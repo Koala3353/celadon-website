@@ -35,8 +35,12 @@ jobs:
       # Optional: refresh content/*.csv from the Sheet before building. The
       # Sheet is link-viewable, so this needs a repository *variable*, not a
       # secret. Without it the committed CSVs are used as-is.
+      # A Sheet that's unreachable (unshared, renamed tab, Google outage) must
+      # not take the site down — the script leaves the committed CSVs in place
+      # and the build carries on with the last known-good content.
       - name: Refresh content from Google Sheet
         if: vars.CONTENT_SHEET_ID != ''
+        continue-on-error: true
         env:
           CONTENT_SHEET_ID: ${{ vars.CONTENT_SHEET_ID }}
         run: npm run sync:content
