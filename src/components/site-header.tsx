@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 import { Container } from "@/components/ui/container";
 
 const NAV = [
@@ -18,7 +19,7 @@ export function SiteHeader() {
           className="shrink-0 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green"
         >
           <Image
-            src="/brand/celaville-wordmark.png"
+            src={asset("/brand/celaville-wordmark.png")}
             alt="Celaville — Ateneo Celadon Recweek 2026–2027"
             width={900}
             height={253}

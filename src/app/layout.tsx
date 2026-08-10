@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Grandstander, Bevan, Jost, Noto_Serif_SC } from "next/font/google";
 import "./globals.css";
+import { asset } from "@/lib/asset";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { copy } from "@/lib/content";
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
   description:
     "下一课！Start the next chapter with Celadon. Explore Celadon's " +
     "departments, projects, and open Recweek roles.",
-  icons: { apple: "/brand/apple-touch-icon.png" },
+  icons: { apple: asset("/brand/apple-touch-icon.png") },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

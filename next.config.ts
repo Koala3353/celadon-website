@@ -14,6 +14,8 @@ const basePath = process.env.PAGES_BASE_PATH ?? "";
 const nextConfig: NextConfig = {
   output: "export",
   basePath,
+  // Exposed so `asset()` can prefix /public URLs; see src/lib/asset.ts.
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   // GitHub Pages serves directories; without this, /projects 404s.
   trailingSlash: true,
   images: {

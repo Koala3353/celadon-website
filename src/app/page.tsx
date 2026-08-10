@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
@@ -59,7 +60,7 @@ export default function Home() {
 
           <div className="relative hidden lg:block">
             <Image
-              src="/brand/celaville-mark.png"
+              src={asset("/brand/celaville-mark.png")}
               alt=""
               width={512}
               height={512}

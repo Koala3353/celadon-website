@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 import { Container } from "@/components/ui/container";
 import { copy } from "@/lib/content";
 
@@ -16,7 +17,7 @@ export function SiteFooter({ note }: { note: string }) {
         <Container className="flex flex-col gap-8 py-12 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
             <Image
-              src="/brand/celaville-mark.png"
+              src={asset("/brand/celaville-mark.png")}
               alt=""
               width={512}
               height={512}
