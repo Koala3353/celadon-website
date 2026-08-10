@@ -62,6 +62,22 @@ async function fetchTab(tab) {
   return body;
 }
 
+/** Count data rows, ignoring newlines that sit inside quoted cells. */
+function countRows(csv) {
+  let rows = 0;
+  let quoted = false;
+  for (let i = 0; i < csv.length; i++) {
+    const c = csv[i];
+    if (c === '"') {
+      if (quoted && csv[i + 1] === '"') i++;
+      else quoted = !quoted;
+    } else if (c === "\n" && !quoted) {
+      rows++;
+    }
+  }
+  return Math.max(0, rows - 1); // drop the header
+}
+
 await fs.mkdir(OUT_DIR, { recursive: true });
 
 let failed = false;
@@ -70,7 +86,7 @@ for (const tab of TABS) {
     const csv = await fetchTab(tab);
     const file = path.join(OUT_DIR, `${tab}.csv`);
     await fs.writeFile(file, csv.endsWith("\n") ? csv : `${csv}\n`, "utf8");
-    const rows = csv.trim().split("\n").length - 1;
+    const rows = countRows(csv.endsWith("\n") ? csv : `${csv}\n`);
     console.log(`✓ content/${tab}.csv  (${rows} rows)`);
   } catch (err) {
     failed = true;
