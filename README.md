@@ -1,74 +1,125 @@
-# COnstruct — Celadon
+# Celaville — Ateneo Celadon Recweek 2026–2027
 
-Celadon's digital portfolio and recruitment portal. Next.js 16 (App Router) +
-Tailwind v4 + Supabase.
+下一课！Start the next chapter with Celadon.
+
+Celadon's Recweek site: departments, projects, and a discovery hub covering
+every Core Team committee and department role.
+
+**Live:** https://koala3353.github.io/celadon-website/
+
+---
+
+## How it works
+
+A **Google Sheet is the only content source.** There is no database, no CMS,
+and no server:
+
+```
+Google Sheet  ──npm run sync:content──▶  content/*.csv  ──next build──▶  out/
+                                                                          │
+                                                        GitHub Actions ───┘
+                                                                          ▼
+                                                                  GitHub Pages
+```
+
+Every page is prerendered to static HTML at build time. That is what makes a
+GitHub Pages deploy possible — Pages serves files and nothing else.
+
+### Editing content
+
+1. Open the content Sheet (see `CONTENT_SHEET_ID` in the repo variables).
+2. Edit any tab. **Don't rename tabs or header columns** — they're the schema.
+3. Publish the change by running the workflow:
+
+   ```bash
+   gh workflow run deploy-pages.yml
+   ```
+
+   It also runs automatically on every push to `main`, and once a day at
+   20:17 UTC (4:17am PHT).
+
+To pull Sheet edits into the repo locally instead:
+
+```bash
+CONTENT_SHEET_ID=<id> npm run sync:content
+```
+
+### Sheet schema
+
+| Tab | Key columns |
+| --- | --- |
+| `departments` | `slug`, `name`, `overview` |
+| `projects` | `slug`, `title`, `department_slug`, `year`, `status`, `description`, `cover_image_url`, `cover_image_alt` |
+| `roles` | `slug`, `title`, `department_slug`, `project_slug`, `status`, `description`, `responsibilities`, `common_deliverables`, `qualities`, `application_deadline`, `application_link`, `core_application_link`, `head_application_link` |
+| `site` | `key`, `value` — all headings and body copy on the site |
+
+Notes:
+
+- `slug` is the URL segment and must be unique and lowercase-hyphenated.
+- A role belongs to **either** a project (a Core Team committee) **or** a
+  department (a standing pool) — fill one of `project_slug` / `department_slug`.
+- Multi-value cells (`responsibilities`, `common_deliverables`, `qualities`)
+  are **one item per line inside a single cell** (Alt+Enter in Sheets).
+- Only projects with `status: published` appear on the site.
+- Roles with `status: open` show apply buttons; `closed` roles stay browsable
+  so people can read up before applications open.
 
 ## Local development
 
 ```bash
 npm install
-cp .env.local.example .env.local   # then fill in the values
 npm run dev
 ```
 
-### Known build quirk
+Then http://localhost:3000.
 
-`next build` (Turbopack, the default) currently fails to load the
-`lightningcss` native binding through the PostCSS worker used by Tailwind v4:
+```bash
+npm run build          # static export to ./out
+npm run sync:content   # refresh content/*.csv from the Sheet
+npm run lint
+```
+
+### Why `--webpack`
+
+`npm run build` passes `--webpack` deliberately. Turbopack, the Next 16
+default, currently fails to load the `lightningcss` native binding through the
+PostCSS worker Tailwind v4 uses:
 
 ```
 Error evaluating Node.js code
 Error: Cannot find module '../lightningcss.darwin-arm64.node'
 ```
 
-Use the webpack builder until this is resolved upstream:
+Remove the flag once that's fixed upstream.
 
-```bash
-npx next build --webpack
-```
+## Design
 
-## Architecture
+Palette, type, and motifs come from the Recweek 2026–2027 brand book.
 
-| Surface | Rendering | Notes |
-| --- | --- | --- |
-| `/`, `/about`, `/departments`, `/projects`, `/recruitment` | Static, ISR 15m–1h | Supabase reads at build time |
-| `/projects/[slug]`, `/recruitment/roles/[slug]` | SSG via `generateStaticParams` | ~78 role pages, 5 project pages |
-| `/admin/login`, `/admin/metrics` | Dynamic (server) | Shared-password gate |
-| `/api/admin/*` | Route handlers | Service-role writes, gated by `src/proxy.ts` |
+| | |
+| --- | --- |
+| Primary | `#FFFCF7` cream · `#5E8F6B` green · `#D94F40` red |
+| Accents | `#E4B64A` gold · `#9FD0EB` sky · `#A8C59A` sage · `#F3BF8D` peach · `#4F4036` ink |
+| Display | Grandstander |
+| Poster | Bevan (first word of a Grandstander lockup) |
+| Body | Jost — stand-in for Glacial Indifference, which isn't web-licensed |
+| Chinese | Noto Serif SC — stand-in for 字由点字云霆楷体 |
 
-`src/proxy.ts` is Next 16's renamed middleware; it guards `/admin/metrics/*`
-and `/api/admin/*`.
+The logo files in `public/brand/` are extracted from the brand book and used
+unmodified, per its usage rules. The village furniture (hills, fence, paper
+grid, rooflines) is drawn in CSS from the palette in `globals.css` rather than
+shipping the book's watercolour artwork.
+
+Two deeper tints, `--green-ink` and `--red-ink`, exist because the brand green
+and red only reach ~3.2:1 on cream — below AA for body text. Use them for small
+text; the pure brand hues are for fills and large display type.
 
 ## Deployment
 
-### GitHub Pages (public site only)
+[`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)
+builds and publishes to Pages. It needs **no secrets**. One optional repository
+*variable*:
 
-GitHub Pages is a static file host. It cannot run route handlers, Proxy
-(middleware), or dynamic pages, so **the admin surface is excluded from the
-Pages build**. `scripts/build-pages.sh` moves `src/app/admin`, `src/app/api`,
-and `src/proxy.ts` aside, builds with `output: "export"`, and restores them.
-
-```bash
-PAGES_BASE_PATH=/celadon-website ./scripts/build-pages.sh   # → ./out
-```
-
-CI: [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)
-runs on every push to `main`.
-
-Required repository secrets (Settings → Secrets and variables → Actions):
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-
-Consequences of the static build:
-
-- Content is a **snapshot**. `revalidate` does nothing on a static host —
-  Supabase edits only appear after a rebuild. Re-run the workflow (or push) to
-  refresh.
-- `/admin/*` returns 404 on Pages. Editing metrics requires running the app
-  somewhere with a Node runtime.
-
-### Full app (with admin)
-
-Deploy to any Node host (Vercel, Fly, a container). Set all four variables from
-`.env.local.example`; `SUPABASE_SERVICE_ROLE_KEY` must stay server-side.
+- `CONTENT_SHEET_ID` — the id in the Sheet URL
+  (`docs.google.com/spreadsheets/d/<THIS>/edit`). Set it and every build pulls
+  fresh content; leave it unset and the committed CSVs are used.

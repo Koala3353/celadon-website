@@ -3,7 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Manual run — use this to publish content edits made in the Google Sheet.
   workflow_dispatch:
+  # Pick up Sheet edits once a day without anyone having to remember.
+  schedule:
+    - cron: "17 20 * * *"
 
 permissions:
   contents: read
@@ -28,15 +32,22 @@ jobs:
 
       - run: npm ci
 
+      # Optional: refresh content/*.csv from the Sheet before building. The
+      # Sheet is link-viewable, so this needs a repository *variable*, not a
+      # secret. Without it the committed CSVs are used as-is.
+      - name: Refresh content from Google Sheet
+        if: vars.CONTENT_SHEET_ID != ''
+        env:
+          CONTENT_SHEET_ID: ${{ vars.CONTENT_SHEET_ID }}
+        run: npm run sync:content
+
       - name: Build static site
         env:
-          # Public, anon-key-only. These are baked into the client bundle by
-          # design; RLS is what protects the data.
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           # Project page, so the site lives under /<repo>.
           PAGES_BASE_PATH: /${{ github.event.repository.name }}
-        run: ./scripts/build-pages.sh
+        run: |
+          npm run build
+          touch out/.nojekyll   # keep _next/ from being swallowed by Jekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:

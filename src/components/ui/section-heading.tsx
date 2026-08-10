@@ -11,16 +11,16 @@ export function SectionHeading({
   title: string;
   description?: string;
   className?: string;
-  /** "brand" for use inside a navy hero band, "surface" elsewhere. */
-  tone?: "surface" | "brand";
+  /** "invert" for use on a green band. */
+  tone?: "surface" | "invert";
 }) {
   return (
     <div className={cn("max-w-2xl", className)}>
       {eyebrow && (
         <p
           className={cn(
-            "text-sm font-medium uppercase tracking-wider",
-            tone === "brand" ? "text-highlight" : "text-accent"
+            "font-display text-sm font-bold uppercase tracking-[0.14em]",
+            tone === "invert" ? "text-gold" : "text-red-ink"
           )}
         >
           {eyebrow}
@@ -28,8 +28,8 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "mt-2 font-display text-3xl font-medium tracking-tight sm:text-4xl",
-          tone === "brand" && "text-brand-foreground"
+          "mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl",
+          tone === "invert" ? "text-cream" : "text-ink"
         )}
       >
         {title}
@@ -37,8 +37,8 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            "mt-3 text-base",
-            tone === "brand" ? "text-brand-muted-foreground" : "text-muted-foreground"
+            "mt-4 text-lg leading-relaxed",
+            tone === "invert" ? "text-cream/85" : "text-muted-foreground"
           )}
         >
           {description}

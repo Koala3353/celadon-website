@@ -1,113 +1,108 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { getRoles } from "@/lib/data";
-import type { RoleWithParent } from "@/lib/data";
-
-export const revalidate = 900;
+import { PageHero } from "@/components/page-hero";
+import { RoleCard } from "@/components/role-card";
+import { copy, getRoles } from "@/lib/content";
+import type { RoleWithParent } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "Recruitment",
-  description: "Open Core Team committees and Department roles at Celadon.",
+  title: "Roles",
+  description:
+    "Every Core Team committee and Department role at Celadon — what the " +
+    "work actually involves, before you apply.",
 };
 
-function formatDeadline(dateStr: string | null) {
-  if (!dateStr) return null;
-  return new Date(dateStr).toLocaleDateString("en", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
+export default function RecruitmentPage() {
+  const roles = getRoles();
+  const openCount = roles.filter((r) => r.status === "open").length;
 
-function RoleCard({ role }: { role: RoleWithParent }) {
-  return (
-    <Link href={`/recruitment/roles/${role.slug}`}>
-      <Card className="flex h-full flex-col gap-3 p-6 transition-colors hover:border-accent">
-        <Badge className="w-fit bg-highlight text-highlight-foreground">Open</Badge>
-        <h3 className="font-display text-xl font-medium">{role.title}</h3>
-        {role.application_deadline && (
-          <p className="mt-auto text-xs text-muted-foreground">
-            Apply by {formatDeadline(role.application_deadline)}
-          </p>
-        )}
-      </Card>
-    </Link>
-  );
-}
-
-export default async function RecruitmentPage() {
-  const roles = await getRoles({ status: "open" }).catch(() => []);
-
-  const projectRoles = roles.filter((r) => r.project);
-  const departmentRoles = roles.filter((r) => r.department);
-
-  const committeesByProject = new Map<string, { title: string; slug: string; roles: RoleWithParent[] }>();
-  for (const role of projectRoles) {
+  // Project roles are a project's core-team committees; department roles are
+  // standing pools. They're browsed differently, so they're grouped apart.
+  const byProject = new Map<string, { title: string; roles: RoleWithParent[] }>();
+  for (const role of roles) {
     if (!role.project) continue;
-    const existing = committeesByProject.get(role.project.id);
-    if (existing) {
-      existing.roles.push(role);
-    } else {
-      committeesByProject.set(role.project.id, {
-        title: role.project.title,
-        slug: role.project.slug,
-        roles: [role],
-      });
-    }
+    const group = byProject.get(role.project.slug);
+    if (group) group.roles.push(role);
+    else byProject.set(role.project.slug, { title: role.project.title, roles: [role] });
+  }
+
+  const byDepartment = new Map<string, { name: string; roles: RoleWithParent[] }>();
+  for (const role of roles) {
+    if (!role.department) continue;
+    const group = byDepartment.get(role.department.slug);
+    if (group) group.roles.push(role);
+    else byDepartment.set(role.department.slug, { name: role.department.name, roles: [role] });
   }
 
   return (
     <>
-      <section className="bg-brand text-brand-foreground">
-        <Container className="py-16">
-          <SectionHeading
-            eyebrow="Discovery & Application Hub"
-            title="Open Roles"
-            description="See what a role actually entails before you apply — responsibilities, expectations, and real examples of the work."
-            tone="brand"
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Discovery & application hub"
+        title={copy("recruitment_heading")}
+        description={copy("recruitment_body")}
+      >
+        <p className="font-display text-sm font-semibold text-green-ink">
+          {openCount > 0
+            ? `${openCount} role${openCount === 1 ? "" : "s"} open now · ${roles.length} documented in total`
+            : `Applications aren't open yet — all ${roles.length} roles are documented here so you can read up before they are.`}
+        </p>
+      </PageHero>
+
       <Container className="flex flex-col gap-16 py-16">
-      {roles.length === 0 && (
-        <p className="text-muted-foreground">No open roles right now — check back soon.</p>
-      )}
+        {byProject.size > 0 && (
+          <section className="flex flex-col gap-10">
+            <h2 className="font-display text-2xl font-bold text-ink">
+              <span className="underline-sketch">Core Team committees</span>
+            </h2>
 
-      {committeesByProject.size > 0 && (
-        <div className="flex flex-col gap-10">
-          <h2 className="font-display text-2xl font-medium">Core Team Recruitment</h2>
-          {Array.from(committeesByProject.values()).map((group) => (
-            <div key={group.slug} className="flex flex-col gap-4">
-              <Link
-                href={`/projects/${group.slug}`}
-                className="w-fit text-lg font-medium hover:text-accent"
-              >
-                {group.title} &rarr;
-              </Link>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {group.roles.map((role) => (
-                  <RoleCard key={role.id} role={role} />
-                ))}
+            {Array.from(byProject.entries()).map(([slug, group]) => (
+              <div key={slug} className="flex flex-col gap-4">
+                <Link
+                  href={`/projects/${slug}`}
+                  className="w-fit font-display text-lg font-bold text-green-ink underline-offset-4 hover:underline"
+                >
+                  {group.title} →
+                </Link>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.roles.map((role) => (
+                    <RoleCard key={role.slug} role={role} />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {departmentRoles.length > 0 && (
-        <div className="flex flex-col gap-6">
-          <h2 className="font-display text-2xl font-medium">Department Recruitment</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {departmentRoles.map((role) => (
-              <RoleCard key={role.id} role={role} />
             ))}
-          </div>
-        </div>
-      )}
+          </section>
+        )}
+
+        {byDepartment.size > 0 && (
+          <section className="flex flex-col gap-10">
+            <h2 className="font-display text-2xl font-bold text-ink">
+              <span className="underline-sketch">Department pools</span>
+            </h2>
+
+            {Array.from(byDepartment.entries()).map(([slug, group]) => (
+              <div key={slug} className="flex flex-col gap-4">
+                <Link
+                  href={`/departments#${slug}`}
+                  className="w-fit font-display text-lg font-bold text-green-ink underline-offset-4 hover:underline"
+                >
+                  {group.name} →
+                </Link>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.roles.map((role) => (
+                    <RoleCard key={role.slug} role={role} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {roles.length === 0 && (
+          <p className="text-muted-foreground">
+            No roles published yet — check back soon.
+          </p>
+        )}
       </Container>
     </>
   );

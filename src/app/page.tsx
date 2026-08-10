@@ -1,130 +1,195 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { Stat } from "@/components/ui/stat";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { getFeaturedProjects, getOrgStats } from "@/lib/data";
-import { formatCompactNumber } from "@/lib/format";
+import { ProjectCard } from "@/components/project-card";
+import {
+  copy,
+  getDepartmentSpotlights,
+  getFeaturedProjects,
+  getOrgStats,
+} from "@/lib/content";
 
-export const revalidate = 3600;
-
-export default async function Home() {
-  const [stats, featuredProjects] = await Promise.all([
-    getOrgStats().catch(() => null),
-    getFeaturedProjects(3).catch(() => []),
-  ]);
+export default function Home() {
+  const stats = getOrgStats();
+  const featured = getFeaturedProjects(3);
+  const departments = getDepartmentSpotlights();
 
   return (
     <>
-      <section className="bg-brand text-brand-foreground">
-        <Container className="flex flex-col gap-8 py-20 sm:py-28">
-          <Badge className="w-fit bg-highlight text-highlight-foreground">
-            Celadon &times; COMMPUB
-          </Badge>
-          <h1 className="max-w-3xl font-display text-4xl font-medium leading-tight tracking-tight text-brand-foreground sm:text-6xl">
-            The digital portfolio and recruitment home of Celadon.
-          </h1>
-          <p className="max-w-xl text-lg text-brand-muted-foreground">
-            Explore the projects, people, and impact behind Celadon&apos;s
-            year-round work — and discover what it actually takes to join
-            the team.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/projects"
-              className="rounded-full bg-brand-foreground px-6 py-3 text-center text-sm font-medium text-brand transition-opacity hover:opacity-90"
-            >
-              Explore Projects
-            </Link>
-            <Link
-              href="/recruitment"
-              className="rounded-full border border-brand-muted-foreground/40 px-6 py-3 text-center text-sm font-medium text-brand-foreground transition-colors hover:bg-white/10"
-            >
-              View Open Roles
-            </Link>
+      {/* ---- Hero ------------------------------------------------------- */}
+      <section className="sky-wash relative isolate overflow-hidden">
+        <div aria-hidden className="paper-grid absolute inset-0 opacity-60" />
+
+        <Container className="relative grid gap-10 pb-36 pt-16 sm:pt-24 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+          <div className="flex flex-col gap-6">
+            <p className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
+              <span className="font-hanzi text-2xl font-bold text-green-ink">
+                {copy("tagline_zh")}
+              </span>
+              <span className="text-base text-muted-foreground">
+                {copy("tagline_en")}
+              </span>
+            </p>
+
+            <h1 className="font-poster text-5xl leading-[1.02] text-red sm:text-7xl">
+              {copy("hero_heading")}
+            </h1>
+
+            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+              {copy("hero_body")}
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href={copy("hero_cta_href")}
+                className="rounded-full bg-red px-7 py-3.5 text-center font-display text-base font-bold text-cream transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              >
+                {copy("hero_cta_label")}
+              </Link>
+              <Link
+                href="/projects"
+                className="rounded-full border-2 border-green px-7 py-3.5 text-center font-display text-base font-bold text-green-ink transition-colors hover:bg-green hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              >
+                Wander the village
+              </Link>
+            </div>
           </div>
+
+          <div className="relative hidden lg:block">
+            <Image
+              src="/brand/celaville-mark.png"
+              alt=""
+              width={512}
+              height={512}
+              priority
+              className="drift mx-auto w-full max-w-sm"
+            />
+          </div>
+        </Container>
+
+        <div aria-hidden className="absolute inset-x-0 bottom-0">
+          <div className="fence h-5 w-full opacity-70" />
+          <div className="hill h-14 w-full" />
+        </div>
+      </section>
+
+      {/* ---- Stats ------------------------------------------------------ */}
+      <section className="border-b-2 border-border bg-muted/50">
+        <Container>
+          <dl className="grid grid-cols-2 gap-8 py-12 sm:grid-cols-4">
+            {[
+              ["Departments", stats.departmentCount],
+              ["Projects", stats.projectCount],
+              ["Roles documented", stats.roleCount],
+              ["Open right now", stats.openRoleCount],
+            ].map(([label, value]) => (
+              <div key={String(label)} className="flex flex-col gap-1">
+                <dt className="order-2 text-sm text-muted-foreground">{label}</dt>
+                <dd className="order-1 font-poster text-4xl text-green-ink">
+                  {value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </Container>
       </section>
 
-      {stats && (
-        <section className="border-b border-border">
-          <Container className="grid grid-cols-2 gap-8 py-14 sm:grid-cols-4">
-            <Stat label="Projects delivered" value={String(stats.projectCount)} />
-            <Stat
-              label="Total impressions"
-              value={formatCompactNumber(stats.totalImpressions)}
-            />
-            <Stat
-              label="Participants engaged"
-              value={formatCompactNumber(stats.totalParticipants)}
-            />
-            <Stat label="Open roles" value={String(stats.openRoleCount)} />
-          </Container>
-        </section>
-      )}
-
+      {/* ---- About ------------------------------------------------------ */}
       <section className="py-20">
+        <Container className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+          <SectionHeading
+            eyebrow="第一课 · Lesson one"
+            title={copy("about_heading")}
+          />
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            {copy("about_body")}
+          </p>
+        </Container>
+      </section>
+
+      {/* ---- Featured projects ------------------------------------------ */}
+      <section className="pb-20">
         <Container className="flex flex-col gap-10">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading
-              eyebrow="Portfolio"
-              title="Featured projects"
-              description="A look at what Celadon has shipped and the impact behind it."
+              eyebrow="Around the village"
+              title={copy("projects_heading")}
+              description={copy("projects_body")}
             />
             <Link
               href="/projects"
-              className="text-sm font-medium text-accent hover:underline"
+              className="font-display text-sm font-bold text-red-ink underline-offset-4 hover:underline"
             >
-              View all projects &rarr;
+              All projects →
             </Link>
           </div>
 
-          {featuredProjects.length === 0 ? (
+          {featured.length === 0 ? (
             <p className="text-muted-foreground">
               No published projects yet — check back soon.
             </p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {featuredProjects.map((project) => (
-                <Link key={project.id} href={`/projects/${project.slug}`}>
-                  <Card className="flex h-full flex-col gap-3 p-6 transition-colors hover:border-accent">
-                    <Badge className="w-fit">{project.year}</Badge>
-                    <h3 className="font-display text-xl font-medium">
-                      {project.title}
-                    </h3>
-                    {project.department && (
-                      <p className="text-sm text-muted-foreground">
-                        {project.department.name}
-                      </p>
-                    )}
-                    {project.description && (
-                      <p className="line-clamp-3 text-sm text-muted-foreground">
-                        {project.description}
-                      </p>
-                    )}
-                  </Card>
-                </Link>
+              {featured.map((project, i) => (
+                <ProjectCard key={project.slug} project={project} index={i} />
               ))}
             </div>
           )}
         </Container>
       </section>
 
-      <section className="bg-brand text-brand-foreground">
-        <Container className="flex flex-col items-start gap-6 py-20 sm:flex-row sm:items-center sm:justify-between">
+      {/* ---- Departments ------------------------------------------------ */}
+      <section className="pb-20">
+        <Container className="flex flex-col gap-10">
           <SectionHeading
-            eyebrow="Join Us"
-            title="See what it's really like before you apply."
-            description="Our Discovery and Application Hub shows the real day-to-day of every Core Team and Managerial role."
+            eyebrow="Neighborhoods"
+            title={copy("departments_heading")}
+            description={copy("departments_body")}
+          />
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {departments.map((department) => (
+              <Card key={department.slug} className="flex flex-col gap-2 p-6">
+                <h3 className="font-display text-lg font-bold text-ink">
+                  {department.name}
+                </h3>
+                <p className="line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+                  {department.overview}
+                </p>
+                <p className="mt-auto pt-3 font-display text-sm font-semibold text-green-ink">
+                  {department.totalRoleCount} role
+                  {department.totalRoleCount === 1 ? "" : "s"}
+                </p>
+              </Card>
+            ))}
+          </div>
+
+          <Link
+            href="/departments"
+            className="w-fit font-display text-sm font-bold text-red-ink underline-offset-4 hover:underline"
+          >
+            Meet the departments →
+          </Link>
+        </Container>
+      </section>
+
+      {/* ---- Closing CTA ------------------------------------------------ */}
+      <section className="bg-green">
+        <Container className="flex flex-col items-start gap-8 py-16 sm:flex-row sm:items-center sm:justify-between">
+          <SectionHeading
+            eyebrow="下一课"
+            title={copy("recruitment_heading")}
+            description={copy("recruitment_body")}
+            tone="invert"
             className="max-w-xl"
-            tone="brand"
           />
           <Link
             href="/recruitment"
-            className="rounded-full bg-brand-foreground px-6 py-3 text-sm font-medium text-brand transition-opacity hover:opacity-90 whitespace-nowrap"
+            className="shrink-0 rounded-full bg-cream px-7 py-3.5 font-display text-base font-bold text-green-ink transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
           >
-            Explore Roles
+            Browse every role
           </Link>
         </Container>
       </section>

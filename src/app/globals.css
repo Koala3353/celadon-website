@@ -1,31 +1,41 @@
 @import "tailwindcss";
 
+/**
+ * Celaville — Ateneo Celadon Recweek 2026–2027.
+ * Palette and type are taken verbatim from the Recweek brand book.
+ *
+ * The site is deliberately light-only: Celaville's whole identity is a warm
+ * cream textbook page. A dark inversion would fight the brand rather than
+ * serve it, so `color-scheme: light` pins form controls to match.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #00000e;
-  --muted: #f1f3f5;
-  --muted-foreground: #5b6472;
-  --border: #e1e4e8;
+  color-scheme: light;
 
-  /* Regal Navy — primary brand color, main calls to action. */
-  --primary: #003078;
-  --primary-foreground: #ffffff;
+  /* Primary */
+  --cream: #fffcf7;
+  --green: #5e8f6b;
+  --red: #d94f40;
 
-  /* Pine Blue — secondary accent for links, hovers, active states. */
-  --accent: #538083;
-  --accent-foreground: #ffffff;
+  /* Secondary & accents */
+  --gold: #e4b64a;
+  --sky: #9fd0eb;
+  --sage: #a8c59a;
+  --peach: #f3bf8d;
+  --ink: #4f4036;
 
-  /* Celadon green — soft highlight chips only (e.g. "Open" status). */
-  --highlight: #ace1af;
-  --highlight-foreground: #0b2412;
+  /* Derived surfaces. Kept as tints of the brand hues so nothing grey
+     sneaks in — the moodboard is entirely warm. */
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --muted: #f6efe3;
+  --muted-foreground: #7a6a5c;
+  --border: #e6dac6;
 
-  /* Brand navy — fixed regardless of light/dark mode. Used for the
-     header, footer, and each page's top hero band so the site reads
-     as branded chrome wrapping a light content area, not an all-white
-     page with a stray accent color here and there. */
-  --brand: #003078;
-  --brand-foreground: #ffffff;
-  --brand-muted-foreground: #b7c4e0;
+  /* Deeper green for text on cream: the brand green alone only reaches
+     ~3.2:1, which fails AA for body copy. */
+  --green-ink: #3f6b4b;
+  /* Deeper red for small text on cream, same reason. */
+  --red-ink: #b83a2c;
 }
 
 @theme inline {
@@ -34,40 +44,114 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-highlight: var(--highlight);
-  --color-highlight-foreground: var(--highlight-foreground);
-  --color-brand: var(--brand);
-  --color-brand-foreground: var(--brand-foreground);
-  --color-brand-muted-foreground: var(--brand-muted-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-cream: var(--cream);
+  --color-green: var(--green);
+  --color-green-ink: var(--green-ink);
+  --color-red: var(--red);
+  --color-red-ink: var(--red-ink);
+  --color-gold: var(--gold);
+  --color-sky: var(--sky);
+  --color-sage: var(--sage);
+  --color-peach: var(--peach);
+  --color-ink: var(--ink);
+
+  --font-sans: var(--font-body);
   --font-display: var(--font-display);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #05070c;
-    --foreground: #f1f3f5;
-    --muted: #10151c;
-    --muted-foreground: #9aa5b0;
-    --border: #232b35;
-
-    --primary: #3d6fcb;
-    --primary-foreground: #ffffff;
-
-    --accent: #7fb0b3;
-    --accent-foreground: #062024;
-
-    /* Highlight stays constant — it's a light chip fill in either theme. */
-  }
+  --font-poster: var(--font-poster);
+  --font-hanzi: var(--font-hanzi);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---------------------------------------------------------------------
+   Village motifs
+
+   The brand book's elements are watercolour PNGs we don't have rights to
+   redistribute, so the furniture here is drawn in CSS from the palette:
+   a rolling hill, a paper grid, a picket fence. Same vocabulary, no assets.
+   --------------------------------------------------------------------- */
+
+/* Faint squared-paper grid, like the Chinese exercise book in the moodboard. */
+.paper-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+}
+
+/* Soft sky wash for hero bands. */
+.sky-wash {
+  background:
+    radial-gradient(120% 90% at 15% 0%, color-mix(in srgb, var(--sky) 42%, transparent) 0%, transparent 60%),
+    radial-gradient(100% 80% at 90% 10%, color-mix(in srgb, var(--peach) 32%, transparent) 0%, transparent 55%),
+    var(--cream);
+}
+
+/* The grass horizon that closes every brand-book slide. */
+.hill {
+  background:
+    radial-gradient(140% 100% at 50% 100%, var(--green) 0%, var(--green) 45%, transparent 46%),
+    radial-gradient(120% 100% at 12% 100%, var(--sage) 0%, var(--sage) 52%, transparent 53%),
+    radial-gradient(120% 100% at 88% 100%, var(--sage) 0%, var(--sage) 48%, transparent 49%);
+}
+
+/* Picket fence, as on the "WORD" sample deliverable. */
+.fence {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--cream) 0 0.6rem,
+    transparent 0.6rem 1.4rem
+  );
+  mask-image: linear-gradient(to bottom, transparent 0, #000 0.5rem);
+}
+
+/* Hand-drawn underline for headings, echoing the logo's green baseline.
+   Sits below the descenders rather than through them. */
+.underline-sketch {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--gold) 80%, transparent),
+    color-mix(in srgb, var(--gold) 80%, transparent)
+  );
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.28em;
+  padding-bottom: 0.18em;
+}
+
+/* Rooflines: a low zigzag ridge, as on the logo's houses. */
+.rooflines {
+  background-image: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--green) 55%, transparent) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      225deg,
+      color-mix(in srgb, var(--green) 55%, transparent) 25%,
+      transparent 25%
+    );
+  background-size: 1.5rem 1.5rem;
+  background-position: 0 0;
+  background-repeat: repeat-x;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .drift {
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(1.5rem);
+  }
 }

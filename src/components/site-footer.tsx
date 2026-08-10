@@ -1,39 +1,54 @@
+import Image from "next/image";
 import Link from "next/link";
+import { Container } from "@/components/ui/container";
+import { copy } from "@/lib/content";
 
-export function SiteFooter() {
+export function SiteFooter({ note }: { note: string }) {
+  const instagram = copy("org_instagram");
+  const facebook = copy("org_facebook");
+
   return (
-    <footer className="bg-brand text-brand-foreground">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="font-display text-lg">COnstruct</p>
-          <p className="mt-1 max-w-sm text-sm text-brand-muted-foreground">
-            Celadon&apos;s official digital portfolio and recruitment portal,
-            built in collaboration with COMMPUB.
-          </p>
-        </div>
-        <div className="flex gap-10 text-sm">
-          <div className="flex flex-col gap-2">
-            <span className="font-medium text-brand-foreground">Explore</span>
-            <Link href="/projects" className="text-brand-muted-foreground hover:text-brand-foreground">
-              Projects
-            </Link>
-            <Link href="/departments" className="text-brand-muted-foreground hover:text-brand-foreground">
-              Departments
-            </Link>
-            <Link href="/about" className="text-brand-muted-foreground hover:text-brand-foreground">
-              About
-            </Link>
+    <footer className="mt-24">
+      {/* The grass horizon that closes every brand-book slide. */}
+      <div aria-hidden className="hill h-24 w-full" />
+
+      <div className="bg-green text-cream">
+        <Container className="flex flex-col gap-8 py-12 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/brand/celaville-mark.png"
+              alt=""
+              width={512}
+              height={512}
+              className="h-14 w-14 shrink-0"
+            />
+            <div>
+              <p className="font-poster text-xl">Celaville</p>
+              <p className="mt-1 text-sm text-cream/80">{note}</p>
+            </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <span className="font-medium text-brand-foreground">Get Involved</span>
-            <Link href="/recruitment" className="text-brand-muted-foreground hover:text-brand-foreground">
-              Open Roles
+
+          <nav aria-label="Elsewhere" className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link
+              href="/recruitment"
+              className="font-display text-sm font-semibold underline-offset-4 hover:underline"
+            >
+              Open roles
             </Link>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-brand-muted-foreground/20 px-6 py-4 text-center text-xs text-brand-muted-foreground">
-        © {new Date().getFullYear()} Celadon. All rights reserved.
+            <a
+              href={instagram}
+              className="font-display text-sm font-semibold underline-offset-4 hover:underline"
+            >
+              Instagram
+            </a>
+            <a
+              href={facebook}
+              className="font-display text-sm font-semibold underline-offset-4 hover:underline"
+            >
+              Facebook
+            </a>
+          </nav>
+        </Container>
       </div>
     </footer>
   );

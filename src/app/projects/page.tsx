@@ -1,36 +1,27 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { PageHero } from "@/components/page-hero";
 import { ProjectsExplorer } from "@/components/projects-explorer";
-import { getAllProjects, getDepartments } from "@/lib/data";
-
-export const revalidate = 3600;
+import { copy, getDepartments, getPublishedProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Browse Celadon's project archive by year and department.",
+  description: "Browse Celadon's projects by year and department.",
 };
 
-export default async function ProjectsPage() {
-  const [projects, departments] = await Promise.all([
-    getAllProjects().catch(() => []),
-    getDepartments().catch(() => []),
-  ]);
-
+export default function ProjectsPage() {
   return (
     <>
-      <section className="bg-brand text-brand-foreground">
-        <Container className="py-16">
-          <SectionHeading
-            eyebrow="Portfolio"
-            title="Project Archive"
-            description="Every Celadon project, filterable by year and department."
-            tone="brand"
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Portfolio"
+        title={copy("projects_heading")}
+        description={copy("projects_body")}
+      />
       <Container className="py-16">
-        <ProjectsExplorer projects={projects} departments={departments} />
+        <ProjectsExplorer
+          projects={getPublishedProjects()}
+          departments={getDepartments()}
+        />
       </Container>
     </>
   );

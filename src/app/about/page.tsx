@@ -2,60 +2,72 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { Stat } from "@/components/ui/stat";
-import { getOrgStats } from "@/lib/data";
-import { formatCompactNumber } from "@/lib/format";
-
-export const revalidate = 3600;
+import { PageHero } from "@/components/page-hero";
+import { copy, getOrgStats } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "An overview of Celadon for sponsors and partners.",
+  description:
+    "下一课！Start the next chapter with Celadon — the story behind " +
+    "Celaville, Recweek 2026–2027.",
 };
 
-export default async function AboutPage() {
-  const stats = await getOrgStats().catch(() => null);
+export default function AboutPage() {
+  const stats = getOrgStats();
 
   return (
     <>
-      <section className="bg-brand text-brand-foreground">
-        <Container className="flex flex-col gap-6 py-20">
-          <SectionHeading
-            eyebrow="For Sponsors & Partners"
-            title="About Celadon"
-            description="Celadon plans and delivers year-round projects that engage the community and create measurable impact — COnstruct is where that work lives in one place."
-            tone="brand"
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="第一课 · Lesson one"
+        title={copy("about_heading")}
+        description={copy("tagline_en")}
+      />
 
-      {stats && (
-        <section className="py-16">
-          <Container className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            <Stat label="Projects delivered" value={String(stats.projectCount)} />
-            <Stat label="Total impressions" value={formatCompactNumber(stats.totalImpressions)} />
-            <Stat label="Participants engaged" value={formatCompactNumber(stats.totalParticipants)} />
-            <Stat label="Beneficiaries reached" value={formatCompactNumber(stats.totalBeneficiaries)} />
-          </Container>
+      <Container className="flex flex-col gap-16 py-16">
+        <section className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+          <SectionHeading eyebrow="The theme" title="Celaville" />
+          <div className="flex flex-col gap-6 text-lg leading-relaxed text-muted-foreground">
+            <p>{copy("hero_body")}</p>
+            <p>{copy("about_body")}</p>
+          </div>
         </section>
-      )}
 
-      <section className="border-t border-border py-16">
-        <Container className="flex flex-col gap-6">
+        <section className="grid grid-cols-2 gap-8 border-y-2 border-border py-12 sm:grid-cols-4">
+          {[
+            ["Departments", stats.departmentCount],
+            ["Projects", stats.projectCount],
+            ["Roles documented", stats.roleCount],
+            ["Open right now", stats.openRoleCount],
+          ].map(([label, value]) => (
+            <div key={String(label)} className="flex flex-col gap-1">
+              <p className="font-poster text-4xl text-green-ink">{value}</p>
+              <p className="text-sm text-muted-foreground">{label}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="flex flex-col gap-6">
           <SectionHeading
-            title="Partner with us"
-            description="Interested in sponsoring or collaborating with Celadon? Browse our project archive to see the kind of work and impact your partnership would support."
+            eyebrow="Join the village"
+            title={copy("recruitment_heading")}
+            description={copy("recruitment_body")}
           />
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/projects"
-              className="w-fit rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              href="/recruitment"
+              className="w-fit rounded-full bg-red px-7 py-3.5 font-display text-base font-bold text-cream transition-transform hover:-translate-y-0.5"
             >
-              View Project Archive
+              Browse every role
+            </Link>
+            <Link
+              href="/projects"
+              className="w-fit rounded-full border-2 border-green px-7 py-3.5 font-display text-base font-bold text-green-ink transition-colors hover:bg-green hover:text-cream"
+            >
+              See the projects
             </Link>
           </div>
-        </Container>
-      </section>
+        </section>
+      </Container>
     </>
   );
 }
