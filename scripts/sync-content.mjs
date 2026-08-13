@@ -17,20 +17,7 @@ import { fileURLToPath } from "node:url";
 // Set once the Sheet exists; env var always wins so CI can override.
 const SHEET_ID = process.env.CONTENT_SHEET_ID ?? "";
 
-/**
- * Tabs pulled from the Sheet.
- *
- * `site` is deliberately absent. Its rows are still the old Celaville copy
- * under keys the templates no longer read, so syncing it would both drop the
- * Ateneo Celadon copy and mix the two brands on the page. Editorial content —
- * the tabs that actually change week to week — keeps syncing.
- *
- * To hand `site` back to the Sheet: update its `key` column to match
- * content/site.csv exactly, then add "site" to this list. src/lib/content.ts
- * asserts the full key set at build time, so a partial update fails the build
- * rather than shipping broken copy.
- */
-const TABS = ["departments", "projects", "roles"];
+const TABS = ["departments", "projects", "roles", "site"];
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT_DIR = path.join(ROOT, "content");

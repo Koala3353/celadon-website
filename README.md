@@ -23,12 +23,6 @@ Google Sheet  ──npm run sync:content──▶  content/*.csv  ──next bui
 Every page is prerendered to static HTML at build time — which is what makes a
 GitHub Pages deploy possible at all, since Pages serves files and nothing else.
 
-> **The `site` tab is not synced.** Its rows are still the old Celaville copy
-> under keys the templates no longer read, so pulling it would drop the Ateneo
-> Celadon copy and mix the two brands. `departments`, `projects` and `roles`
-> sync normally; site copy lives in [`content/site.csv`](content/site.csv)
-> until the Sheet is updated. See "Handing `site` back to the Sheet" below.
-
 ### Editing content
 
 1. Open the content Sheet.
@@ -46,26 +40,6 @@ To pull Sheet edits into the repo locally:
 ```bash
 CONTENT_SHEET_ID=<id> npm run sync:content
 ```
-
-### Handing `site` back to the Sheet
-
-The Sheet's `site` tab is missing eight keys the templates read
-(`hero_line_1`, `hero_line_2`, `org_tagline`, `org_phone`, `org_address`,
-`about_secondary_body`, `cta_heading`, `cta_body`) and carries seven obsolete
-Celaville ones (`theme_name`, `theme_year`, `tagline_zh`, `tagline_en`,
-`hero_heading`, `about_body` as Celaville prose, `footer_note`).
-
-To restore it:
-
-1. Replace the `site` tab's contents with
-   [`content/site.csv`](content/site.csv) — File → Import → Replace current
-   sheet, or paste the two columns in.
-2. Add `"site"` back to `TABS` in
-   [`scripts/sync-content.mjs`](scripts/sync-content.mjs).
-
-`src/lib/content.ts` asserts every key the templates use is present, so a
-partial update fails the build loudly instead of publishing pages with
-`hero_line_1` printed as body copy.
 
 ### Sheet schema
 
