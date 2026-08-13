@@ -102,6 +102,7 @@ function load() {
  * fails here rather than shipping pages with "hero_line_1" printed as copy.
  */
 const REQUIRED_COPY_KEYS = [
+  "org_name",
   "org_tagline",
   "org_phone",
   "org_address",

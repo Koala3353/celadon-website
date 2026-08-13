@@ -4,6 +4,7 @@ import "./globals.css";
 import { asset } from "@/lib/asset";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { copy } from "@/lib/content";
 
 /**
  * Brandbook type is Gotham Black for titles and Gotham for body. Gotham is a
@@ -17,10 +18,10 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-const TITLE = "Ateneo Celadon";
-const DESCRIPTION =
-  "The premier Filipino-Chinese student-led organization of the Ateneo de " +
-  "Manila University.";
+// Sheet-driven, so the org name and one-liner are editable without a deploy
+// from a developer.
+const TITLE = copy("org_name");
+const DESCRIPTION = copy("org_tagline");
 
 export const metadata: Metadata = {
   title: { default: TITLE, template: `%s — ${TITLE}` },
