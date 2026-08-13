@@ -1,9 +1,7 @@
-# Celaville — Ateneo Celadon Recweek 2026–2027
+# Ateneo Celadon
 
-下一课！Start the next chapter with Celadon.
-
-Celadon's Recweek site: departments, projects, and a discovery hub covering
-every Core Team committee and department role.
+The premier Filipino-Chinese student-led organization of the Ateneo de Manila
+University.
 
 **Live:** https://koala3353.github.io/celadon-website/
 
@@ -22,27 +20,46 @@ Google Sheet  ──npm run sync:content──▶  content/*.csv  ──next bui
                                                                   GitHub Pages
 ```
 
-Every page is prerendered to static HTML at build time. That is what makes a
-GitHub Pages deploy possible — Pages serves files and nothing else.
+Every page is prerendered to static HTML at build time — which is what makes a
+GitHub Pages deploy possible at all, since Pages serves files and nothing else.
+
+> **Sheet sync is currently paused.** The `site` tab still holds the old
+> Celaville copy, and the templates now read a different set of keys. Until the
+> Sheet is updated to match [`content/site.csv`](content/site.csv), the
+> `CONTENT_SHEET_ID` repository variable is unset and CI builds from the
+> committed CSVs. See "Re-enabling Sheet sync" below.
 
 ### Editing content
 
-1. Open the content Sheet (see `CONTENT_SHEET_ID` in the repo variables).
+1. Open the content Sheet.
 2. Edit any tab. **Don't rename tabs or header columns** — they're the schema.
-3. Publish the change by running the workflow:
+3. Publish:
 
    ```bash
    gh workflow run deploy-pages.yml
    ```
 
-   It also runs automatically on every push to `main`, and once a day at
-   20:17 UTC (4:17am PHT).
+   It also runs on every push to `main`, and daily at 20:17 UTC (4:17am PHT).
 
-To pull Sheet edits into the repo locally instead:
+To pull Sheet edits into the repo locally:
 
 ```bash
 CONTENT_SHEET_ID=<id> npm run sync:content
 ```
+
+### Re-enabling Sheet sync
+
+1. Update the Sheet's `site` tab so its `key` column matches
+   [`content/site.csv`](content/site.csv) exactly.
+2. Restore the variable:
+
+   ```bash
+   gh variable set CONTENT_SHEET_ID --body "<sheet-id>" --repo Koala3353/celadon-website
+   ```
+
+`src/lib/content.ts` asserts every key the templates use is present, so a
+mismatched Sheet fails the build loudly instead of publishing pages with
+`hero_line_1` printed as body copy.
 
 ### Sheet schema
 
@@ -51,29 +68,24 @@ CONTENT_SHEET_ID=<id> npm run sync:content
 | `departments` | `slug`, `name`, `overview` |
 | `projects` | `slug`, `title`, `department_slug`, `year`, `status`, `description`, `cover_image_url`, `cover_image_alt` |
 | `roles` | `slug`, `title`, `department_slug`, `project_slug`, `status`, `description`, `responsibilities`, `common_deliverables`, `qualities`, `application_deadline`, `application_link`, `core_application_link`, `head_application_link` |
-| `site` | `key`, `value` — all headings and body copy on the site |
+| `site` | `key`, `value` — all headings and body copy |
 
 Notes:
 
-- `slug` is the URL segment and must be unique and lowercase-hyphenated.
+- `slug` is the URL segment: unique, lowercase-hyphenated.
 - A role belongs to **either** a project (a Core Team committee) **or** a
   department (a standing pool) — fill one of `project_slug` / `department_slug`.
 - Multi-value cells (`responsibilities`, `common_deliverables`, `qualities`)
   are **one item per line inside a single cell** (Alt+Enter in Sheets).
-- Only projects with `status: published` appear on the site.
-- Roles with `status: open` show apply buttons; `closed` roles stay browsable
-  so people can read up before applications open.
+- A department slug also selects its Ayi mascot from `public/ayi/<slug>.png`.
+- Only projects with `status: published` appear.
+- Roles with `status: open` show apply buttons; `closed` roles stay browsable.
 
 ## Local development
 
 ```bash
 npm install
-npm run dev
-```
-
-Then http://localhost:3000.
-
-```bash
+npm run dev            # http://localhost:3000
 npm run build          # static export to ./out
 npm run sync:content   # refresh content/*.csv from the Sheet
 npm run lint
@@ -81,45 +93,59 @@ npm run lint
 
 ### Why `--webpack`
 
-`npm run build` passes `--webpack` deliberately. Turbopack, the Next 16
-default, currently fails to load the `lightningcss` native binding through the
-PostCSS worker Tailwind v4 uses:
-
-```
-Error evaluating Node.js code
-Error: Cannot find module '../lightningcss.darwin-arm64.node'
-```
-
-Remove the flag once that's fixed upstream.
+`npm run build` passes `--webpack` deliberately. Turbopack, the Next 16 default,
+currently fails to load the `lightningcss` native binding through the PostCSS
+worker Tailwind v4 uses. Remove the flag once that's fixed upstream.
 
 ## Design
 
-Palette, type, and motifs come from the Recweek 2026–2027 brand book.
+From the Celadon Website Brandbook.
 
 | | |
 | --- | --- |
-| Primary | `#FFFCF7` cream · `#5E8F6B` green · `#D94F40` red |
-| Accents | `#E4B64A` gold · `#9FD0EB` sky · `#A8C59A` sage · `#F3BF8D` peach · `#4F4036` ink |
-| Display | Grandstander |
-| Poster | Bevan (first word of a Grandstander lockup) |
-| Body | Jost — stand-in for Glacial Indifference, which isn't web-licensed |
-| Chinese | Noto Serif SC — stand-in for 字由点字云霆楷体 |
+| Primary | `#003078` navy · `#18182A` ink · `#FFFFFF` white |
+| On navy | `#C7D2E1` body · `#7BA4FF` link |
+| Accent | `#F09B43` orange, sparingly |
+| Title | Gotham Black → **Montserrat 900**, all caps |
+| Body | Gotham → **Montserrat** |
 
-The logo files in `public/brand/` are extracted from the brand book and used
-unmodified, per its usage rules. The village furniture (hills, fence, paper
-grid, rooflines) is drawn in CSS from the palette in `globals.css` rather than
-shipping the book's watercolour artwork.
+Two deliberate departures from the book, both for legibility:
 
-Two deeper tints, `--green-ink` and `--red-ink`, exist because the brand green
-and red only reach ~3.2:1 on cream — below AA for body text. Use them for small
-text; the pure brand hues are for fills and large display type.
+- **`--link: #296BFF` and `--accent-ink: #B2620E`.** The book's `#7BA4FF` and
+  `#F09B43` are tuned for a navy field; on white they measure 2.44:1 and 2.22:1,
+  well under the 4.5:1 WCAG asks for body text. These keep the hue and
+  saturation and only drop lightness until they clear AA at 4.52:1. The original
+  values are still used verbatim on navy, where they pass.
+- **Line spacing.** The book specifies 1.0. That's applied to display type
+  (`.display`); paragraphs use 1.6, since 1.0 leading at paragraph length is
+  below what WCAG 1.4.12 asks and is genuinely hard to read.
+
+Montserrat substitutes for Gotham, which has no web-embedding licence here —
+same geometric skeleton and wide caps, and one variable family covers 400–900.
+
+Brand assets in `public/brand/` are extracted from the brandbook; the Ayi
+mascots in `public/ayi/` come from the org's asset Drive.
+
+### Motion
+
+[anime.js v4](https://animejs.com) drives scroll reveals, the stat counters, the
+hero line reveal, and the filter re-stagger. Everything else — the wordmark
+marquee, hovers, press feedback — is CSS, so it runs off the main thread.
+
+Rules the motion follows:
+
+- Only `transform` and `opacity` animate; nothing triggers layout.
+- Custom `cubic-bezier(0.23, 1, 0.32, 1)` easing; no `linear`/`ease-in-out`
+  defaults, and never `ease-in` on entry.
+- UI transitions stay under 300ms. Reveals run 620ms as scroll choreography.
+- Hover effects are gated behind `@media (hover: hover) and (pointer: fine)`
+  so a tap on touch hardware can't latch them.
+- `prefers-reduced-motion: reduce` disables the marquee and every reveal, and
+  content is shown rather than left in its hidden start state.
+- Nav links don't animate — they're high-frequency targets.
 
 ## Deployment
 
 [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)
 builds and publishes to Pages. It needs **no secrets**. One optional repository
-*variable*:
-
-- `CONTENT_SHEET_ID` — the id in the Sheet URL
-  (`docs.google.com/spreadsheets/d/<THIS>/edit`). Set it and every build pulls
-  fresh content; leave it unset and the committed CSVs are used.
+*variable*, `CONTENT_SHEET_ID`, turns on the Sheet refresh (see above).

@@ -1,5 +1,5 @@
 {
-  "name": "celaville-website",
+  "name": "ateneo-celadon-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "sync:content": "node scripts/sync-content.mjs"
   },
   "dependencies": {
+    "animejs": "^4.5.0",
     "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"

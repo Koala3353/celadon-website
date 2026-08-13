@@ -3,105 +3,118 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { PageHero } from "@/components/page-hero";
 import { RoleCard } from "@/components/role-card";
+import { Reveal } from "@/components/motion/reveal";
 import { copy, getRoles } from "@/lib/content";
 import type { RoleWithParent } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "Roles",
+  title: "Join",
   description:
-    "Every Core Team committee and Department role at Celadon — what the " +
-    "work actually involves, before you apply.",
+    "Every Core Team committee and department role at Ateneo Celadon — what " +
+    "the work involves, before you apply.",
 };
+
+function group<T extends string>(
+  roles: RoleWithParent[],
+  key: (r: RoleWithParent) => { slug: string; label: T } | null
+) {
+  const out = new Map<string, { label: T; roles: RoleWithParent[] }>();
+  for (const role of roles) {
+    const k = key(role);
+    if (!k) continue;
+    const existing = out.get(k.slug);
+    if (existing) existing.roles.push(role);
+    else out.set(k.slug, { label: k.label, roles: [role] });
+  }
+  return out;
+}
 
 export default function RecruitmentPage() {
   const roles = getRoles();
   const openCount = roles.filter((r) => r.status === "open").length;
 
-  // Project roles are a project's core-team committees; department roles are
-  // standing pools. They're browsed differently, so they're grouped apart.
-  const byProject = new Map<string, { title: string; roles: RoleWithParent[] }>();
-  for (const role of roles) {
-    if (!role.project) continue;
-    const group = byProject.get(role.project.slug);
-    if (group) group.roles.push(role);
-    else byProject.set(role.project.slug, { title: role.project.title, roles: [role] });
-  }
-
-  const byDepartment = new Map<string, { name: string; roles: RoleWithParent[] }>();
-  for (const role of roles) {
-    if (!role.department) continue;
-    const group = byDepartment.get(role.department.slug);
-    if (group) group.roles.push(role);
-    else byDepartment.set(role.department.slug, { name: role.department.name, roles: [role] });
-  }
+  const byProject = group(roles, (r) =>
+    r.project ? { slug: r.project.slug, label: r.project.title } : null
+  );
+  const byDepartment = group(roles, (r) =>
+    r.department ? { slug: r.department.slug, label: r.department.name } : null
+  );
 
   return (
     <>
       <PageHero
-        eyebrow="Discovery & application hub"
+        eyebrow="Recruitment"
         title={copy("recruitment_heading")}
         description={copy("recruitment_body")}
       >
-        <p className="font-display text-sm font-semibold text-green-ink">
+        <p className="text-sm font-bold uppercase tracking-wider text-link-navy">
           {openCount > 0
-            ? `${openCount} role${openCount === 1 ? "" : "s"} open now · ${roles.length} documented in total`
-            : `Applications aren't open yet — all ${roles.length} roles are documented here so you can read up before they are.`}
+            ? `${openCount} open now · ${roles.length} documented`
+            : `Applications aren't open yet · all ${roles.length} roles documented`}
         </p>
       </PageHero>
 
-      <Container className="flex flex-col gap-16 py-16">
+      <Container className="flex flex-col gap-20 py-20">
         {byProject.size > 0 && (
-          <section className="flex flex-col gap-10">
-            <h2 className="font-display text-2xl font-bold text-ink">
-              <span className="underline-sketch">Core Team committees</span>
-            </h2>
+          <section className="flex flex-col gap-12">
+            <Reveal>
+              <h2 className="display text-3xl text-navy sm:text-4xl" data-reveal>
+                Core Team committees
+              </h2>
+            </Reveal>
 
-            {Array.from(byProject.entries()).map(([slug, group]) => (
-              <div key={slug} className="flex flex-col gap-4">
+            {Array.from(byProject.entries()).map(([slug, g]) => (
+              <Reveal key={slug} stagger={50} className="flex flex-col gap-4">
                 <Link
                   href={`/projects/${slug}`}
-                  className="w-fit font-display text-lg font-bold text-green-ink underline-offset-4 hover:underline"
+                  data-reveal
+                  className="w-fit text-lg font-extrabold text-link underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
                 >
-                  {group.title} →
+                  {g.label}
                 </Link>
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {group.roles.map((role) => (
-                    <RoleCard key={role.slug} role={role} />
+                <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {g.roles.map((role) => (
+                    <li key={role.slug}>
+                      <RoleCard role={role} />
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </Reveal>
             ))}
           </section>
         )}
 
         {byDepartment.size > 0 && (
-          <section className="flex flex-col gap-10">
-            <h2 className="font-display text-2xl font-bold text-ink">
-              <span className="underline-sketch">Department pools</span>
-            </h2>
+          <section className="flex flex-col gap-12">
+            <Reveal>
+              <h2 className="display text-3xl text-navy sm:text-4xl" data-reveal>
+                Department pools
+              </h2>
+            </Reveal>
 
-            {Array.from(byDepartment.entries()).map(([slug, group]) => (
-              <div key={slug} className="flex flex-col gap-4">
+            {Array.from(byDepartment.entries()).map(([slug, g]) => (
+              <Reveal key={slug} stagger={50} className="flex flex-col gap-4">
                 <Link
                   href={`/departments#${slug}`}
-                  className="w-fit font-display text-lg font-bold text-green-ink underline-offset-4 hover:underline"
+                  data-reveal
+                  className="w-fit text-lg font-extrabold text-link underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
                 >
-                  {group.name} →
+                  {g.label}
                 </Link>
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {group.roles.map((role) => (
-                    <RoleCard key={role.slug} role={role} />
+                <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {g.roles.map((role) => (
+                    <li key={role.slug}>
+                      <RoleCard role={role} />
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </Reveal>
             ))}
           </section>
         )}
 
         {roles.length === 0 && (
-          <p className="text-muted-foreground">
-            No roles published yet — check back soon.
-          </p>
+          <p className="text-muted-foreground">No roles published yet.</p>
         )}
       </Container>
     </>

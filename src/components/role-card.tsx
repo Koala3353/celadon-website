@@ -21,26 +21,29 @@ export function RoleCard({ role }: { role: RoleWithParent }) {
   return (
     <Link
       href={`/recruitment/roles/${role.slug}`}
-      className="group rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green"
+      data-reveal
+      className="group rounded-[1.75rem] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
     >
-      <Card className="flex h-full flex-col gap-3 p-6 transition-transform group-hover:-translate-y-1 group-hover:border-green">
+      <Card className="lift h-full" innerClassName="flex h-full flex-col gap-3 p-6">
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone={role.status === "open" ? "open" : "closed"}>
             {role.status === "open" ? "Open" : "Closed"}
           </Badge>
-          {parent && <Badge tone="sky">{parent}</Badge>}
+          {parent && <Badge>{parent}</Badge>}
         </div>
 
-        <h3 className="font-display text-xl font-bold text-ink">{role.title}</h3>
+        <h3 className="text-lg font-extrabold leading-tight text-navy">
+          {role.title}
+        </h3>
 
         {role.description && (
-          <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+          <p className="prose-body line-clamp-3 text-sm text-muted-foreground">
             {role.description}
           </p>
         )}
 
-        <p className="mt-auto pt-2 font-display text-sm font-semibold text-green-ink">
-          {deadline ? `Apply by ${deadline}` : "See the role →"}
+        <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-link">
+          {deadline ? `Apply by ${deadline}` : "Read the role"}
         </p>
       </Card>
     </Link>

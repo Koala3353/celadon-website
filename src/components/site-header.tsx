@@ -1,51 +1,92 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { asset } from "@/lib/asset";
+import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/container";
 
 const NAV = [
-  { href: "/recruitment", label: "Roles" },
-  { href: "/projects", label: "Projects" },
-  { href: "/departments", label: "Departments" },
   { href: "/about", label: "About" },
+  { href: "/departments", label: "Departments" },
+  { href: "/projects", label: "Projects" },
+  { href: "/recruitment", label: "Join" },
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname() ?? "/";
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-cream/90 backdrop-blur-sm">
-      <Container className="flex flex-col items-center gap-1 py-3 sm:h-20 sm:flex-row sm:justify-between sm:gap-6 sm:py-0">
+    <header
+      className="sticky top-0 border-b border-border bg-white/85 backdrop-blur-md"
+      style={{ zIndex: "var(--z-nav)" }}
+    >
+      {/* Four uppercase labels plus the mark do not fit on one line at
+          375px, so the header stacks into two rows below sm. */}
+      <Container className="flex flex-col items-center gap-1 py-2.5 sm:h-[4.5rem] sm:flex-row sm:justify-between sm:gap-4 sm:py-0">
         <Link
           href="/"
-          className="shrink-0 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green"
+          aria-label="Ateneo Celadon — home"
+          className="flex shrink-0 items-center gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
         >
+          {/* Roundel + wordmark. The full crest's own CELADON banner is
+              unreadable at header size, so the mark is cropped to the
+              dragon-and-eagle and the name is set beside it. */}
           <Image
-            src={asset("/brand/celaville-wordmark.png")}
-            alt="Celaville — Ateneo Celadon Recweek 2026–2027"
-            width={900}
-            height={253}
+            src={asset("/brand/dreagle-mark.png")}
+            alt=""
+            width={600}
+            height={380}
             priority
-            className="h-10 w-auto sm:h-12"
+            className="h-9 w-auto"
           />
+          <Image
+            src={asset("/brand/celadon-wordmark.png")}
+            alt=""
+            width={1000}
+            height={200}
+            priority
+            className="hidden h-[1.15rem] w-auto sm:block"
+          />
+          <span className="sr-only">Ateneo Celadon</span>
         </Link>
 
         <nav
           aria-label="Main"
-          className="flex w-full items-center justify-between gap-1 sm:w-auto sm:justify-end sm:gap-2"
+          className="flex w-full items-center justify-between gap-0.5 sm:w-auto sm:justify-end sm:gap-1"
         >
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-full px-2.5 py-2 font-display text-sm font-semibold text-ink transition-colors hover:bg-muted hover:text-green-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green sm:px-4 sm:text-base"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV.map((item) => {
+            // Nested routes (/projects/rose-sale) should still light up
+            // their top-level entry.
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "relative rounded-full px-2 py-2 text-[0.6875rem] font-bold uppercase tracking-wider transition-colors sm:px-4 sm:text-sm",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy",
+                  active
+                    ? "text-navy"
+                    : "text-muted-foreground hover:text-navy"
+                )}
+              >
+                {item.label}
+                {active && (
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-navy sm:inset-x-4"
+                  />
+                )}
+              </Link>
+            );
+          })}
         </nav>
       </Container>
-
-      {/* Rooflines, echoing the logo's houses. */}
-      <div aria-hidden className="rooflines h-3 w-full opacity-70" />
     </header>
   );
 }

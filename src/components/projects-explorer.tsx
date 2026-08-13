@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { animate, stagger } from "animejs";
 import { ProjectCard } from "@/components/project-card";
 import { cn } from "@/lib/cn";
 import type { Department, ProjectWithDepartment } from "@/lib/types";
@@ -14,14 +15,16 @@ export function ProjectsExplorer({
 }) {
   const [year, setYear] = useState<number | "all">("all");
   const [departmentSlug, setDepartmentSlug] = useState<string>("all");
+  const grid = useRef<HTMLDivElement>(null);
+  const first = useRef(true);
 
   const years = useMemo(
     () => Array.from(new Set(projects.map((p) => p.year))).sort((a, b) => b - a),
     [projects]
   );
 
-  // Only offer a department filter for departments that actually have
-  // projects — otherwise most pills lead to an empty grid.
+  // Only offer a department filter for departments that own projects —
+  // otherwise most pills lead to an empty grid.
   const usedDepartments = useMemo(() => {
     const slugs = new Set(projects.map((p) => p.department?.slug).filter(Boolean));
     return departments.filter((d) => slugs.has(d.slug));
@@ -34,8 +37,35 @@ export function ProjectsExplorer({
     return true;
   });
 
+  // Re-stagger the grid when the filter changes so results feel dealt out
+  // rather than swapped. Skipped on first paint — the Reveal on mount already
+  // covers that, and doubling up reads as a stutter.
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    const el = grid.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const cards = el.querySelectorAll<HTMLElement>("[data-card]");
+    if (cards.length === 0) return;
+
+    const animation = animate(cards, {
+      opacity: [0, 1],
+      translateY: [12, 0],
+      duration: 380,
+      delay: stagger(35),
+      ease: "cubicBezier(0.23, 1, 0.32, 1)",
+    });
+    return () => {
+      animation.revert();
+    };
+  }, [year, departmentSlug]);
+
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-4">
         <FilterRow label="Year">
           <FilterPill active={year === "all"} onClick={() => setYear("all")}>
@@ -76,9 +106,14 @@ export function ProjectsExplorer({
       {filtered.length === 0 ? (
         <p className="text-muted-foreground">No projects match these filters.</p>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((project, i) => (
-            <ProjectCard key={project.slug} project={project} index={i} />
+        <div
+          ref={grid}
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {filtered.map((project) => (
+            <div key={project.slug} data-card>
+              <ProjectCard project={project} />
+            </div>
           ))}
         </div>
       )}
@@ -95,9 +130,7 @@ function FilterRow({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 font-display text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-        {label}
-      </span>
+      <span className="eyebrow mr-1 text-muted-foreground">{label}</span>
       {children}
     </div>
   );
@@ -118,10 +151,10 @@ function FilterPill({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "rounded-full border-2 px-4 py-1.5 font-display text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green",
+        "pressable rounded-full px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy",
         active
-          ? "border-green bg-green text-cream"
-          : "border-border text-muted-foreground hover:bg-muted"
+          ? "bg-navy text-white"
+          : "bg-navy/[0.05] text-muted-foreground hover:bg-navy/[0.1] hover:text-navy"
       )}
     >
       {children}

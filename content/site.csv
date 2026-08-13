@@ -1,20 +1,24 @@
-"key","value"
-"theme_name","Celaville"
-"theme_year","2026–2027"
-"tagline_zh","下一课！"
-"tagline_en","Start the next chapter with Celadon!"
-"hero_heading","Welcome to Celaville"
-"hero_body","Experience the next chapter of your story alongside both new and familiar faces. Through sleepless nights and cherished moments shared together, Celadon’s recweek theme, Celaville, celebrates the significance of community and familial bonds."
-"hero_cta_label","See open roles"
-"hero_cta_href","/recruitment"
-"about_heading","The next chapter"
-"about_body","The Classic Chinese class textbook is a staple in young Chinese–Filipinos’ upbringing. Full of color and life, it takes you back to your past elementary and highschool classroom days. Celaville invites the Ateneo Community to join the village and experience the camaraderie that empowers the organization."
-"recruitment_heading","Join the village"
-"recruitment_body","Every role in Celaville is a doorway into the community. Find the one that fits the story you want to tell."
-"projects_heading","Around the village"
-"projects_body","Projects are how Celaville comes to life — summits, festivals, sales, and celebrations run by townspeople like you."
-"departments_heading","Neighborhoods"
-"departments_body","Six departments keep the village running. Each one recruits for its own pool of roles."
-"footer_note","Ateneo Celadon · Recweek 2026–2027"
-"org_instagram","https://www.instagram.com/ateneoceladon/"
-"org_facebook","https://www.facebook.com/AteneoCeladon"
+key,value
+org_name,Ateneo Celadon
+org_tagline,The premier Filipino-Chinese student-led organization of the Ateneo de Manila University.
+org_phone,0921 999 8882
+org_address,"3/F Manuel V. Pangilinan Building, Ateneo de Manila University, Katipunan Avenue, Quezon City"
+hero_line_1,Ateneo
+hero_line_2,Celadon
+hero_body,"Six departments, one community. Celadon runs the projects, culture, and formation that carry Filipino-Chinese life on campus — and recruits the students who make them happen."
+hero_cta_label,Join Celadon
+hero_cta_href,/recruitment
+about_heading,Who we are
+about_body,"Celadon has spent decades building a home for Filipino-Chinese students at the Ateneo. What that looks like in practice is concrete: cultural projects that fill the campus calendar, formation programs that turn members into leaders, and partnerships that reach well past Katipunan."
+about_secondary_heading,What we do
+about_secondary_body,"Every project on this site was run by students. Each one is staffed by a core team drawn from across the organization, supported by six departments that handle communications, culture, external relations, finance, people, and strategy."
+departments_heading,Departments
+departments_body,"Six departments keep Celadon running. Each recruits into its own pool of roles, and each has its own Ayi."
+projects_heading,Projects
+projects_body,"Summits, festivals, sales, and celebrations — the work Celadon puts into the world each year."
+recruitment_heading,Join Celadon
+recruitment_body,"Every role is documented before applications open, so you can read exactly what the work involves before you commit to it."
+cta_heading,Start here
+cta_body,"Read through the roles, find the department that fits, and apply when the forms open."
+org_instagram,https://www.instagram.com/ateneoceladon/
+org_facebook,https://www.facebook.com/AteneoCeladon

@@ -13,11 +13,11 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Portfolio"
+        eyebrow="Our work"
         title={copy("projects_heading")}
         description={copy("projects_body")}
       />
-      <Container className="py-16">
+      <Container className="py-20">
         <ProjectsExplorer
           projects={getPublishedProjects()}
           departments={getDepartments()}

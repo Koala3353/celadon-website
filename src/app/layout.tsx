@@ -1,59 +1,50 @@
 import type { Metadata } from "next";
-import { Grandstander, Bevan, Jost, Noto_Serif_SC } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { asset } from "@/lib/asset";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { copy } from "@/lib/content";
 
-// Primary typeface from the brand book.
-const grandstander = Grandstander({
-  variable: "--font-display",
-  subsets: ["latin"],
-});
-
-// Brand book: "can use BEVAN for the first word of the Grandstander".
-const bevan = Bevan({
-  variable: "--font-poster",
-  subsets: ["latin"],
-  weight: "400",
-});
-
-// Stand-in for Glacial Indifference, which isn't web-licensed. Jost is the
-// closest open geometric sans — same single-storey 'a' and circular bowls.
-const jost = Jost({
+/**
+ * Brandbook type is Gotham Black for titles and Gotham for body. Gotham is a
+ * licensed Hoefler face with no web-embedding rights here, so Montserrat
+ * stands in for both weights: the same geometric construction and wide caps,
+ * and it covers 400 through 900 from a single variable family.
+ */
+const montserrat = Montserrat({
   variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
 });
 
-// Stand-in for 字由点字云霆楷体 for the Chinese display bits.
-const notoSerifSC = Noto_Serif_SC({
-  variable: "--font-hanzi",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+const TITLE = "Ateneo Celadon";
+const DESCRIPTION =
+  "The premier Filipino-Chinese student-led organization of the Ateneo de " +
+  "Manila University.";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Celaville — Ateneo Celadon Recweek 2026–2027",
-    template: "%s — Celaville",
-  },
-  description:
-    "下一课！Start the next chapter with Celadon. Explore Celadon's " +
-    "departments, projects, and open Recweek roles.",
+  title: { default: TITLE, template: `%s — ${TITLE}` },
+  description: DESCRIPTION,
+  applicationName: TITLE,
   icons: { apple: asset("/brand/apple-touch-icon.png") },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: TITLE,
+    type: "website",
+  },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
+
+export const viewport = { themeColor: "#003078" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${grandstander.variable} ${bevan.variable} ${jost.variable} ${notoSerifSC.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-background">
+    <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
+      <body className="grain flex min-h-full flex-col bg-background">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-red focus:px-5 focus:py-2 focus:font-display focus:text-sm focus:font-bold focus:text-cream"
+          className="sr-only rounded-full focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-navy focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-white"
         >
           Skip to content
         </a>
@@ -61,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main" className="flex-1">
           {children}
         </main>
-        <SiteFooter note={copy("footer_note")} />
+        <SiteFooter />
       </body>
     </html>
   );

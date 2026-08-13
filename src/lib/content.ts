@@ -90,12 +90,53 @@ function load() {
     readTable("site").map((r) => [r.key, r.value ?? ""])
   );
 
+  assertCopyKeys(site);
+
   cache = { departments, projects, roles, site };
   return cache;
 }
 
-/** Editable copy from the `site` tab. Falls back to the key so a missing row
- *  is visible on the page rather than silently blank. */
+/**
+ * Keys the templates call directly. If the `site` tab drifts out of sync with
+ * the code — say a sync pulls down an older revision of the Sheet — the build
+ * fails here rather than shipping pages with "hero_line_1" printed as copy.
+ */
+const REQUIRED_COPY_KEYS = [
+  "org_tagline",
+  "org_phone",
+  "org_address",
+  "hero_line_1",
+  "hero_line_2",
+  "hero_body",
+  "hero_cta_label",
+  "hero_cta_href",
+  "about_heading",
+  "about_body",
+  "about_secondary_body",
+  "departments_heading",
+  "departments_body",
+  "projects_heading",
+  "projects_body",
+  "recruitment_heading",
+  "recruitment_body",
+  "cta_heading",
+  "cta_body",
+  "org_instagram",
+  "org_facebook",
+] as const;
+
+function assertCopyKeys(site: Record<string, string>) {
+  const missing = REQUIRED_COPY_KEYS.filter((k) => !site[k]?.trim());
+  if (missing.length > 0) {
+    throw new Error(
+      `content/site.csv is missing required keys: ${missing.join(", ")}.\n` +
+        `The Google Sheet's "site" tab is probably out of date — update it, ` +
+        `or run the build without CONTENT_SHEET_ID to use the committed CSVs.`
+    );
+  }
+}
+
+/** Editable copy from the `site` tab. */
 export function copy(key: string): string {
   return load().site[key] ?? key;
 }

@@ -44,3 +44,6 @@ next-env.d.ts
 # github pages build
 /out/
 /.pages-stash/
+
+# editor/tooling
+/.claude/
