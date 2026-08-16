@@ -27,7 +27,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
 
       - run: npm ci
@@ -47,11 +47,19 @@ jobs:
 
       - name: Build static site
         env:
-          # Project page, so the site lives under /<repo>.
-          PAGES_BASE_PATH: /${{ github.event.repository.name }}
+          # ateneoceladon.com is a custom domain mapped to the Pages site, so
+          # it's served at the domain root, not under /<repo>. PAGES_BASE_PATH
+          # must stay empty here — set it back to /${{ github.event.repository.name }}
+          # only if the custom domain is ever removed and the site reverts to
+          # koala3353.github.io/celadon-website/.
+          PAGES_BASE_PATH: ""
         run: |
           npm run build
-          touch out/.nojekyll   # keep _next/ from being swallowed by Jekyll
+          touch out/.nojekyll        # keep _next/ from being swallowed by Jekyll
+          echo "ateneoceladon.com" > out/CNAME   # Pages re-derives this from the
+                                                  # repo's custom-domain setting on
+                                                  # every deploy unless the file
+                                                  # ships in the artifact itself.
 
       - uses: actions/upload-pages-artifact@v3
         with:

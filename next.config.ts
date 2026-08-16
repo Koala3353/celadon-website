@@ -6,8 +6,12 @@ import type { NextConfig } from "next";
  * flag. That way a route handler or dynamic page can never be added by
  * accident and only fail in CI.
  *
- * `PAGES_BASE_PATH` is set to /<repo> by the Pages workflow because this
- * deploys as a project page, not a user page. It stays empty locally.
+ * `PAGES_BASE_PATH` prefixes every asset URL and is only non-empty when the
+ * site is served under a path segment (a GitHub Pages *project* page like
+ * koala3353.github.io/celadon-website/). With the ateneoceladon.com custom
+ * domain mapped in, the site is served at the domain root, so the workflow
+ * sets this to "" — set it back to /celadon-website only if the custom
+ * domain is ever removed. It stays empty locally too.
  */
 const basePath = process.env.PAGES_BASE_PATH ?? "";
 

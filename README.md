@@ -3,7 +3,7 @@
 The premier Filipino-Chinese student-led organization of the Ateneo de Manila
 University.
 
-**Live:** https://koala3353.github.io/celadon-website/
+**Live:** https://ateneoceladon.com/
 
 ---
 
