@@ -18,26 +18,28 @@ import { fileURLToPath } from "node:url";
 const SHEET_ID = process.env.CONTENT_SHEET_ID ?? "";
 
 /**
- * `site` is deliberately absent here.
+ * Tab name -> gid (the numeric id in the Sheet URL after `gid=`).
  *
- * On 2026-08-16, row 1 of the Sheet's `site` tab lost its "key","value"
- * header — it became a single corrupted row holding the first 9 keys and
- * values each space-joined together (visible directly with
- * `curl "…/gviz/tq?tqx=out:csv&sheet=site"`). Since content.ts uses row 1 as
- * the column names for every row below it, that one bad row broke every
- * required key at once and failed the build.
+ * This used to fetch by tab *name* through the gviz endpoint
+ * (`/gviz/tq?tqx=out:csv&sheet=<name>`), which is more convenient to set up
+ * but has a real server-side cache: on 2026-08-16 a Sheet edit that fixed a
+ * corrupted `site` header row didn't show up over gviz for several minutes
+ * even with cache-busting query params and headers, while
+ * `/export?format=csv&gid=<gid>` returned the fresh content immediately,
+ * every time. Fetching by gid trades a one-time setup cost (recording the
+ * gid below) for not silently serving stale content after an edit.
  *
- * The team's edits below that row (Vision/Mission/Core Competency, real
- * stats, recruitment dates, the corrected Facebook URL, TikTok, email) were
- * genuine and are preserved in content/site.csv — only the corrupted
- * structural rows were reconstructed (their values were still fully
- * recoverable from the space-joined string, verified byte-for-byte).
- *
- * Put "site" back once the Sheet's row 1 reads exactly "key","value" and the
- * 9 rows below it (org_name … hero_cta_href) are separate rows again — see
- * README "Handing `site` back to the Sheet".
+ * A gid is assigned once when a tab is created and does not change when the
+ * tab is renamed or reordered — only deleting and recreating the tab changes
+ * it. If a tab is ever deleted and recreated, update its gid here (visible in
+ * the Sheet URL after `gid=` once that tab is open).
  */
-const TABS = ["departments", "projects", "roles"];
+const TABS = {
+  departments: 0,
+  projects: 61485455,
+  roles: 1787450093,
+  site: 455462947,
+};
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT_DIR = path.join(ROOT, "content");
@@ -52,18 +54,20 @@ if (!SHEET_ID) {
   process.exit(1);
 }
 
-/** gviz honours sheet *names*, so tabs can be reordered without breaking this. */
-function csvUrl(tab) {
-  const u = new URL(
-    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq`
-  );
-  u.searchParams.set("tqx", "out:csv");
-  u.searchParams.set("sheet", tab);
+function csvUrl(gid) {
+  const u = new URL(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export`);
+  u.searchParams.set("format", "csv");
+  u.searchParams.set("gid", String(gid));
   return u.toString();
 }
 
-async function fetchTab(tab) {
-  const res = await fetch(csvUrl(tab), { redirect: "follow" });
+async function fetchTab(tab, gid) {
+  const res = await fetch(csvUrl(gid), {
+    redirect: "follow",
+    // Belt-and-suspenders: this endpoint hasn't shown the gviz staleness
+    // above, but ask intermediaries not to cache it anyway.
+    headers: { "Cache-Control": "no-cache", Pragma: "no-cache" },
+  });
   if (!res.ok) {
     throw new Error(`${tab}: HTTP ${res.status} ${res.statusText}`);
   }
@@ -77,7 +81,7 @@ async function fetchTab(tab) {
     );
   }
   if (body.trim() === "") {
-    throw new Error(`${tab}: empty response — does a tab named "${tab}" exist?`);
+    throw new Error(`${tab}: empty response — has gid ${gid} been deleted?`);
   }
   return body;
 }
@@ -101,9 +105,9 @@ function countRows(csv) {
 await fs.mkdir(OUT_DIR, { recursive: true });
 
 let failed = false;
-for (const tab of TABS) {
+for (const [tab, gid] of Object.entries(TABS)) {
   try {
-    const csv = await fetchTab(tab);
+    const csv = await fetchTab(tab, gid);
     const file = path.join(OUT_DIR, `${tab}.csv`);
     await fs.writeFile(file, csv.endsWith("\n") ? csv : `${csv}\n`, "utf8");
     const rows = countRows(csv.endsWith("\n") ? csv : `${csv}\n`);
