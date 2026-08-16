@@ -117,11 +117,14 @@ export default function Home() {
           <Reveal className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionHeading eyebrow="About" title={copy("about_heading")} />
             <div className="flex flex-col gap-6 lg:pt-16">
-              <p className="prose-body text-lg text-muted-foreground" data-reveal>
+              {/* Teaser only — the full text (plus about_secondary_body)
+                  lives on /about, so this stays short rather than
+                  duplicating the whole paragraph. */}
+              <p
+                className="prose-body line-clamp-4 text-lg text-muted-foreground"
+                data-reveal
+              >
                 {copy("about_body")}
-              </p>
-              <p className="prose-body text-lg text-muted-foreground" data-reveal>
-                {copy("about_secondary_body")}
               </p>
               <div data-reveal>
                 <ButtonLink href="/about" variant="outline">
