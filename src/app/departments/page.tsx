@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { asset } from "@/lib/asset";
 import { ayiFor } from "@/lib/ayi";
-import {
-  copy,
-  getDepartmentSpotlights,
-  getPublishedProjects,
-  getRolesForDepartment,
-} from "@/lib/content";
+import { copy, getDepartments } from "@/lib/content";
 import { Container } from "@/components/ui/container";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -21,8 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function DepartmentsPage() {
-  const departments = getDepartmentSpotlights();
-  const projects = getPublishedProjects();
+  const departments = getDepartments();
 
   return (
     <>
@@ -32,27 +23,39 @@ export default function DepartmentsPage() {
         description={copy("departments_body")}
       />
 
-      <Container className="flex flex-col gap-24 py-24">
-        {departments.map((department, i) => {
-          const roles = getRolesForDepartment(department.slug);
-          const owned = projects.filter(
-            (p) => p.department?.slug === department.slug
-          );
-          const ayi = ayiFor(department.slug);
-          // Alternate which side the mascot sits on so the page doesn't read
-          // as six identical rows.
-          const flip = i % 2 === 1;
+      {departments.map((department, i) => {
+        const ayi = ayiFor(department.slug);
+        // Alternate which side the mascot sits on so the page doesn't read
+        // as six identical rows.
+        const flip = i % 2 === 1;
+        const tinted = i % 2 === 1;
 
-          return (
-            <Reveal
-              as="section"
-              key={department.slug}
-              className="scroll-mt-28"
-            >
-              <div id={department.slug} className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-                <div
-                  className={`flex flex-col gap-5 ${flip ? "lg:order-2" : ""}`}
-                >
+        return (
+          <Reveal
+            as="section"
+            key={department.slug}
+            className={
+              tinted
+                ? "scroll-mt-28 bg-navy/[0.035] py-16"
+                : "scroll-mt-28 py-16"
+            }
+          >
+            <Container>
+              <div
+                id={department.slug}
+                className={
+                  flip
+                    ? "grid items-start gap-10 lg:grid-cols-[1.6fr_1fr]"
+                    : "grid items-start gap-10 lg:grid-cols-[1fr_1.6fr]"
+                }
+              >
+                {/* Not flipped: the image is left-aligned in its column by
+                    default, which strands it far from the text on its right
+                    — pull it to the column's end so it sits next to the
+                    text instead. Flipped rows don't need this: the image's
+                    own column already sits on the right, right next to the
+                    text on its left. */}
+                <div className={flip ? "lg:order-2" : "lg:justify-self-end"}>
                   {ayi && (
                     <Image
                       src={asset(ayi)}
@@ -63,94 +66,20 @@ export default function DepartmentsPage() {
                       className="h-44 w-auto self-start"
                     />
                   )}
+                </div>
+                <div className="flex flex-col gap-5">
                   <h2 className="display text-4xl text-navy" data-reveal>
                     {department.name}
                   </h2>
-                  <div data-reveal>
-                    {department.openRoleCount > 0 ? (
-                      <Badge tone="navy">
-                        {department.openRoleCount} open role
-                        {department.openRoleCount === 1 ? "" : "s"}
-                      </Badge>
-                    ) : (
-                      roles.length > 0 && (
-                        <Badge>
-                          {roles.length} role{roles.length === 1 ? "" : "s"} documented
-                        </Badge>
-                      )
-                    )}
-                  </div>
                   <p className="prose-body text-muted-foreground" data-reveal>
                     {department.overview}
                   </p>
                 </div>
-
-                <div className="flex flex-col gap-8">
-                  {roles.length > 0 && (
-                    <div className="flex flex-col gap-4">
-                      <h3 className="eyebrow text-muted-foreground" data-reveal>
-                        Roles
-                      </h3>
-                      <ul className="grid gap-3 sm:grid-cols-2">
-                        {roles.map((role) => (
-                          <li key={role.slug} data-reveal>
-                            <Link
-                              href={`/recruitment/roles/${role.slug}`}
-                              className="group block h-full rounded-[1.75rem] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
-                            >
-                              <Card className="lift h-full" innerClassName="p-5">
-                                <p className="font-extrabold text-navy">
-                                  {role.title}
-                                </p>
-                                <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                                  {role.status === "open" ? "Open" : "Closed"}
-                                </p>
-                              </Card>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {owned.length > 0 && (
-                    <div className="flex flex-col gap-4">
-                      <h3 className="eyebrow text-muted-foreground" data-reveal>
-                        Projects
-                      </h3>
-                      <ul className="grid gap-3 sm:grid-cols-2">
-                        {owned.map((project) => (
-                          <li key={project.slug} data-reveal>
-                            <Link
-                              href={`/projects/${project.slug}`}
-                              className="group block h-full rounded-[1.75rem] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
-                            >
-                              <Card className="lift h-full" innerClassName="p-5">
-                                <p className="tnum text-xs text-muted-foreground">
-                                  {project.year}
-                                </p>
-                                <p className="mt-1 font-extrabold text-navy">
-                                  {project.title}
-                                </p>
-                              </Card>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {roles.length === 0 && owned.length === 0 && (
-                    <p className="text-sm text-muted-foreground" data-reveal>
-                      Nothing published for this department yet.
-                    </p>
-                  )}
-                </div>
               </div>
-            </Reveal>
-          );
-        })}
-      </Container>
+            </Container>
+          </Reveal>
+        );
+      })}
     </>
   );
 }
