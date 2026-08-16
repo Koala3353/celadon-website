@@ -23,6 +23,17 @@ Google Sheet  ──npm run sync:content──▶  content/*.csv  ──next bui
 Every page is prerendered to static HTML at build time — which is what makes a
 GitHub Pages deploy possible at all, since Pages serves files and nothing else.
 
+> **`site` is not currently synced.** On 2026-08-16 row 1 of the Sheet's `site`
+> tab lost its `key`,`value` header — a direct edit merged it and the first 9
+> data rows into one corrupted row. Since row 1 supplies the column names for
+> every row below it, that broke every required key at once and failed the
+> build. The team's other edits (Vision/Mission copy, real stats, recruitment
+> dates, the corrected Facebook URL) were genuine and are preserved in
+> [`content/site.csv`](content/site.csv) — only the corrupted header/9-row
+> block was reconstructed, from values that were still fully recoverable.
+> `departments`, `projects`, `roles` sync normally. See "Handing `site` back
+> to the Sheet" below to restore full sync.
+
 ### Editing content
 
 1. Open the content Sheet.
@@ -40,6 +51,37 @@ To pull Sheet edits into the repo locally:
 ```bash
 CONTENT_SHEET_ID=<id> npm run sync:content
 ```
+
+### Handing `site` back to the Sheet
+
+1. Open the Sheet's `site` tab. Row 1 currently reads something like
+   `"key org_name org_tagline org_phone org_address hero_line_1 hero_line_2
+   hero_body hero_cta_label hero_cta_href"` in column A — one merged cell
+   instead of a header plus 9 rows.
+2. Delete that corrupted row 1 entirely (right-click the row number → Delete
+   row).
+3. Insert 10 clean rows above the current `est_year` row, in this exact
+   order, one `key`/`value` pair per row:
+
+   | key | value |
+   | --- | --- |
+   | `key` | `value` |
+   | `org_name` | `Ateneo Celadon` |
+   | `org_tagline` | `The premier Filipino-Chinese student-led organization of the Ateneo de Manila University.` |
+   | `org_phone` | `0921 999 8882` |
+   | `org_address` | `3/F Manuel V. Pangilinan Building, Ateneo de Manila University, Katipunan Avenue, Quezon City` |
+   | `hero_line_1` | `Ateneo` |
+   | `hero_line_2` | `Celadon` |
+   | `hero_body` | `Six departments, one community. Celadon runs the projects, culture, and formation that carry Filipino-Chinese life on campus — and recruits the students who make them happen.` |
+   | `hero_cta_label` | `Join Celadon` |
+   | `hero_cta_href` | `/recruitment` |
+
+4. Add `"site"` back to `TABS` in
+   [`scripts/sync-content.mjs`](scripts/sync-content.mjs).
+
+`src/lib/content.ts` asserts every key the templates use is present, so a
+still-broken header fails the build loudly rather than shipping empty copy —
+safe to attempt.
 
 ### Sheet schema
 

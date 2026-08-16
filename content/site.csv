@@ -1,24 +1,60 @@
-"key","value"
-"org_name","Ateneo Celadon"
-"org_tagline","The premier Filipino-Chinese student-led organization of the Ateneo de Manila University."
-"org_phone","0921 999 8882"
-"org_address","3/F Manuel V. Pangilinan Building, Ateneo de Manila University, Katipunan Avenue, Quezon City"
-"hero_line_1","Ateneo"
-"hero_line_2","Celadon"
-"hero_body","Six departments, one community. Celadon runs the projects, culture, and formation that carry Filipino-Chinese life on campus — and recruits the students who make them happen."
-"hero_cta_label","Join Celadon"
-"hero_cta_href","/recruitment"
-"about_heading","Who we are"
-"about_body","Celadon has spent decades building a home for Filipino-Chinese students at the Ateneo. What that looks like in practice is concrete: cultural projects that fill the campus calendar, formation programs that turn members into leaders, and partnerships that reach well past Katipunan."
-"about_secondary_heading","What we do"
-"about_secondary_body","Every project on this site was run by students. Each one is staffed by a core team drawn from across the organization, supported by six departments that handle communications, culture, external relations, finance, people, and strategy."
-"departments_heading","Departments"
-"departments_body","Six departments keep Celadon running. Each recruits into its own pool of roles, and each has its own Ayi."
-"projects_heading","Projects"
-"projects_body","Summits, festivals, sales, and celebrations — the work Celadon puts into the world each year."
-"recruitment_heading","Join Celadon"
-"recruitment_body","Every role is documented before applications open, so you can read exactly what the work involves before you commit to it."
-"cta_heading","Start here"
-"cta_body","Read through the roles, find the department that fits, and apply when the forms open."
-"org_instagram","https://www.instagram.com/ateneoceladon/"
-"org_facebook","https://www.facebook.com/AteneoCeladon"
+key,value
+org_name,Ateneo Celadon
+org_tagline,The premier Filipino-Chinese student-led organization of the Ateneo de Manila University.
+org_phone,0921 999 8882
+org_address,"3/F Manuel V. Pangilinan Building, Ateneo de Manila University, Katipunan Avenue, Quezon City"
+hero_line_1,Ateneo
+hero_line_2,Celadon
+hero_body,"Six departments, one community. Celadon runs the projects, culture, and formation that carry Filipino-Chinese life on campus — and recruits the students who make them happen."
+hero_cta_label,Join Celadon
+hero_cta_href,/recruitment
+est_year,1985
+about_heading,Who we are
+about_body,"Established in 1985, Ateneo Celadon is the premier Chinese-Filipino organization of the Ateneo for 40 years running. We aspire to develop our members to become the game changers in society by integrating our vision of social change with the Chinese-Filipino tradition. In Celadon, we encourage our members to be united in this vision by developing their potential to become globally competitive leaders based on strong Chinese-Filipino principles. We do this by showcasing our events such as cultural festivals, financial summits, and leadership programs that not only have won awards but also bring the best in our members–paving the way for them to become the leaders and visionaries for a 'Greater Philippine Society'. With the help our partners such as the Ateneo Ricardo Leong Center for Chinese Studies, we believe this is possible. Simply put, Celadon has stayed and will stay true to its promise of being the forefront in creating Chinese-Filipino game-changers for the country."
+about_secondary_heading,What we do
+about_secondary_body,"Every project on this site was run by students. Each one is staffed by a core team drawn from across the organization, supported by six departments that handle communications, culture, external relations, finance, people, and strategy."
+vision_heading,Our Vision
+vision_body,"Ateneo Celadon envisions a community that is deeply connected to Chinese-Filipino culture and is committed to engaging in its identity, appreciation, and discourse within greater Philippine society."
+mission_heading,Our Mission
+mission_body,"Ateneo Celadon strives to engage its members and audiences in learning, experiencing, and facilitating exchange between the Chinese-Filipino culture and greater Philippine society through culturally-rooted efforts. In line with this, the organization aims to develop member relations and equip them with different skills that are relevant to the practice and discourse of Chinese-Filipino culture."
+core_competency_heading,Core Competency
+core_competency_body,"Chinese-Filipino values are rooted in openness, sensitivity, excellence, and family.
+Shared responsibility to understand, advocate for, and integrate Chinese-Filipino socio-cultural heritage."
+core_advocacy_heading,Core Advocacy
+core_advocacy_body,To foster nationhood through culture-sharing and discourse.
+purposes_heading,Purposes & Functions
+purposes_body,"Expose the members to a deeper, more relevant understanding and appreciation of the Chinese-Filipino culture.
+Help embody the Ateneo social and Ignatian vision of being men and women for and with others through the integration of Chinese-Filipino cultures, traditions, and values with everyday experiences.
+Facilitate the discovery and formation of a Chinese-Filipino culture that has significance and relevance in the modern context of society and nationhood.
+Promote student unity and encourage camaraderie amongst its members.
+Expose the members to interaction with students from inside and outside the Ateneo community.
+Cultivate and develop the skills and leadership capabilities of its members.
+Encourage interaction with others outside the organization using Chinese-Filipino culture as a rich medium to discover a common national identity."
+departments_heading,Departments
+departments_body,"Six departments keep Celadon running. Each recruits into its own pool of roles, and each has its own Ayi."
+projects_heading,Projects
+projects_body,"Summits, festivals, sales, and celebrations — the work Celadon puts into the world each year."
+recruitment_heading,Join Celadon
+recruitment_body,"Every role is documented before applications open, so you can read exactly what the work involves before you commit to it."
+recruitment_stay_tuned_heading,Stay tuned
+recruitment_stay_tuned_body,Applications aren't open yet. Here's when to check back.
+recruitment_deputy_date,"September 2, 2026"
+recruitment_core_date,"September 9, 2026"
+cta_heading,Start here
+cta_body,"Read through the roles, find the department that fits, and apply when the forms open."
+stat_1_value,874
+stat_1_label,Celadoneans last year
+stat_2_value,546
+stat_2_label,New members
+stat_3_value,"₱100,000+"
+stat_3_label,Donated to PAWS
+stat_4_value,500+
+stat_4_label,Merch sold
+stat_5_value,13
+stat_5_label,Major projects
+stat_6_value,42+
+stat_6_label,Total initiatives
+org_instagram,https://www.instagram.com/ateneoceladon/
+org_facebook,https://www.facebook.com/celadonateneo
+org_tiktok,https://www.tiktok.com/@achiceladon
+org_email,celadon.college.org@student.ateneo.edu

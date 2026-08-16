@@ -17,7 +17,27 @@ import { fileURLToPath } from "node:url";
 // Set once the Sheet exists; env var always wins so CI can override.
 const SHEET_ID = process.env.CONTENT_SHEET_ID ?? "";
 
-const TABS = ["departments", "projects", "roles", "site"];
+/**
+ * `site` is deliberately absent here.
+ *
+ * On 2026-08-16, row 1 of the Sheet's `site` tab lost its "key","value"
+ * header — it became a single corrupted row holding the first 9 keys and
+ * values each space-joined together (visible directly with
+ * `curl "…/gviz/tq?tqx=out:csv&sheet=site"`). Since content.ts uses row 1 as
+ * the column names for every row below it, that one bad row broke every
+ * required key at once and failed the build.
+ *
+ * The team's edits below that row (Vision/Mission/Core Competency, real
+ * stats, recruitment dates, the corrected Facebook URL, TikTok, email) were
+ * genuine and are preserved in content/site.csv — only the corrupted
+ * structural rows were reconstructed (their values were still fully
+ * recoverable from the space-joined string, verified byte-for-byte).
+ *
+ * Put "site" back once the Sheet's row 1 reads exactly "key","value" and the
+ * 9 rows below it (org_name … hero_cta_href) are separate rows again — see
+ * README "Handing `site` back to the Sheet".
+ */
+const TABS = ["departments", "projects", "roles"];
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT_DIR = path.join(ROOT, "content");
