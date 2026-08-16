@@ -5,9 +5,12 @@ on:
     branches: [main]
   # Manual run — use this to publish content edits made in the Google Sheet.
   workflow_dispatch:
-  # Pick up Sheet edits once a day without anyone having to remember.
+  # Pick up Sheet edits every 3 hours without anyone having to remember to
+  # trigger a rebuild. The Sheet doesn't change often enough to need faster
+  # than this — a manual `gh workflow run deploy-pages.yml` still covers the
+  # "I need it live right now" case.
   schedule:
-    - cron: "17 20 * * *"
+    - cron: "17 */3 * * *"
 
 permissions:
   contents: read
