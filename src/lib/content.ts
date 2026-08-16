@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { asset } from "@/lib/asset";
 import { parseCsvRecords } from "@/lib/csv";
 import type {
   Department,
@@ -41,6 +42,34 @@ function orNull(value: string | undefined): string | null {
   return v === "" ? null : v;
 }
 
+/**
+ * Cover images are pasted straight from Google Drive's "Share" dialog, which
+ * gives a viewer-page URL (`/file/d/<id>/view`) — that serves an HTML page,
+ * not image bytes, so it's a broken `<img>` src as-is. Rewriting it to
+ * Drive's CDN host here means anyone can just paste the normal share link
+ * into the Sheet and it works, with no special "direct link" format to
+ * remember.
+ *
+ * A cell can also hold a path into this repo's own /public/covers (for
+ * photos that needed cropping before they could be used). Those are written
+ * as a site-relative path, e.g. "/covers/mid-autumn-festival.jpg", not a full
+ * domain — that way the same Sheet value resolves correctly both on
+ * localhost and on whatever domain the site is actually deployed to.
+ */
+function resolveImageUrl(value: string | undefined): string | null {
+  const url = orNull(value);
+  if (!url) return null;
+
+  if (url.startsWith("/")) return asset(url);
+
+  const fileMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+  const openMatch = url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+  const id = fileMatch?.[1] ?? openMatch?.[1];
+  if (!id) return url;
+
+  return `https://lh3.googleusercontent.com/d/${id}=w1600`;
+}
+
 // Read once per process. `next build` is a single pass, so this is the whole
 // cache we need.
 let cache: {
@@ -66,7 +95,7 @@ function load() {
     year: Number(r.year) || new Date().getFullYear(),
     status: (r.status || "published") as Project["status"],
     description: r.description ?? "",
-    coverImageUrl: orNull(r.cover_image_url),
+    coverImageUrl: resolveImageUrl(r.cover_image_url),
     coverImageAlt: r.cover_image_alt ?? "",
   }));
 
@@ -104,22 +133,15 @@ function load() {
 const REQUIRED_COPY_KEYS = [
   "org_name",
   "org_tagline",
-  "org_phone",
   "org_address",
   "hero_line_1",
-  "hero_line_2",
-  "hero_body",
-  "hero_cta_label",
-  "hero_cta_href",
   "about_heading",
   "about_body",
-  "about_secondary_body",
   "departments_heading",
   "departments_body",
   "projects_heading",
   "projects_body",
   "recruitment_heading",
-  "recruitment_body",
   "cta_heading",
   "cta_body",
   "org_instagram",
@@ -228,6 +250,23 @@ export function getEstYear(): string | null {
   return copyOrNull("est_year");
 }
 
+/** Same as `copy`, but for a multi-line `site` cell — one item per line. */
+export function copyList(key: string): string[] {
+  return list(load().site[key]);
+}
+
+/**
+ * Splits a stat value like "₱100,000+" into its animatable numeric core
+ * and the surrounding text, so `<Counter>` can count up the number while
+ * "₱" and "+" render as plain static text around it.
+ */
+export function parseStat(raw: string): { prefix: string; value: number; suffix: string } {
+  const match = raw.match(/^(\D*)([\d,]+)(\D*)$/);
+  if (!match) return { prefix: "", value: 0, suffix: raw };
+  const [, prefix, digits, suffix] = match;
+  return { prefix, value: Number(digits.replace(/,/g, "")), suffix };
+}
+
 export function getDepartments(): Department[] {
   return [...load().departments].sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -256,15 +295,6 @@ export function getFeaturedProjects(limit = 3): ProjectWithDepartment[] {
   return getPublishedProjects().slice(0, limit);
 }
 
-export function getProjectBySlug(slug: string): ProjectWithDepartment | null {
-  const project = load().projects.find((p) => p.slug === slug);
-  return project ? withDepartment(project) : null;
-}
-
-export function getAllProjectSlugs(): string[] {
-  return getPublishedProjects().map((p) => p.slug);
-}
-
 function withParents(role: Role): RoleWithParent {
   return {
     ...role,
@@ -291,10 +321,6 @@ export function getRoleBySlug(slug: string): RoleWithParent | null {
 
 export function getAllRoleSlugs(): string[] {
   return load().roles.map((r) => r.slug);
-}
-
-export function getRolesForProject(projectSlug: string): RoleWithParent[] {
-  return getRoles().filter((r) => r.projectSlug === projectSlug);
 }
 
 export function getRolesForDepartment(departmentSlug: string): RoleWithParent[] {

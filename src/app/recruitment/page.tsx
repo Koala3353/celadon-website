@@ -1,160 +1,47 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { PageHero } from "@/components/page-hero";
-import { RoleCard } from "@/components/role-card";
 import { Reveal } from "@/components/motion/reveal";
-import { copy, getRecruitmentTimeline, getRoles } from "@/lib/content";
-import type { RoleWithParent } from "@/lib/types";
+import { copy } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Join",
-  description:
-    "Every Core Team committee and department role at Ateneo Celadon — what " +
-    "the work involves, before you apply.",
+  title: "Recruitment",
+  description: copy("recruitment_stay_tuned_body"),
 };
 
-function group<T extends string>(
-  roles: RoleWithParent[],
-  key: (r: RoleWithParent) => { slug: string; label: T } | null
-) {
-  const out = new Map<string, { label: T; roles: RoleWithParent[] }>();
-  for (const role of roles) {
-    const k = key(role);
-    if (!k) continue;
-    const existing = out.get(k.slug);
-    if (existing) existing.roles.push(role);
-    else out.set(k.slug, { label: k.label, roles: [role] });
-  }
-  return out;
-}
-
+// Applications aren't open yet this cycle — the real role listing (grouped
+// by Core Team committee and department pool) lives in git history; swap
+// this placeholder back out once applications open.
 export default function RecruitmentPage() {
-  const roles = getRoles();
-  const openCount = roles.filter((r) => r.status === "open").length;
-  const timeline = getRecruitmentTimeline();
-
-  const byProject = group(roles, (r) =>
-    r.project ? { slug: r.project.slug, label: r.project.title } : null
-  );
-  const byDepartment = group(roles, (r) =>
-    r.department ? { slug: r.department.slug, label: r.department.name } : null
-  );
-
   return (
     <>
-      <PageHero
-        eyebrow="Recruitment"
-        title={copy("recruitment_heading")}
-        description={copy("recruitment_body")}
-      >
-        <p className="text-sm font-bold uppercase tracking-wider text-link-navy">
-          {openCount > 0
-            ? `${openCount} open now · ${roles.length} documented`
-            : `Applications aren't open yet · all ${roles.length} roles documented`}
-        </p>
-      </PageHero>
+      <PageHero eyebrow="Recruitment" title={copy("recruitment_heading")} />
 
-      <Container className="flex flex-col gap-20 py-20">
-        {timeline && openCount === 0 && (
-          <Reveal>
-            <Card data-reveal>
-              <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex flex-col gap-2">
-                  <p className="display text-xl text-navy">{timeline.heading}</p>
-                  <p className="prose-body text-muted-foreground">{timeline.body}</p>
-                </div>
-                {(timeline.deputyDate || timeline.coreDate) && (
-                  <dl className="flex shrink-0 gap-8">
-                    {timeline.deputyDate && (
-                      <div>
-                        <dt className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                          Deputy apps
-                        </dt>
-                        <dd className="mt-1 font-bold text-navy">
-                          {timeline.deputyDate}
-                        </dd>
-                      </div>
-                    )}
-                    {timeline.coreDate && (
-                      <div>
-                        <dt className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                          Core apps
-                        </dt>
-                        <dd className="mt-1 font-bold text-navy">
-                          {timeline.coreDate}
-                        </dd>
-                      </div>
-                    )}
-                  </dl>
-                )}
-              </div>
+      <Container className="py-20">
+        <Reveal className="mx-auto flex max-w-3xl flex-col items-center gap-3 text-center">
+          <p className="eyebrow text-accent-ink" data-reveal>
+            {copy("recruitment_stay_tuned_heading")}
+          </p>
+          <h2 className="display text-4xl text-navy sm:text-5xl" data-reveal>
+            {copy("recruitment_stay_tuned_body")}
+          </h2>
+        </Reveal>
+
+        <Reveal stagger={70} className="mx-auto mt-14 grid max-w-3xl gap-6 sm:grid-cols-2">
+          <div data-reveal>
+            <Card innerClassName="flex h-full flex-col gap-2 p-8 text-center">
+              <p className="eyebrow text-accent-ink">Deputy applications</p>
+              <p className="display text-3xl text-navy">{copy("recruitment_deputy_date")}</p>
             </Card>
-          </Reveal>
-        )}
-
-        {byProject.size > 0 && (
-          <section className="flex flex-col gap-12">
-            <Reveal>
-              <h2 className="display text-3xl text-navy sm:text-4xl" data-reveal>
-                Core Team committees
-              </h2>
-            </Reveal>
-
-            {Array.from(byProject.entries()).map(([slug, g]) => (
-              <Reveal key={slug} stagger={50} className="flex flex-col gap-4">
-                <Link
-                  href={`/projects/${slug}`}
-                  data-reveal
-                  className="w-fit text-lg font-extrabold text-link underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
-                >
-                  {g.label}
-                </Link>
-                <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {g.roles.map((role) => (
-                    <li key={role.slug}>
-                      <RoleCard role={role} />
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </section>
-        )}
-
-        {byDepartment.size > 0 && (
-          <section className="flex flex-col gap-12">
-            <Reveal>
-              <h2 className="display text-3xl text-navy sm:text-4xl" data-reveal>
-                Department pools
-              </h2>
-            </Reveal>
-
-            {Array.from(byDepartment.entries()).map(([slug, g]) => (
-              <Reveal key={slug} stagger={50} className="flex flex-col gap-4">
-                <Link
-                  href={`/departments#${slug}`}
-                  data-reveal
-                  className="w-fit text-lg font-extrabold text-link underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
-                >
-                  {g.label}
-                </Link>
-                <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {g.roles.map((role) => (
-                    <li key={role.slug}>
-                      <RoleCard role={role} />
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </section>
-        )}
-
-        {roles.length === 0 && (
-          <p className="text-muted-foreground">No roles published yet.</p>
-        )}
+          </div>
+          <div data-reveal>
+            <Card innerClassName="flex h-full flex-col gap-2 p-8 text-center">
+              <p className="eyebrow text-accent-ink">Core Team applications</p>
+              <p className="display text-3xl text-navy">{copy("recruitment_core_date")}</p>
+            </Card>
+          </div>
+        </Reveal>
       </Container>
     </>
   );

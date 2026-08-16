@@ -12,10 +12,15 @@ import { animate, onScroll, utils } from "animejs";
  */
 export function Counter({
   value,
+  prefix = "",
+  suffix = "",
   className,
   duration = 1100,
 }: {
   value: number;
+  /** Rendered outside the animated span, e.g. "₱" or "+". */
+  prefix?: string;
+  suffix?: string;
   className?: string;
   duration?: number;
 }) {
@@ -33,22 +38,26 @@ export function Counter({
       ease: "out(3)",
       autoplay: onScroll({ enter: "bottom-=40 top", repeat: false }),
       onUpdate: () => {
-        el.textContent = String(utils.round(state.n, 0));
+        el.textContent = utils.round(state.n, 0).toLocaleString("en-US");
       },
       onComplete: () => {
-        el.textContent = String(value);
+        el.textContent = value.toLocaleString("en-US");
       },
     });
 
     return () => {
       animation.revert();
-      el.textContent = String(value);
+      el.textContent = value.toLocaleString("en-US");
     };
   }, [value, duration]);
 
   return (
-    <span ref={ref} className={className}>
-      {value}
-    </span>
+    <>
+      {prefix}
+      <span ref={ref} className={className}>
+        {value.toLocaleString("en-US")}
+      </span>
+      {suffix}
+    </>
   );
 }

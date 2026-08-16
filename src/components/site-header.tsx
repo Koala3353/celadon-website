@@ -11,7 +11,7 @@ const NAV = [
   { href: "/about", label: "About" },
   { href: "/departments", label: "Departments" },
   { href: "/projects", label: "Projects" },
-  { href: "/recruitment", label: "Join" },
+  { href: "/recruitment", label: "Recruitment" },
 ];
 
 export function SiteHeader() {
@@ -28,26 +28,17 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-label="Ateneo Celadon — home"
-          className="flex shrink-0 items-center gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
+          className="flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
         >
-          {/* Roundel + wordmark. The full crest's own CELADON banner is
-              unreadable at header size, so the mark is cropped to the
-              dragon-and-eagle and the name is set beside it. */}
+          {/* The crest already has "Celadon" set into its own artwork, so
+              no separate wordmark is stacked underneath it. */}
           <Image
             src={asset("/brand/dreagle-mark.png")}
             alt=""
-            width={600}
-            height={380}
+            width={775}
+            height={775}
             priority
-            className="h-9 w-auto"
-          />
-          <Image
-            src={asset("/brand/celadon-wordmark.png")}
-            alt=""
-            width={1000}
-            height={200}
-            priority
-            className="hidden h-[1.15rem] w-auto sm:block"
+            className="h-14 w-auto"
           />
           <span className="sr-only">Ateneo Celadon</span>
         </Link>
