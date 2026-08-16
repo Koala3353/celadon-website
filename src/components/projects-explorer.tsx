@@ -16,7 +16,6 @@ export function ProjectsExplorer({
   const [year, setYear] = useState<number | "all">("all");
   const [departmentSlug, setDepartmentSlug] = useState<string>("all");
   const grid = useRef<HTMLDivElement>(null);
-  const first = useRef(true);
 
   const years = useMemo(
     () => Array.from(new Set(projects.map((p) => p.year))).sort((a, b) => b - a),
@@ -37,26 +36,32 @@ export function ProjectsExplorer({
     return true;
   });
 
-  // Re-stagger the grid when the filter changes so results feel dealt out
-  // rather than swapped. Skipped on first paint — the Reveal on mount already
-  // covers that, and doubling up reads as a stutter.
+  // Reveal the grid. This runs after the initial mount too (React fires
+  // effects once after first render regardless of the dependency array), so
+  // it also has to cover the very first paint — there's no page-level
+  // <Reveal> wrapping this component, and each card's own [data-reveal]
+  // starts at opacity:0 via CSS (globals.css) until something clears it.
+  // Filter changes re-run it for whichever project cards just mounted.
   useEffect(() => {
-    if (first.current) {
-      first.current = false;
-      return;
-    }
     const el = grid.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const cards = el.querySelectorAll<HTMLElement>("[data-card]");
-    if (cards.length === 0) return;
+    const targets = el.querySelectorAll<HTMLElement>("[data-reveal]");
+    if (targets.length === 0) return;
 
-    const animation = animate(cards, {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      targets.forEach((t) => {
+        t.style.opacity = "1";
+        t.style.transform = "none";
+      });
+      return;
+    }
+
+    const animation = animate(targets, {
       opacity: [0, 1],
       translateY: [12, 0],
-      duration: 380,
-      delay: stagger(35),
+      duration: 420,
+      delay: stagger(40),
       ease: "cubicBezier(0.23, 1, 0.32, 1)",
     });
     return () => {
@@ -111,9 +116,7 @@ export function ProjectsExplorer({
           className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {filtered.map((project) => (
-            <div key={project.slug} data-card>
-              <ProjectCard project={project} />
-            </div>
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       )}
