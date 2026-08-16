@@ -2,10 +2,16 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button-link";
+import { Card } from "@/components/ui/card";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/motion/reveal";
 import { Counter } from "@/components/motion/counter";
-import { copy, getOrgStats } from "@/lib/content";
+import {
+  copy,
+  getIdentityStatements,
+  getOrgStats,
+  getPurposes,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -14,6 +20,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const stats = getOrgStats();
+  const identity = getIdentityStatements();
+  const purposes = getPurposes();
 
   return (
     <>
@@ -53,6 +61,47 @@ export default function AboutPage() {
             ))}
           </dl>
         </Reveal>
+
+        {identity.length > 0 && (
+          <Reveal className="mt-20 flex flex-col gap-10">
+            <SectionHeading eyebrow="Identity" title="What we stand for" />
+            <div className="grid gap-5 sm:grid-cols-2">
+              {identity.map((statement) => (
+                <Card key={statement.key} data-reveal>
+                  <div className="flex h-full flex-col gap-3 p-6">
+                    <h3 className="display text-xl text-navy">{statement.heading}</h3>
+                    <p className="prose-body text-muted-foreground">
+                      {statement.body}
+                    </p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
+        {purposes.items.length > 0 && (
+          <Reveal stagger={40} className="mt-20 flex flex-col gap-6">
+            <h2 className="display text-2xl text-navy sm:text-3xl" data-reveal>
+              {purposes.heading ?? "Purposes & Functions"}
+            </h2>
+            <ul className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+              {purposes.items.map((item, i) => (
+                <li
+                  key={i}
+                  data-reveal
+                  className="prose-body flex gap-4 text-muted-foreground"
+                >
+                  <span
+                    aria-hidden
+                    className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-ink"
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        )}
 
         <Reveal className="mt-20 flex flex-col gap-7">
           <SectionHeading

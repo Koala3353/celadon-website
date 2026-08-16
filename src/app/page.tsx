@@ -5,8 +5,9 @@ import { ayiFor } from "@/lib/ayi";
 import {
   copy,
   getDepartmentSpotlights,
+  getEstYear,
   getFeaturedProjects,
-  getOrgStats,
+  getImpactStats,
 } from "@/lib/content";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -15,11 +16,11 @@ import { Card } from "@/components/ui/card";
 import { ProjectCard } from "@/components/project-card";
 import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/motion/reveal";
-import { Counter } from "@/components/motion/counter";
 import { HeroLines } from "@/components/motion/hero-lines";
 
 export default function Home() {
-  const stats = getOrgStats();
+  const estYear = getEstYear();
+  const impactStats = getImpactStats();
   const featured = getFeaturedProjects(3);
   const departments = getDepartmentSpotlights();
 
@@ -30,7 +31,9 @@ export default function Home() {
         <div className="navy-grid">
           <Container className="grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.25fr_1fr] lg:py-32">
             <div className="flex flex-col gap-7">
-              <p className="eyebrow text-link-navy">Est. 1977 · Loyola Heights</p>
+              <p className="eyebrow text-link-navy">
+                {estYear ? `Est. ${estYear} · Loyola Heights` : "Loyola Heights"}
+              </p>
 
               <HeroLines
                 lines={[copy("hero_line_1"), copy("hero_line_2")]}
@@ -82,28 +85,31 @@ export default function Home() {
 
       <Marquee />
 
-      {/* ---- Stats ------------------------------------------------------- */}
-      <section className="border-b border-border">
-        <Container>
-          <Reveal as="div" stagger={60}>
-            <dl className="grid grid-cols-2 gap-x-8 gap-y-10 py-16 lg:grid-cols-4">
-              {[
-                ["Departments", stats.departmentCount],
-                ["Projects", stats.projectCount],
-                ["Roles documented", stats.roleCount],
-                ["Open right now", stats.openRoleCount],
-              ].map(([label, value]) => (
-                <div key={String(label)} className="flex flex-col gap-2" data-reveal>
-                  <dd className="display tnum text-5xl text-navy sm:text-6xl">
-                    <Counter value={Number(value)} />
-                  </dd>
-                  <dt className="text-sm text-muted-foreground">{label}</dt>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </Container>
-      </section>
+      {/* ---- Impact stats -------------------------------------------------
+          Real membership/donation/output numbers from the site tab, not
+          site-generated counts — swapped in because they say more to a
+          visitor than "Departments: 6" does. */}
+      {impactStats.length > 0 && (
+        <section className="border-b border-border">
+          <Container>
+            <Reveal as="div" stagger={60} className="flex flex-col gap-10 py-16">
+              <p className="eyebrow text-accent-ink" data-reveal>
+                Celadon in numbers
+              </p>
+              <dl className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-3">
+                {impactStats.map((stat) => (
+                  <div key={stat.label} className="flex flex-col gap-2" data-reveal>
+                    <dd className="display tnum text-4xl text-navy sm:text-5xl">
+                      {stat.value}
+                    </dd>
+                    <dt className="text-sm text-muted-foreground">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          </Container>
+        </section>
+      )}
 
       {/* ---- About ------------------------------------------------------- */}
       <section className="py-24 sm:py-32">

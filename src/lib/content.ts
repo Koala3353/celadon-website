@@ -142,6 +142,92 @@ export function copy(key: string): string {
   return load().site[key] ?? key;
 }
 
+/**
+ * Like `copy`, but for keys that are optional — content the Sheet may or may
+ * not carry (e.g. a stat pair, a section that hasn't been written yet).
+ * Returns `null` instead of falling back to the key name, so callers can hide
+ * a whole section rather than render "vision_heading" as if it were copy.
+ */
+function copyOrNull(key: string): string | null {
+  const v = load().site[key];
+  return v && v.trim() !== "" ? v : null;
+}
+
+export interface ImpactStat {
+  value: string;
+  label: string;
+}
+
+/**
+ * Reads stat_1_value/stat_1_label through stat_6_value/stat_6_label. Values
+ * are free text (e.g. "₱100,000+"), not necessarily plain integers, so they're
+ * rendered as-is rather than run through the digit-counting animation used
+ * elsewhere — a mixed currency/plus-sign string can't count up cleanly.
+ */
+export function getImpactStats(): ImpactStat[] {
+  const stats: ImpactStat[] = [];
+  for (let i = 1; i <= 6; i++) {
+    const value = copyOrNull(`stat_${i}_value`);
+    const label = copyOrNull(`stat_${i}_label`);
+    if (value && label) stats.push({ value, label });
+  }
+  return stats;
+}
+
+export interface IdentityStatement {
+  key: string;
+  heading: string;
+  body: string;
+}
+
+const IDENTITY_KEYS = ["vision", "mission", "core_competency", "core_advocacy"] as const;
+
+/** Vision / Mission / Core Competency / Core Advocacy, only the ones present. */
+export function getIdentityStatements(): IdentityStatement[] {
+  const out: IdentityStatement[] = [];
+  for (const key of IDENTITY_KEYS) {
+    const heading = copyOrNull(`${key}_heading`);
+    const body = copyOrNull(`${key}_body`);
+    if (heading && body) out.push({ key, heading, body });
+  }
+  return out;
+}
+
+export interface Purposes {
+  heading: string | null;
+  items: string[];
+}
+
+export function getPurposes(): Purposes {
+  const heading = copyOrNull("purposes_heading");
+  const body = copyOrNull("purposes_body");
+  return { heading, items: body ? list(body) : [] };
+}
+
+export interface RecruitmentTimeline {
+  heading: string;
+  body: string;
+  deputyDate: string | null;
+  coreDate: string | null;
+}
+
+/** The "applications aren't open yet, here's when" block. Null if unwritten. */
+export function getRecruitmentTimeline(): RecruitmentTimeline | null {
+  const heading = copyOrNull("recruitment_stay_tuned_heading");
+  const body = copyOrNull("recruitment_stay_tuned_body");
+  if (!heading || !body) return null;
+  return {
+    heading,
+    body,
+    deputyDate: copyOrNull("recruitment_deputy_date"),
+    coreDate: copyOrNull("recruitment_core_date"),
+  };
+}
+
+export function getEstYear(): string | null {
+  return copyOrNull("est_year");
+}
+
 export function getDepartments(): Department[] {
   return [...load().departments].sort((a, b) => a.name.localeCompare(b.name));
 }

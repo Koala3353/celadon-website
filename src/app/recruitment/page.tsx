@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { Card } from "@/components/ui/card";
 import { PageHero } from "@/components/page-hero";
 import { RoleCard } from "@/components/role-card";
 import { Reveal } from "@/components/motion/reveal";
-import { copy, getRoles } from "@/lib/content";
+import { copy, getRecruitmentTimeline, getRoles } from "@/lib/content";
 import type { RoleWithParent } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ function group<T extends string>(
 export default function RecruitmentPage() {
   const roles = getRoles();
   const openCount = roles.filter((r) => r.status === "open").length;
+  const timeline = getRecruitmentTimeline();
 
   const byProject = group(roles, (r) =>
     r.project ? { slug: r.project.slug, label: r.project.title } : null
@@ -55,6 +57,43 @@ export default function RecruitmentPage() {
       </PageHero>
 
       <Container className="flex flex-col gap-20 py-20">
+        {timeline && openCount === 0 && (
+          <Reveal>
+            <Card data-reveal>
+              <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-2">
+                  <p className="display text-xl text-navy">{timeline.heading}</p>
+                  <p className="prose-body text-muted-foreground">{timeline.body}</p>
+                </div>
+                {(timeline.deputyDate || timeline.coreDate) && (
+                  <dl className="flex shrink-0 gap-8">
+                    {timeline.deputyDate && (
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                          Deputy apps
+                        </dt>
+                        <dd className="mt-1 font-bold text-navy">
+                          {timeline.deputyDate}
+                        </dd>
+                      </div>
+                    )}
+                    {timeline.coreDate && (
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                          Core apps
+                        </dt>
+                        <dd className="mt-1 font-bold text-navy">
+                          {timeline.coreDate}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                )}
+              </div>
+            </Card>
+          </Reveal>
+        )}
+
         {byProject.size > 0 && (
           <section className="flex flex-col gap-12">
             <Reveal>

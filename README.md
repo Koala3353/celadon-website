@@ -56,13 +56,18 @@ To pull Sheet edits into the repo locally:
 CONTENT_SHEET_ID=<id> npm run sync:content
 ```
 
-The `site` tab also carries several keys not yet read by any page —
-`vision_heading`/`body`, `mission_heading`/`body`, `core_competency_*`,
-`core_advocacy_*`, `purposes_*`, `recruitment_stay_tuned_*`,
-`recruitment_deputy_date`, `recruitment_core_date`, `stat_1`–`stat_6`
-`_value`/`_label`, `org_tiktok`, `org_email`, `est_year`. They're preserved by
-every sync but have no effect on the site until a page is built to render
-them.
+Where each `site` key renders:
+
+| Keys | Page | Notes |
+| --- | --- | --- |
+| `est_year` | Home hero | `Est. {est_year} · Loyola Heights`; the eyebrow drops to just "Loyola Heights" if unset |
+| `stat_1`–`stat_6` `_value`/`_label` | Home, "Celadon in numbers" | Any pair missing its value *or* label is skipped, not shown half-empty. Values are free text (`₱100,000+` is fine) — not run through digit-counting animation |
+| `vision_heading`/`_body`, `mission_heading`/`_body`, `core_competency_heading`/`_body`, `core_advocacy_heading`/`_body` | About, "What we stand for" | Each rendered only if both its heading and body are present |
+| `purposes_heading`, `purposes_body` | About, "Purposes & Functions" | `purposes_body` is a bulleted list — one item per line in the cell |
+| `recruitment_stay_tuned_heading`/`_body`, `recruitment_deputy_date`, `recruitment_core_date` | Recruitment, "Stay tuned" | Shown only while no role is `open`; the two dates are each optional |
+
+`org_tiktok` and `org_email` are stored but not yet linked anywhere — say the
+word if they should join the footer's Instagram/Facebook links.
 
 ### Sheet schema
 
