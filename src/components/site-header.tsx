@@ -30,15 +30,13 @@ export function SiteHeader() {
           aria-label="Ateneo Celadon — home"
           className="flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
         >
-          {/* The crest already has "Celadon" set into its own artwork, so
-              no separate wordmark is stacked underneath it. */}
           <Image
             src={asset("/brand/dreagle-mark.png")}
             alt=""
             width={775}
             height={775}
             priority
-            className="h-14 w-auto"
+            className="h-16 w-auto"
           />
           <span className="sr-only">Ateneo Celadon</span>
         </Link>

@@ -26,14 +26,12 @@ export function SiteFooter() {
       <div className="navy-grid">
         <Container className="grid gap-8 py-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
-            {/* The crest already has "Celadon" set into its own artwork, so
-                no separate wordmark is stacked underneath it. */}
             <Image
               src={asset("/brand/dreagle-mark-white.png")}
               alt=""
               width={5000}
               height={5000}
-              className="h-14 w-auto self-start"
+              className="h-20 w-auto self-start"
             />
             <span className="sr-only">Ateneo Celadon</span>
             <p className="prose-body max-w-sm text-sm">{copy("org_tagline")}</p>
