@@ -28,7 +28,7 @@ export default function AboutPage() {
         description={copy("org_tagline")}
       />
 
-      <Container className="py-24 sm:py-32">
+      <Container className="py-16 sm:py-20">
         {/* ---- Who we are --------------------------------------------- */}
         <Reveal className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeading eyebrow="The organization" title="Celadon at a glance" />
@@ -40,8 +40,8 @@ export default function AboutPage() {
         </Reveal>
 
         {/* ---- Stats ---------------------------------------------------- */}
-        <Reveal stagger={60} className="mt-20">
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 border-y border-border py-14 lg:grid-cols-4">
+        <Reveal stagger={60} className="mt-14">
+          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 border-y border-border py-10 lg:grid-cols-4">
             {STATS.map(([valueKey, labelKey]) => {
               const { prefix, value, suffix } = parseStat(copy(valueKey));
               return (
@@ -61,24 +61,24 @@ export default function AboutPage() {
         </Reveal>
 
         {/* ---- Identity: Vision, Mission, Core Competency, Core Advocacy -- */}
-        <Reveal className="mt-20">
+        <Reveal className="mt-14">
           <SectionHeading eyebrow="Identity" title="What We Stand For" />
         </Reveal>
-        <Reveal stagger={60} className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal stagger={60} className="mt-8 grid gap-6 sm:grid-cols-2">
           <div data-reveal>
-            <Card innerClassName="flex h-full flex-col gap-3 p-8">
+            <Card className="h-full" innerClassName="flex h-full flex-col gap-3 p-8">
               <h3 className="display text-2xl text-navy">{copy("vision_heading")}</h3>
               <p className="prose-body text-muted-foreground">{copy("vision_body")}</p>
             </Card>
           </div>
           <div data-reveal>
-            <Card innerClassName="flex h-full flex-col gap-3 p-8">
+            <Card className="h-full" innerClassName="flex h-full flex-col gap-3 p-8">
               <h3 className="display text-2xl text-navy">{copy("mission_heading")}</h3>
               <p className="prose-body text-muted-foreground">{copy("mission_body")}</p>
             </Card>
           </div>
           <div data-reveal>
-            <Card innerClassName="flex h-full flex-col gap-3 p-8">
+            <Card className="h-full" innerClassName="flex h-full flex-col gap-3 p-8">
               <h3 className="display text-2xl text-navy">{copy("core_competency_heading")}</h3>
               <p className="prose-body text-muted-foreground">
                 {copyList("core_competency_body").join(" ")}
@@ -86,7 +86,7 @@ export default function AboutPage() {
             </Card>
           </div>
           <div data-reveal>
-            <Card innerClassName="flex h-full flex-col gap-3 p-8">
+            <Card className="h-full" innerClassName="flex h-full flex-col gap-3 p-8">
               <h3 className="display text-2xl text-navy">{copy("core_advocacy_heading")}</h3>
               <p className="prose-body text-muted-foreground">{copy("core_advocacy_body")}</p>
             </Card>
@@ -94,7 +94,7 @@ export default function AboutPage() {
         </Reveal>
 
         {/* ---- Purposes & Functions ---------------------------------------- */}
-        <Reveal stagger={60} className="mt-20">
+        <Reveal stagger={60} className="mt-14">
           <h2 className="display text-3xl text-navy sm:text-4xl" data-reveal>
             {copy("purposes_heading")}
           </h2>

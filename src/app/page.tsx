@@ -33,7 +33,7 @@ export default function Home() {
       {/* ---- Hero: editorial split, type left, mascot right -------------- */}
       <section className="navy-field text-on-navy">
         <div className="navy-grid">
-          <Container className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.25fr_1fr] lg:py-24">
+          <Container className="grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.25fr_1fr] lg:py-16">
             <div className="flex flex-col gap-7">
               <p className="eyebrow text-link-navy">Est. {copy("est_year")} · Loyola Heights</p>
 
@@ -85,7 +85,7 @@ export default function Home() {
       <section className="border-b border-border">
         <Container>
           <Reveal as="div" stagger={60}>
-            <dl className="grid grid-cols-2 gap-x-8 gap-y-10 py-16 lg:grid-cols-4">
+            <dl className="grid grid-cols-2 gap-x-8 gap-y-10 py-10 lg:grid-cols-4">
               {STATS.map(([valueKey, labelKey]) => {
                 const { prefix, value, suffix } = parseStat(copy(valueKey));
                 return (
@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       {/* ---- About ------------------------------------------------------- */}
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <Container>
           <Reveal className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionHeading eyebrow="About" title={copy("about_heading")} />
@@ -126,7 +126,7 @@ export default function Home() {
       </section>
 
       {/* ---- Projects ---------------------------------------------------- */}
-      <section className="border-t border-border py-24 sm:py-32">
+      <section className="border-t border-border py-16 sm:py-20">
         <Container>
           <Reveal className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading title={copy("projects_heading")} />
@@ -138,7 +138,7 @@ export default function Home() {
           </Reveal>
 
           {featured.length > 0 && (
-            <Reveal stagger={70} className="mt-14">
+            <Reveal stagger={70} className="mt-10">
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {featured.map((project) => (
                   <ProjectCard key={project.slug} project={project} />
