@@ -10,7 +10,7 @@ import { copy, copyList, parseStat } from "@/lib/content";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Established in 1985, Ateneo Celadon has spent 40 years developing Chinese-Filipino leaders at the Ateneo de Manila University — our vision, mission, and the values behind every project we run.",
+    "Established in 1985, Ateneo Celadon — also known as ADMU Celadon, ADMU CLDN, or Ateneo Cela — has spent 40 years developing Chinese-Filipino leaders at the Ateneo de Manila University.",
   alternates: { canonical: "/about/" },
 };
 

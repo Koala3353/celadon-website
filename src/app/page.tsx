@@ -28,7 +28,7 @@ const FEATURED_SLUGS = ["rose-sale", "binondo-amazing-race", "chinese-new-year"]
 // the "%s — Ateneo Celadon" template and read as "Home — Ateneo Celadon".
 export const metadata: Metadata = {
   description:
-    "Ateneo Celadon is the premier Chinese-Filipino student organization of the Ateneo de Manila University — six departments, dozens of cultural festivals and projects, and a community built on Chinese-Filipino heritage since 1985.",
+    "Ateneo Celadon (ADMU Celadon / ADMU CLDN) is the premier Chinese-Filipino student organization of the Ateneo de Manila University — six departments, dozens of cultural festivals and projects, and a community built on Chinese-Filipino heritage since 1985.",
   alternates: { canonical: "/" },
 };
 

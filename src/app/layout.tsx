@@ -56,6 +56,17 @@ export const viewport = { themeColor: "#003078" };
  * page's content — Search Console reads this regardless of which page a
  * crawler lands on first.
  */
+// Shorthand students and search engines actually use — Ateneo Celadon
+// doesn't appear in its own copy anywhere otherwise, so nothing signals to
+// Google that these queries should resolve here.
+const ALTERNATE_NAMES = [
+  "ADMU Celadon",
+  "ADMU Cela",
+  "ADMU CLDN",
+  "Ateneo Cela",
+  "Ateneo CLDN",
+];
+
 function OrganizationJsonLd() {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -64,8 +75,14 @@ function OrganizationJsonLd() {
         "@type": "Organization",
         "@id": `${SITE_URL}/#organization`,
         name: TITLE,
+        alternateName: ALTERNATE_NAMES,
         url: SITE_URL,
-        logo: `${SITE_URL}/brand/dreagle-mark.png`,
+        logo: {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/brand/dreagle-mark.png`,
+          width: 775,
+          height: 775,
+        },
         description: DESCRIPTION,
         foundingDate: "1985",
         sameAs: [copy("org_instagram"), copy("org_facebook"), copy("org_tiktok")].filter(
@@ -77,6 +94,7 @@ function OrganizationJsonLd() {
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: TITLE,
+        alternateName: ALTERNATE_NAMES,
         publisher: { "@id": `${SITE_URL}/#organization` },
       },
     ],
