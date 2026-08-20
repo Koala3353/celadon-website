@@ -9,7 +9,9 @@ import { Reveal } from "@/components/motion/reveal";
 
 export const metadata: Metadata = {
   title: "Departments",
-  description: "The six departments that keep Ateneo Celadon running.",
+  description:
+    "Meet the six departments that run Ateneo Celadon — COMMPUB, CUL, EXREL, FIN, HR, and OSR — and the Ayi mascot that represents each one.",
+  alternates: { canonical: "/departments/" },
 };
 
 export default function DepartmentsPage() {

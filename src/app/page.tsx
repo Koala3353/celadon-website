@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/asset";
@@ -21,6 +22,15 @@ const STATS = [
 // Hand-picked for the home page teaser rather than "whatever's newest" —
 // swap slugs here to feature different projects.
 const FEATURED_SLUGS = ["rose-sale", "binondo-amazing-race", "chinese-new-year"];
+
+// No title override — the layout's default ("Ateneo Celadon") is already
+// the right title for the root page. Setting one here would run it through
+// the "%s — Ateneo Celadon" template and read as "Home — Ateneo Celadon".
+export const metadata: Metadata = {
+  description:
+    "Ateneo Celadon is the premier Chinese-Filipino student organization of the Ateneo de Manila University — six departments, dozens of cultural festivals and projects, and a community built on Chinese-Filipino heritage since 1985.",
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   const allProjects = getPublishedProjects();

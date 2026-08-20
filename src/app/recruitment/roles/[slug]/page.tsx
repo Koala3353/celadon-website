@@ -22,7 +22,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const role = getRoleBySlug(slug);
   if (!role) return {};
-  return { title: role.title, description: role.description || undefined };
+  return {
+    title: role.title,
+    description: role.description || undefined,
+    alternates: { canonical: `/recruitment/roles/${slug}/` },
+  };
 }
 
 function Block({ title, items }: { title: string; items: string[] }) {

@@ -7,7 +7,9 @@ import { copy, getPublishedProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Browse Celadon's projects.",
+  description:
+    "Explore Ateneo Celadon's projects — cultural festivals, business summits, and community initiatives that bring Chinese-Filipino culture to life at the Ateneo de Manila University.",
+  alternates: { canonical: "/projects/" },
 };
 
 export default function ProjectsPage() {
