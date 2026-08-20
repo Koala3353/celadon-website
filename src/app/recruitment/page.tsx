@@ -7,7 +7,9 @@ import { copy } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Recruitment",
-  description: copy("recruitment_stay_tuned_body"),
+  description:
+    "Join Ateneo Celadon's departments and projects. Applications open soon — here's when to check back and what to expect.",
+  alternates: { canonical: "/recruitment/" },
 };
 
 // Applications aren't open yet this cycle — the real role listing (grouped

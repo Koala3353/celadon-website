@@ -46,8 +46,8 @@ export function SiteHeader() {
           className="flex w-full items-center justify-between gap-0.5 sm:w-auto sm:justify-end sm:gap-1"
         >
           {NAV.map((item) => {
-            // Nested routes (/projects/rose-sale) should still light up
-            // their top-level entry.
+            // Nested routes (/recruitment/roles/rose-sale-log) should still
+            // light up their top-level entry.
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`);
 
