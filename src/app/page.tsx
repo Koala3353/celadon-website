@@ -120,7 +120,7 @@ export default function Home() {
       <section className="py-16 sm:py-20">
         <Container>
           <Reveal className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-            <SectionHeading eyebrow="About" title={copy("about_heading")} />
+            <SectionHeading eyebrow="About Us" title={copy("about_heading")} />
             <div className="flex flex-col gap-6 lg:pt-16">
               <p className="prose-body whitespace-pre-line text-lg text-muted-foreground" data-reveal>
                 {copy("about_body_short")}

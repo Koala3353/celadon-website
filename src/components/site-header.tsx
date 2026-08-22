@@ -8,7 +8,8 @@ import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/container";
 
 const NAV = [
-  { href: "/about", label: "About" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
   { href: "/departments", label: "Departments" },
   { href: "/projects", label: "Projects" },
   { href: "/recruitment", label: "Recruitment" },

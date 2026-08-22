@@ -3,7 +3,9 @@ import path from "node:path";
 import { asset } from "@/lib/asset";
 import { parseCsvRecords } from "@/lib/csv";
 import type {
+  CoreTeamCommittee,
   Department,
+  GlossaryTerm,
   Project,
   ProjectWithDepartment,
   Role,
@@ -33,6 +35,20 @@ function readTable(name: string): Record<string, string>[] {
 function list(value: string | undefined): string[] {
   return (value ?? "")
     .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Committee list cells use " | " between items on a single line, unlike
+ * other multi-value cells (one item per line). A newline-per-item cell only
+ * survives a paste into Sheets as a quoted CSV field, which a plain-text
+ * clipboard paste (as opposed to File > Import) doesn't reliably produce —
+ * keeping every committee to one flat row sidesteps that entirely.
+ */
+function pipeList(value: string | undefined): string[] {
+  return (value ?? "")
+    .split("|")
     .map((s) => s.trim())
     .filter(Boolean);
 }
@@ -77,6 +93,8 @@ let cache: {
   projects: Project[];
   roles: Role[];
   site: Record<string, string>;
+  committees: CoreTeamCommittee[];
+  glossary: GlossaryTerm[];
 } | null = null;
 
 function load() {
@@ -121,7 +139,22 @@ function load() {
 
   assertCopyKeys(site);
 
-  cache = { departments, projects, roles, site };
+  const committees: CoreTeamCommittee[] = readTable("committees").map((r) => ({
+    abbr: r.abbr,
+    name: r.name,
+    description: r.description ?? "",
+    responsibilities: pipeList(r.responsibilities),
+    deliverables: pipeList(r.deliverables),
+    qualities: pipeList(r.qualities),
+    listCap: r.list_cap ? Number(r.list_cap) : undefined,
+  }));
+
+  const glossary: GlossaryTerm[] = readTable("glossary").map((r) => ({
+    term: r.term,
+    definition: r.definition ?? "",
+  }));
+
+  cache = { departments, projects, roles, site, committees, glossary };
   return cache;
 }
 
@@ -348,6 +381,16 @@ export interface OrgStats {
   projectCount: number;
   roleCount: number;
   openRoleCount: number;
+}
+
+/** Reference copy for the recruitment page's "know the roles" glossary. */
+export function getGlossaryTerms(): GlossaryTerm[] {
+  return load().glossary;
+}
+
+/** The Core Team committees, in Sheet row order. */
+export function getCoreTeamCommittees(): CoreTeamCommittee[] {
+  return load().committees;
 }
 
 export function getOrgStats(): OrgStats {

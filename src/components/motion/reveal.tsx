@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animate, stagger, onScroll } from "animejs";
+import { animate, stagger, onScroll, cubicBezier } from "animejs";
 
 /**
  * Scroll-entry reveal, driven by anime.js.
@@ -51,7 +51,7 @@ export function Reveal({
       translateY: [distance, 0],
       duration: 620,
       delay: stagger(staggerMs, { start: delay }),
-      ease: "cubicBezier(0.23, 1, 0.32, 1)",
+      ease: cubicBezier(0.23, 1, 0.32, 1),
       // `enter` fires when the container crosses into view; `repeat: false`
       // stops it re-running on the way back up.
       autoplay: onScroll({ container: undefined, enter: "bottom-=80 top", repeat: false }),

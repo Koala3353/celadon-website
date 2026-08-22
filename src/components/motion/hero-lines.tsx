@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animate, stagger } from "animejs";
+import { animate, stagger, cubicBezier } from "animejs";
 
 /**
  * The hero headline, revealed line by line from behind a mask.
@@ -39,7 +39,7 @@ export function HeroLines({
       opacity: [0, 1],
       duration: 900,
       delay: stagger(90),
-      ease: "cubicBezier(0.23, 1, 0.32, 1)",
+      ease: cubicBezier(0.23, 1, 0.32, 1),
     });
 
     return () => {

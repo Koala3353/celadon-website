@@ -31,6 +31,23 @@ export interface Role {
   headApplicationLink: string | null;
 }
 
+export interface GlossaryTerm {
+  term: string;
+  definition: string;
+}
+
+export interface CoreTeamCommittee {
+  abbr: string;
+  name: string;
+  description: string;
+  responsibilities: string[];
+  deliverables: string[];
+  qualities: string[];
+  /** Overrides the default "+N more" cap on each list — set high enough to
+   * show every item when a list is only barely over the default cap. */
+  listCap?: number;
+}
+
 export type ProjectWithDepartment = Project & { department: Department | null };
 
 export type RoleWithParent = Role & {

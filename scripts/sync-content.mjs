@@ -39,6 +39,11 @@ const TABS = {
   projects: 61485455,
   roles: 1787450093,
   site: 455462947,
+  // Set these once the tabs exist in the Sheet — open the tab, copy the gid
+  // from the URL after `gid=`. Left as `null` (not 0) so a forgotten update
+  // fails loudly instead of silently re-fetching the departments tab.
+  committees: null,
+  glossary: null,
 };
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
