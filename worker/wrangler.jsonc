@@ -1,0 +1,16 @@
+{
+  "name": "celadon-internal-gate",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "routes": [
+    { "pattern": "ateneoceladon.com/recruitment/internal*", "zone_name": "ateneoceladon.com" }
+  ],
+  "vars": {
+    // Not secret — client IDs are public by design (they end up in browser
+    // redirect URLs). Replace with the real value from Google Cloud Console.
+    "GOOGLE_CLIENT_ID": "REPLACE_WITH_GOOGLE_OAUTH_CLIENT_ID",
+    // Comma-separated. GOOGLE_CLIENT_SECRET and COOKIE_SECRET are set via
+    // `wrangler secret put` instead — never committed here.
+    "ALLOWED_EMAIL_DOMAINS": "student.ateneo.edu,ateneo-celadon.org"
+  }
+}

@@ -6,7 +6,15 @@ import Image from "next/image";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { Card } from "@/components/ui/card";
+import { PhotoCarousel } from "@/components/photo-carousel";
+import { formatExecutionDate } from "@/lib/format";
 import type { ProjectWithDepartment } from "@/lib/types";
+
+/** "September 2026" or, for a project that runs more than once, "September
+ * 2026 · February 2027". Empty string if the Sheet hasn't set a date yet. */
+function executionLabel(dates: string[]): string {
+  return dates.map(formatExecutionDate).join(" · ");
+}
 
 /**
  * A grid tile that opens as an overlay on click — a bigger version of the
@@ -46,9 +54,16 @@ export function ProjectCard({ project }: { project: ProjectWithDepartment }) {
           <ProjectImage project={project} className="aspect-[16/10]" />
 
           <div className="flex flex-1 flex-col gap-3 p-6">
-            <h3 className="text-lg font-extrabold leading-tight text-navy">
-              {project.title}
-            </h3>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-lg font-extrabold leading-tight text-navy">
+                {project.title}
+              </h3>
+              {project.executionDates.length > 0 && (
+                <span className="text-xs font-bold uppercase tracking-wider text-accent-ink">
+                  {executionLabel(project.executionDates)}
+                </span>
+              )}
+            </div>
 
             {project.description && (
               <p className="prose-body line-clamp-3 whitespace-pre-line text-sm text-muted-foreground">
@@ -105,10 +120,17 @@ function ProjectOverlay({
           </svg>
         </button>
 
-        <ProjectImage project={project} className="aspect-[16/10] sm:aspect-[2/1]" />
+        <ProjectGallery project={project} className="aspect-[16/10] sm:aspect-[2/1]" />
 
         <div className="flex flex-col gap-3 p-6 sm:p-8">
-          <h3 className="display text-2xl text-navy sm:text-3xl">{project.title}</h3>
+          <div className="flex flex-col gap-1">
+            <h3 className="display text-2xl text-navy sm:text-3xl">{project.title}</h3>
+            {project.executionDates.length > 0 && (
+              <span className="text-xs font-bold uppercase tracking-wider text-accent-ink">
+                {executionLabel(project.executionDates)}
+              </span>
+            )}
+          </div>
           {project.description && (
             <p className="prose-body whitespace-pre-line text-base text-muted-foreground">
               {project.description}
@@ -128,21 +150,51 @@ function ProjectImage({
   project: ProjectWithDepartment;
   className?: string;
 }) {
-  if (project.coverImageUrl) {
-    return (
-      <div className={cn("relative shrink-0 overflow-hidden bg-navy-tint", className)}>
-        <Image
-          src={project.coverImageUrl}
-          alt={project.coverImageAlt || project.title}
-          fill
-          sizes="(min-width: 640px) 36rem, 100vw"
-          className="object-cover"
-        />
-      </div>
-    );
-  }
+  if (!project.coverImageUrl) return <NoCoverPlate className={className} />;
 
-  // No cover art: a navy plate carrying the crest as a watermark.
+  return (
+    <div className={cn("relative shrink-0 overflow-hidden bg-navy-tint", className)}>
+      <Image
+        src={project.coverImageUrl}
+        alt={project.coverImageAlt || project.title}
+        fill
+        sizes="(min-width: 640px) 36rem, 100vw"
+        className="object-cover"
+      />
+    </div>
+  );
+}
+
+/**
+ * The overlay's image area: the cover photo plus any additional photos from
+ * the Sheet's `photos` column, browsable as a carousel. The grid card behind
+ * it keeps showing just the cover (via ProjectImage) — the carousel is only
+ * for once someone has actually opened the project.
+ */
+function ProjectGallery({
+  project,
+  className,
+}: {
+  project: ProjectWithDepartment;
+  className?: string;
+}) {
+  const gallery = [project.coverImageUrl, ...project.photos].filter(
+    (url): url is string => Boolean(url)
+  );
+
+  if (gallery.length === 0) return <NoCoverPlate className={className} />;
+
+  return (
+    <PhotoCarousel
+      photos={gallery}
+      alt={project.coverImageAlt || project.title}
+      className={cn("shrink-0", className)}
+    />
+  );
+}
+
+// No cover art: a navy plate carrying the crest as a watermark.
+function NoCoverPlate({ className }: { className?: string }) {
   return (
     <div className={cn("navy-field relative shrink-0 overflow-hidden", className)}>
       <Image

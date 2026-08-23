@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/motion/reveal";
 import { Counter } from "@/components/motion/counter";
+import { asset } from "@/lib/asset";
 import { copy, copyList, parseStat } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Us",
   description:
     "Established in 1985, Ateneo Celadon — also known as ADMU Celadon, ADMU CLDN, or Ateneo Cela — has spent 40 years developing Chinese-Filipino leaders at the Ateneo de Manila University.",
   alternates: { canonical: "/about/" },
@@ -16,7 +18,6 @@ export const metadata: Metadata = {
 
 const STATS = [
   ["stat_1_value", "stat_1_label"],
-  ["stat_2_value", "stat_2_label"],
   ["stat_3_value", "stat_3_label"],
   ["stat_4_value", "stat_4_label"],
 ] as const;
@@ -25,7 +26,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About"
+        eyebrow="About Us"
         title={copy("about_heading")}
         description={copy("org_tagline")}
       />
@@ -33,7 +34,17 @@ export default function AboutPage() {
       <Container className="py-16 sm:py-20">
         {/* ---- Who we are --------------------------------------------- */}
         <Reveal className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeading eyebrow="The organization" title="Celadon at a glance" />
+          <div className="flex flex-col gap-8">
+            <SectionHeading eyebrow="The organization" title="Celadon at a glance" />
+            <Image
+              src={asset("/about/celadon-team.jpg")}
+              alt="Ateneo Celadon members"
+              width={2000}
+              height={1333}
+              data-reveal
+              className="h-auto w-full rounded-[1.75rem]"
+            />
+          </div>
           <div className="flex flex-col gap-6 lg:pt-16">
             <p className="prose-body whitespace-pre-line text-lg text-muted-foreground" data-reveal>
               {copy("about_body")}
@@ -43,7 +54,7 @@ export default function AboutPage() {
 
         {/* ---- Stats ---------------------------------------------------- */}
         <Reveal stagger={60} className="mt-14">
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 border-y border-border py-10 lg:grid-cols-4">
+          <dl className="grid grid-cols-3 gap-x-8 gap-y-10 border-y border-border py-10">
             {STATS.map(([valueKey, labelKey]) => {
               const { prefix, value, suffix } = parseStat(copy(valueKey));
               return (
@@ -96,7 +107,7 @@ export default function AboutPage() {
         </Reveal>
 
         {/* ---- Purposes & Functions ---------------------------------------- */}
-        <Reveal stagger={60} className="mt-14">
+        <Reveal stagger={60} className="mt-14 border-t border-border pt-14">
           <h2 className="display text-3xl text-navy sm:text-4xl" data-reveal>
             {copy("purposes_heading")}
           </h2>

@@ -2,6 +2,7 @@ export interface Department {
   slug: string;
   name: string;
   overview: string;
+  photos: string[];
 }
 
 export interface Project {
@@ -13,6 +14,11 @@ export interface Project {
   description: string;
   coverImageUrl: string | null;
   coverImageAlt: string;
+  photos: string[];
+  /** "YYYY-MM" — when the project actually runs. Sortable as-is; format for
+   * display with `formatExecutionDate`. A project can span more than one
+   * month (e.g. a sale that reopens later in the year). */
+  executionDates: string[];
 }
 
 export interface Role {
@@ -29,6 +35,23 @@ export interface Role {
   applicationLink: string | null;
   coreApplicationLink: string | null;
   headApplicationLink: string | null;
+}
+
+export interface GlossaryTerm {
+  term: string;
+  definition: string;
+}
+
+export interface CoreTeamCommittee {
+  abbr: string;
+  name: string;
+  description: string;
+  responsibilities: string[];
+  deliverables: string[];
+  qualities: string[];
+  /** Overrides the default "+N more" cap on each list — set high enough to
+   * show every item when a list is only barely over the default cap. */
+  listCap?: number;
 }
 
 export type ProjectWithDepartment = Project & { department: Department | null };

@@ -5,6 +5,7 @@ import { ayiFor } from "@/lib/ayi";
 import { copy, getDepartments } from "@/lib/content";
 import { Container } from "@/components/ui/container";
 import { PageHero } from "@/components/page-hero";
+import { PhotoCarousel } from "@/components/photo-carousel";
 import { Reveal } from "@/components/motion/reveal";
 
 export const metadata: Metadata = {
@@ -27,10 +28,44 @@ export default function DepartmentsPage() {
 
       {departments.map((department, i) => {
         const ayi = ayiFor(department.slug);
-        // Alternate which side the mascot sits on so the page doesn't read
-        // as six identical rows.
+        // COMMPUB/EXREL/HR (even rows): carousel on the far left, text on the
+        // right. CUL/FIN/OSR (odd rows): mirrored. Ayi always sits in the
+        // middle column either way.
         const flip = i % 2 === 1;
         const tinted = i % 2 === 1;
+
+        const ayiEl = ayi && (
+          <div className="flex items-center justify-center self-center lg:col-start-2">
+            <Image
+              src={asset(ayi)}
+              alt={`Ayi in ${department.name} colours`}
+              width={700}
+              height={950}
+              data-reveal
+              className="h-44 w-auto"
+            />
+          </div>
+        );
+
+        const carouselEl = department.photos.length > 0 && (
+          <PhotoCarousel
+            photos={department.photos}
+            alt={`${department.name} department`}
+            data-reveal
+            className="aspect-video w-full rounded-2xl"
+          />
+        );
+
+        const textEl = (
+          <div className="flex flex-col gap-5">
+            <h2 className="display text-4xl text-navy" data-reveal>
+              {department.name}
+            </h2>
+            <p className="prose-body text-muted-foreground" data-reveal>
+              {department.overview}
+            </p>
+          </div>
+        );
 
         return (
           <Reveal
@@ -45,38 +80,21 @@ export default function DepartmentsPage() {
             <Container>
               <div
                 id={department.slug}
-                className={
-                  flip
-                    ? "grid items-start gap-10 lg:grid-cols-[1.6fr_1fr]"
-                    : "grid items-start gap-10 lg:grid-cols-[1fr_1.6fr]"
-                }
+                className="grid items-start gap-8 lg:grid-cols-[1fr_auto_1fr]"
               >
-                {/* Not flipped: the image is left-aligned in its column by
-                    default, which strands it far from the text on its right
-                    — pull it to the column's end so it sits next to the
-                    text instead. Flipped rows don't need this: the image's
-                    own column already sits on the right, right next to the
-                    text on its left. */}
-                <div className={flip ? "lg:order-2" : "lg:justify-self-end"}>
-                  {ayi && (
-                    <Image
-                      src={asset(ayi)}
-                      alt={`Ayi in ${department.name} colours`}
-                      width={700}
-                      height={950}
-                      data-reveal
-                      className="h-44 w-auto self-start"
-                    />
-                  )}
-                </div>
-                <div className="flex flex-col gap-5">
-                  <h2 className="display text-4xl text-navy" data-reveal>
-                    {department.name}
-                  </h2>
-                  <p className="prose-body text-muted-foreground" data-reveal>
-                    {department.overview}
-                  </p>
-                </div>
+                {flip ? (
+                  <>
+                    {textEl}
+                    {ayiEl}
+                    {carouselEl}
+                  </>
+                ) : (
+                  <>
+                    {carouselEl}
+                    {ayiEl}
+                    {textEl}
+                  </>
+                )}
               </div>
             </Container>
           </Reveal>

@@ -3,7 +3,9 @@ import path from "node:path";
 import { asset } from "@/lib/asset";
 import { parseCsvRecords } from "@/lib/csv";
 import type {
+  CoreTeamCommittee,
   Department,
+  GlossaryTerm,
   Project,
   ProjectWithDepartment,
   Role,
@@ -33,6 +35,20 @@ function readTable(name: string): Record<string, string>[] {
 function list(value: string | undefined): string[] {
   return (value ?? "")
     .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Committee list cells use " | " between items on a single line, unlike
+ * other multi-value cells (one item per line). A newline-per-item cell only
+ * survives a paste into Sheets as a quoted CSV field, which a plain-text
+ * clipboard paste (as opposed to File > Import) doesn't reliably produce —
+ * keeping every committee to one flat row sidesteps that entirely.
+ */
+function pipeList(value: string | undefined): string[] {
+  return (value ?? "")
+    .split("|")
     .map((s) => s.trim())
     .filter(Boolean);
 }
@@ -70,6 +86,13 @@ function resolveImageUrl(value: string | undefined): string | null {
   return `https://lh3.googleusercontent.com/d/${id}=w1600`;
 }
 
+/** A carousel cell: one Drive share link (or /public path) per line. */
+function resolveImageUrls(value: string | undefined): string[] {
+  return list(value)
+    .map((line) => resolveImageUrl(line))
+    .filter((url): url is string => url !== null);
+}
+
 // Read once per process. `next build` is a single pass, so this is the whole
 // cache we need.
 let cache: {
@@ -77,6 +100,8 @@ let cache: {
   projects: Project[];
   roles: Role[];
   site: Record<string, string>;
+  committees: CoreTeamCommittee[];
+  glossary: GlossaryTerm[];
 } | null = null;
 
 function load() {
@@ -86,6 +111,7 @@ function load() {
     slug: r.slug,
     name: r.name,
     overview: r.overview ?? "",
+    photos: resolveImageUrls(r.photos),
   }));
 
   const projects: Project[] = readTable("projects").map((r) => ({
@@ -97,6 +123,8 @@ function load() {
     description: r.description ?? "",
     coverImageUrl: resolveImageUrl(r.cover_image_url),
     coverImageAlt: r.cover_image_alt ?? "",
+    photos: resolveImageUrls(r.photos),
+    executionDates: pipeList(r.execution_dates),
   }));
 
   const roles: Role[] = readTable("roles").map((r) => ({
@@ -121,7 +149,22 @@ function load() {
 
   assertCopyKeys(site);
 
-  cache = { departments, projects, roles, site };
+  const committees: CoreTeamCommittee[] = readTable("committees").map((r) => ({
+    abbr: r.abbr,
+    name: r.name,
+    description: r.description ?? "",
+    responsibilities: pipeList(r.responsibilities),
+    deliverables: pipeList(r.deliverables),
+    qualities: pipeList(r.qualities),
+    listCap: r.list_cap ? Number(r.list_cap) : undefined,
+  }));
+
+  const glossary: GlossaryTerm[] = readTable("glossary").map((r) => ({
+    term: r.term,
+    definition: r.definition ?? "",
+  }));
+
+  cache = { departments, projects, roles, site, committees, glossary };
   return cache;
 }
 
@@ -284,10 +327,21 @@ function withDepartment(project: Project): ProjectWithDepartment {
   };
 }
 
+/** A project's earliest execution month, for chronological sorting. Falls
+ * back to January of its `year` so a project with no execution_dates yet
+ * still sorts somewhere sane instead of crashing the comparator. */
+function earliestExecutionKey(project: Project): string {
+  return [...project.executionDates].sort()[0] ?? `${project.year}-01`;
+}
+
 export function getPublishedProjects(): ProjectWithDepartment[] {
   return load()
     .projects.filter((p) => p.status === "published")
-    .sort((a, b) => b.year - a.year || a.title.localeCompare(b.title))
+    .sort(
+      (a, b) =>
+        earliestExecutionKey(a).localeCompare(earliestExecutionKey(b)) ||
+        a.title.localeCompare(b.title)
+    )
     .map(withDepartment);
 }
 
@@ -348,6 +402,16 @@ export interface OrgStats {
   projectCount: number;
   roleCount: number;
   openRoleCount: number;
+}
+
+/** Reference copy for the recruitment page's "know the roles" glossary. */
+export function getGlossaryTerms(): GlossaryTerm[] {
+  return load().glossary;
+}
+
+/** The Core Team committees, in Sheet row order. */
+export function getCoreTeamCommittees(): CoreTeamCommittee[] {
+  return load().committees;
 }
 
 export function getOrgStats(): OrgStats {

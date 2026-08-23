@@ -1,0 +1,2 @@
+GOOGLE_CLIENT_SECRET=paste-a-real-or-dummy-value-for-local-testing
+COOKIE_SECRET=any-long-random-string-for-local-testing
