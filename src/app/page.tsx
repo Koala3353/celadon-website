@@ -133,7 +133,7 @@ export default function Home() {
                 width={1284}
                 height={801}
                 data-reveal
-                className="h-auto w-full rounded-[1.75rem]"
+                className="h-auto w-full max-w-sm rounded-[1.75rem]"
               />
             </div>
             <div className="flex flex-col gap-6 lg:pt-16">
