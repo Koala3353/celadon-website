@@ -2,6 +2,7 @@ export interface Department {
   slug: string;
   name: string;
   overview: string;
+  photos: string[];
 }
 
 export interface Project {
@@ -13,6 +14,11 @@ export interface Project {
   description: string;
   coverImageUrl: string | null;
   coverImageAlt: string;
+  photos: string[];
+  /** "YYYY-MM" — when the project actually runs. Sortable as-is; format for
+   * display with `formatExecutionDate`. A project can span more than one
+   * month (e.g. a sale that reopens later in the year). */
+  executionDates: string[];
 }
 
 export interface Role {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExpandableList } from "@/components/expandable-list";
 import { PageHero } from "@/components/page-hero";
@@ -20,6 +19,8 @@ export const metadata: Metadata = {
 export default function RecruitmentPage() {
   const glossaryTerms = getGlossaryTerms();
   const coreTeamCommittees = getCoreTeamCommittees();
+  const deputyTerm = glossaryTerms.find((g) => g.term === "Deputy");
+  const coreTeamTerm = glossaryTerms.find((g) => g.term === "Core Team");
 
   return (
     <>
@@ -37,54 +38,66 @@ export default function RecruitmentPage() {
             </h2>
           </Reveal>
 
-          <Reveal stagger={70} className="mx-auto mt-14 grid max-w-3xl gap-6 sm:grid-cols-2">
-            <div data-reveal>
-              <Card innerClassName="flex h-full flex-col gap-2 p-8 text-center">
+          <Reveal
+            stagger={70}
+            className="mx-auto mt-14 grid max-w-3xl items-start gap-6 sm:grid-cols-2"
+          >
+            <details
+              className="group rounded-[1.75rem] bg-navy/[0.035] p-1.5 ring-1 ring-inset ring-navy/[0.07]"
+              data-reveal
+            >
+              <summary className="flex cursor-pointer list-none flex-col items-center gap-2 rounded-[1.375rem] bg-white p-8 text-center shadow-[var(--shadow-sm)] [&::-webkit-details-marker]:hidden">
                 <p className="eyebrow text-accent-ink">Deputy applications</p>
                 <p className="display text-3xl text-navy">{copy("recruitment_deputy_date")}</p>
-              </Card>
-            </div>
-            <div data-reveal>
-              <Card innerClassName="flex h-full flex-col gap-2 p-8 text-center">
+                <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link">
+                  What&rsquo;s a deputy?
+                  <span
+                    className="inline-block transition-transform duration-200 group-open:rotate-180"
+                    aria-hidden
+                  >
+                    &#8964;
+                  </span>
+                </span>
+              </summary>
+              {deputyTerm && (
+                <div className="rounded-b-[1.375rem] bg-white px-8 pb-8 text-center">
+                  <p className="prose-body text-sm text-muted-foreground">
+                    {deputyTerm.definition}
+                  </p>
+                </div>
+              )}
+            </details>
+            <details
+              className="group rounded-[1.75rem] bg-navy/[0.035] p-1.5 ring-1 ring-inset ring-navy/[0.07]"
+              data-reveal
+            >
+              <summary className="flex cursor-pointer list-none flex-col items-center gap-2 rounded-[1.375rem] bg-white p-8 text-center shadow-[var(--shadow-sm)] [&::-webkit-details-marker]:hidden">
                 <p className="eyebrow text-accent-ink">Core Team applications</p>
                 <p className="display text-3xl text-navy">{copy("recruitment_core_date")}</p>
-              </Card>
-            </div>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* ---- Glossary --------------------------------------------- */}
-      <section className="bg-navy/[0.035] py-16 sm:py-20">
-        <Container>
-          <Reveal className="mx-auto max-w-4xl text-center">
-            <p className="eyebrow text-accent-ink" data-reveal>
-              While you wait
-            </p>
-            <h2 className="display mt-4 text-3xl text-navy sm:text-4xl" data-reveal>
-              Know the roles
-            </h2>
-          </Reveal>
-          <Reveal
-            stagger={50}
-            className="mx-auto mt-10 grid max-w-4xl gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {glossaryTerms.map((g) => (
-              <div key={g.term} data-reveal>
-                <Card className="h-full" innerClassName="flex h-full flex-col gap-2 p-6">
-                  <p className="text-sm font-extrabold uppercase tracking-wide text-navy">
-                    {g.term}
+                <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link">
+                  What&rsquo;s Core Team?
+                  <span
+                    className="inline-block transition-transform duration-200 group-open:rotate-180"
+                    aria-hidden
+                  >
+                    &#8964;
+                  </span>
+                </span>
+              </summary>
+              {coreTeamTerm && (
+                <div className="rounded-b-[1.375rem] bg-white px-8 pb-8 text-center">
+                  <p className="prose-body text-sm text-muted-foreground">
+                    {coreTeamTerm.definition}
                   </p>
-                  <p className="prose-body text-sm text-muted-foreground">{g.definition}</p>
-                </Card>
-              </div>
-            ))}
+                </div>
+              )}
+            </details>
           </Reveal>
         </Container>
       </section>
 
       {/* ---- Core Team committees ----------------------------------- */}
-      <section className="py-16 sm:py-20">
+      <section className="bg-navy/[0.035] py-16 sm:py-20">
         <Container>
           <Reveal className="mx-auto max-w-4xl text-center">
             <p className="eyebrow text-accent-ink" data-reveal>

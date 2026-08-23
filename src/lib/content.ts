@@ -86,6 +86,13 @@ function resolveImageUrl(value: string | undefined): string | null {
   return `https://lh3.googleusercontent.com/d/${id}=w1600`;
 }
 
+/** A carousel cell: one Drive share link (or /public path) per line. */
+function resolveImageUrls(value: string | undefined): string[] {
+  return list(value)
+    .map((line) => resolveImageUrl(line))
+    .filter((url): url is string => url !== null);
+}
+
 // Read once per process. `next build` is a single pass, so this is the whole
 // cache we need.
 let cache: {
@@ -104,6 +111,7 @@ function load() {
     slug: r.slug,
     name: r.name,
     overview: r.overview ?? "",
+    photos: resolveImageUrls(r.photos),
   }));
 
   const projects: Project[] = readTable("projects").map((r) => ({
@@ -115,6 +123,8 @@ function load() {
     description: r.description ?? "",
     coverImageUrl: resolveImageUrl(r.cover_image_url),
     coverImageAlt: r.cover_image_alt ?? "",
+    photos: resolveImageUrls(r.photos),
+    executionDates: pipeList(r.execution_dates),
   }));
 
   const roles: Role[] = readTable("roles").map((r) => ({
@@ -317,10 +327,21 @@ function withDepartment(project: Project): ProjectWithDepartment {
   };
 }
 
+/** A project's earliest execution month, for chronological sorting. Falls
+ * back to January of its `year` so a project with no execution_dates yet
+ * still sorts somewhere sane instead of crashing the comparator. */
+function earliestExecutionKey(project: Project): string {
+  return [...project.executionDates].sort()[0] ?? `${project.year}-01`;
+}
+
 export function getPublishedProjects(): ProjectWithDepartment[] {
   return load()
     .projects.filter((p) => p.status === "published")
-    .sort((a, b) => b.year - a.year || a.title.localeCompare(b.title))
+    .sort(
+      (a, b) =>
+        earliestExecutionKey(a).localeCompare(earliestExecutionKey(b)) ||
+        a.title.localeCompare(b.title)
+    )
     .map(withDepartment);
 }
 

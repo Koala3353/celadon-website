@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 
 const STATS = [
   ["stat_1_value", "stat_1_label"],
-  ["stat_2_value", "stat_2_label"],
   ["stat_3_value", "stat_3_label"],
   ["stat_4_value", "stat_4_label"],
 ] as const;
@@ -55,7 +54,7 @@ export default function AboutPage() {
 
         {/* ---- Stats ---------------------------------------------------- */}
         <Reveal stagger={60} className="mt-14">
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 border-y border-border py-10 lg:grid-cols-4">
+          <dl className="grid grid-cols-3 gap-x-8 gap-y-10 border-y border-border py-10">
             {STATS.map(([valueKey, labelKey]) => {
               const { prefix, value, suffix } = parseStat(copy(valueKey));
               return (
@@ -108,7 +107,7 @@ export default function AboutPage() {
         </Reveal>
 
         {/* ---- Purposes & Functions ---------------------------------------- */}
-        <Reveal stagger={60} className="mt-14">
+        <Reveal stagger={60} className="mt-14 border-t border-border pt-14">
           <h2 className="display text-3xl text-navy sm:text-4xl" data-reveal>
             {copy("purposes_heading")}
           </h2>
