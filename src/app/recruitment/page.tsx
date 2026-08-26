@@ -46,10 +46,10 @@ export default function RecruitmentPage() {
               className="group rounded-[1.75rem] bg-navy/[0.035] p-1.5 ring-1 ring-inset ring-navy/[0.07]"
               data-reveal
             >
-              <summary className="flex cursor-pointer list-none flex-col items-center gap-2 rounded-[1.375rem] bg-white p-8 text-center shadow-[var(--shadow-sm)] [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none flex-col items-center gap-2 rounded-[1.375rem] bg-white p-8 text-center shadow-[var(--shadow-sm)] transition-colors hover:bg-navy-tint [&::-webkit-details-marker]:hidden">
                 <p className="eyebrow text-accent-ink">Deputy applications</p>
                 <p className="display text-3xl text-navy">{copy("recruitment_deputy_date")}</p>
-                <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link">
+                <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link group-hover:underline">
                   What&rsquo;s a deputy?
                   <span
                     className="inline-block transition-transform duration-200 group-open:rotate-180"
@@ -71,10 +71,10 @@ export default function RecruitmentPage() {
               className="group rounded-[1.75rem] bg-navy/[0.035] p-1.5 ring-1 ring-inset ring-navy/[0.07]"
               data-reveal
             >
-              <summary className="flex cursor-pointer list-none flex-col items-center gap-2 rounded-[1.375rem] bg-white p-8 text-center shadow-[var(--shadow-sm)] [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none flex-col items-center gap-2 rounded-[1.375rem] bg-white p-8 text-center shadow-[var(--shadow-sm)] transition-colors hover:bg-navy-tint [&::-webkit-details-marker]:hidden">
                 <p className="eyebrow text-accent-ink">Core Team applications</p>
                 <p className="display text-3xl text-navy">{copy("recruitment_core_date")}</p>
-                <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link">
+                <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link group-hover:underline">
                   What&rsquo;s Core Team?
                   <span
                     className="inline-block transition-transform duration-200 group-open:rotate-180"
@@ -121,7 +121,7 @@ export default function RecruitmentPage() {
                 className="group open:col-span-2 rounded-[1.75rem] bg-navy/[0.035] p-1.5 ring-1 ring-inset ring-navy/[0.07]"
                 data-reveal
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[1.375rem] bg-white p-6 shadow-[var(--shadow-sm)] [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[1.375rem] bg-white p-6 shadow-[var(--shadow-sm)] transition-colors hover:bg-navy-tint [&::-webkit-details-marker]:hidden">
                   <span className="flex items-center gap-3">
                     <Badge>{c.abbr}</Badge>
                     <span className="text-lg font-extrabold text-navy">{c.name}</span>

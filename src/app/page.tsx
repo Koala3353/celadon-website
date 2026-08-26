@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button-link";
 import { ProjectCard } from "@/components/project-card";
+import { PhotoCarousel } from "@/components/photo-carousel";
 import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/motion/reveal";
 import { Counter } from "@/components/motion/counter";
@@ -21,6 +22,12 @@ const STATS = [
 // Hand-picked for the home page teaser rather than "whatever's newest" —
 // swap slugs here to feature different projects.
 const FEATURED_SLUGS = ["rose-sale", "binondo-amazing-race", "chinese-new-year"];
+
+const CELAZINE_COVERS = [
+  { src: "/celazine/vol-1-unabridged.jpg", alt: "CelaZine Vol. 1 — Unabridged" },
+  { src: "/celazine/vol-2-countenance.jpg", alt: "CelaZine Vol. 2 — Countenance" },
+  { src: "/celazine/womens-month-special.jpg", alt: "CelaZine Special — Women's Month" },
+];
 
 // No title override — the layout's default ("Ateneo Celadon") is already
 // the right title for the root page. Setting one here would run it through
@@ -171,6 +178,33 @@ export default function Home() {
               </div>
             </Reveal>
           )}
+        </Container>
+      </section>
+
+      {/* ---- CelaZine ------------------------------------------------------ */}
+      <section className="border-t border-border py-16 sm:py-20">
+        <Container>
+          <Reveal className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="flex flex-col gap-8">
+              <SectionHeading title={copy("celazine_heading")} />
+              <PhotoCarousel
+                photos={CELAZINE_COVERS.map((cover) => asset(cover.src))}
+                alt="CelaZine issue cover"
+                data-reveal
+                className="aspect-square w-full max-w-xs self-center rounded-2xl border border-border"
+              />
+            </div>
+            <div className="flex flex-col gap-6 lg:pt-16">
+              <p className="prose-body whitespace-pre-line text-lg text-muted-foreground" data-reveal>
+                {copy("celazine_body")}
+              </p>
+              <div data-reveal>
+                <ButtonLink href={copy("celazine_url")} variant="outline" external>
+                  Read CelaZine
+                </ButtonLink>
+              </div>
+            </div>
+          </Reveal>
         </Container>
       </section>
     </>
