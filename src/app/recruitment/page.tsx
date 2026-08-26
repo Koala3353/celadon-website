@@ -44,12 +44,15 @@ export default function RecruitmentPage() {
           <Reveal stagger={70} className="mt-10 grid items-start gap-6 sm:grid-cols-2">
             <details className="group" data-reveal>
               <summary className="list-none [&::-webkit-details-marker]:hidden">
-                <Card className="cursor-pointer" innerClassName="flex flex-col gap-2 p-8">
+                <Card
+                  className="lift cursor-pointer"
+                  innerClassName="flex flex-col gap-2 p-8"
+                >
                   <p className="eyebrow text-accent-ink">Deputy applications</p>
                   <p className="display text-3xl text-navy">
                     {copy("recruitment_deputy_date")}
                   </p>
-                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link">
+                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link group-hover:underline">
                     What&rsquo;s a deputy?
                     <span
                       className="inline-block transition-transform duration-200 group-open:rotate-180"
@@ -68,10 +71,13 @@ export default function RecruitmentPage() {
             </details>
             <details className="group" data-reveal>
               <summary className="list-none [&::-webkit-details-marker]:hidden">
-                <Card className="cursor-pointer" innerClassName="flex flex-col gap-2 p-8">
+                <Card
+                  className="lift cursor-pointer"
+                  innerClassName="flex flex-col gap-2 p-8"
+                >
                   <p className="eyebrow text-accent-ink">Core Team applications</p>
                   <p className="display text-3xl text-navy">{copy("recruitment_core_date")}</p>
-                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link">
+                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link group-hover:underline">
                     What&rsquo;s Core Team?
                     <span
                       className="inline-block transition-transform duration-200 group-open:rotate-180"

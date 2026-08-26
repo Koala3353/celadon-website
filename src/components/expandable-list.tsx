@@ -27,7 +27,7 @@ export function ExpandableList({ items, cap = 4 }: { items: string[]; cap?: numb
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-2 text-xs font-bold uppercase tracking-wider text-link"
+          className="mt-2 text-xs font-bold uppercase tracking-wider text-link transition-colors hover:text-navy hover:underline"
         >
           {expanded ? "Show less" : `+${hiddenCount} more`}
         </button>

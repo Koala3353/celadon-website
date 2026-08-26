@@ -75,7 +75,7 @@ export function PhotoCarousel({
                 aria-label={`Go to photo ${i + 1}`}
                 className={cn(
                   "h-2 w-2 rounded-full transition-colors",
-                  i === index ? "bg-white" : "bg-white/40"
+                  i === index ? "bg-white" : "bg-white/40 hover:bg-white/70"
                 )}
               />
             ))}
