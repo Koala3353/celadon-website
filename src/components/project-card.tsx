@@ -71,7 +71,7 @@ export function ProjectCard({ project }: { project: ProjectWithDepartment }) {
               </p>
             )}
 
-            <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-link">
+            <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-link transition-colors group-hover:text-navy group-hover:underline">
               Read more
             </p>
           </div>
@@ -159,7 +159,7 @@ function ProjectImage({
         alt={project.coverImageAlt || project.title}
         fill
         sizes="(min-width: 640px) 36rem, 100vw"
-        className="object-cover"
+        className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-105"
       />
     </div>
   );
