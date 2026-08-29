@@ -52,3 +52,5 @@ next-env.d.ts
 /worker/node_modules
 /worker/.wrangler
 /worker/.dev.vars
+# Real member emails — generated locally by sync:members, never committed.
+/worker/members-kv.json

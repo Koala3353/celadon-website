@@ -71,10 +71,16 @@ export function SiteFooter() {
         </Container>
 
         <Container>
-          <div className="border-t border-white/10 py-4">
+          <div className="flex flex-col gap-2 border-t border-white/10 py-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-on-navy/70">
               Copyright © {year} Ateneo Celadon. All rights reserved.
             </p>
+            <Link
+              href="/privacy"
+              className="w-fit text-xs text-on-navy/70 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Privacy Policy
+            </Link>
           </div>
         </Container>
       </div>

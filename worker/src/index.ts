@@ -8,6 +8,10 @@ export interface Env {
   COOKIE_SECRET: string;
   // Comma-separated list of allowed email domains, e.g. "student.ateneo.edu".
   ALLOWED_EMAIL_DOMAINS: string;
+  // Roster of ~700-800 member emails, synced from the Sheet's `members` tab
+  // via scripts/sync-members.mjs. Keyed by lowercased email; the value isn't
+  // read, presence is all that matters.
+  MEMBERS: KVNamespace;
 }
 
 const GATE_PATH_PREFIX = "/recruitment/internal";
@@ -18,12 +22,23 @@ const NONCE_COOKIE = "celadon_oauth_nonce";
 const SESSION_TTL_SECONDS = 60 * 60 * 24; // 24h — matches the "same browser, no repeat sign-in" behavior.
 const NONCE_TTL_SECONDS = 600; // Just long enough to complete the Google redirect round trip.
 
-function isAllowedEmail(email: string, env: Env): boolean {
+function isAllowedDomain(email: string, env: Env): boolean {
   const domains = env.ALLOWED_EMAIL_DOMAINS.split(",")
     .map((d) => d.trim().toLowerCase())
     .filter(Boolean);
   const lower = email.toLowerCase();
   return domains.some((domain) => lower.endsWith(`@${domain}`));
+}
+
+// A signed-in Ateneo/Celadon email only gets in if it's also on the member
+// roster — the domain check alone would admit any Ateneo student, not just
+// Celadon's ~700-800 actual members.
+async function isMember(email: string, env: Env): Promise<boolean> {
+  return (await env.MEMBERS.get(email.toLowerCase())) !== null;
+}
+
+async function isAuthorized(email: string, env: Env): Promise<boolean> {
+  return isAllowedDomain(email, env) && (await isMember(email, env));
 }
 
 // Only ever redirect back into our own gated path — a returnTo taken
@@ -102,7 +117,7 @@ async function handleCallback(request: Request, url: URL, env: Env): Promise<Res
   const claims = await verifyGoogleIdToken(tokenBody.id_token, env.GOOGLE_CLIENT_ID);
   if (!claims || !claims.email || !claims.email_verified) return bounceBack("error");
 
-  if (!isAllowedEmail(claims.email, env)) return bounceBack("denied");
+  if (!(await isAuthorized(claims.email, env))) return bounceBack("denied");
 
   const token = await createSessionToken(claims.email, env.COOKIE_SECRET, SESSION_TTL_SECONDS);
   const headers = new Headers({ Location: returnTo });
@@ -128,10 +143,10 @@ export default {
     const session = await verifySessionToken(cookies[SESSION_COOKIE], env.COOKIE_SECRET);
 
     // Re-check the allowlist on every request, not just at sign-in time — if
-    // someone's email is removed from ALLOWED_EMAIL_DOMAINS after they
-    // already have a session cookie, they lose access immediately rather
-    // than keeping it until the cookie happens to expire.
-    if (session && isAllowedEmail(session.email, env)) {
+    // someone's email is removed from ALLOWED_EMAIL_DOMAINS or the member
+    // roster after they already have a session cookie, they lose access
+    // immediately rather than keeping it until the cookie happens to expire.
+    if (session && (await isAuthorized(session.email, env))) {
       return fetch(request);
     }
 
