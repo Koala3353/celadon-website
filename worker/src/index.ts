@@ -14,9 +14,9 @@ export interface Env {
   MEMBERS: KVNamespace;
 }
 
-const GATE_PATH_PREFIX = "/recruitment/internal";
-const AUTH_START_PATH = "/recruitment/internal/__auth/start";
-const CALLBACK_PATH = "/recruitment/internal/__auth/callback";
+const GATE_PATH_PREFIX = "/internal";
+const AUTH_START_PATH = "/internal/__auth/start";
+const CALLBACK_PATH = "/internal/__auth/callback";
 const SESSION_COOKIE = "celadon_session";
 const NONCE_COOKIE = "celadon_oauth_nonce";
 const SESSION_TTL_SECONDS = 60 * 60 * 24; // 24h — matches the "same browser, no repeat sign-in" behavior.

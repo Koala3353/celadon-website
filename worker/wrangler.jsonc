@@ -3,7 +3,7 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-08-01",
   "routes": [
-    { "pattern": "ateneoceladon.com/recruitment/internal*", "zone_name": "ateneoceladon.com" }
+    { "pattern": "ateneoceladon.com/internal*", "zone_name": "ateneoceladon.com" }
   ],
   "vars": {
     // Not secret — client IDs are public by design (they end up in browser

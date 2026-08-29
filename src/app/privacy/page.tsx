@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
             <div data-reveal>
               <Section title="Signing into the internal portal">
                 <p>
-                  The internal recruitment portal, under /recruitment/internal, is
+                  The internal recruitment portal, under /internal, is
                   restricted to current Celadon members. Signing in uses Google&rsquo;s
                   own sign-in flow, which shares your Google account&rsquo;s email
                   address with us.
