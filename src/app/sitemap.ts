@@ -56,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...rest,
   }));
 
-  // Deliberately excluded: /recruitment/internal — members-only, marked
+  // Deliberately excluded: /internal — members-only, marked
   // `robots: { index: false }` on the page itself, and never linked from
   // public nav. Listing it here would just be inviting a crawl of a page
   // that has nothing to show an unauthenticated visitor anyway.

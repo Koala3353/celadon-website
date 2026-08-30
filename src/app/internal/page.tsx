@@ -4,7 +4,8 @@ import { Card } from "@/components/ui/card";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/motion/reveal";
 
-// Members-only — access is enforced at the edge (Cloudflare Access), not in
+// Members-only — access is enforced at the edge by the Cloudflare Worker in
+// /worker (Google sign-in checked against the member roster in KV), not in
 // this app. This page has no auth logic of its own; it's just marked
 // noindex and left out of sitemap.ts so it isn't offered to crawlers or
 // the public nav.
