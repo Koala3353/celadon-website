@@ -103,6 +103,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                     alt={section.image.alt}
                     width={1600}
                     height={400}
+                    loading="lazy"
                     data-reveal
                     className="w-full rounded-2xl"
                   />
@@ -213,6 +214,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                         alt={t.name}
                         width={56}
                         height={56}
+                        loading="lazy"
                         className="h-14 w-14 shrink-0 rounded-full object-cover"
                       />
                     ) : (
@@ -256,6 +258,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                       alt={contact.name}
                       width={112}
                       height={112}
+                      loading="lazy"
                       className="h-28 w-28 rounded-full object-cover"
                     />
                   ) : (

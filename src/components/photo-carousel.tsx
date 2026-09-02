@@ -41,6 +41,7 @@ export function PhotoCarousel({
           fill
           sizes="(min-width: 1024px) 640px, 100vw"
           priority={i === 0}
+          loading={i === 0 ? undefined : "lazy"}
           className={cn(
             "object-cover transition-opacity duration-500",
             i === index ? "opacity-100" : "pointer-events-none opacity-0"

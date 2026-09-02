@@ -47,6 +47,7 @@ function ContactCard({ contact }: { contact: DeptContact }) {
             alt={contact.name}
             width={112}
             height={112}
+            loading="lazy"
             className="h-24 w-24 rounded-full object-cover"
           />
         ) : (

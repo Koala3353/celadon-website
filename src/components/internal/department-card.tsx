@@ -30,6 +30,7 @@ export function DepartmentCard({ dept }: { dept: Department }) {
             src={asset(dept.cardCover.src)}
             alt=""
             fill
+            loading="lazy"
             sizes="(min-width: 640px) 33vw, 100vw"
             className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-105"
           />

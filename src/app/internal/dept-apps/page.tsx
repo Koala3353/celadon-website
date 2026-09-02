@@ -80,6 +80,7 @@ export default function DeptAppsHubPage() {
                   width={272}
                   height={384}
                   unoptimized
+                  loading="lazy"
                   className="h-auto w-40 shrink-0 sm:w-52"
                 />
                 <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
@@ -210,6 +211,7 @@ export default function DeptAppsHubPage() {
                   alt=""
                   width={340}
                   height={447}
+                  loading="lazy"
                   className="h-auto w-32 shrink-0 sm:w-40 md:w-48"
                 />
               </Card>
@@ -232,6 +234,7 @@ export default function DeptAppsHubPage() {
                             alt={t.name}
                             width={112}
                             height={112}
+                            loading="lazy"
                             className="h-24 w-24 shrink-0 rounded-full object-cover ring-2 ring-white/20 sm:h-28 sm:w-28"
                           />
                         ) : (
