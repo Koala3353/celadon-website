@@ -44,6 +44,53 @@ export function DepartmentPage({ dept }: { dept: Department }) {
     >
       <DeptHero dept={dept} />
 
+      {dept.techShowcase && (
+        <section className="bg-dept-tint py-14 sm:py-20">
+          <Container>
+            <Reveal className="mx-auto w-full max-w-4xl">
+              <div
+                className="rounded-[1.75rem] bg-white p-8 shadow-[var(--shadow-md)] ring-1 ring-inset ring-dept-accent/15 sm:p-10"
+                data-reveal
+              >
+                <span className="eyebrow text-dept-accent">Made by this department</span>
+                <h2 className="display mt-3 text-2xl text-dept-ink sm:text-3xl">{dept.techShowcase.heading}</h2>
+                <p className="prose-body mt-4 text-muted-foreground">{dept.techShowcase.blurb}</p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                  {dept.techShowcase.items.map((item) => {
+                    const body = (
+                      <>
+                        <p className="font-extrabold text-dept-ink">{item.name}</p>
+                        <p className="prose-body mt-1.5 text-sm text-muted-foreground">{item.description}</p>
+                        {item.href && (
+                          <span className="mt-3 inline-block text-xs font-bold uppercase tracking-wider text-dept-accent">
+                            Visit &#8599;
+                          </span>
+                        )}
+                      </>
+                    );
+                    return item.href ? (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="pressable rounded-2xl bg-dept-tint p-5 transition-colors hover:bg-dept-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dept-accent"
+                      >
+                        {body}
+                      </a>
+                    ) : (
+                      <div key={item.name} className="rounded-2xl bg-dept-tint p-5">
+                        {body}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </Reveal>
+          </Container>
+        </section>
+      )}
+
       <section className="bg-white py-16 sm:py-24">
         <Container className="flex flex-col gap-16 sm:gap-20">
           {dept.photos.length > 0 && (

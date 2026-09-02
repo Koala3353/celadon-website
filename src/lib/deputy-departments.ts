@@ -97,6 +97,15 @@ export interface Department {
   timeline?: DeptTimelineItem[];
   /** EXREL's four flagship projects/initiatives. */
   projects?: DeptProject[];
+  /** OSR-only: real tools/products OSR members have built for Celadon (this
+   * site included) — a concrete "if you want to build things like this,
+   * this is the department" hook, distinct from `projects`, which covers
+   * org-wide event/campaign projects rather than built software. */
+  techShowcase?: {
+    heading: string;
+    blurb: string;
+    items: { name: string; description: string; href?: string }[];
+  };
   /** Extra note alongside the (uniform, 3-step) application instructions —
    * e.g. a link to additional requirements, or "none needed" for clarity. */
   applicationNote?: { text: string; href?: string };
@@ -628,6 +637,27 @@ export const DEPARTMENTS: Department[] = [
       "The Organization Strategies and Research Department develops evaluative and data-driven project and organizational strategies for Celadon’s sustainable growth. The department handles the internal systems and research initiatives for the organization.",
     about:
       "The Organization Strategies and Research Department (OSR) supervises and maintains the overall welfare of the organization by spearheading and administering various evaluations and research. The department collects qualitative and quantitative data through consultations and questionnaires to make data-driven assessments and recommendations for Celadon's projects and departments. Moreover, OSR provides technical support through assigned liaison teams and project deployments. By optimizing organizational systems and workflows, the department continuously improves the organization's operational efficiency. Ultimately, OSR ensures that Celadon is grounded in data-driven decision-making to ensure that its members are strategically engaged and that organizational goals are achieved.",
+    techShowcase: {
+      heading: "Built by OSR",
+      blurb:
+        "This website, the Mahjong Leaderboard, and CelaWrapped were all designed and built by OSR members — not outsourced, not assigned from outside the department, just members who decided to build something the org needed. If you've ever wanted to make something like this for Celadon, OSR is where that starts.",
+      items: [
+        {
+          name: "ateneoceladon.com",
+          description:
+            "The public website and this deputy application portal you're reading right now — designed, coded, and maintained end-to-end by OSR.",
+          href: "https://ateneoceladon.com",
+        },
+        {
+          name: "Mahjong Leaderboard",
+          description: "A live leaderboard for Celadon's mahjong community, tracking standings across the year.",
+        },
+        {
+          name: "CelaWrapped",
+          description: "Celadon's own year-in-review, Spotify Wrapped-style, built from scratch for the org.",
+        },
+      ],
+    },
     sections: [
       {
         heading: "Junior Analyst (Deputy-level Role)",
