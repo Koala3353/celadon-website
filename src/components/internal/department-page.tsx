@@ -44,8 +44,8 @@ export function DepartmentPage({ dept }: { dept: Department }) {
     >
       <DeptHero dept={dept} />
 
-      <section className="bg-white py-16 sm:py-20">
-        <Container className="flex flex-col gap-16">
+      <section className="bg-white py-16 sm:py-24">
+        <Container className="flex flex-col gap-16 sm:gap-20">
           {dept.photos.length > 0 && (
             <Reveal className="mx-auto w-full max-w-3xl">
               <Heading>Photos</Heading>

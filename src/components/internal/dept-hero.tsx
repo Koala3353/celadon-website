@@ -17,7 +17,19 @@ import type { Department } from "@/lib/deputy-departments";
  */
 export function DeptHero({ dept }: { dept: Department }) {
   return (
-    <section className="bg-dept-tint text-dept-ink">
+    <section className="relative overflow-hidden bg-dept-tint text-dept-ink">
+      {/* Ambient depth in the department's own accent — same radial-glow
+          technique as the public site's navy hero, so every department page
+          reads as one family even though the hue changes per department. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 55% at 85% 0%, color-mix(in srgb, var(--dept-accent) 20%, transparent) 0%, transparent 65%)",
+        }}
+      />
+
       {dept.heroImage && (
         <Reveal>
           <Image
@@ -32,12 +44,15 @@ export function DeptHero({ dept }: { dept: Department }) {
         </Reveal>
       )}
 
-      <Container className="py-16 sm:py-20">
-        <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-          <p className="eyebrow text-dept-accent" data-reveal>
+      <Container className="relative py-20 sm:py-28">
+        <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
+          <span
+            className="eyebrow rounded-full bg-white/70 px-4 py-1.5 text-dept-ink/80 ring-1 ring-inset ring-dept-accent/20 backdrop-blur-sm"
+            data-reveal
+          >
             {dept.fullName} • Deputy Pool
-          </p>
-          <h1 className="display text-4xl text-dept-ink sm:text-6xl" data-reveal>
+          </span>
+          <h1 className="display text-5xl text-dept-ink sm:text-7xl" data-reveal>
             {dept.name} {dept.emoji}
           </h1>
           <p className="prose-body max-w-xl text-lg text-dept-ink/80" data-reveal>
@@ -48,9 +63,17 @@ export function DeptHero({ dept }: { dept: Department }) {
               href="https://ateneoceladon.com/deputy-appform"
               target="_blank"
               rel="noopener noreferrer"
-              className="pressable inline-flex items-center gap-2 rounded-full bg-dept-accent px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dept-accent"
+              className="pressable group inline-flex items-center gap-3 rounded-full bg-dept-accent py-3 pl-6 pr-3 text-sm font-bold uppercase tracking-wider text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dept-accent"
             >
-              Apply {dept.name}
+              <span>Apply {dept.name}</span>
+              <span
+                aria-hidden
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              >
+                <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 12 12 4M6 4h6v6" />
+                </svg>
+              </span>
             </a>
           </div>
         </Reveal>

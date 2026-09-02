@@ -189,11 +189,36 @@ html {
 }
 
 /* CelaSkies gradient — the deputy-application pages' signature background.
-   Sun-through-cloud glow at top, blue sky sinking into a peach horizon. */
+   Sun-through-cloud glow at top, blue sky sinking into a peach horizon, plus
+   a warm ambient glow bottom-right so it reads as lit, not flat — same
+   radial-depth technique as .navy-field. */
 .sky-field {
   background:
     radial-gradient(60% 50% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 70%),
+    radial-gradient(65% 70% at 92% 100%, rgba(240, 155, 67, 0.16) 0%, transparent 60%),
     linear-gradient(180deg, var(--sky-blue) 0%, #bfe0f2 45%, var(--sky-peach) 100%);
+}
+
+/* Fine white hairline grid over the sky field — the .navy-grid technique in
+   the sky palette, for the hero band only. */
+.sky-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+/* Ambient backdrop for the rest of a CelaSkies page, underneath the hero —
+   a continuous, very light wash rather than the stacked flat-color and
+   multi-stop gradient bands the hub page used to switch between per
+   section. Every section on top of it stays visually connected instead of
+   reading as a patchwork of separate backgrounds. */
+.sky-tint-field {
+  background:
+    radial-gradient(55% 45% at 10% 0%, rgba(74, 159, 216, 0.1) 0%, transparent 65%),
+    radial-gradient(50% 45% at 100% 15%, rgba(245, 217, 168, 0.28) 0%, transparent 60%),
+    radial-gradient(60% 50% at 50% 100%, rgba(156, 197, 197, 0.14) 0%, transparent 65%),
+    var(--white);
 }
 
 .sky-display {

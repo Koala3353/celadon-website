@@ -121,8 +121,8 @@ export const APPLICATION_STEPS = [
 // The Office of the President — org-wide leadership, distinct from any one
 // department's own VP/AVP roster.
 export const EBCB_LEADERSHIP: DeptContact[] = [
-  { name: "Josh Lee", role: "President", facebook: "http://fb.com/joshanthony.lee.9", email: "josh.anthony.lee@student.ateneo.edu", photo: "/internal/ebcb/leadership-josh-lee.jpg" },
-  { name: "Bern Chua", role: "Executive Vice President", facebook: "http://fb.com/bernsteinjoachim.chua", email: "bernstein.joachim.chua@student.ateneo.edu", photo: "/internal/ebcb/leadership-bern-chua.jpg" },
+  { name: "Josh Lee", role: "President", facebook: "http://fb.com/joshanthony.lee.9", email: "josh.anthony.lee@student.ateneo.edu", photo: "/internal/ebcb/leadership-josh-lee.webp" },
+  { name: "Bern Chua", role: "Executive Vice President", facebook: "http://fb.com/bernsteinjoachim.chua", email: "bernstein.joachim.chua@student.ateneo.edu", photo: "/internal/ebcb/leadership-bern-chua.webp" },
 ];
 
 export const DEPARTMENTS: Department[] = [
@@ -133,8 +133,8 @@ export const DEPARTMENTS: Department[] = [
     name: "COMMPUB",
     fullName: "Communications and Publications",
     accent: { base: "#D97706", tint: "#FDF1E3", ink: "#7C3A0D" },
-    heroImage: { src: "/internal/commpub-hero.jpg", alt: "COMMPUB Staffers SY 2026-2027" },
-    cardCover: { src: "/internal/commpub-card-cover.jpg", alt: "COMMPUB" },
+    heroImage: { src: "/internal/commpub-hero.webp", alt: "COMMPUB Staffers SY 2026-2027" },
+    cardCover: { src: "/internal/commpub-card-cover.webp", alt: "COMMPUB" },
     cardBlurb:
       "The Communications and Publications Department handles branding, social media, and creative content in graphic, physical design, photo, video, and writing. It aims to bring Celadon’s voice and stories to life.",
     about:
@@ -186,13 +186,13 @@ export const DEPARTMENTS: Department[] = [
     testimonials: [],
     faqs: [],
     contacts: [
-      { name: "Jillian Yu", role: "VP for Communications and Publications", facebook: "http://fb.com/jillian.yu.758", email: "jillian.yu@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-yu.jpg" },
-      { name: "Jillian Dy", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/jillian.dy.961", email: "jillian.dy@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-dy.jpg" },
-      { name: "Dia Fernando", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/dia.fernando.9", email: "dia.ainsly.fernando@student.ateneo.edu", photo: "/internal/ebcb/commpub-dia-fernando.jpg" },
-      { name: "Simone Chua", role: "AVP for Documentation and Publications", facebook: "http://fb.com/simoneabigailc", email: "simone.chua@student.ateneo.edu", photo: "/internal/ebcb/commpub-simone-chua.jpg" },
-      { name: "Abby Tan", role: "AVP for Documentation and Publications", facebook: "http://fb.com/abbytann", email: "elise.tan@student.ateneo.edu", photo: "/internal/ebcb/commpub-abby-tan.jpg" },
+      { name: "Jillian Yu", role: "VP for Communications and Publications", facebook: "http://fb.com/jillian.yu.758", email: "jillian.yu@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-yu.webp" },
+      { name: "Jillian Dy", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/jillian.dy.961", email: "jillian.dy@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-dy.webp" },
+      { name: "Dia Fernando", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/dia.fernando.9", email: "dia.ainsly.fernando@student.ateneo.edu", photo: "/internal/ebcb/commpub-dia-fernando.webp" },
+      { name: "Simone Chua", role: "AVP for Documentation and Publications", facebook: "http://fb.com/simoneabigailc", email: "simone.chua@student.ateneo.edu", photo: "/internal/ebcb/commpub-simone-chua.webp" },
+      { name: "Abby Tan", role: "AVP for Documentation and Publications", facebook: "http://fb.com/abbytann", email: "elise.tan@student.ateneo.edu", photo: "/internal/ebcb/commpub-abby-tan.webp" },
     ],
-    photos: ["/internal/commpub-ga.jpg"],
+    photos: ["/internal/commpub-ga.webp"],
   },
 
   // ---------------------------------------------------------------------- CUL
@@ -202,7 +202,7 @@ export const DEPARTMENTS: Department[] = [
     name: "CUL",
     fullName: "Cultural Affairs",
     accent: { base: "#DC2626", tint: "#FEF2F2", ink: "#7F1D1D" },
-    heroImage: { src: "/internal/cul-hero.jpg", alt: "Ateneo Celadon Cultural Affairs Department" },
+    heroImage: { src: "/internal/cul-hero.webp", alt: "Ateneo Celadon Cultural Affairs Department" },
     cardCover: { src: "/covers/chinese-new-year.jpg", alt: "CUL" },
     cardBlurb:
       "The Cultural Affairs Department is the heart of Celadon. It promotes Filipino-Chinese culture through meaningful events and builds on relevance, appreciation, and cultural connection.",
@@ -211,7 +211,7 @@ export const DEPARTMENTS: Department[] = [
     sections: [
       {
         heading: "CUL Trainee Roadmap",
-        image: { src: "/internal/cul-roadmap.jpg", alt: "CUL Trainee year-long roadmap, from the first CUL GA in September through the second CUL GA and bonding in April" },
+        image: { src: "/internal/cul-roadmap.webp", alt: "CUL Trainee year-long roadmap, from the first CUL GA in September through the second CUL GA and bonding in April" },
         groups: [
           {
             items: [
@@ -275,9 +275,9 @@ export const DEPARTMENTS: Department[] = [
       },
     ],
     contacts: [
-      { name: "Therese Yap", role: "VP for Cultural Affairs", facebook: "http://fb.com/yap.reese04", email: "anne.therese.yap@student.ateneo.edu", photo: "/internal/ebcb/cul-therese-yap.jpg" },
+      { name: "Therese Yap", role: "VP for Cultural Affairs", facebook: "http://fb.com/yap.reese04", email: "anne.therese.yap@student.ateneo.edu", photo: "/internal/ebcb/cul-therese-yap.webp" },
     ],
-    photos: ["/internal/cul-dragon-dance.jpg"],
+    photos: ["/internal/cul-dragon-dance.webp"],
   },
 
   // -------------------------------------------------------------------- EXREL
@@ -287,8 +287,8 @@ export const DEPARTMENTS: Department[] = [
     name: "EXREL",
     fullName: "External Relations",
     accent: { base: "#2563EB", tint: "#EFF6FF", ink: "#1E3A8A" },
-    heroImage: { src: "/internal/exrel-hero.jpg", alt: "External Relations Department" },
-    cardCover: { src: "/internal/exrel-card-cover.jpg", alt: "EXREL" },
+    heroImage: { src: "/internal/exrel-hero.webp", alt: "External Relations Department" },
+    cardCover: { src: "/internal/exrel-card-cover.webp", alt: "EXREL" },
     cardBlurb:
       "The External Relations Department serves as the liaison of Ateneo Celadon towards external organizations and corporations. The department aims to provide value to both the internal and external stakeholders of the organization through engaging in strategic, mutually-beneficial and sustainable partnerships.",
     about:
@@ -383,14 +383,14 @@ export const DEPARTMENTS: Department[] = [
         role: "Associate Vice President for External Relations",
         quote:
           "Of course! This role is open to everyone, no matter your experience level. When I applied to become an ExRel Associate, there were so many systems and processes that I wasn't aware of. However, throughout the year, I was able to slowly learn these things through the projects I joined and the people I worked with. It's important that you keep an open mind and are ready to learn new things.",
-        photo: "/internal/ebcb/exrel-ashley-yu.jpg",
+        photo: "/internal/ebcb/exrel-ashley-yu.webp",
       },
       {
         name: "Kyle",
         role: "Associate Vice President for External Relations",
         quote:
           "Absolutely! When I applied for the role, I genuinely had zero clue on anything about ExRel. What I did get right, though, is that there would be a lot of networking and getting to know people inside and outside of Celadon. The most important thing we look for is your willingness to learn. Even if you don't have any experience, as long as you have the initiative and drive to learn, go for it!",
-        photo: "/internal/ebcb/exrel-kyle-tan.jpg",
+        photo: "/internal/ebcb/exrel-kyle-tan.webp",
       },
       {
         name: "Yomi",
@@ -403,7 +403,7 @@ export const DEPARTMENTS: Department[] = [
         role: "Associate Vice President for External Relations",
         quote:
           "Choosing EXREL means choosing to learn and immerse yourself in skills that you can surely use anywhere you go. Interpersonal, negotiation, and communication skills are among these skills you can use in your personal life, future career or business, group work, and so much more.",
-        photo: "/internal/ebcb/exrel-vin-ong.jpg",
+        photo: "/internal/ebcb/exrel-vin-ong.webp",
       },
     ],
     faqs: [
@@ -413,10 +413,10 @@ export const DEPARTMENTS: Department[] = [
       },
     ],
     contacts: [
-      { name: "Yomi Tan", role: "VP for External Relations", facebook: "http://fb.com/share/1FUBkQijF4/", email: "caoimhe.elise.tan@student.ateneo.edu", photo: "/internal/ebcb/exrel-yomi-tan.jpg" },
-      { name: "Vin Ong", role: "AVP for External Relations", facebook: "http://fb.com/vin.cedric.ong.2024/", email: "vin.cedric.ong@student.ateneo.edu", photo: "/internal/ebcb/exrel-vin-ong.jpg" },
-      { name: "Kyle Tan", role: "AVP for External Relations", facebook: "http://fb.com/Kyle.Bennett.Tan", email: "kyle.bennett.tan@student.ateneo.edu", photo: "/internal/ebcb/exrel-kyle-tan.jpg" },
-      { name: "Ashley Yu", role: "AVP for External Relations", facebook: "http://fb.com/ashley.yu.327309/", email: "ashley.denise.yu@student.ateneo.edu", photo: "/internal/ebcb/exrel-ashley-yu.jpg" },
+      { name: "Yomi Tan", role: "VP for External Relations", facebook: "http://fb.com/share/1FUBkQijF4/", email: "caoimhe.elise.tan@student.ateneo.edu", photo: "/internal/ebcb/exrel-yomi-tan.webp" },
+      { name: "Vin Ong", role: "AVP for External Relations", facebook: "http://fb.com/vin.cedric.ong.2024/", email: "vin.cedric.ong@student.ateneo.edu", photo: "/internal/ebcb/exrel-vin-ong.webp" },
+      { name: "Kyle Tan", role: "AVP for External Relations", facebook: "http://fb.com/Kyle.Bennett.Tan", email: "kyle.bennett.tan@student.ateneo.edu", photo: "/internal/ebcb/exrel-kyle-tan.webp" },
+      { name: "Ashley Yu", role: "AVP for External Relations", facebook: "http://fb.com/ashley.yu.327309/", email: "ashley.denise.yu@student.ateneo.edu", photo: "/internal/ebcb/exrel-ashley-yu.webp" },
     ],
     photos: [],
   },
@@ -428,8 +428,8 @@ export const DEPARTMENTS: Department[] = [
     name: "FIN",
     fullName: "Financial Affairs",
     accent: { base: "#16A34A", tint: "#F0FDF4", ink: "#14532D" },
-    heroImage: { src: "/internal/fin-hero.jpg", alt: "Welcome to the FINance Farmily 2026-2027" },
-    cardCover: { src: "/internal/fin-card-cover.jpg", alt: "FIN" },
+    heroImage: { src: "/internal/fin-hero.webp", alt: "Welcome to the FINance Farmily 2026-2027" },
+    cardCover: { src: "/internal/fin-card-cover.webp", alt: "FIN" },
     cardBlurb:
       "The Financial Affairs Department manages Celadon’s finances and major fundraising projects. We train members holistically — both financially and entrepreneurially.",
     about:
@@ -515,10 +515,10 @@ export const DEPARTMENTS: Department[] = [
       },
     ],
     contacts: [
-      { name: "Jill Lee", role: "VP for Financial Affairs", facebook: "http://fb.com/jillian.lee.7789", email: "jillian.lee@student.ateneo.edu", photo: "/internal/ebcb/fin-jill-lee.jpg" },
-      { name: "Leander Lee", role: "AVP for Financial Affairs", facebook: "http://fb.com/leandermarcus.lee", email: "leander.marcus.lee@student.ateneo.edu", photo: "/internal/ebcb/fin-leander-lee.jpg" },
-      { name: "Andrew Tan", role: "AVP for Financial Affairs", facebook: "http://fb.com/andrewkyletan", email: "andrew.k.tan@student.ateneo.edu", photo: "/internal/ebcb/fin-andrew-tan.jpg" },
-      { name: "Dy Sia", role: "AVP for Financial Affairs", facebook: "http://fb.com/share/19jeVi42AH/", email: "dyanne.rachel.sia@student.ateneo.edu", photo: "/internal/ebcb/fin-dy-sia.jpg" },
+      { name: "Jill Lee", role: "VP for Financial Affairs", facebook: "http://fb.com/jillian.lee.7789", email: "jillian.lee@student.ateneo.edu", photo: "/internal/ebcb/fin-jill-lee.webp" },
+      { name: "Leander Lee", role: "AVP for Financial Affairs", facebook: "http://fb.com/leandermarcus.lee", email: "leander.marcus.lee@student.ateneo.edu", photo: "/internal/ebcb/fin-leander-lee.webp" },
+      { name: "Andrew Tan", role: "AVP for Financial Affairs", facebook: "http://fb.com/andrewkyletan", email: "andrew.k.tan@student.ateneo.edu", photo: "/internal/ebcb/fin-andrew-tan.webp" },
+      { name: "Dy Sia", role: "AVP for Financial Affairs", facebook: "http://fb.com/share/19jeVi42AH/", email: "dyanne.rachel.sia@student.ateneo.edu", photo: "/internal/ebcb/fin-dy-sia.webp" },
     ],
     photos: [],
   },
@@ -530,7 +530,7 @@ export const DEPARTMENTS: Department[] = [
     name: "HR",
     fullName: "Human Resources",
     accent: { base: "#CA8A04", tint: "#FEFCE8", ink: "#713F12" },
-    heroImage: { src: "/internal/hr-hero.jpg", alt: "Ateneo Celadon Human Resources Department" },
+    heroImage: { src: "/internal/hr-hero.webp", alt: "Ateneo Celadon Human Resources Department" },
     cardCover: { src: "/departments/hr-general-assembly.jpg", alt: "HR" },
     cardBlurb:
       "The Human Resources Department develops membership development and leadership through meaningful formation and community-building efforts.",
@@ -609,11 +609,11 @@ export const DEPARTMENTS: Department[] = [
       },
     ],
     contacts: [
-      { name: "Bianca Ysabel Yu", role: "VP for HR", facebook: "http://fb.com/share/1B52TUZ4wv/?mibextid=wwXIfr", email: "bianca.ysabel.yu@student.ateneo.edu", photo: "/internal/ebcb/hr-yzzie-yu.jpg" },
-      { name: "John Andre Lee", role: "AVP for Human Resources", facebook: "http://fb.com/johnandrelee36", email: "john.andre.lee@student.ateneo.edu", photo: "/internal/ebcb/hr-andre-lee.jpg" },
-      { name: "Keng Wei Lin", role: "AVP for Human Resources", facebook: "http://fb.com/mxrphem/", email: "keng.wei.lin@student.ateneo.edu", photo: "/internal/ebcb/hr-keng-lin.jpg" },
+      { name: "Bianca Ysabel Yu", role: "VP for HR", facebook: "http://fb.com/share/1B52TUZ4wv/?mibextid=wwXIfr", email: "bianca.ysabel.yu@student.ateneo.edu", photo: "/internal/ebcb/hr-yzzie-yu.webp" },
+      { name: "John Andre Lee", role: "AVP for Human Resources", facebook: "http://fb.com/johnandrelee36", email: "john.andre.lee@student.ateneo.edu", photo: "/internal/ebcb/hr-andre-lee.webp" },
+      { name: "Keng Wei Lin", role: "AVP for Human Resources", facebook: "http://fb.com/mxrphem/", email: "keng.wei.lin@student.ateneo.edu", photo: "/internal/ebcb/hr-keng-lin.webp" },
     ],
-    photos: ["/internal/hr-bonding.jpg"],
+    photos: ["/internal/hr-bonding.webp"],
   },
 
   // ----------------------------------------------------------------------- OSR
@@ -623,7 +623,7 @@ export const DEPARTMENTS: Department[] = [
     name: "OSR",
     fullName: "Organization Strategies and Research",
     accent: { base: "#7C3AED", tint: "#F5F3FF", ink: "#4C1D95" },
-    cardCover: { src: "/internal/osr-card-cover.jpg", alt: "OSR" },
+    cardCover: { src: "/internal/osr-card-cover.webp", alt: "OSR" },
     cardBlurb:
       "The Organization Strategies and Research Department develops evaluative and data-driven project and organizational strategies for Celadon’s sustainable growth. The department handles the internal systems and research initiatives for the organization.",
     about:
@@ -686,10 +686,10 @@ export const DEPARTMENTS: Department[] = [
       },
     ],
     contacts: [
-      { name: "Kyle Co", role: "VP for Organization Strategies and Research", facebook: "http://fb.com/Kyledominic.co", email: "kyle.dominic.co@student.ateneo.edu", photo: "/internal/ebcb/osr-kyle-co.jpg" },
-      { name: "Sofia Diño", role: "AVP for Organization Strategies and Research", facebook: "http://fb.com/sofiag.dino", email: "sofia.giulia.dino@student.ateneo.edu", photo: "/internal/ebcb/osr-sofia-dino.jpg" },
-      { name: "Lyss Orquina", role: "AVP for Organization Strategies and Research", facebook: "http://fb.com/alyssa.orquina", email: "alyssa.andrea.orquina@student.ateneo.edu", photo: "/internal/ebcb/osr-lyss-orquina.jpg" },
-      { name: "Keene Brigado", role: "AVP for Organization Strategies and Research", facebook: "https://www.facebook.com/kbrigado", email: "keene.xander.bridgado@student.ateneo.edu", photo: "/internal/ebcb/osr-keene-brigado.jpg" },
+      { name: "Kyle Co", role: "VP for Organization Strategies and Research", facebook: "http://fb.com/Kyledominic.co", email: "kyle.dominic.co@student.ateneo.edu", photo: "/internal/ebcb/osr-kyle-co.webp" },
+      { name: "Sofia Diño", role: "AVP for Organization Strategies and Research", facebook: "http://fb.com/sofiag.dino", email: "sofia.giulia.dino@student.ateneo.edu", photo: "/internal/ebcb/osr-sofia-dino.webp" },
+      { name: "Lyss Orquina", role: "AVP for Organization Strategies and Research", facebook: "http://fb.com/alyssa.orquina", email: "alyssa.andrea.orquina@student.ateneo.edu", photo: "/internal/ebcb/osr-lyss-orquina.webp" },
+      { name: "Keene Brigado", role: "AVP for Organization Strategies and Research", facebook: "https://www.facebook.com/kbrigado", email: "keene.xander.bridgado@student.ateneo.edu", photo: "/internal/ebcb/osr-keene-brigado.webp" },
     ],
     photos: [],
   },
@@ -727,14 +727,14 @@ export const HUB_TESTIMONIALS: DeptTestimonial[] = [
   {
     name: "Claire Chiu",
     role: "Chinese New Year Project Manager '26-'27, External Relations Partnerships Manager '26-'27, External Relations Associate '25-'26",
-    photo: "/internal/testimonial-claire.jpg",
+    photo: "/internal/testimonial-claire.webp",
     quote:
       "Joining Celadon as a freshman was one of the best decisions I have made, and joining one of its departments as an External Relations Deputy made the experience all the more memorable. ExRel was a space where I was given the opportunity to grow and learn, whether through project deployments or simply meeting and getting to know new people along the way. So, if you've been waiting for a sign to give it a shot, this is it — submit that application form, put yourself out there, and see where it takes you!",
   },
   {
     name: "Marcus Castro",
     role: "Lunar Lotus Market Project Manager '26-'27, Financial Affairs Manager-In-Training '25-'26",
-    photo: "/internal/testimonial-marcus.jpg",
+    photo: "/internal/testimonial-marcus.webp",
     quote:
       "Being a Celadon deputy was a welcoming and fun jumpstart into being active in Celadon projects. In the FIN MIT program, I was able to learn the fundamentals of fundraising and budgeting. It taught me the importance of keeping records and how to make sales. It is also a great place to make new friends!",
   },

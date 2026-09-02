@@ -41,6 +41,11 @@ export function SkyHero({
           : undefined
       }
     >
+      {/* Institutional hairline grid, same technique as the public site's
+          navy hero bands, so the two heroes read as the same family. */}
+      {!heroImage && !backgroundImage && <div className="absolute inset-0 sky-grid" />}
+      {backgroundImage && <div className="absolute inset-0 bg-sky-navy/45" aria-hidden />}
+
       {heroImage ? (
         <Reveal>
           <Image
@@ -65,20 +70,32 @@ export function SkyHero({
       )}
 
       {(!heroImage || description || children) && (
-        <Container className={heroImage ? "relative py-12 sm:py-16" : "relative py-20 sm:py-28"}>
-          <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
+        <Container className={heroImage ? "relative py-12 sm:py-16" : "relative py-24 sm:py-32"}>
+          <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
             {!heroImage && eyebrow && (
-              <p className="sky-display eyebrow text-sky-navy/70" data-reveal>
+              <span
+                className="sky-display eyebrow rounded-full bg-white/60 px-4 py-1.5 text-sky-navy/80 ring-1 ring-inset ring-white/70 backdrop-blur-sm"
+                data-reveal
+              >
                 {eyebrow}
-              </p>
+              </span>
             )}
             {!heroImage && (
-              <h1 className="sky-display text-4xl font-semibold text-sky-navy sm:text-6xl" data-reveal>
+              <h1
+                className="sky-display text-5xl font-semibold tracking-tight text-sky-navy sm:text-7xl"
+                data-reveal
+              >
                 {title}
               </h1>
             )}
             {description && (
-              <p className="prose-body max-w-xl text-lg text-sky-navy/80" data-reveal>
+              <p
+                className={cn(
+                  "prose-body max-w-xl text-lg",
+                  backgroundImage ? "text-white/90" : "text-sky-navy/80"
+                )}
+                data-reveal
+              >
                 {description}
               </p>
             )}
@@ -89,6 +106,15 @@ export function SkyHero({
             )}
           </Reveal>
         </Container>
+      )}
+
+      {/* Soft fade into whatever tinted body follows, so the hero and the
+          page below read as one continuous surface instead of a hard seam. */}
+      {!heroImage && !backgroundImage && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white/70"
+        />
       )}
     </section>
   );

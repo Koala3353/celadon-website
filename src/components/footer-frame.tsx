@@ -25,7 +25,7 @@ export function FooterFrame({ children }: { children: React.ReactNode }) {
       style={
         isInternal
           ? {
-              backgroundImage: `url(${asset("/internal/footer-sky-bg.jpg")})`,
+              backgroundImage: `url(${asset("/internal/footer-sky-bg.webp")})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }
