@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { SkeletonImage } from "@/components/ui/skeleton-image";
 import { asset } from "@/lib/asset";
 import type { Department } from "@/lib/deputy-departments";
 
@@ -26,13 +26,12 @@ export function DepartmentCard({ dept }: { dept: Department }) {
     >
       <div className="flex h-full flex-col overflow-hidden rounded-[1.375rem] bg-white shadow-[var(--shadow-sm)]">
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
-          <Image
+          <SkeletonImage
             src={asset(dept.cardCover.src)}
             alt=""
             fill
-            loading="lazy"
             sizes="(min-width: 640px) 33vw, 100vw"
-            className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-105"
+            className="object-cover ease-[var(--ease-out)] group-hover:scale-105"
           />
           <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/25 to-transparent" />
         </div>

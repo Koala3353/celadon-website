@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { SkeletonImage } from "@/components/ui/skeleton-image";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
 import { SkyHero } from "@/components/internal/sky-hero";
@@ -74,13 +74,13 @@ export default function DeptAppsHubPage() {
                 innerClassName="flex flex-col items-center gap-6 p-8 text-center md:flex-row md:gap-10 md:p-10 md:text-left"
                 data-reveal
               >
-                <Image
+                <SkeletonImage
                   src={asset("/internal/dept-pandas.gif")}
                   alt="The A-yi mascots of Celadon's departments"
                   width={272}
                   height={384}
                   unoptimized
-                  loading="lazy"
+                  containerClassName="h-auto w-40 shrink-0 sm:w-52"
                   className="h-auto w-40 shrink-0 sm:w-52"
                 />
                 <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
@@ -206,12 +206,12 @@ export default function DeptAppsHubPage() {
                     ))}
                   </div>
                 </div>
-                <Image
+                <SkeletonImage
                   src={asset("/internal/faq-panda.webp")}
                   alt=""
                   width={340}
                   height={447}
-                  loading="lazy"
+                  containerClassName="h-auto w-32 shrink-0 sm:w-40 md:w-48"
                   className="h-auto w-32 shrink-0 sm:w-40 md:w-48"
                 />
               </Card>
@@ -229,13 +229,13 @@ export default function DeptAppsHubPage() {
                     {HUB_TESTIMONIALS.map((t) => (
                       <div key={t.name} className="flex gap-5">
                         {t.photo ? (
-                          <Image
+                          <SkeletonImage
                             src={asset(t.photo)}
                             alt={t.name}
                             width={112}
                             height={112}
-                            loading="lazy"
-                            className="h-24 w-24 shrink-0 rounded-full object-cover ring-2 ring-white/20 sm:h-28 sm:w-28"
+                            containerClassName="h-24 w-24 shrink-0 rounded-full ring-2 ring-white/20 sm:h-28 sm:w-28"
+                            className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28"
                           />
                         ) : (
                           <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-white/15 ring-2 ring-white/20 sm:h-28 sm:w-28">

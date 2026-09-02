@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { SkyHero } from "@/components/internal/sky-hero";
+import { SkeletonImage } from "@/components/ui/skeleton-image";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { DEPARTMENTS, EBCB_LEADERSHIP, type DeptContact } from "@/lib/deputy-departments";
@@ -42,12 +42,12 @@ function ContactCard({ contact }: { contact: DeptContact }) {
         style={{ transform: `rotate(${tilt}deg)` }}
       >
         {contact.photo ? (
-          <Image
+          <SkeletonImage
             src={asset(contact.photo)}
             alt={contact.name}
             width={112}
             height={112}
-            loading="lazy"
+            containerClassName="h-24 w-24 rounded-full"
             className="h-24 w-24 rounded-full object-cover"
           />
         ) : (

@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { PhotoCarousel } from "@/components/photo-carousel";
+import { SkeletonImage } from "@/components/ui/skeleton-image";
 import { DeptHero } from "@/components/internal/dept-hero";
 import { RoleAccordion } from "@/components/internal/role-accordion";
 import { Timeline } from "@/components/internal/timeline";
@@ -98,13 +98,13 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                   </div>
                 ))}
                 {section.image && (
-                  <Image
+                  <SkeletonImage
                     src={asset(section.image.src)}
                     alt={section.image.alt}
                     width={1600}
                     height={400}
-                    loading="lazy"
-                    data-reveal
+                    reveal
+                    containerClassName="w-full rounded-2xl"
                     className="w-full rounded-2xl"
                   />
                 )}
@@ -209,13 +209,13 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                 {dept.testimonials.map((t) => (
                   <div key={t.name} className="flex gap-4 rounded-2xl bg-dept-tint p-5" data-reveal>
                     {t.photo ? (
-                      <Image
+                      <SkeletonImage
                         src={asset(t.photo)}
                         alt={t.name}
                         width={56}
                         height={56}
-                        loading="lazy"
-                        className="h-14 w-14 shrink-0 rounded-full object-cover"
+                        containerClassName="h-14 w-14 shrink-0 rounded-full"
+                        className="h-14 w-14 rounded-full object-cover"
                       />
                     ) : (
                       <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-dept-accent/15">
@@ -253,12 +253,12 @@ export function DepartmentPage({ dept }: { dept: Department }) {
               {dept.contacts.map((contact) => (
                 <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
                   {contact.photo ? (
-                    <Image
+                    <SkeletonImage
                       src={asset(contact.photo)}
                       alt={contact.name}
                       width={112}
                       height={112}
-                      loading="lazy"
+                      containerClassName="h-28 w-28 rounded-full"
                       className="h-28 w-28 rounded-full object-cover"
                     />
                   ) : (
