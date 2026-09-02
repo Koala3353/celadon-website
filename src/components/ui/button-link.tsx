@@ -10,17 +10,24 @@ export function ButtonLink({
   href,
   children,
   variant = "primary",
+  size = "md",
   external,
   className,
 }: {
   href: string;
   children: React.ReactNode;
   variant?: "primary" | "outline" | "onNavy";
+  size?: "md" | "lg";
   external?: boolean;
   className?: string;
 }) {
   const base =
-    "group pressable inline-flex items-center gap-3 rounded-full py-3 pl-6 pr-3 text-sm font-bold uppercase tracking-wider focus-visible:outline-2 focus-visible:outline-offset-2";
+    "group pressable inline-flex items-center gap-3 rounded-full font-bold uppercase tracking-wider focus-visible:outline-2 focus-visible:outline-offset-2";
+
+  const sizes = {
+    md: "py-3 pl-6 pr-3 text-sm",
+    lg: "py-4 pl-8 pr-4 text-base",
+  } as const;
 
   const variants = {
     primary:
@@ -37,20 +44,31 @@ export function ButtonLink({
     onNavy: "bg-navy/10",
   } as const;
 
+  const discSizes = {
+    md: "h-8 w-8",
+    lg: "h-10 w-10",
+  } as const;
+
+  const iconSizes = {
+    md: "h-3.5 w-3.5",
+    lg: "h-4 w-4",
+  } as const;
+
   const content = (
     <>
       <span>{children}</span>
       <span
         aria-hidden
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+          "flex items-center justify-center rounded-full transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+          discSizes[size],
           discs[variant]
         )}
       >
         <svg
           viewBox="0 0 16 16"
           fill="none"
-          className="h-3.5 w-3.5"
+          className={iconSizes[size]}
           stroke="currentColor"
           strokeWidth="1.75"
           strokeLinecap="round"
@@ -68,7 +86,7 @@ export function ButtonLink({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={cn(base, variants[variant], className)}
+        className={cn(base, sizes[size], variants[variant], className)}
       >
         {content}
       </a>

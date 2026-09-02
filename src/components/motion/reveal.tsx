@@ -46,6 +46,30 @@ export function Reveal({
       return;
     }
 
+    // animejs's onScroll autoplay only (re-)evaluates on scroll *events* — a
+    // container that already satisfies the "enter" threshold the moment it
+    // mounts (e.g. it sits just below a tall hero, so the page loads with it
+    // already in view) never receives one, and is left permanently stuck at
+    // its hidden starting state. Rather than autoplay:true (which races with
+    // React StrictMode's dev-mode double-invoke of this effect — the first
+    // animation starts, gets reverted by the simulated unmount before it can
+    // finish, and the reveal never recovers), just skip the animation
+    // entirely and show the content immediately, the same as reduced-motion.
+    // Generous on purpose: this only has to distinguish "close enough to
+    // load-bearing-visible that it should just be there" from "genuinely
+    // requires scrolling to discover," not pixel-match the onScroll trigger
+    // itself — content that's one small scroll away shouldn't depend on a
+    // scroll event actually happening before it appears.
+    const rect = el.getBoundingClientRect();
+    const alreadyEntered = rect.top <= window.innerHeight + 300;
+    if (alreadyEntered) {
+      targets.forEach((t) => {
+        t.style.opacity = "1";
+        t.style.transform = "none";
+      });
+      return;
+    }
+
     const animation = animate(targets, {
       opacity: [0, 1],
       translateY: [distance, 0],

@@ -54,6 +54,26 @@
   --z-nav: 40;
   --z-overlay: 60;
   --z-grain: 70;
+
+  /* CelaSkies — this year's seasonal sub-brand, used only on the deputy
+     hub page at /internal/dept-apps. Kept as its own named set rather than
+     folded into navy/ink above since it's deliberately a different,
+     time-boxed identity layered on top of the perennial brand. */
+  --sky-blue: #4a9fd8;
+  --sky-peach: #f5d9a8;
+  --sky-teal: #9cc5c5;
+  --sky-navy: #1b3a6b;
+  --sky-mint: #a3c9c7;
+  --sky-pink: #f5cdd3;
+  --sky-gray: #d4d0d8;
+
+  /* Per-department accent — the *values* are set inline per page (see
+     Department.accent in deputy-departments.ts), not here. Declaring the
+     variable at :root just gives it a real (if unused) default so nothing
+     renders broken if a utility is referenced before a page sets it. */
+  --dept-accent: var(--navy);
+  --dept-tint: var(--navy-tint);
+  --dept-ink: var(--navy);
 }
 
 @theme inline {
@@ -72,8 +92,21 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
 
+  --color-dept-accent: var(--dept-accent);
+  --color-dept-tint: var(--dept-tint);
+  --color-dept-ink: var(--dept-ink);
+
+  --color-sky-blue: var(--sky-blue);
+  --color-sky-peach: var(--sky-peach);
+  --color-sky-teal: var(--sky-teal);
+  --color-sky-navy: var(--sky-navy);
+  --color-sky-mint: var(--sky-mint);
+  --color-sky-pink: var(--sky-pink);
+  --color-sky-gray: var(--sky-gray);
+
   --font-sans: var(--font-body);
   --font-display: var(--font-body);
+  --font-sky-display: var(--font-sky-display);
 }
 
 body {
@@ -84,15 +117,8 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
   overscroll-behavior-x: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
 }
 
 /* ---------------------------------------------------------------------
@@ -150,6 +176,28 @@ html {
     radial-gradient(80% 120% at 12% 0%, #0a44a0 0%, transparent 55%),
     radial-gradient(70% 100% at 100% 100%, #002357 0%, transparent 60%),
     var(--navy);
+}
+
+/* Internal portal's footer sits on a pale illustrated sky photo instead of
+   the navy field, so its usual light-on-navy text needs to flip to bold
+   black to stay readable — plain (unlayered) rule so it reliably outranks
+   the Tailwind color/weight utilities already on those elements. */
+.footer-dark-text,
+.footer-dark-text * {
+  color: #000000;
+  font-weight: 700;
+}
+
+/* CelaSkies gradient — the deputy-application pages' signature background.
+   Sun-through-cloud glow at top, blue sky sinking into a peach horizon. */
+.sky-field {
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 70%),
+    linear-gradient(180deg, var(--sky-blue) 0%, #bfe0f2 45%, var(--sky-peach) 100%);
+}
+
+.sky-display {
+  font-family: var(--font-sky-display), ui-sans-serif, sans-serif;
 }
 
 /* Film grain. Fixed and pointer-events-none so it never repaints on scroll. */
