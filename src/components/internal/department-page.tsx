@@ -52,7 +52,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                 className="rounded-[1.75rem] bg-white p-8 shadow-[var(--shadow-md)] ring-1 ring-inset ring-dept-accent/15 sm:p-10"
                 data-reveal
               >
-                <span className="eyebrow text-dept-accent">Made by this department</span>
+                <span className="eyebrow text-dept-accent">Built in-house</span>
                 <h2 className="display mt-3 text-2xl text-dept-ink sm:text-3xl">{dept.techShowcase.heading}</h2>
                 <p className="prose-body mt-4 text-muted-foreground">{dept.techShowcase.blurb}</p>
                 <div className="mt-8 grid gap-4 sm:grid-cols-3">

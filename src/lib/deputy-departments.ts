@@ -638,14 +638,14 @@ export const DEPARTMENTS: Department[] = [
     about:
       "The Organization Strategies and Research Department (OSR) supervises and maintains the overall welfare of the organization by spearheading and administering various evaluations and research. The department collects qualitative and quantitative data through consultations and questionnaires to make data-driven assessments and recommendations for Celadon's projects and departments. Moreover, OSR provides technical support through assigned liaison teams and project deployments. By optimizing organizational systems and workflows, the department continuously improves the organization's operational efficiency. Ultimately, OSR ensures that Celadon is grounded in data-driven decision-making to ensure that its members are strategically engaged and that organizational goals are achieved.",
     techShowcase: {
-      heading: "Built by OSR",
+      heading: "This website is an OSR project",
       blurb:
-        "This website, the Mahjong Leaderboard, and CelaWrapped were all designed and built by OSR members — not outsourced, not assigned from outside the department, just members who decided to build something the org needed. If you've ever wanted to make something like this for Celadon, OSR is where that starts.",
+        "This site, the Mahjong Leaderboard, and CelaWrapped were all built by OSR members. Nobody outsourced them, and nobody assigned them from outside the department. Someone in OSR just decided the org needed them and built them. If you want to build something like this for Celadon, this is the department.",
       items: [
         {
           name: "ateneoceladon.com",
           description:
-            "The public website and this deputy application portal you're reading right now — designed, coded, and maintained end-to-end by OSR.",
+            "The public website and this deputy application portal. Designed, coded, and maintained end-to-end by OSR.",
           href: "https://ateneoceladon.com",
         },
         {
