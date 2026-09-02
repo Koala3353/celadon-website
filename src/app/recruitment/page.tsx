@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { CommitteeExplorer } from "@/components/committee-explorer";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/motion/reveal";
-import { copy, getCoreTeamCommittees, getGlossaryTerms } from "@/lib/content";
+import { copy } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Recruitment",
@@ -14,15 +12,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/recruitment/" },
 };
 
-// Applications aren't open yet this cycle — the real role listing (grouped
-// by Core Team committee and department pool) lives in git history; swap
-// this placeholder back out once applications open.
+// Applications aren't open to the public yet this cycle. The date cards and
+// committee reference that used to live here now live inside the internal
+// portal (/internal), alongside the actual application flow — this page is
+// just the public-facing "check back soon" notice.
 export default function RecruitmentPage() {
-  const glossaryTerms = getGlossaryTerms();
-  const coreTeamCommittees = getCoreTeamCommittees();
-  const deputyTerm = glossaryTerms.find((g) => g.term === "Deputy");
-  const coreTeamTerm = glossaryTerms.find((g) => g.term === "Core Team");
-
   return (
     <>
       <PageHero
@@ -31,87 +25,16 @@ export default function RecruitmentPage() {
         description={copy("recruitment_body")}
       />
 
-      {/* ---- Stay tuned / application dates --------------------------- */}
       <section className="py-16 sm:py-20">
         <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow={copy("recruitment_stay_tuned_heading")}
-              title={copy("recruitment_stay_tuned_body")}
-            />
-          </Reveal>
-
-          <Reveal stagger={70} className="mt-10 grid items-start gap-6 sm:grid-cols-2">
-            <details className="group" data-reveal>
-              <summary className="list-none [&::-webkit-details-marker]:hidden">
-                <Card
-                  className="lift cursor-pointer"
-                  innerClassName="flex flex-col gap-2 p-8"
-                >
-                  <p className="eyebrow text-accent-ink">Deputy applications</p>
-                  <p className="display text-3xl text-navy">
-                    {copy("recruitment_deputy_date")}
-                  </p>
-                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link group-hover:underline">
-                    What&rsquo;s a deputy?
-                    <span
-                      className="inline-block transition-transform duration-200 group-open:rotate-180"
-                      aria-hidden
-                    >
-                      &#8964;
-                    </span>
-                  </span>
-                </Card>
-              </summary>
-              {deputyTerm && (
-                <p className="prose-body mt-4 px-2 text-sm text-muted-foreground">
-                  {deputyTerm.definition}
-                </p>
-              )}
-            </details>
-            <details className="group" data-reveal>
-              <summary className="list-none [&::-webkit-details-marker]:hidden">
-                <Card
-                  className="lift cursor-pointer"
-                  innerClassName="flex flex-col gap-2 p-8"
-                >
-                  <p className="eyebrow text-accent-ink">Core Team applications</p>
-                  <p className="display text-3xl text-navy">{copy("recruitment_core_date")}</p>
-                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-link group-hover:underline">
-                    What&rsquo;s Core Team?
-                    <span
-                      className="inline-block transition-transform duration-200 group-open:rotate-180"
-                      aria-hidden
-                    >
-                      &#8964;
-                    </span>
-                  </span>
-                </Card>
-              </summary>
-              {coreTeamTerm && (
-                <p className="prose-body mt-4 px-2 text-sm text-muted-foreground">
-                  {coreTeamTerm.definition}
-                </p>
-              )}
-            </details>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* ---- Core Team committees ----------------------------------- */}
-      <section className="bg-navy/[0.035] py-16 sm:py-20">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="Core Team"
-              title="The committees"
-              description="Every project’s Core Team is built from these committees. Open one to see what the work actually involves."
-            />
-          </Reveal>
-          <Reveal className="mt-10">
-            <div data-reveal>
-              <CommitteeExplorer committees={coreTeamCommittees} />
-            </div>
+          <Reveal className="mx-auto max-w-2xl">
+            <Card innerClassName="flex flex-col gap-3 p-8 text-center">
+              <p className="eyebrow text-accent-ink">Stay tuned</p>
+              <h2 className="display text-2xl text-navy">{copy("recruitment_stay_tuned_body")}</h2>
+              <p className="prose-body text-muted-foreground">
+                Follow our socials for the latest updates on when applications open.
+              </p>
+            </Card>
           </Reveal>
         </Container>
       </section>

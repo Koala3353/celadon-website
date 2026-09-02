@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { CommitteeExplorer } from "@/components/committee-explorer";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/motion/reveal";
+import { getCoreTeamCommittees } from "@/lib/content";
 
 // Members-only — access is enforced at the edge by the Cloudflare Worker in
 // /worker (Google sign-in checked against the member roster in KV), not in
@@ -10,31 +15,72 @@ import { Reveal } from "@/components/motion/reveal";
 // noindex and left out of sitemap.ts so it isn't offered to crawlers or
 // the public nav.
 export const metadata: Metadata = {
-  title: "Internal Recruitment",
+  title: "A-yi's Corner",
   robots: { index: false, follow: false },
 };
 
-export default function InternalRecruitmentPage() {
+export default function InternalPortalHomePage() {
+  const coreTeamCommittees = getCoreTeamCommittees();
+
   return (
     <>
       <PageHero
         eyebrow="Members only"
-        title="Internal Recruitment"
-        description="The process for current Celadoneans applying to Deputy and Core Team roles."
+        title="A-yi's Corner"
+        description="Everything current Celadoneans need for this year's applications, roles, and reference material."
       />
 
-      <Container className="py-20">
-        <Reveal className="mx-auto max-w-3xl">
-          <Card innerClassName="flex flex-col gap-3 p-8">
-            <h2 className="display text-2xl text-navy">Details coming soon</h2>
-            <p className="prose-body text-muted-foreground">
-              This page will walk through the internal application process,
-              timeline, and requirements for current members. Content is
-              still being put together.
-            </p>
-          </Card>
-        </Reveal>
-      </Container>
+      {/* ---- Deputy / Core Team application cards --------------------- */}
+      <section className="py-16 sm:py-20">
+        <Container>
+          <Reveal stagger={70} className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+            <Link href="/internal/dept-apps" data-reveal>
+              <Card className="lift h-full" innerClassName="flex h-full flex-col gap-3 p-8">
+                <Badge tone="open">Open now</Badge>
+                <h2 className="display text-2xl text-navy">Deputy Applications</h2>
+                <p className="prose-body text-sm text-muted-foreground">
+                  Apply to join a department&rsquo;s year-long deputy pool. Browse every department&rsquo;s
+                  roles, timeline, and requirements.
+                </p>
+                <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-link">
+                  Explore departments →
+                </p>
+              </Card>
+            </Link>
+
+            <div data-reveal>
+              <Card className="h-full" innerClassName="flex h-full flex-col gap-3 p-8 opacity-70">
+                <Badge tone="closed">Coming soon</Badge>
+                <h2 className="display text-2xl text-navy">Core Team Applications</h2>
+                <p className="prose-body text-sm text-muted-foreground">
+                  Applications for project Core Team roles aren&rsquo;t open yet.
+                </p>
+                <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Stay tuned for the 2nd week of September
+                </p>
+              </Card>
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* ---- Core Team committees ----------------------------------- */}
+      <section className="bg-navy/[0.035] py-16 sm:py-20">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              eyebrow="Core Team"
+              title="The committees"
+              description="Every project’s Core Team is built from these committees. Open one to see what the work actually involves."
+            />
+          </Reveal>
+          <Reveal className="mt-10">
+            <div data-reveal>
+              <CommitteeExplorer committees={coreTeamCommittees} />
+            </div>
+          </Reveal>
+        </Container>
+      </section>
     </>
   );
 }

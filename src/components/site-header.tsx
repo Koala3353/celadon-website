@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/container";
+import { InternalNav } from "@/components/internal/internal-nav";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -20,6 +21,13 @@ const NAV = [
 export function SiteHeader() {
   const pathname = usePathname() ?? "/";
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // The internal portal (/internal) is a different area with its own nav
+  // (dashboard, deputy apps, a way back to the public site) — swap the
+  // whole header rather than trying to make one nav serve both.
+  if (pathname === "/internal" || pathname.startsWith("/internal/")) {
+    return <InternalNav />;
+  }
 
   return (
     <header

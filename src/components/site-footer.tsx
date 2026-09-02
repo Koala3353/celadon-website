@@ -3,6 +3,8 @@ import Link from "next/link";
 import { asset } from "@/lib/asset";
 import { copy } from "@/lib/content";
 import { Container } from "@/components/ui/container";
+import { FooterFrame } from "@/components/footer-frame";
+import { FooterColumnSwitch } from "@/components/footer-column-switch";
 
 const NAV = [
   { href: "/about", label: "About Us" },
@@ -22,63 +24,77 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="navy-field mt-20 text-on-navy">
-      <div className="navy-grid">
-        <Container className="grid gap-8 py-12 lg:grid-cols-[1.4fr_1fr_1fr]">
-          <div className="flex flex-col gap-4">
-            <Image
-              src={asset("/brand/dreagle-mark-white.png")}
-              alt=""
-              width={5000}
-              height={5000}
-              className="h-20 w-auto self-start"
-            />
-            <span className="sr-only">Ateneo Celadon</span>
-            <p className="prose-body max-w-sm text-sm">{copy("org_tagline")}</p>
-          </div>
-
-          <nav aria-label="Footer" className="flex flex-col gap-3">
-            <h2 className="eyebrow text-white">Explore</h2>
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="w-fit text-sm text-on-navy underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex flex-col gap-3">
-            <h2 className="eyebrow text-white">Connect with us</h2>
-            <address className="prose-body max-w-xs text-sm not-italic">
-              {copy("org_address")}
-            </address>
-            <div className="mt-2 flex gap-4">
-              {socials.map(({ label, href, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="text-on-navy transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              ))}
+    <FooterFrame>
+      <Container className="grid gap-8 py-12 lg:grid-cols-[1.4fr_1fr_1fr]">
+        <FooterColumnSwitch
+          publicContent={
+            <div className="flex flex-col gap-4">
+              <Image
+                src={asset("/brand/dreagle-mark-white.png")}
+                alt=""
+                width={5000}
+                height={5000}
+                className="h-20 w-auto self-start"
+              />
+              <span className="sr-only">Ateneo Celadon</span>
+              <p className="prose-body max-w-sm text-sm">{copy("org_tagline")}</p>
             </div>
-          </div>
-        </Container>
+          }
+          internalContent={
+            <div className="flex flex-col gap-3">
+              <h2 className="sky-display text-3xl font-bold sm:text-4xl">Have Questions?</h2>
+              <p className="prose-body max-w-sm text-sm">
+                Feel free to send a message to any member of the{" "}
+                <Link href="/internal/ebcb-directory" className="underline underline-offset-4 hover:no-underline">
+                  EBCB 2026 - 2027
+                </Link>
+                !
+              </p>
+            </div>
+          }
+        />
 
-        <Container>
-          <div className="border-t border-white/10 py-4">
-            <p className="text-xs text-on-navy/70">
-              Copyright © {year} Ateneo Celadon. All rights reserved.
-            </p>
+        <nav aria-label="Footer" className="flex flex-col gap-3">
+          <h2 className="eyebrow text-white">Explore</h2>
+          {NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="w-fit text-sm text-on-navy underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex flex-col gap-3">
+          <h2 className="eyebrow text-white">Connect with us</h2>
+          <address className="prose-body max-w-xs text-sm not-italic">
+            {copy("org_address")}
+          </address>
+          <div className="mt-2 flex gap-5">
+            {socials.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                className="text-on-navy transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                <Icon className="h-7 w-7" />
+              </a>
+            ))}
           </div>
-        </Container>
-      </div>
-    </footer>
+        </div>
+      </Container>
+
+      <Container>
+        <div className="border-t border-white/10 py-4">
+          <p className="text-xs text-on-navy/70">
+            Copyright © {year} Ateneo Celadon. All rights reserved.
+          </p>
+        </div>
+      </Container>
+    </FooterFrame>
   );
 }
 
