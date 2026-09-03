@@ -66,9 +66,9 @@ export function InternalNav() {
 
         <Link
           href="/"
-          className="hidden items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground transition-colors hover:text-navy sm:flex"
+          className="pressable hidden items-center rounded-full bg-navy-tint px-4 py-2 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:bg-navy/[0.15] sm:flex"
         >
-          <span aria-hidden>&larr;</span> Public Site
+          Public Site
         </Link>
 
         <button
@@ -127,12 +127,18 @@ function DeptsDropdown({ active }: { active: boolean }) {
           aria-expanded={deptsOpen}
           className="pressable -ml-2 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-navy-tint hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
         >
-          <span
-            className={cn("inline-block transition-transform duration-200", deptsOpen && "rotate-180")}
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={cn("h-3.5 w-3.5 transition-transform duration-200", deptsOpen && "rotate-180")}
             aria-hidden
           >
-            &#8964;
-          </span>
+            <path d="m6 9 6 6 6-6" />
+          </svg>
         </button>
       </div>
 

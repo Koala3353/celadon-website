@@ -1,3 +1,5 @@
+import { PhotoCarousel } from "@/components/photo-carousel";
+import { asset } from "@/lib/asset";
 import type { DeptRole } from "@/lib/deputy-departments";
 
 /**
@@ -19,15 +21,29 @@ export function RoleAccordion({ roles }: { roles: DeptRole[] }) {
               {role.emoji && <span className="text-xl">{role.emoji}</span>}
               <span className="font-extrabold text-dept-ink">{role.title}</span>
             </span>
-            <span
-              className="shrink-0 text-dept-ink/50 transition-transform duration-200 group-open:rotate-180"
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-3.5 w-3.5 shrink-0 text-dept-ink/50 transition-transform duration-200 group-open:rotate-180"
               aria-hidden
             >
-              &#8964;
-            </span>
+              <path d="m6 9 6 6 6-6" />
+            </svg>
           </summary>
           <div className="rounded-b-[1.125rem] bg-white px-5 pb-5">
-            <p className="prose-body text-sm text-muted-foreground">{role.description}</p>
+            <p className="prose-body text-sm text-dept-ink/70">{role.description}</p>
+            {role.images && role.images.length > 0 && (
+              <PhotoCarousel
+                photos={role.images.map((img) => asset(img.src))}
+                alt={`${role.title} sample output`}
+                fit="contain"
+                className="mx-auto mt-4 aspect-[3/2] w-full max-w-sm rounded-xl"
+              />
+            )}
           </div>
         </details>
       ))}

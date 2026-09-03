@@ -18,20 +18,42 @@ export function FooterFrame({ children }: { children: React.ReactNode }) {
   return (
     <footer
       className={cn(
-        "relative mt-20 overflow-hidden text-on-navy",
+        "relative overflow-hidden text-on-navy",
+        isInternal ? "mt-8" : "mt-20",
         !isInternal && "navy-field",
         isInternal && "footer-dark-text"
       )}
-      style={
-        isInternal
-          ? {
-              backgroundImage: `url(${asset("/internal/footer-sky-bg.webp")})`,
+    >
+      {isInternal && (
+        <>
+          {/* Both background layers fade in from transparent at the very top
+              edge — the artwork itself has a hard-edged cloud shape with no
+              soft entry, so without this the page's white abruptly gives way
+              to solid color partway down the footer instead of blending in. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 sm:hidden"
+            style={{
+              backgroundImage: `url(${asset("/internal/footer-osr-bg-mobile.webp")})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-            }
-          : undefined
-      }
-    >
+              maskImage: "linear-gradient(to bottom, transparent, black 20%)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 hidden sm:block"
+            style={{
+              backgroundImage: `url(${asset("/internal/footer-commpub-bg.webp")})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              maskImage: "linear-gradient(to bottom, transparent, black 20%)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)",
+            }}
+          />
+        </>
+      )}
       <div className={cn("relative", !isInternal && "navy-grid")}>{children}</div>
     </footer>
   );

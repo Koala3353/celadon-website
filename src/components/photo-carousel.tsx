@@ -14,15 +14,33 @@ export function PhotoCarousel({
   photos,
   alt,
   className,
+  imageClassName,
+  fit = "cover",
   ...props
 }: {
-  photos: string[];
+  /** A plain src string uses the carousel's own `fit`; pass an object to
+   * override `fit` for just that one photo — for a carousel where most
+   * photos crop fine but a poster-shaped outlier needs its full frame
+   * visible. */
+  photos: (string | { src: string; fit?: "cover" | "contain" })[];
   alt: string;
   className?: string;
+  /** Extra classes on each `<Image>` itself — e.g. matching corner rounding
+   * for a "contain"-fit photo, whose own edges sit inside the (possibly
+   * larger, letterboxed) container rather than filling it, so the
+   * container's own rounded corners don't reach the photo's visible edges. */
+  imageClassName?: string;
+  /** "contain" shows the full photo, letterboxed, instead of cropping it to
+   * fill the frame — for content like sample-work photos where cropping
+   * would cut off part of what's being shown. */
+  fit?: "cover" | "contain";
 } & React.HTMLAttributes<HTMLDivElement>) {
   const [index, setIndex] = useState(0);
 
   if (photos.length === 0) return null;
+
+  const items = photos.map((p) => (typeof p === "string" ? { src: p, fit: undefined } : p));
+  const hasLetterbox = items.some((item) => (item.fit ?? fit) === "contain");
 
   const go = (delta: number) => {
     setIndex((i) => (i + delta + photos.length) % photos.length);
@@ -30,21 +48,27 @@ export function PhotoCarousel({
 
   return (
     <div
-      className={cn("group relative w-full overflow-hidden bg-navy/[0.06]", className)}
+      className={cn(
+        "group relative w-full overflow-hidden",
+        hasLetterbox ? "bg-transparent" : "bg-navy/[0.06]",
+        className
+      )}
       {...props}
     >
-      {photos.map((src, i) => (
+      {items.map((item, i) => (
         <Image
-          key={src}
-          src={src}
-          alt={`${alt} — photo ${i + 1} of ${photos.length}`}
+          key={item.src}
+          src={item.src}
+          alt={`${alt} — photo ${i + 1} of ${items.length}`}
           fill
           sizes="(min-width: 1024px) 640px, 100vw"
           priority={i === 0}
           loading={i === 0 ? undefined : "lazy"}
           className={cn(
-            "object-cover transition-opacity duration-500",
-            i === index ? "opacity-100" : "pointer-events-none opacity-0"
+            (item.fit ?? fit) === "contain" ? "object-contain" : "object-cover",
+            "transition-opacity duration-500",
+            i === index ? "opacity-100" : "pointer-events-none opacity-0",
+            imageClassName
           )}
         />
       ))}

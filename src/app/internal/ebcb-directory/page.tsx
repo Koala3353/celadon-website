@@ -114,7 +114,6 @@ export default function EbcbDirectoryPage() {
     <>
       <SkyHero
         title="EBCB Directory"
-        description="Everyone who keeps Celadon running — reach out any time."
         backgroundImage="/internal/ebcb/directory-hero.webp"
       />
 

@@ -2,7 +2,9 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { asset } from "@/lib/asset";
+import { cn } from "@/lib/cn";
 import type { Department } from "@/lib/deputy-departments";
+import { RichParagraphs } from "@/components/internal/rich-text";
 
 /**
  * Per-department hero — deliberately not the CelaSkies sky theme (that's
@@ -44,20 +46,37 @@ export function DeptHero({ dept }: { dept: Department }) {
         </Reveal>
       )}
 
-      <Container className="relative py-20 sm:py-28">
-        <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
-          <span
-            className="eyebrow rounded-full bg-white/70 px-4 py-1.5 text-dept-ink/80 ring-1 ring-inset ring-dept-accent/20 backdrop-blur-sm"
-            data-reveal
-          >
-            {dept.fullName} • Deputy Pool
-          </span>
+      <Container className="relative pb-10 pt-12 sm:pb-14 sm:pt-16">
+        <Reveal
+          className={cn(
+            "mx-auto flex flex-col items-center gap-5 text-center",
+            dept.aboutWidth === "wide" ? "max-w-3xl" : "max-w-2xl"
+          )}
+        >
           <h1 className="display text-5xl text-dept-ink sm:text-7xl" data-reveal>
             {dept.name} {dept.emoji}
           </h1>
-          <p className="prose-body max-w-xl text-lg text-dept-ink/80" data-reveal>
-            {dept.about}
-          </p>
+          {typeof dept.about === "string" ? (
+            <p
+              className={cn(
+                "prose-body text-lg text-dept-ink/80",
+                dept.aboutWidth === "wide" ? "max-w-2xl" : "max-w-xl"
+              )}
+              data-reveal
+            >
+              {dept.about}
+            </p>
+          ) : (
+            <RichParagraphs
+              paragraphs={dept.about}
+              className={cn(
+                "flex flex-col gap-4 text-left",
+                dept.aboutWidth === "wide" ? "max-w-2xl" : "max-w-xl"
+              )}
+              paragraphClassName="prose-body text-lg text-dept-ink/80"
+              data-reveal
+            />
+          )}
           <div className="mt-2" data-reveal>
             <a
               href="https://ateneoceladon.com/deputy-appform"
