@@ -41,7 +41,7 @@ export function SkeletonImage({
     <div
       aria-hidden
       className={cn(
-        "absolute inset-0 animate-pulse bg-muted transition-opacity duration-300",
+        "absolute inset-0 bg-muted transition-opacity duration-300",
         loaded ? "pointer-events-none opacity-0" : "opacity-100"
       )}
     />

@@ -38,7 +38,7 @@ export function CommitteeExplorer({ committees }: { committees: CoreTeamCommitte
                 "pressable flex items-center gap-3 rounded-2xl p-4 text-left ring-1 ring-inset transition-colors",
                 isSelected
                   ? "bg-navy text-white shadow-[var(--shadow-md)] ring-navy"
-                  : "bg-white text-navy ring-navy/[0.07] hover:bg-navy/[0.035]"
+                  : "bg-white text-navy ring-navy/[0.07] hover:bg-navy/[0.08] hover:shadow-[var(--shadow-sm)] hover:ring-navy/[0.2]"
               )}
             >
               <Badge tone={isSelected ? "onNavy" : "neutral"}>{c.abbr}</Badge>

@@ -3,7 +3,6 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { CloudBlob, PaperAirplane, PaperCrane } from "./sky-motifs";
 
 /**
  * The CelaSkies hero band — used only on the dept-apps hub
@@ -61,10 +60,38 @@ export function SkyHero({
       ) : (
         !backgroundImage && (
           <>
-            <CloudBlob className="pointer-events-none absolute -bottom-6 left-[-8%] h-32 w-[45%] text-white/70 sm:h-40" />
-            <CloudBlob className="pointer-events-none absolute -bottom-10 right-[-10%] h-36 w-[50%] text-white/60 sm:h-48" />
-            <PaperCrane className="pointer-events-none absolute right-[8%] top-10 h-14 w-auto text-sky-navy/25 sm:h-20" />
-            <PaperAirplane className="pointer-events-none absolute left-[6%] top-16 h-10 w-auto -rotate-6 text-sky-navy/25 sm:h-14" />
+            <Image
+              src={asset("/internal/motif-cloud-real.webp")}
+              alt=""
+              width={442}
+              height={392}
+              aria-hidden
+              className="pointer-events-none absolute -bottom-6 left-[-8%] h-32 w-[45%] object-contain opacity-70 sm:h-40"
+            />
+            <Image
+              src={asset("/internal/motif-cloud-real.webp")}
+              alt=""
+              width={442}
+              height={392}
+              aria-hidden
+              className="pointer-events-none absolute -bottom-10 right-[-10%] h-36 w-[50%] scale-x-[-1] object-contain opacity-60 sm:h-48"
+            />
+            <Image
+              src={asset("/internal/motif-crane-real.webp")}
+              alt=""
+              width={262}
+              height={203}
+              aria-hidden
+              className="pointer-events-none absolute right-[8%] top-10 h-14 w-auto object-contain opacity-40 sm:h-20"
+            />
+            <Image
+              src={asset("/internal/motif-paper-airplanes-real.webp")}
+              alt=""
+              width={278}
+              height={272}
+              aria-hidden
+              className="pointer-events-none absolute left-[6%] top-16 h-10 w-auto -rotate-6 object-contain opacity-40 sm:h-14"
+            />
           </>
         )
       )}

@@ -21,10 +21,51 @@ export interface DeptGroup {
   items: string[];
 }
 
+/** One run of text within a rich-text `about` paragraph — plain by default,
+ * or emphasized via `bold`/`italic`. */
+export interface AboutRun {
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  /** Renders in the department's own accent color instead of the default ink
+   * — for a word/phrase a department's own PDF highlights in color. */
+  accent?: boolean;
+}
+
 export interface DeptSection {
   heading: string;
+  /** Renders the heading in normal sentence case instead of the shared
+   * all-caps display style — for a heading that's a full quoted sentence
+   * (e.g. a department's own tagline) rather than a short label. */
+  normalCaseHeading?: boolean;
   groups: DeptGroup[];
+  /** Rich-text paragraphs shown instead of `groups`' bulleted lists — for
+   * prose content like a welcome letter. Leave `groups` empty when using
+   * this. */
+  richText?: AboutRun[][];
   image?: { src: string; alt: string };
+  /** Multiple photos shown as a carousel beside the section's text, instead
+   * of the single static `image`. */
+  images?: { src: string; alt: string; fit?: "cover" | "contain" }[];
+  /** Which side the image/carousel sits on next to the text — defaults to
+   * "right". Ignored when `layout` is "stacked". */
+  imagePosition?: "left" | "right";
+  /** "sideBySide" (default) pairs the image/carousel next to the text in two
+   * columns. "stacked" runs the image full-width above the heading's single
+   * group of bullets, which then splits across two columns below it — for a
+   * wide banner-shaped image (like a roadmap graphic) that would be cramped
+   * next to text. */
+  layout?: "sideBySide" | "stacked";
+  /** When an item follows a "Label: rest of sentence" pattern, bolds and
+   * accent-colors the label portion — for a department's PDF that
+   * specifically highlights those leading labels in its own color. Off by
+   * default so it never changes the look of sections that weren't asked for
+   * this treatment. */
+  colorLabels?: boolean;
+  /** Renders each labeled group as its own tinted card, laid out in a
+   * two-column grid instead of stacked — for a section whose groups read as
+   * parallel/comparable categories rather than one continuous list. */
+  groupsAsCards?: boolean;
 }
 
 /** A distinct applicant-facing position — only departments with more than
@@ -35,6 +76,11 @@ export interface DeptRole {
   emoji?: string;
   title: string;
   description: string;
+  /** Sample-work photos shown under the description once the pool's
+   * accordion item is opened — currently only COMMPUB's five pools have any.
+   * Rendered as a carousel when there's more than one (e.g. Digital
+   * Creatives' three samples). */
+  images?: { src: string; alt: string }[];
 }
 
 export interface DeptTimelineItem {
@@ -82,10 +128,20 @@ export interface Department {
   /** Short blurb shown on the hub's department card — distinct from `about`,
    * which is the longer bio on the department's own page. */
   cardBlurb: string;
-  about: string;
+  /** Plain text for most departments. A department can instead use an array
+   * of paragraphs (each an array of `AboutRun`s) for bold/italic emphasis and
+   * paragraph breaks — currently only EXREL's does. */
+  about: string | AboutRun[][];
+  /** Widens the hero's `about` paragraph (and the column it sits in) for
+   * departments whose description runs long enough that the default column
+   * wraps awkwardly. Defaults to "normal". */
+  aboutWidth?: "normal" | "wide";
   /** COMMPUB's PDF has a distinct "Vision and Thrust" blurb beyond the
    * plain department description; nobody else does. */
   visionThrust?: string;
+  /** A "What can you expect?" blurb, distinct from the shorter `about` shown
+   * in the hero — currently only COMMPUB's PDF spells this out separately. */
+  whatToExpect?: string;
   /** Multiple distinct applicant-facing positions. Only populated where a
    * department's PDF actually lists more than one (COMMPUB's five pools) —
    * everything else is a single role covered by `sections` instead. */
@@ -94,6 +150,13 @@ export interface Department {
   /** FIN MITs get deployed into one of four committees; shown as an
    * informational breakdown, not a role choice. */
   committees?: DeptGroup[];
+  /** Heading shown above the committees accordion. Defaults to "Committees". */
+  committeesHeading?: string;
+  /** Rich-text blurb shown above the committees grid, introducing it. */
+  committeesIntro?: AboutRun[];
+  /** Rich-text paragraph(s) shown below the committees grid — e.g. a
+   * follow-up note about related responsibilities. */
+  committeesNote?: AboutRun[][];
   timeline?: DeptTimelineItem[];
   /** EXREL's four flagship projects/initiatives. */
   projects?: DeptProject[];
@@ -106,6 +169,11 @@ export interface Department {
     blurb: string;
     items: { name: string; description: string; href?: string }[];
   };
+  /** Shows the shared Application Instructions section on this department's
+   * page. Off by default — COMMPUB is the only department that needs it
+   * spelled out, since its multi-pool applications have per-pool additional
+   * requirements that the other departments' single-role flow doesn't. */
+  showApplicationInstructions?: boolean;
   /** Extra note alongside the (uniform, 3-step) application instructions —
    * e.g. a link to additional requirements, or "none needed" for clarity. */
   applicationNote?: { text: string; href?: string };
@@ -145,11 +213,13 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/commpub-hero.webp", alt: "COMMPUB Staffers SY 2026-2027" },
     cardCover: { src: "/internal/commpub-card-cover.webp", alt: "COMMPUB" },
     cardBlurb:
-      "The Communications and Publications Department handles branding, social media, and creative content in graphic, physical design, photo, video, and writing. It aims to bring Celadon’s voice and stories to life.",
+      "COMMPUB handles branding, social media, and creative content in graphic, physical design, photo, video, and writing. It aims to bring Celadon’s voice and stories to life.",
     about:
-      "The Communications and Publications (COMMPUB) Department produces creative media in various forms and is also responsible for training and developing its members' creative abilities and other relevant skills. As a COMMPUB staffer, you will become a part of the department for the whole school year, selecting one (1) out of our five (5) pools: Digital Creatives, Production Design, Photos, Videos, and Writing. As a member of the department, you will be participating in bonding activities and meaningful workshops, be given the chance to contribute creative outputs to CelaZine, COMMPUB's official online magazine, and be deployed to Celadon projects, giving you plenty of chances for exploration and growth. Meet fellow artists, engage in fun activities, and unleash your creative side by joining the COMMPUB department!",
+      "The Communications and Publications (COMMPUB) Department produces creative media in various forms and is also responsible for training and developing its members' creative abilities and other relevant skills.",
     visionThrust:
       "COMMPUB aims to engage its members' creative interests by providing opportunities to grow in skill-building, leadership, and community, through the maintenance and promotion of comprehensive systems, COMMPUB-led workshops, and the integration of members in concrete talent-cultivating initiatives and Celadon projects.",
+    whatToExpect:
+      "As a COMMPUB staffer, you will become a part of the department for the whole school year, selecting one (1) out of our five (5) pools: Digital Creatives, Production Design, Photos, Videos, and Writing. As a member of the department, you will be participating in bonding activities and meaningful workshops, be given the chance to contribute creative outputs to CelaZine, COMMPUB's official online magazine, and be deployed to Celadon projects, giving you plenty of chances for exploration and growth. Meet fellow artists, engage in fun activities, and unleash your creative side by joining the COMMPUB department!",
     roles: [
       {
         slug: "digital-creatives",
@@ -157,6 +227,11 @@ export const DEPARTMENTS: Department[] = [
         title: "Digital Creatives Pool",
         description:
           "Digital Creatives Staffers design digital creative and graphic design outputs for Celadon projects and other promotional materials, working in collaboration with other pools or project teams to conceptualize and create cohesive outputs. If you are interested in graphic design, as well as innovative and willing to explore new themes and artistic directions, then this is the pool for you! Experience in Canva, Adobe Photoshop, Adobe Illustrator, or other graphic design softwares is highly preferred, but not required.",
+        images: [
+          { src: "/internal/commpub-pool-digital-creatives.webp", alt: "Digital Creatives Pool sample output 1" },
+          { src: "/internal/commpub-pool-digital-creatives-2.webp", alt: "Digital Creatives Pool sample output 2" },
+          { src: "/internal/commpub-pool-digital-creatives-3.webp", alt: "Digital Creatives Pool sample output 3" },
+        ],
       },
       {
         slug: "production-design",
@@ -164,6 +239,9 @@ export const DEPARTMENTS: Department[] = [
         title: "Production Design Pool",
         description:
           "Production Design Staffers create and conceptualize physical props, onsite gimmicks, set/booth designs, and more for Celadon projects and initiatives. If you are interested in physical crafts and design, bursting with ideas for marketing gimmicks, and excited to work with something hands-on, then this is the pool for you! Experience in onsite design layout, prop crafting, and gimmicks is highly preferred, but not required.",
+        images: [
+          { src: "/internal/commpub-pool-production-design.webp", alt: "Production Design Pool sample output" },
+        ],
       },
       {
         slug: "photos",
@@ -171,6 +249,7 @@ export const DEPARTMENTS: Department[] = [
         title: "Photos Pool",
         description:
           "Photos Staffers document various Celadon projects and initiatives, and participate in the making of DP shoots and photo collages. If you are interested in photography, and eager to explore new concepts and artistic directions, then this is the pool for you! Experience in photography and photo editing software is highly preferred, but not required. Owning a good camera is likewise highly preferred, but also not required.",
+        images: [{ src: "/internal/commpub-pool-photos.webp", alt: "Photos Pool sample output" }],
       },
       {
         slug: "videos",
@@ -178,6 +257,7 @@ export const DEPARTMENTS: Department[] = [
         title: "Videos Pool",
         description:
           "Videos Staffers capture and edit engaging video content for Celadon projects and initiatives, such as short edits, event recaps, promotional videos, and Reels. If you are interested in video production (whether shooting, editing, or both), and driven to exploring new artistic directions, then this is the pool for you! Experience in video production and editing is highly preferred, but not required. Owning a good camera is likewise highly preferred, but also not required.",
+        images: [{ src: "/internal/commpub-pool-videos.webp", alt: "Videos Pool sample output" }],
       },
       {
         slug: "writing",
@@ -185,9 +265,11 @@ export const DEPARTMENTS: Department[] = [
         title: "Writing Pool",
         description:
           "Writing Staffers create various writing-based outputs including but not limited to: spiels/captions, poems, articles, and more. As a Writing Staffer, you will also be required to contribute at least one output to CelaZine, COMMPUB's official online magazine. If you are interested in exploring new writing styles and working with a variety of content, as well as detail-oriented, witty, and able to create emphatic written pieces, then this is the pool for you! Experience in writing a variety of written content and creative outputs is highly preferred, but not required.",
+        images: [{ src: "/internal/commpub-pool-writing.webp", alt: "Writing Pool sample output" }],
       },
     ],
     sections: [],
+    showApplicationInstructions: true,
     applicationNote: {
       text: "You must submit additional requirements for every pool you apply to (find them in the Additional Requirements doc) — but whether you apply to one or two pools, you only need to sign up for ONE interview.",
       href: "https://docs.google.com/document/d/1fvO5nr9ze-vnwbelc_XBSIeTkzUQafuuC6CE_nVD5Ow/edit?usp=sharing",
@@ -201,7 +283,13 @@ export const DEPARTMENTS: Department[] = [
       { name: "Simone Chua", role: "AVP for Documentation and Publications", facebook: "http://fb.com/simoneabigailc", email: "simone.chua@student.ateneo.edu", photo: "/internal/ebcb/commpub-simone-chua.webp" },
       { name: "Abby Tan", role: "AVP for Documentation and Publications", facebook: "http://fb.com/abbytann", email: "elise.tan@student.ateneo.edu", photo: "/internal/ebcb/commpub-abby-tan.webp" },
     ],
-    photos: ["/internal/commpub-ga.webp"],
+    photos: [
+      "/internal/commpub-photo-ga-2526.webp",
+      "/internal/commpub-photo-ga-2425.webp",
+      "/internal/commpub-photo-bonding.webp",
+      "/internal/commpub-photo-workshop.webp",
+      "/internal/commpub-photo-celazine.webp",
+    ],
   },
 
   // ---------------------------------------------------------------------- CUL
@@ -214,13 +302,14 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/cul-hero.webp", alt: "Ateneo Celadon Cultural Affairs Department" },
     cardCover: { src: "/covers/chinese-new-year.jpg", alt: "CUL" },
     cardBlurb:
-      "The Cultural Affairs Department is the heart of Celadon. It promotes Filipino-Chinese culture through meaningful events and builds on relevance, appreciation, and cultural connection.",
+      "CUL is the heart of Celadon. It promotes Filipino-Chinese culture through meaningful events and builds on relevance, appreciation, and cultural connection.",
     about:
       "The Cultural Affairs (CUL) Department is the heart of Celadon as it spearheads the cultivation of awareness, understanding, and appreciation of the Chinese-Filipino culture both inside and outside the organization through various projects and initiatives. Given this, the department seeks to enrich active culture-sharing and encourage passive discourse and provide proper leadership training and engagement opportunities to better equip members in leading cultural initiatives under the department.",
     sections: [
       {
         heading: "CUL Trainee Roadmap",
         image: { src: "/internal/cul-roadmap.webp", alt: "CUL Trainee year-long roadmap, from the first CUL GA in September through the second CUL GA and bonding in April" },
+        layout: "stacked",
         groups: [
           {
             items: [
@@ -232,6 +321,11 @@ export const DEPARTMENTS: Department[] = [
       },
       {
         heading: "CUL Trainee Responsibilities",
+        images: [
+          { src: "/internal/cul-responsibilities-1.webp", alt: "CUL trainees at a department bonding" },
+          { src: "/internal/cul-responsibilities-2.webp", alt: "CUL trainees at a department bonding" },
+          { src: "/internal/cul-responsibilities-3.webp", alt: "CUL trainees at a department bonding" },
+        ],
         groups: [
           {
             items: [
@@ -244,6 +338,13 @@ export const DEPARTMENTS: Department[] = [
       },
       {
         heading: "Who are we looking for?",
+        imagePosition: "left",
+        images: [
+          { src: "/internal/cul-looking-for-1.webp", alt: "CUL trainees hanging out" },
+          { src: "/internal/cul-looking-for-2.webp", alt: "CUL trainees hanging out" },
+          { src: "/internal/cul-looking-for-3.webp", alt: "CUL trainees hanging out" },
+          { src: "/internal/cul-looking-for-4.webp", alt: "CUL trainees hanging out" },
+        ],
         groups: [
           {
             items: [
@@ -279,14 +380,14 @@ export const DEPARTMENTS: Department[] = [
         a: "As CUL trainees, you are expected to take initiative in your core team deployments and execution of CUL Mini Events year-long. Despite this, you are still students first at the end of the day. The CUL EBCB and Managers will try our best to accommodate your pacing, and we hope for your full transparency in communicating any of your potential concerns to us.",
       },
       {
-        q: "Why CUL over other departments?",
+        q: "Why CUL?",
         a: "In an organization that builds discourse between the Filipino-Chinese culture and that of the larger Ateneo community and society, the CUL department serves as a direct avenue toward this goal with its many culturally-focused initiatives.",
       },
     ],
     contacts: [
       { name: "Therese Yap", role: "VP for Cultural Affairs", facebook: "http://fb.com/yap.reese04", email: "anne.therese.yap@student.ateneo.edu", photo: "/internal/ebcb/cul-therese-yap.webp" },
     ],
-    photos: ["/internal/cul-dragon-dance.webp"],
+    photos: [],
   },
 
   // -------------------------------------------------------------------- EXREL
@@ -299,9 +400,35 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/exrel-hero.webp", alt: "External Relations Department" },
     cardCover: { src: "/internal/exrel-card-cover.webp", alt: "EXREL" },
     cardBlurb:
-      "The External Relations Department serves as the liaison of Ateneo Celadon towards external organizations and corporations. The department aims to provide value to both the internal and external stakeholders of the organization through engaging in strategic, mutually-beneficial and sustainable partnerships.",
-    about:
-      "The External Relations (EXREL) Department is the matchmaker of Celadon, aiming to strengthen on and off-campus partnerships by creating sustainable and beneficial relationships between the organization and renowned sponsors and partners through systematic contacting and negotiating, as well as flagship projects — Binondo Amazing Race (BAR) and Jade Business Summit (JADE) — and in-house initiatives such as Celadon's AlumNight and Advocacy Outreach. These endeavours help improve Celadon's visibility to the general public and provide either monetary or product-based sponsorship. As such, EXREL aims to develop and cultivate its associates into leaders knowledgeable in Celadon's EXREL systems for database contacting, negotiating, and package drafting, with a minor understanding of project management.",
+      "EXREL serves as the liaison of Ateneo Celadon towards external organizations and corporations. The department aims to provide value to both the internal and external stakeholders of the organization through engaging in strategic, mutually-beneficial and sustainable partnerships.",
+    about: [
+      [
+        {
+          text: "The External Relations (EXREL) Department is the matchmaker of Celadon, aiming to strengthen on and off-campus partnerships by ",
+        },
+        { text: "creating sustainable and beneficial relationships", bold: true },
+        { text: " between the organization and " },
+        { text: "renowned sponsors and partners", bold: true },
+        { text: " through " },
+        { text: "systematic contacting and negotiating, as well as flagship projects", bold: true },
+        { text: " — " },
+        { text: "Binondo Amazing Race (BAR) and Jade Business Summit (JADE)", italic: true },
+        { text: " — " },
+        { text: "and in-house initiatives", bold: true },
+        { text: " such as Celadon's AlumNight and Advocacy Outreach", italic: true },
+        { text: "." },
+      ],
+      [
+        { text: "These endeavours help " },
+        { text: "improve Celadon's visibility", bold: true },
+        { text: " to the general public and " },
+        { text: "provide either monetary or product-based sponsorship", bold: true },
+        {
+          text: ". As such, EXREL aims to develop and cultivate its associates into leaders knowledgeable in Celadon's EXREL systems for database contacting, negotiating, and package drafting, with a minor understanding of project management.",
+        },
+      ],
+    ],
+    aboutWidth: "wide",
     sections: [
       {
         heading: "EXREL Associate Role",
@@ -406,6 +533,7 @@ export const DEPARTMENTS: Department[] = [
         role: "Vice President for External Relations",
         quote:
           "Speaking as a former ExRel Associate, the workload has always been very manageable within the department as ample support is provided by the people you work with (Managers and EBCB). You also get the freedom to choose how many commitments you'd like to take on throughout the year across projects and initiatives of your choice!",
+        photo: "/internal/ebcb/exrel-yomi-tan.webp",
       },
       {
         name: "Vin",
@@ -440,12 +568,54 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/fin-hero.webp", alt: "Welcome to the FINance Farmily 2026-2027" },
     cardCover: { src: "/internal/fin-card-cover.webp", alt: "FIN" },
     cardBlurb:
-      "The Financial Affairs Department manages Celadon’s finances and major fundraising projects. We train members holistically — both financially and entrepreneurially.",
-    about:
-      "The Financial Affairs Department is responsible for all the organization's financial matters including major fundraising projects for the organization and financial transactions of all ongoing initiatives within Celadon. Our department is known for our flagship fundraising projects such as Celadon Rose Sale (RS), Celadon Merchandise (Merch), and Lunar Lotus Market (LLM), as well as our Tent Rental Service. By sustainable innovation and entrepreneurship amongst the members and leaders of the organization, we are able to supply the entire financial ecosystem for all projects of Celadon. From fundraising to budget allocation, our department aims to foster a more open community by initiating purpose-driven and relational bonding opportunities for FIN deputies (FIN MITs), managers, and EBCB through workshops, dinners, and outings.",
+      "FIN manages Celadon’s finances and major fundraising projects. We train members holistically — both financially and entrepreneurially.",
+    about: [
+      [
+        {
+          text: "The Financial Affairs Department is responsible for all the organization's financial matters including ",
+        },
+        { text: "major fundraising projects for the organization and financial transactions", bold: true },
+        {
+          text: " of all ongoing initiatives within Celadon. Our department is known for our flagship fundraising projects such as Celadon Rose Sale (RS), Celadon Merchandise (Merch), and Lunar Lotus Market (LLM), as well as our Tent Rental Service. By ",
+        },
+        { text: "sustainable innovation and entrepreneurship", bold: true },
+        {
+          text: " amongst the members and leaders of the organization, we are able to supply the entire financial ecosystem for all projects of Celadon.",
+        },
+      ],
+    ],
     sections: [
       {
+        heading: "Fostering collaboration interdepartmentally and intradepartmentally.",
+        normalCaseHeading: true,
+        groups: [],
+        richText: [
+          [
+            {
+              text: "From fundraising to budget allocation, our department aims to foster a more open community by initiating purpose-driven and relational bonding opportunities for FIN deputies (FIN MITs), managers, and EBCB through workshops, dinners, and outings. Through which, we are able to maintain better relationships within ourselves and across the departments we work with.",
+            },
+          ],
+        ],
+        imagePosition: "left",
+        images: [
+          { src: "/internal/fin-dept-1.webp", alt: "Ateneo Celadon FIN department members" },
+          { src: "/internal/fin-dept-2.webp", alt: "Ateneo Celadon FIN department members" },
+          { src: "/internal/fin-dept-3.webp", alt: "Ateneo Celadon FIN department members" },
+          { src: "/internal/fin-dept-4.webp", alt: "Ateneo Celadon FIN department members" },
+        ],
+      },
+      {
         heading: "FIN Manager-In-Training (FIN MIT)",
+        images: [
+          { src: "/internal/fin-mit-project-1.webp", alt: "FIN deputies deployed to a fundraising project" },
+          { src: "/internal/fin-mit-project-2.webp", alt: "FIN deputies deployed to a fundraising project", fit: "contain" },
+          { src: "/internal/fin-mit-project-3.webp", alt: "FIN deputies deployed to a fundraising project" },
+          { src: "/internal/fin-mit-project-4.webp", alt: "FIN deputies deployed to a fundraising project", fit: "contain" },
+          { src: "/internal/fin-mit-project-5.webp", alt: "FIN deputies deployed to a fundraising project" },
+          { src: "/internal/fin-mit-project-6.webp", alt: "FIN deputies deployed to a fundraising project" },
+          { src: "/internal/fin-mit-project-7.webp", alt: "FIN deputies deployed to a fundraising project" },
+          { src: "/internal/fin-mit-project-8.webp", alt: "FIN deputies deployed to a fundraising project" },
+        ],
         groups: [
           {
             items: [
@@ -454,6 +624,12 @@ export const DEPARTMENTS: Department[] = [
           },
         ],
       },
+    ],
+    committeesHeading: "Project and Systems Deployment",
+    committeesIntro: [
+      { text: "MITs will be " },
+      { text: "deployed to projects", bold: true },
+      { text: " within and outside the Financial Affairs Department in either of the following committees:" },
     ],
     committees: [
       {
@@ -485,6 +661,18 @@ export const DEPARTMENTS: Department[] = [
         ],
       },
     ],
+    committeesNote: [
+      [
+        { text: "MITs will also be assisting in " },
+        { text: "tracking expenses and collecting receipts", bold: true },
+        { text: ", both during fundraising activities and throughout the project proper." },
+      ],
+      [
+        {
+          text: "Don't worry! Your FIN Systems Managers will be the main people in charge of reimbursements per project. You will be helping from time to time but will always be guided by the Managers.",
+        },
+      ],
+    ],
     timeline: [
       { date: "September 15, 2026", label: "First Departmental General Assembly" },
       { date: "September 22, 2026", label: "Logistics Workshop" },
@@ -497,14 +685,7 @@ export const DEPARTMENTS: Department[] = [
       { date: "Year-Long (2026-2027)", label: "Celadon Merchandise" },
     ],
     applicationNote: { text: "The Financial Affairs Department does NOT require any additional requirements." },
-    testimonials: [
-      {
-        name: "Marcus Castro",
-        role: "Lunar Lotus Market Project Manager '26-'27, Financial Affairs Manager-In-Training '25-'26",
-        quote:
-          "Being a Celadon deputy was a welcoming and fun jumpstart into being active in Celadon projects. In the FIN MIT program, I was able to learn the fundamentals of fundraising and budgeting. It taught me the importance of keeping records and how to make sales. It is also a great place to make new friends!",
-      },
-    ],
+    testimonials: [],
     faqs: [
       {
         q: "How much time commitment should I expect?",
@@ -539,15 +720,49 @@ export const DEPARTMENTS: Department[] = [
     name: "HR",
     fullName: "Human Resources",
     accent: { base: "#CA8A04", tint: "#FEFCE8", ink: "#713F12" },
-    heroImage: { src: "/internal/hr-hero.webp", alt: "Ateneo Celadon Human Resources Department" },
+    heroImage: { src: "/internal/hr-hero.webp", alt: "Ateneo Celadon Human Resources Department, 2026-2027" },
     cardCover: { src: "/departments/hr-general-assembly.jpg", alt: "HR" },
     cardBlurb:
-      "The Human Resources Department develops membership development and leadership through meaningful formation and community-building efforts.",
+      "HR develops membership development and leadership through meaningful formation and community-building efforts.",
+    aboutWidth: "wide",
     about:
-      "The Human Resources (HR) Department is the foundation of Celadon's members that works to promote member welfare, engagement, and development. The department seeks to foster a supportive and inclusive environment where members can grow and build meaningful connections while providing opportunities for personal and leadership development.",
+      "The Human Resources (HR) Department is the foundation of Celadon's members that works to promote member welfare, engagement, and development. Our department seeks to foster a supportive and inclusive environment where members of Celadon can grow and build meaningful connections while providing opportunities for personal and leadership development.",
     sections: [
       {
+        heading: "A Letter From HR",
+        groups: [],
+        richText: [
+          [{ text: "Dear Applicant!", bold: true }],
+          [
+            { text: "Hey there! If you love connecting with people, bringing out the best in others, and making a room full of strangers feel like family, you've found your home in " },
+            { text: "HR", accent: true },
+            { text: " \u{1F49B}✨." },
+          ],
+          [
+            {
+              text: "In our department, you can be the heart of Celadon. You'll be the Achi or Ahia someone looks up to, the warm welcome a new member needs, and the driving force that helps our community grow together. Join us in shaping an inclusive and vibrant space where everyone belongs. We can't wait to see the incredible impact you'll make! \u{1F680}",
+            },
+          ],
+          [{ text: "Sincerely, your " }, { text: "HR", accent: true }, { text: " Family." }],
+        ],
+        images: [
+          { src: "/internal/hr-photo-1.webp", alt: "Ateneo Celadon HR department members" },
+          { src: "/internal/hr-photo-2.webp", alt: "Ateneo Celadon HR department members" },
+          { src: "/internal/hr-photo-3.webp", alt: "Ateneo Celadon HR department members" },
+          { src: "/internal/hr-photo-4.webp", alt: "Ateneo Celadon HR department members" },
+          { src: "/internal/hr-photo-5.webp", alt: "Ateneo Celadon HR department members" },
+        ],
+      },
+      {
         heading: "HR Roadmap",
+        colorLabels: true,
+        imagePosition: "left",
+        images: [
+          { src: "/internal/hr-project-1.webp", alt: "HR deputies at the Leadership Development Program" },
+          { src: "/internal/hr-project-2.webp", alt: "HR deputies at the Leadership Development Program" },
+          { src: "/internal/hr-project-3.webp", alt: "HR deputies at the Leadership Development Program" },
+          { src: "/internal/hr-project-4.webp", alt: "HR deputies at the Leadership Development Program" },
+        ],
         groups: [
           {
             label: "What to expect in HR?",
@@ -562,6 +777,7 @@ export const DEPARTMENTS: Department[] = [
       },
       {
         heading: "HR Deputy Responsibilities",
+        groupsAsCards: true,
         groups: [
           {
             label: "Systems Management Duties",
@@ -622,7 +838,7 @@ export const DEPARTMENTS: Department[] = [
       { name: "John Andre Lee", role: "AVP for Human Resources", facebook: "http://fb.com/johnandrelee36", email: "john.andre.lee@student.ateneo.edu", photo: "/internal/ebcb/hr-andre-lee.webp" },
       { name: "Keng Wei Lin", role: "AVP for Human Resources", facebook: "http://fb.com/mxrphem/", email: "keng.wei.lin@student.ateneo.edu", photo: "/internal/ebcb/hr-keng-lin.webp" },
     ],
-    photos: ["/internal/hr-bonding.webp"],
+    photos: [],
   },
 
   // ----------------------------------------------------------------------- OSR
@@ -634,9 +850,27 @@ export const DEPARTMENTS: Department[] = [
     accent: { base: "#7C3AED", tint: "#F5F3FF", ink: "#4C1D95" },
     cardCover: { src: "/internal/osr-card-cover.webp", alt: "OSR" },
     cardBlurb:
-      "The Organization Strategies and Research Department develops evaluative and data-driven project and organizational strategies for Celadon’s sustainable growth. The department handles the internal systems and research initiatives for the organization.",
-    about:
-      "The Organization Strategies and Research Department (OSR) supervises and maintains the overall welfare of the organization by spearheading and administering various evaluations and research. The department collects qualitative and quantitative data through consultations and questionnaires to make data-driven assessments and recommendations for Celadon's projects and departments. Moreover, OSR provides technical support through assigned liaison teams and project deployments. By optimizing organizational systems and workflows, the department continuously improves the organization's operational efficiency. Ultimately, OSR ensures that Celadon is grounded in data-driven decision-making to ensure that its members are strategically engaged and that organizational goals are achieved.",
+      "OSR develops evaluative and data-driven project and organizational strategies for Celadon’s sustainable growth. Handles research initiatives and back-end work for the organization.",
+    aboutWidth: "wide",
+    about: [
+      [
+        { text: "The " },
+        { text: "Organization Strategies and Research Department (OSR)", bold: true },
+        {
+          text: " supervises and maintains the overall welfare of the organization by ",
+        },
+        { text: "spearheading and administering various evaluations and research", bold: true },
+        {
+          text: ". The department collects qualitative and quantitative data through consultations and questionnaires to make data-driven assessments and recommendations for Celadon's projects and departments. Moreover, OSR provides technical support through assigned liaison teams and project deployments. By ",
+        },
+        { text: "optimizing organizational systems and workflows", bold: true },
+        { text: ", the department continuously improves the organization's operational efficiency. Ultimately, OSR ensures that Celadon is grounded in " },
+        { text: "data-driven decision-making", bold: true },
+        {
+          text: " to ensure that its members are strategically engaged and that organizational goals are achieved.",
+        },
+      ],
+    ],
     techShowcase: {
       heading: "This website is an OSR project",
       blurb:
@@ -661,36 +895,72 @@ export const DEPARTMENTS: Department[] = [
     sections: [
       {
         heading: "Junior Analyst (Deputy-level Role)",
-        groups: [
-          {
-            items: [
-              "Deployment as RecSec/Operations Core to different Celadon projects",
-              "Assist the OSR Consultant Managers with evaluations, data gathering, ICs, and completing the sustainability report",
-              "Participate in different OSR workshops and events!",
-            ],
-          },
+        groups: [],
+        imagePosition: "left",
+        images: [
+          { src: "/internal/osr-photo-1.webp", alt: "Ateneo Celadon OSR department members" },
+          { src: "/internal/osr-photo-2.webp", alt: "Ateneo Celadon OSR department members" },
+          { src: "/internal/osr-photo-3.webp", alt: "Ateneo Celadon OSR department members" },
+          { src: "/internal/osr-photo-4.webp", alt: "Ateneo Celadon OSR department members" },
+          { src: "/internal/osr-photo-5.webp", alt: "Ateneo Celadon OSR department members" },
+        ],
+        richText: [
+          [{ text: "Available Slots: 8–10", bold: true }],
+          [
+            { text: "OSR Junior Analysts work together with Consultants & Senior Analysts on projects, being " },
+            { text: "directly deployed", bold: true },
+            {
+              text: " to Core Teams as Operations and/or Recruitment & Secretariat core members. The role encompasses assisting the managers in facilitating ",
+            },
+            { text: "consultations", bold: true },
+            { text: ", administering " },
+            { text: "evaluations", bold: true },
+            { text: ", writing " },
+            { text: "project sustainability reports", bold: true },
+            { text: ", and gathering other " },
+            { text: "relevant data", bold: true },
+            {
+              text: ". Moreover, they also get to participate in the department's internal efforts, such as the Google Sheets/Excel ",
+            },
+            { text: "workshop", bold: true },
+            { text: ", AppScript " },
+            { text: "tutorials", bold: true },
+            { text: ", and execution of small-scale " },
+            { text: "research initiatives", bold: true },
+            { text: "." },
+          ],
         ],
       },
       {
         heading: "What's in store for you?",
+        images: [
+          { src: "/internal/osr-recweek-celaville.webp", alt: "OSR EBCB at RecWeek 2026-2027 Celaville", fit: "contain" },
+        ],
         groups: [
           {
             label: "As a member of OSR, you may expect to…",
             items: [
               "Improve your technical skills as you work and familiarize yourself with data collection and Google Workspace.",
               "Hone your critical thinking and analytical skills in supporting other departments and/or projects.",
-              "Develop your interpersonal skills as you work collaboratively with other members of the Celadonean community.",
+              "Develop your interpersonal skills as you work collaboratively with other members of OSR and the Celadonean community.",
             ],
           },
         ],
       },
       {
         heading: "Who are we looking for?",
+        groupsAsCards: true,
         groups: [
           {
+            label: "Driven & Proactive",
             items: [
-              "Driven & Proactive: Individuals who will dutifully accomplish their tasks by providing technical support and insights and find purpose in doing consultations and meticulous work for the improvement of Celadon.",
-              "Analytical & Eager to Learn: Team players who have experience working with Google Sheets and Workspace and are eager to develop their soft skills alongside their technical capabilities.",
+              "Individuals who will dutifully accomplish their tasks by providing technical support and insights and find purpose in doing consultations and meticulous work for the improvement of Celadon.",
+            ],
+          },
+          {
+            label: "Analytical & Eager to Learn",
+            items: [
+              "Team players who have experience working with Google Sheets and Workspace and are eager to develop their soft skills alongside their technical capabilities.",
             ],
           },
         ],
@@ -699,8 +969,16 @@ export const DEPARTMENTS: Department[] = [
     applicationNote: { text: "OSR has no additional requirements for Junior Analysts." },
     testimonials: [
       {
+        name: "Sofia Diño",
+        role: "OSR Associate Vice President '26-'27, OSR Junior Analyst '25-'26",
+        photo: "/internal/ebcb/osr-sofia-dino.webp",
+        quote:
+          "Unlike what one may typically assume, being a Junior Analyst isn't about having a secondary technical role; rather, it is about having the opportunity to ask questions, contribute ideas, and recommend solutions. I not only improved my technical skills and knowledge, but I found a space that provided me with avenues for growth and helped me build meaningful relationships with those who make everything worthwhile. And for as long as the world keeps spinning, I'd rather be enveloped by the department that boggles my mind every so often, yet will always push me to become better.",
+      },
+      {
         name: "Keene Brigado",
         role: "RecWeek & Welcome Week Project Manager '26-'27, OSR Junior Analyst '25-'26",
+        photo: "/internal/ebcb/osr-keene-brigado.webp",
         quote:
           "Before OSR, I didn't know much about Google Apps Script, and I was still trying to find a place where I belonged. Joining this department taught me so many technical things, gave me amazing friends along the way, and opened up a lot of doors for me. OSR really made me who I am today. Without this department, I definitely wouldn't have what it takes to make it this far.",
       },

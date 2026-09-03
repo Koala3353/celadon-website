@@ -4,11 +4,12 @@ import { asset } from "@/lib/asset";
 import type { Department } from "@/lib/deputy-departments";
 
 /**
- * Double-bezel treatment (outer tray + inner plate), same family as the
- * public site's <Card> — an untinted navy tray here would fight the sky
- * palette, so the outer shell is tinted to the department's own accent
- * instead, set once as CSS variables (see DepartmentPage for the same
- * pattern on the full page).
+ * A single flat surface tinted to the department's own accent (set once as
+ * CSS variables — see DepartmentPage for the same pattern on the full page),
+ * with the cover photo doing the identifying work instead of a decorative
+ * icon badge. The department name sits directly on the tint, colored by the
+ * accent's ink, so each card reads as a distinct color-block rather than a
+ * repeat of the same white card shape six times over.
  */
 export function DepartmentCard({ dept }: { dept: Department }) {
   return (
@@ -22,10 +23,13 @@ export function DepartmentCard({ dept }: { dept: Department }) {
           "--dept-ink": dept.accent.ink,
         } as React.CSSProperties
       }
-      className="lift pressable group block rounded-[1.75rem] bg-dept-accent/[0.08] p-1.5 ring-1 ring-inset ring-dept-accent/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-navy"
+      className="lift pressable group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-navy"
     >
-      <div className="flex h-full flex-col overflow-hidden rounded-[1.375rem] bg-white shadow-[var(--shadow-sm)]">
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
+      {/* overflow-hidden lives on this inner wrapper, not the <a> itself —
+          the hover lift's box-shadow is painted on the <a>, and an element
+          clips its own shadow if overflow-hidden sits on that same box. */}
+      <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-dept-tint">
+        <div className="relative aspect-[16/10] w-full overflow-hidden">
           <SkeletonImage
             src={asset(dept.cardCover.src)}
             alt=""
@@ -33,23 +37,14 @@ export function DepartmentCard({ dept }: { dept: Department }) {
             sizes="(min-width: 640px) 33vw, 100vw"
             className="object-cover ease-[var(--ease-out)] group-hover:scale-105"
           />
-          <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/25 to-transparent" />
         </div>
         <div className="flex flex-1 flex-col gap-1 p-5">
-          <div className="flex items-center gap-2">
-            <span
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-dept-tint text-lg"
-              aria-hidden
-            >
-              {dept.emoji}
-            </span>
-            <span className="sky-display text-lg font-semibold text-dept-ink">{dept.name}</span>
-          </div>
-          <span className="text-sm text-muted-foreground">{dept.fullName}</span>
-          <p className="prose-body mt-2 text-sm text-muted-foreground">{dept.cardBlurb}</p>
-          <span className="mt-auto flex items-center gap-1.5 pt-4 text-xs font-bold uppercase tracking-wider text-dept-ink transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1">
-            View department <span aria-hidden>&rarr;</span>
+          <span className="sky-display text-lg font-semibold text-dept-ink">
+            {dept.name} <span aria-hidden>{dept.emoji}</span>
           </span>
+          <span className="text-sm text-dept-ink/70">{dept.fullName}</span>
+          <p className="prose-body mt-2 text-sm text-dept-ink/80">{dept.cardBlurb}</p>
+          <span className="mt-auto pt-4 text-sm font-bold text-dept-accent">View department</span>
         </div>
       </div>
     </Link>

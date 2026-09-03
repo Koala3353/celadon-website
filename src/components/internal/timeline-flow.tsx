@@ -25,9 +25,9 @@ export function TimelineFlow({ items }: { items: DeptTimelineItem[] }) {
         ))}
       </ol>
 
-      <div className="hidden sm:flex sm:items-stretch sm:py-5">
+      <div className="hidden sm:flex sm:items-stretch sm:px-6 sm:py-5">
         {items.map((item, i) => (
-          <div key={item.label} className={cn("relative flex-1", i > 0 && "-ml-5")}>
+          <div key={item.label} className={cn("relative min-w-0 flex-1", i > 0 && "-ml-5")}>
             <div
               className={cn(
                 "flex h-36 flex-col items-center justify-center gap-1 px-8 text-center sm:px-10",

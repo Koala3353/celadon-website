@@ -178,14 +178,20 @@ html {
     var(--navy);
 }
 
-/* Internal portal's footer sits on a pale illustrated sky photo instead of
+/* Internal portal's footer sits on a busy illustrated background instead of
    the navy field, so its usual light-on-navy text needs to flip to bold
    black to stay readable — plain (unlayered) rule so it reliably outranks
-   the Tailwind color/weight utilities already on those elements. */
+   the Tailwind color/weight utilities already on those elements. A white
+   glow stands in for a legibility scrim: it holds up against both the light
+   and dark patches of the illustration without covering the artwork. */
 .footer-dark-text,
 .footer-dark-text * {
   color: #000000;
   font-weight: 700;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 6px #fff,
+    0 0 10px #fff;
 }
 
 /* CelaSkies gradient — the deputy-application pages' signature background.
