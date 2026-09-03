@@ -1,3 +1,4 @@
+import { renderItem } from "@/components/internal/rich-text";
 import type { DeptGroup } from "@/lib/deputy-departments";
 
 /**
@@ -33,7 +34,7 @@ export function ListAccordion({ groups }: { groups: DeptGroup[] }) {
             <ul className="flex flex-col gap-1.5">
               {group.items.map((item, i) => (
                 <li key={i} className="prose-body text-sm text-muted-foreground">
-                  {item}
+                  {renderItem(item)}
                 </li>
               ))}
             </ul>

@@ -35,7 +35,7 @@ export function DepartmentCard({ dept }: { dept: Department }) {
             alt=""
             fill
             sizes="(min-width: 640px) 33vw, 100vw"
-            className="object-cover ease-[var(--ease-out)] group-hover:scale-105"
+            className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-105"
           />
         </div>
         <div className="flex flex-1 flex-col gap-1 p-5">
@@ -44,7 +44,15 @@ export function DepartmentCard({ dept }: { dept: Department }) {
           </span>
           <span className="text-sm text-dept-ink/70">{dept.fullName}</span>
           <p className="prose-body mt-2 text-sm text-dept-ink/80">{dept.cardBlurb}</p>
-          <span className="mt-auto pt-4 text-sm font-bold text-dept-accent">View department</span>
+          <span className="mt-auto flex items-center gap-1 pt-4 text-sm font-bold text-dept-accent">
+            View department
+            <span
+              aria-hidden
+              className="inline-block transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </span>
         </div>
       </div>
     </Link>

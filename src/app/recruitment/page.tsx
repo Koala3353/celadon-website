@@ -32,7 +32,8 @@ export default function RecruitmentPage() {
               <p className="eyebrow text-accent-ink">Stay tuned</p>
               <h2 className="display text-2xl text-navy">{copy("recruitment_stay_tuned_body")}</h2>
               <p className="prose-body text-muted-foreground">
-                Follow our socials for the latest updates on when applications open.
+                Stay posted with our internal Facebook Group to get the latest updates on opening for
+                different projects!
               </p>
             </Card>
           </Reveal>

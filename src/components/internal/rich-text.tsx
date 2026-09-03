@@ -1,11 +1,22 @@
 import type { AboutRun } from "@/lib/deputy-departments";
 
+/** Renders one bullet item — a plain string as-is (optionally with its
+ * leading "Label:" colored via `colorLabels`), or an `AboutRun[]` for
+ * mid-sentence bold/italic/accent spans. */
+export function renderItem(item: string | AboutRun[], colorLabels?: boolean) {
+  if (Array.isArray(item)) {
+    return item.map((run, i) => <AboutRunText key={i} run={run} />);
+  }
+  return colorLabels ? <LabeledItemText text={item} /> : item;
+}
+
 /** Renders one run of a rich-text paragraph, applying bold, italic, and/or
  * the department's own accent color. */
 export function AboutRunText({ run }: { run: AboutRun }) {
   let node: React.ReactNode = run.text;
   if (run.italic) node = <em className="italic">{node}</em>;
   if (run.bold) node = <strong className="font-bold">{node}</strong>;
+  if (run.underline) node = <span className="underline">{node}</span>;
   if (run.accent) node = <span className="text-dept-accent">{node}</span>;
   return <>{node}</>;
 }

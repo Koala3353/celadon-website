@@ -6,7 +6,7 @@ import { SkeletonImage } from "@/components/ui/skeleton-image";
 import { DeptHero } from "@/components/internal/dept-hero";
 import { RoleAccordion } from "@/components/internal/role-accordion";
 import { ListAccordion } from "@/components/internal/list-accordion";
-import { AboutRunText, LabeledItemText, RichParagraphs } from "@/components/internal/rich-text";
+import { AboutRunText, RichParagraphs, renderItem } from "@/components/internal/rich-text";
 import { Timeline } from "@/components/internal/timeline";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { asset } from "@/lib/asset";
@@ -78,6 +78,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
   const hasTimelineGroup = !!dept.timeline || !!dept.committees || !!dept.projects;
   const hasTestimonials = dept.testimonials.length > 0;
   const hasFaqs = dept.faqs.length > 0;
+  const hasQaTestimonials = !!dept.qaTestimonials && dept.qaTestimonials.length > 0;
 
   // Bands alternate white/dept-tint in render order, but only counting bands
   // that actually render for this department — a department missing a
@@ -119,7 +120,11 @@ export function DepartmentPage({ dept }: { dept: Department }) {
               />
               <div data-reveal>
                 <Heading>Vision and Thrust</Heading>
-                <p className="prose-body mt-4 text-muted-foreground">{dept.visionThrust}</p>
+                <p className="prose-body mt-4 text-muted-foreground">
+                  {Array.isArray(dept.visionThrust)
+                    ? dept.visionThrust.map((run, i) => <AboutRunText key={i} run={run} />)
+                    : dept.visionThrust}
+                </p>
               </div>
             </Reveal>
           ) : (
@@ -140,7 +145,9 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                 <Reveal className="mx-auto w-full max-w-3xl">
                   <Heading>Vision and Thrust</Heading>
                   <p className="prose-body mt-4 text-muted-foreground" data-reveal>
-                    {dept.visionThrust}
+                    {Array.isArray(dept.visionThrust)
+                      ? dept.visionThrust.map((run, i) => <AboutRunText key={i} run={run} />)
+                      : dept.visionThrust}
                   </p>
                 </Reveal>
               )}
@@ -207,7 +214,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                       {group.items.map((item, j) => (
                         <li key={j} className="prose-body flex gap-2.5 text-muted-foreground">
                           <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-dept-accent" />
-                          <span>{section.colorLabels ? <LabeledItemText text={item} /> : item}</span>
+                          <span>{renderItem(item, section.colorLabels)}</span>
                         </li>
                       ))}
                     </ul>
@@ -232,7 +239,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                       {group.items.map((item, j) => (
                         <li key={j} className="prose-body flex gap-2.5 text-muted-foreground">
                           <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-dept-accent" />
-                          <span>{section.colorLabels ? <LabeledItemText text={item} /> : item}</span>
+                          <span>{renderItem(item, section.colorLabels)}</span>
                         </li>
                       ))}
                     </ul>
@@ -296,7 +303,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                     {section.groups[0].items.map((item, j) => (
                       <li key={j} className="prose-body flex gap-2.5 text-muted-foreground">
                         <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-dept-accent" />
-                        <span>{item}</span>
+                        <span>{renderItem(item)}</span>
                       </li>
                     ))}
                   </ul>
@@ -500,7 +507,9 @@ export function DepartmentPage({ dept }: { dept: Department }) {
               </ol>
               {dept.applicationNote && (
                 <p className="prose-body mt-4 text-sm text-muted-foreground" data-reveal>
-                  {dept.applicationNote.text}
+                  {Array.isArray(dept.applicationNote.text)
+                    ? dept.applicationNote.text.map((run, i) => <AboutRunText key={i} run={run} />)
+                    : dept.applicationNote.text}
                 </p>
               )}
             </Reveal>
@@ -547,7 +556,35 @@ export function DepartmentPage({ dept }: { dept: Department }) {
         </section>
       )}
 
-      <section className={cn("py-8 sm:py-10", nextBand())}>
+      {hasQaTestimonials && (
+        <section className={cn("py-8 sm:py-10", nextBand())}>
+          <Container>
+            <Reveal className="mx-auto w-full max-w-3xl">
+              <Heading>FAQs &amp; Testimonials</Heading>
+              <div className="mt-6 flex flex-col gap-8">
+                {dept.qaTestimonials?.map((qa) => (
+                  <div key={qa.q} data-reveal>
+                    <p className="font-bold text-dept-ink">{qa.q}</p>
+                    <div className="mt-3 flex flex-col gap-3">
+                      {qa.answers.map((ans, i) => (
+                        <p key={i} className="prose-body text-muted-foreground">
+                          <span className="font-bold text-dept-accent">
+                            {ans.name} ({ans.role}):
+                          </span>{" "}
+                          {ans.quote}
+                        </p>
+                      ))}
+                      {qa.note && <p className="prose-body text-muted-foreground">{qa.note}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </Container>
+        </section>
+      )}
+
+      <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl">
             <Heading>Contact Us!</Heading>
