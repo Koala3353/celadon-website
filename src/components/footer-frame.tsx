@@ -32,22 +32,22 @@ export function FooterFrame({ children }: { children: React.ReactNode }) {
               to solid color partway down the footer instead of blending in. */}
           <div
             aria-hidden
-            className="absolute inset-0 sm:hidden"
+            className="absolute inset-0 footer-bg-mobile"
             style={{
               backgroundImage: `url(${asset("/internal/footer-osr-bg-mobile.webp")})`,
               backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundPosition: "top",
               maskImage: "linear-gradient(to bottom, transparent, black 20%)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)",
             }}
           />
           <div
             aria-hidden
-            className="absolute inset-0 hidden sm:block"
+            className="absolute inset-0 footer-bg-desktop"
             style={{
               backgroundImage: `url(${asset("/internal/footer-commpub-bg.webp")})`,
               backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundPosition: "top",
               maskImage: "linear-gradient(to bottom, transparent, black 20%)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)",
             }}

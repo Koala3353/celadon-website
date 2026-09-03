@@ -35,8 +35,11 @@ export default function InternalPortalHomePage() {
         <section className="py-16 sm:py-20">
           <Container>
             <Reveal stagger={70} className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-              <Link href="/internal/dept-apps" data-reveal>
-                <Card className="lift h-full ring-sky-navy/10" innerClassName="flex h-full flex-col gap-3 p-8">
+              <Link href="/internal/dept-apps" data-reveal className="group pressable">
+                <Card
+                  className="lift h-full ring-sky-navy/10 transition group-hover:ring-sky-navy/30"
+                  innerClassName="flex h-full flex-col gap-3 p-8"
+                >
                   <span className="sky-display eyebrow w-fit rounded-full bg-sky-blue px-3 py-1 text-[0.6875rem] text-white">
                     Open now
                   </span>
@@ -45,8 +48,14 @@ export default function InternalPortalHomePage() {
                     Apply to join a department&rsquo;s year-long deputy pool. Browse every department&rsquo;s
                     roles, timeline, and requirements.
                   </p>
-                  <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-sky-navy">
-                    Explore departments →
+                  <p className="mt-auto flex items-center gap-1 pt-3 text-xs font-bold uppercase tracking-wider text-sky-navy">
+                    Explore departments
+                    <span
+                      aria-hidden
+                      className="inline-block transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
                   </p>
                 </Card>
               </Link>

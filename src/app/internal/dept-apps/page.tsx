@@ -120,54 +120,117 @@ export default function DeptAppsHubPage() {
                 className="aspect-[4/3] rounded-[1.75rem] shadow-[var(--shadow-md)] md:order-2"
               />
               <div className="flex flex-col items-start gap-4 text-left">
-                <SectionHeading>What&rsquo;s a deputy?</SectionHeading>
+                <SectionHeading>What are Deputies?</SectionHeading>
                 <p className="prose-body text-muted-foreground">
-                  A department deputy role is a year-long journey with your department family &mdash;
-                  you&rsquo;ll train together, build close bonds, and get deployed to support or lead
-                  multiple projects throughout the year. Every department runs its own pool with its own
-                  roadmap and responsibilities, so take a look before you apply.
+                  Deputies take on a year-long role in supporting Celadon as members of its different
+                  departments! Becoming a deputy is one of the best ways to kickstart your journey into
+                  becoming an active member of the organization, as you develop your skills, step outside
+                  of your comfort zone, and build friendships within your department. With each department
+                  leading its deputies with specialized roadmaps and responsibilities, please read through
+                  each department&rsquo;s sections before applying!
                 </p>
               </div>
             </Reveal>
           </Container>
         </section>
 
+        {/* Its own section now — the chevron flow was designed to run across
+            a full row (see TimelineFlow), so it read as cramped squeezed
+            into half of a two-column grid alongside "How to apply". */}
         <section>
           <Container>
-            <div className="mx-auto grid w-full max-w-5xl gap-10 lg:grid-cols-2 lg:items-start">
-              <Reveal>
-                <Card innerClassName="p-6 sm:p-8" data-reveal>
-                  <SectionHeading>Timeline</SectionHeading>
-                  <div className="mt-6">
-                    <TimelineFlow items={HUB_TIMELINE} />
-                  </div>
-                </Card>
-              </Reveal>
+            <Reveal className="mx-auto w-full max-w-4xl text-center">
+              <SectionHeading>Timeline</SectionHeading>
+            </Reveal>
+            <Reveal className="mx-auto mt-10 w-full max-w-4xl">
+              <TimelineFlow items={HUB_TIMELINE} />
+            </Reveal>
+          </Container>
+        </section>
 
-              <Reveal>
-                <Card className="bg-sky-teal/20" innerClassName="p-8 sm:p-10" data-reveal>
-                  <SectionHeading>How to apply</SectionHeading>
-                  <ol className="prose-body mt-6 flex flex-col gap-2.5 text-sky-navy/80">
-                    <li className="flex gap-2.5">
-                      <span className="font-bold text-sky-navy">1.</span>
-                      <span>Fill out and submit the Application Google Form.</span>
-                    </li>
-                    <li className="flex gap-2.5">
-                      <span className="font-bold text-sky-navy">2.</span>
-                      <span>Schedule and attend your interview.</span>
-                    </li>
-                    <li className="flex gap-2.5">
-                      <span className="font-bold text-sky-navy">3.</span>
-                      <span>Wait for your application results!</span>
-                    </li>
-                  </ol>
-                  <p className="prose-body mt-4 text-sm text-sky-navy/70">
-                    Note: COMMPUB has an additional requirement for applicants. Check COMMPUB&rsquo;s page
-                    before you apply.
-                  </p>
-                </Card>
-              </Reveal>
-            </div>
+        {/* Also its own section — six steps plus several inline notes is a
+            lot of content to balance against Timeline's three short dates in
+            a shared row, and it was getting cramped into half the width. */}
+        <section className="bg-sky-teal/20 py-12 sm:py-16">
+          <Container>
+            <Reveal className="mx-auto w-full max-w-2xl" data-reveal>
+              <SectionHeading>How to apply</SectionHeading>
+              <ol className="prose-body mt-6 flex flex-col gap-4 text-sky-navy/80">
+                <li className="flex gap-2.5">
+                  <span className="font-bold text-sky-navy">1.</span>
+                  <span>
+                    Browse through this <strong className="font-bold">website</strong> and the{" "}
+                    <strong className="font-bold">pages for the department/s</strong> you are interested in
+                    for information on deputy role/s, such as available positions, responsibilities, and
+                    other expectations.
+                    <br />
+                    <em className="italic text-sky-navy/70">
+                      Note: Deputy-level positions are unique to each department.
+                    </em>
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="font-bold text-sky-navy">2.</span>
+                  <span>
+                    Fill out and submit this{" "}
+                    <a
+                      href={APPLICATION_FORM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-link underline-offset-2 hover:underline"
+                    >
+                      Google Form
+                    </a>{" "}
+                    using your <strong className="font-bold">Ateneo Student Account</strong> for your
+                    application.
+                    <br />
+                    <em className="italic text-sky-navy/70">
+                      Note: Make sure that you have submitted this{" "}
+                      <strong className="font-bold">Membership Survey</strong> before submitting the Deputy
+                      Application Form. The survey will close by{" "}
+                      <strong className="font-bold">September 12, 11:59 PM</strong>.
+                    </em>
+                    <br />
+                    <em className="italic text-sky-navy/70">
+                      Note: You are also allowed to <strong className="font-bold">make edits</strong> to
+                      your application until <strong className="font-bold">September 12, 11:59 PM</strong>{" "}
+                      only.
+                    </em>
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="font-bold text-sky-navy">3.</span>
+                  <em className="italic">
+                    If instructed, complete the <strong className="font-bold">additional requirements</strong>{" "}
+                    for the department/s you are applying to.
+                  </em>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="font-bold text-sky-navy">4.</span>
+                  <span>
+                    <strong className="font-bold">Schedule</strong> your{" "}
+                    <strong className="font-bold">interview</strong> in this{" "}
+                    <strong className="font-bold">Google Sheet</strong> by following the instructions found
+                    in the landing tab.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="font-bold text-sky-navy">5.</span>
+                  <span>
+                    Wait for a <strong className="font-bold">confirmation message</strong> from your
+                    interviewer. Then, <strong className="font-bold">attend your interview.</strong>
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="font-bold text-sky-navy">6.</span>
+                  <span>Wait for your application results!</span>
+                </li>
+              </ol>
+              <p className="prose-body mt-4 text-sm text-sky-navy/70">
+                Note: COMMPUB has an additional requirement for applicants. Check COMMPUB&rsquo;s page before
+                you apply.
+              </p>
+            </Reveal>
           </Container>
         </section>
 

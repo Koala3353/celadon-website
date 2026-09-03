@@ -41,7 +41,7 @@ export function DeptHero({ dept }: { dept: Department }) {
             height={1080}
             priority
             data-reveal
-            className="max-h-[60vh] w-full object-cover"
+            className="max-h-[60vh] w-full object-cover sm:max-h-[75vh]"
           />
         </Reveal>
       )}

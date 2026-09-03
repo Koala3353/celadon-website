@@ -35,10 +35,10 @@ export function CommitteeExplorer({ committees }: { committees: CoreTeamCommitte
               aria-selected={isSelected}
               onClick={() => setSelectedAbbr(c.abbr)}
               className={cn(
-                "pressable flex items-center gap-3 rounded-2xl p-4 text-left ring-1 ring-inset transition-colors",
+                "pressable flex items-center gap-3 rounded-2xl p-4 text-left ring-1 ring-inset transition",
                 isSelected
                   ? "bg-navy text-white shadow-[var(--shadow-md)] ring-navy"
-                  : "bg-white text-navy ring-navy/[0.07] hover:bg-navy/[0.08] hover:shadow-[var(--shadow-sm)] hover:ring-navy/[0.2]"
+                  : "bg-white text-navy ring-navy/[0.07] hover:-translate-y-0.5 hover:bg-navy/[0.08] hover:shadow-[var(--shadow-sm)] hover:ring-navy/[0.2]"
               )}
             >
               <Badge tone={isSelected ? "onNavy" : "neutral"}>{c.abbr}</Badge>

@@ -194,6 +194,28 @@ html {
     0 0 10px #fff;
 }
 
+/* The internal footer's desktop background is a wide banner (5.3:1) — on a
+   viewport that's square-ish or taller (a resized browser window, a tablet
+   in portrait, etc.) `cover` would blow it up and crop nearly all of it away
+   instead of just cropping the edges. So the switch isn't a plain width
+   breakpoint: the wide banner only shows once the viewport is *both* wide
+   enough and actually landscape-shaped; anything squarer falls back to the
+   portrait mobile background, which crops sensibly at any aspect ratio. */
+.footer-bg-desktop {
+  display: none;
+}
+.footer-bg-mobile {
+  display: block;
+}
+@media (min-width: 640px) and (min-aspect-ratio: 4/3) {
+  .footer-bg-desktop {
+    display: block;
+  }
+  .footer-bg-mobile {
+    display: none;
+  }
+}
+
 /* CelaSkies gradient — the deputy-application pages' signature background.
    Sun-through-cloud glow at top, blue sky sinking into a peach horizon, plus
    a warm ambient glow bottom-right so it reads as lit, not flat — same

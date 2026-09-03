@@ -19,7 +19,7 @@ const AUTH_START_PATH = "/internal/__auth/start";
 const CALLBACK_PATH = "/internal/__auth/callback";
 const SESSION_COOKIE = "celadon_session";
 const NONCE_COOKIE = "celadon_oauth_nonce";
-const SESSION_TTL_SECONDS = 60 * 60 * 24; // 24h — matches the "same browser, no repeat sign-in" behavior.
+const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30; // 30d — matches the "same browser, no repeat sign-in" behavior.
 const NONCE_TTL_SECONDS = 600; // Just long enough to complete the Google redirect round trip.
 
 function isAllowedDomain(email: string, env: Env): boolean {

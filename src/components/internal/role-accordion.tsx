@@ -1,4 +1,5 @@
 import { PhotoCarousel } from "@/components/photo-carousel";
+import { AboutRunText } from "@/components/internal/rich-text";
 import { asset } from "@/lib/asset";
 import type { DeptRole } from "@/lib/deputy-departments";
 
@@ -35,7 +36,11 @@ export function RoleAccordion({ roles }: { roles: DeptRole[] }) {
             </svg>
           </summary>
           <div className="rounded-b-[1.125rem] bg-white px-5 pb-5">
-            <p className="prose-body text-sm text-dept-ink/70">{role.description}</p>
+            <p className="prose-body text-sm text-dept-ink/70">
+              {Array.isArray(role.description)
+                ? role.description.map((run, i) => <AboutRunText key={i} run={run} />)
+                : role.description}
+            </p>
             {role.images && role.images.length > 0 && (
               <PhotoCarousel
                 photos={role.images.map((img) => asset(img.src))}

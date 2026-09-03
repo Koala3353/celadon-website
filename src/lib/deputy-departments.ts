@@ -18,7 +18,10 @@ export interface DeptAccent {
 
 export interface DeptGroup {
   label?: string;
-  items: string[];
+  /** A plain string renders as-is; pass an `AboutRun[]` instead for an item
+   * that needs bold/italic/accent spans mid-sentence (a leading "Label:" is
+   * better served by the section's `colorLabels` instead). */
+  items: (string | AboutRun[])[];
 }
 
 /** One run of text within a rich-text `about` paragraph — plain by default,
@@ -27,6 +30,7 @@ export interface AboutRun {
   text: string;
   bold?: boolean;
   italic?: boolean;
+  underline?: boolean;
   /** Renders in the department's own accent color instead of the default ink
    * — for a word/phrase a department's own PDF highlights in color. */
   accent?: boolean;
@@ -75,7 +79,9 @@ export interface DeptRole {
   slug: string;
   emoji?: string;
   title: string;
-  description: string;
+  /** A plain string renders as-is; pass an `AboutRun[]` instead for bold/
+   * italic/underline/accent spans. */
+  description: string | AboutRun[];
   /** Sample-work photos shown under the description once the pool's
    * accordion item is opened — currently only COMMPUB's five pools have any.
    * Rendered as a carousel when there's more than one (e.g. Digital
@@ -137,8 +143,9 @@ export interface Department {
    * wraps awkwardly. Defaults to "normal". */
   aboutWidth?: "normal" | "wide";
   /** COMMPUB's PDF has a distinct "Vision and Thrust" blurb beyond the
-   * plain department description; nobody else does. */
-  visionThrust?: string;
+   * plain department description; nobody else does. A plain string renders
+   * as-is; pass an `AboutRun[]` instead for bold/italic/accent spans. */
+  visionThrust?: string | AboutRun[];
   /** A "What can you expect?" blurb, distinct from the shorter `about` shown
    * in the hero — currently only COMMPUB's PDF spells this out separately. */
   whatToExpect?: string;
@@ -175,10 +182,23 @@ export interface Department {
    * requirements that the other departments' single-role flow doesn't. */
   showApplicationInstructions?: boolean;
   /** Extra note alongside the (uniform, 3-step) application instructions —
-   * e.g. a link to additional requirements, or "none needed" for clarity. */
-  applicationNote?: { text: string; href?: string };
+   * e.g. a link to additional requirements, or "none needed" for clarity. A
+   * plain string renders as-is; pass an `AboutRun[]` instead for bold/
+   * underline/accent spans. */
+  applicationNote?: { text: string | AboutRun[]; href?: string };
   testimonials: DeptTestimonial[];
   faqs: DeptFaq[];
+  /** A combined "FAQs & Testimonials" format — a question followed by one or
+   * more named answers (each its own personal quote), plus an optional
+   * unattributed closing note — for a department whose own material presents
+   * it this way instead of separate plain-FAQ and testimonial-grid sections.
+   * When set, this renders in place of (not alongside) `testimonials`/`faqs`,
+   * so those should be left empty. */
+  qaTestimonials?: {
+    q: string;
+    answers: { name: string; role: string; quote: string }[];
+    note?: string;
+  }[];
   contacts: DeptContact[];
   /** Real event photos beyond the hero banner. */
   photos: string[];
@@ -216,8 +236,21 @@ export const DEPARTMENTS: Department[] = [
       "COMMPUB handles branding, social media, and creative content in graphic, physical design, photo, video, and writing. It aims to bring Celadon’s voice and stories to life.",
     about:
       "The Communications and Publications (COMMPUB) Department produces creative media in various forms and is also responsible for training and developing its members' creative abilities and other relevant skills.",
-    visionThrust:
-      "COMMPUB aims to engage its members' creative interests by providing opportunities to grow in skill-building, leadership, and community, through the maintenance and promotion of comprehensive systems, COMMPUB-led workshops, and the integration of members in concrete talent-cultivating initiatives and Celadon projects.",
+    visionThrust: [
+      { text: "COMMPUB aims to engage its " },
+      { text: "members' creative interests", bold: true },
+      { text: " by providing opportunities to grow in " },
+      { text: "skill-building", bold: true },
+      { text: ", leadership, and " },
+      { text: "community", bold: true },
+      { text: ", through the " },
+      { text: "maintenance and promotion", bold: true },
+      { text: " of comprehensive systems, COMMPUB" },
+      { text: "-led", bold: true },
+      { text: " workshops, and the integration of members in " },
+      { text: "concrete talent-cultivating", bold: true },
+      { text: " initiatives and Celadon projects." },
+    ],
     whatToExpect:
       "As a COMMPUB staffer, you will become a part of the department for the whole school year, selecting one (1) out of our five (5) pools: Digital Creatives, Production Design, Photos, Videos, and Writing. As a member of the department, you will be participating in bonding activities and meaningful workshops, be given the chance to contribute creative outputs to CelaZine, COMMPUB's official online magazine, and be deployed to Celadon projects, giving you plenty of chances for exploration and growth. Meet fellow artists, engage in fun activities, and unleash your creative side by joining the COMMPUB department!",
     roles: [
@@ -225,8 +258,13 @@ export const DEPARTMENTS: Department[] = [
         slug: "digital-creatives",
         emoji: "🎨",
         title: "Digital Creatives Pool",
-        description:
-          "Digital Creatives Staffers design digital creative and graphic design outputs for Celadon projects and other promotional materials, working in collaboration with other pools or project teams to conceptualize and create cohesive outputs. If you are interested in graphic design, as well as innovative and willing to explore new themes and artistic directions, then this is the pool for you! Experience in Canva, Adobe Photoshop, Adobe Illustrator, or other graphic design softwares is highly preferred, but not required.",
+        description: [
+          {
+            text: "Digital Creatives Staffers design digital creative and graphic design outputs for Celadon projects and other promotional materials, working in collaboration with other pools or project teams to conceptualize and create cohesive outputs. If you are interested in graphic design, as well as innovative and willing to explore new themes and artistic directions, then this is the pool for you! Experience in Canva, Adobe Photoshop, Adobe Illustrator, or other graphic design softwares is highly preferred, but ",
+          },
+          { text: "not required", bold: true },
+          { text: "." },
+        ],
         images: [
           { src: "/internal/commpub-pool-digital-creatives.webp", alt: "Digital Creatives Pool sample output 1" },
           { src: "/internal/commpub-pool-digital-creatives-2.webp", alt: "Digital Creatives Pool sample output 2" },
@@ -237,8 +275,13 @@ export const DEPARTMENTS: Department[] = [
         slug: "production-design",
         emoji: "🛠️",
         title: "Production Design Pool",
-        description:
-          "Production Design Staffers create and conceptualize physical props, onsite gimmicks, set/booth designs, and more for Celadon projects and initiatives. If you are interested in physical crafts and design, bursting with ideas for marketing gimmicks, and excited to work with something hands-on, then this is the pool for you! Experience in onsite design layout, prop crafting, and gimmicks is highly preferred, but not required.",
+        description: [
+          {
+            text: "Production Design Staffers create and conceptualize physical props, onsite gimmicks, set/booth designs, and more for Celadon projects and initiatives. If you are interested in physical crafts and design, bursting with ideas for marketing gimmicks, and excited to work with something hands-on, then this is the pool for you! Experience in onsite design layout, prop crafting, and gimmicks is highly preferred, but ",
+          },
+          { text: "not required", bold: true },
+          { text: "." },
+        ],
         images: [
           { src: "/internal/commpub-pool-production-design.webp", alt: "Production Design Pool sample output" },
         ],
@@ -247,31 +290,59 @@ export const DEPARTMENTS: Department[] = [
         slug: "photos",
         emoji: "📸",
         title: "Photos Pool",
-        description:
-          "Photos Staffers document various Celadon projects and initiatives, and participate in the making of DP shoots and photo collages. If you are interested in photography, and eager to explore new concepts and artistic directions, then this is the pool for you! Experience in photography and photo editing software is highly preferred, but not required. Owning a good camera is likewise highly preferred, but also not required.",
+        description: [
+          {
+            text: "Photos Staffers document various Celadon projects and initiatives, and participate in the making of DP shoots and photo collages. If you are interested in photography, and eager to explore new concepts and artistic directions, then this is the pool for you! Experience in photography and photo editing software is highly preferred, but ",
+          },
+          { text: "not required", bold: true },
+          { text: ". Owning a good camera is likewise highly preferred, but also " },
+          { text: "not required", bold: true },
+          { text: "." },
+        ],
         images: [{ src: "/internal/commpub-pool-photos.webp", alt: "Photos Pool sample output" }],
       },
       {
         slug: "videos",
         emoji: "🎥",
         title: "Videos Pool",
-        description:
-          "Videos Staffers capture and edit engaging video content for Celadon projects and initiatives, such as short edits, event recaps, promotional videos, and Reels. If you are interested in video production (whether shooting, editing, or both), and driven to exploring new artistic directions, then this is the pool for you! Experience in video production and editing is highly preferred, but not required. Owning a good camera is likewise highly preferred, but also not required.",
+        description: [
+          {
+            text: "Videos Staffers capture and edit engaging video content for Celadon projects and initiatives, such as short edits, event recaps, promotional videos, and Reels. If you are interested in video production (whether shooting, editing, or both), and driven to exploring new artistic directions, then this is the pool for you! Experience in video production and editing is highly preferred, but ",
+          },
+          { text: "not required", bold: true },
+          { text: ". Owning a good camera is likewise highly preferred, but also " },
+          { text: "not required", bold: true },
+          { text: "." },
+        ],
         images: [{ src: "/internal/commpub-pool-videos.webp", alt: "Videos Pool sample output" }],
       },
       {
         slug: "writing",
         emoji: "✍️",
         title: "Writing Pool",
-        description:
-          "Writing Staffers create various writing-based outputs including but not limited to: spiels/captions, poems, articles, and more. As a Writing Staffer, you will also be required to contribute at least one output to CelaZine, COMMPUB's official online magazine. If you are interested in exploring new writing styles and working with a variety of content, as well as detail-oriented, witty, and able to create emphatic written pieces, then this is the pool for you! Experience in writing a variety of written content and creative outputs is highly preferred, but not required.",
+        description: [
+          {
+            text: "Writing Staffers create various writing-based outputs including but not limited to: spiels/captions, poems, articles, and more. As a Writing Staffer, you will also be required to contribute at least one output to CelaZine, COMMPUB's official online magazine. If you are interested in exploring new writing styles and working with a variety of content, as well as detail-oriented, witty, and able to create emphatic written pieces, then this is the pool for you! Experience in writing a variety of written content and creative outputs is highly preferred, but ",
+          },
+          { text: "not required", bold: true },
+          { text: "." },
+        ],
         images: [{ src: "/internal/commpub-pool-writing.webp", alt: "Writing Pool sample output" }],
       },
     ],
     sections: [],
     showApplicationInstructions: true,
     applicationNote: {
-      text: "You must submit additional requirements for every pool you apply to (find them in the Additional Requirements doc) — but whether you apply to one or two pools, you only need to sign up for ONE interview.",
+      text: [
+        { text: "Note", bold: true, underline: true },
+        { text: ": You must submit additional requirements for " },
+        { text: "ALL", bold: true, underline: true },
+        {
+          text: " pools that you are applying for. However, whether you are applying to one or two pools, you only need to sign up for ",
+        },
+        { text: "ONE", bold: true, underline: true },
+        { text: " interview." },
+      ],
       href: "https://docs.google.com/document/d/1fvO5nr9ze-vnwbelc_XBSIeTkzUQafuuC6CE_nVD5Ow/edit?usp=sharing",
     },
     testimonials: [],
@@ -303,8 +374,23 @@ export const DEPARTMENTS: Department[] = [
     cardCover: { src: "/covers/chinese-new-year.jpg", alt: "CUL" },
     cardBlurb:
       "CUL is the heart of Celadon. It promotes Filipino-Chinese culture through meaningful events and builds on relevance, appreciation, and cultural connection.",
-    about:
-      "The Cultural Affairs (CUL) Department is the heart of Celadon as it spearheads the cultivation of awareness, understanding, and appreciation of the Chinese-Filipino culture both inside and outside the organization through various projects and initiatives. Given this, the department seeks to enrich active culture-sharing and encourage passive discourse and provide proper leadership training and engagement opportunities to better equip members in leading cultural initiatives under the department.",
+    aboutWidth: "wide",
+    about: [
+      [
+        { text: "The Cultural Affairs (CUL) Department is the heart of Celadon as it spearheads the " },
+        {
+          text: "cultivation of awareness, understanding, and appreciation of the Chinese-Filipino culture",
+          bold: true,
+        },
+        {
+          text: " both inside and outside the organization through various projects and initiatives. Given this, the department seeks to ",
+        },
+        { text: "enrich active culture-sharing and encourage passive discourse", bold: true },
+        { text: " and " },
+        { text: "provide proper leadership training and engagement opportunities", bold: true },
+        { text: " to better equip members in leading cultural initiatives under the department." },
+      ],
+    ],
     sections: [
       {
         heading: "CUL Trainee Roadmap",
@@ -329,9 +415,20 @@ export const DEPARTMENTS: Department[] = [
         groups: [
           {
             items: [
-              "Spearhead the planning and execution of CUL Mini Events (e.g., workshops, talks)",
-              "Contribute to CUL projects by heading Logistics or Programs committees in core teams",
-              "Honing leadership skills by attending skills-development workshops spearheaded by CUL and other departments",
+              [
+                { text: "Spearhead the " },
+                { text: "planning and execution of CUL Mini Events", bold: true },
+                { text: " (e.g., workshops, talks)" },
+              ],
+              [
+                { text: "Contribute to CUL projects by " },
+                { text: "heading Logistics or Programs committees in core teams", bold: true },
+              ],
+              [
+                { text: "Honing leadership skills by " },
+                { text: "attending skills-development workshops", bold: true },
+                { text: " spearheaded by CUL and other departments" },
+              ],
             ],
           },
         ],
@@ -348,9 +445,19 @@ export const DEPARTMENTS: Department[] = [
         groups: [
           {
             items: [
-              "Individuals who are passionate and want to enhance their project management skills",
-              "Members with a strong passion and love for culture-sharing",
-              "People who are proactive in sharing visions and bringing them to life",
+              [
+                { text: "Individuals who are " },
+                { text: "passionate and want to enhance", bold: true },
+                { text: " their project management skills" },
+              ],
+              [
+                { text: "Members with a " },
+                { text: "strong passion and love for culture-sharing", bold: true },
+              ],
+              [
+                { text: "People who are " },
+                { text: "proactive in sharing visions and bringing them to life", bold: true },
+              ],
             ],
           },
         ],
@@ -432,12 +539,33 @@ export const DEPARTMENTS: Department[] = [
     sections: [
       {
         heading: "EXREL Associate Role",
+        imagePosition: "left",
+        images: [
+          { src: "/internal/exrel-jade-1.webp", alt: "EXREL deputies at Jade Business Summit" },
+          { src: "/internal/exrel-jade-2.webp", alt: "EXREL deputies at Jade Business Summit" },
+          { src: "/internal/exrel-jade-3.webp", alt: "EXREL deputies at Jade Business Summit" },
+          { src: "/internal/exrel-jade-4.webp", alt: "EXREL deputies at Jade Business Summit" },
+        ],
         groups: [
           {
             items: [
-              "EXREL Associates are to be the official liaison of Ateneo Celadon towards external organizations (e.g. student organizations, corporate sponsors, advocacy communities, Chinese-Filipino organizations)",
-              "EXREL Associates aim to provide value to both internal and external stakeholders of the organization through sustainable and mutually beneficial partnerships",
-              "EXREL Associates seek to generate, develop, and maintain the relationships and networks of the organization",
+              [
+                { text: "EXREL Associates are to be the " },
+                { text: "official liaison of Ateneo Celadon", bold: true },
+                {
+                  text: " towards external organizations (e.g. student organizations, corporate sponsors, advocacy communities, Chinese-Filipino organizations)",
+                },
+              ],
+              [
+                { text: "EXREL Associates aim to " },
+                { text: "provide value to both internal and external stakeholders", bold: true },
+                { text: " of the organization through sustainable and mutually beneficial partnerships" },
+              ],
+              [
+                { text: "EXREL Associates seek to " },
+                { text: "generate, develop, and maintain the relationships and networks", bold: true },
+                { text: " of the organization" },
+              ],
             ],
           },
         ],
@@ -467,6 +595,12 @@ export const DEPARTMENTS: Department[] = [
       },
       {
         heading: "Who are we looking for?",
+        images: [
+          { src: "/internal/exrel-bar-1.webp", alt: "EXREL deputies at Binondo Amazing Race" },
+          { src: "/internal/exrel-bar-2.webp", alt: "EXREL deputies at Binondo Amazing Race" },
+          { src: "/internal/exrel-bar-3.webp", alt: "EXREL deputies at Binondo Amazing Race" },
+          { src: "/internal/exrel-bar-4.webp", alt: "EXREL deputies at Binondo Amazing Race" },
+        ],
         groups: [
           {
             items: [
@@ -513,40 +647,54 @@ export const DEPARTMENTS: Department[] = [
       },
     ],
     applicationNote: { text: "The EXREL Department does not require any additional requirements." },
-    testimonials: [
+    testimonials: [],
+    faqs: [],
+    qaTestimonials: [
       {
-        name: "Ashley",
-        role: "Associate Vice President for External Relations",
-        quote:
-          "Of course! This role is open to everyone, no matter your experience level. When I applied to become an ExRel Associate, there were so many systems and processes that I wasn't aware of. However, throughout the year, I was able to slowly learn these things through the projects I joined and the people I worked with. It's important that you keep an open mind and are ready to learn new things.",
-        photo: "/internal/ebcb/exrel-ashley-yu.webp",
+        q: "Can I be an EXREL Associate despite having no prior EXREL experience?",
+        answers: [
+          {
+            name: "Ashley",
+            role: "Associate Vice President",
+            quote:
+              "Of course! This role is open to everyone, no matter your experience level. When I applied to become an ExRel Associate, there were so many systems and processes that I wasn't aware of. However, throughout the year, I was able to slowly learn these things through the projects I joined and the people I worked with. It's important that you keep an open mind and are ready to learn new things.",
+          },
+          {
+            name: "Kyle",
+            role: "Associate Vice President",
+            quote:
+              "Absolutely! When I applied for the role, I genuinely had zero clue on anything about ExRel (I'm pretty sure my interviewer thought I accidentally signed up for ExRel instead of Cul). What I did get right, though, is that there would be a lot of networking and getting to know people inside and outside of Celadon. The most important thing we look for is your willingness to learn. Even if you don't have any experience, as long as you have the initiative and drive to learn, go for it! That's what I did, and it ended up being one of the best choices I've made so far in college.",
+          },
+        ],
       },
-      {
-        name: "Kyle",
-        role: "Associate Vice President for External Relations",
-        quote:
-          "Absolutely! When I applied for the role, I genuinely had zero clue on anything about ExRel. What I did get right, though, is that there would be a lot of networking and getting to know people inside and outside of Celadon. The most important thing we look for is your willingness to learn. Even if you don't have any experience, as long as you have the initiative and drive to learn, go for it!",
-        photo: "/internal/ebcb/exrel-kyle-tan.webp",
-      },
-      {
-        name: "Yomi",
-        role: "Vice President for External Relations",
-        quote:
-          "Speaking as a former ExRel Associate, the workload has always been very manageable within the department as ample support is provided by the people you work with (Managers and EBCB). You also get the freedom to choose how many commitments you'd like to take on throughout the year across projects and initiatives of your choice!",
-        photo: "/internal/ebcb/exrel-yomi-tan.webp",
-      },
-      {
-        name: "Vin",
-        role: "Associate Vice President for External Relations",
-        quote:
-          "Choosing EXREL means choosing to learn and immerse yourself in skills that you can surely use anywhere you go. Interpersonal, negotiation, and communication skills are among these skills you can use in your personal life, future career or business, group work, and so much more.",
-        photo: "/internal/ebcb/exrel-vin-ong.webp",
-      },
-    ],
-    faqs: [
       {
         q: "How much commitment is expected when being an EXREL Associate?",
-        a: "The EXREL EBCB expects each individual to prioritize their academics and well-being above organization-related work. In exchange, the EXREL EBCB also expects each individual to communicate their concerns as soon as possible to their respective teams, managers or EBCB.",
+        answers: [
+          {
+            name: "Yomi",
+            role: "Vice President",
+            quote:
+              "Speaking as a former ExRel Associate, the workload has always been very manageable within the department as ample support is provided by the people you work with (Managers and EBCB). You also get the freedom to choose how many commitments you'd like to take on throughout the year across projects and initiatives of your choice!",
+          },
+        ],
+        note: "The EXREL EBCB expects each individual to prioritize their academics and well-being above organization-related work. In exchange, the EXREL EBCB also expects each individual to communicate their concerns as soon as possible to their respective teams, managers or EBCB.",
+      },
+      {
+        q: "Why Choose EXREL?",
+        answers: [
+          {
+            name: "Bern",
+            role: "Former Associate Vice President",
+            quote:
+              "EXREL had always been the place I would love to call my second home when I got into university. Coming from a science background, EXREL imbued me with the corporate skills I would need to engage with the real world at the university level. From engaging in various company meetings, whether emailing them or attending onsite agendas, to simply bonding with the EXREL team and the partner university communities. I believe this is one of the best departments if you are looking to grow your corporate career and learn lifelong lessons, while making meaningful connections between outside partners and simply your fellow associates.",
+          },
+          {
+            name: "Vin",
+            role: "Associate Vice President",
+            quote:
+              "Choosing EXREL means choosing to learn and immerse yourself in skills that you can surely use anywhere you go. Interpersonal, negotiation, and communication skills are among these skills you can use in your personal life, future career or business, group work, and so much more. Being a part of EXREL also means that you get an early start as an associate to learn the ins and outs of this type of work as you continuously receive guidance and support from all of us. You can gradually build your exposure and confidence in handling communications and collaborations with all types of people and all of our partners in different capacities.",
+          },
+        ],
       },
     ],
     contacts: [
@@ -848,6 +996,7 @@ export const DEPARTMENTS: Department[] = [
     name: "OSR",
     fullName: "Organization Strategies and Research",
     accent: { base: "#7C3AED", tint: "#F5F3FF", ink: "#4C1D95" },
+    heroImage: { src: "/internal/osr-hero.webp", alt: "Organization Strategies and Research — loading, panda mascot" },
     cardCover: { src: "/internal/osr-card-cover.webp", alt: "OSR" },
     cardBlurb:
       "OSR develops evaluative and data-driven project and organizational strategies for Celadon’s sustainable growth. Handles research initiatives and back-end work for the organization.",
@@ -872,23 +1021,26 @@ export const DEPARTMENTS: Department[] = [
       ],
     ],
     techShowcase: {
-      heading: "This website is an OSR project",
+      heading: "This website is OSR's work!",
       blurb:
-        "This site, the Mahjong Leaderboard, and CelaWrapped were all built by OSR members. Nobody outsourced them, and nobody assigned them from outside the department. Someone in OSR just decided the org needed them and built them. If you want to build something like this for Celadon, this is the department.",
+        "To improve the experiences of Celadon's members, OSR built this website, together with the Mahjong Leaderboard and CelaWrapped, during RecWeek & Welcome Week. If you want to have the opportunity to learn from us hands-on and try to build similar initiatives, then OSR may be the department for you!",
       items: [
         {
           name: "ateneoceladon.com",
           description:
-            "The public website and this deputy application portal. Designed, coded, and maintained end-to-end by OSR.",
+            "We prepared this website, both its public-facing front and this internal portal, Ayi's Corner! The entire site is designed, coded, and maintained end-to-end by us.",
           href: "https://ateneoceladon.com",
         },
         {
           name: "Mahjong Leaderboard",
-          description: "A live leaderboard for Celadon's mahjong community, tracking standings across the year.",
+          description:
+            "This is a live leaderboard, which was first implemented during Welcome Week, for tracking standings and engagements among Celadon's mahjong community!",
+          href: "https://script.google.com/a/student.ateneo.edu/macros/s/AKfycbxNNdxbleontXs4X_-kB4lK_9qLV5Me6YnPvzjpzTnuyZj0xTwwbNkJ2XKow3PICsst/exec?table=A4&pli=1",
         },
         {
           name: "CelaWrapped",
-          description: "Celadon's own year-in-review, Spotify Wrapped-style, built from scratch for the org.",
+          description:
+            "At the end of each school year, we feature fun statistics and information we've collected on Celadon throughout the year, Spotify Wrapped-style! You may also expect to receive your own personalized CelaWrapped based on the information gathered over RecWeek and Welcome Week.",
         },
       ],
     },
@@ -973,7 +1125,7 @@ export const DEPARTMENTS: Department[] = [
         role: "OSR Associate Vice President '26-'27, OSR Junior Analyst '25-'26",
         photo: "/internal/ebcb/osr-sofia-dino.webp",
         quote:
-          "Unlike what one may typically assume, being a Junior Analyst isn't about having a secondary technical role; rather, it is about having the opportunity to ask questions, contribute ideas, and recommend solutions. I not only improved my technical skills and knowledge, but I found a space that provided me with avenues for growth and helped me build meaningful relationships with those who make everything worthwhile. And for as long as the world keeps spinning, I'd rather be enveloped by the department that boggles my mind every so often, yet will always push me to become better.",
+          "OSR taught me that our work extends far beyond numbers, questionnaires, and evaluations. All the data we gather serves a purpose: to better understand our members, projects, departments—and most importantly, to develop strategies for the Celadon we want to build. And, unlike what one may typically assume, being a Junior Analyst isn't about having a secondary role; rather, it is about having the opportunity to ask questions, contribute ideas, and recommend solutions. I not only improved my technical skills and knowledge, but I found a space that provided me with avenues for growth and helped me build meaningful relationships with those who make everything worthwhile.",
       },
       {
         name: "Keene Brigado",
@@ -1011,7 +1163,7 @@ export function getDepartment(slug: string): Department | undefined {
 // From this year's dept-apps hub outline PDF.
 
 export const HUB_TIMELINE: DeptTimelineItem[] = [
-  { date: "September 3–12, 2026", label: "Deputy Application Duration" },
+  { date: "September 4–12, 2026", label: "Deputy Application Duration" },
   { date: "September 8–16, 2026", label: "Interview Dates" },
   { date: "September 18, 2026", label: "Release of Results" },
 ];
@@ -1027,7 +1179,7 @@ export const HUB_FAQS: DeptFaq[] = [
   },
   {
     q: "What's the difference between being a department deputy versus a project core team member?",
-    a: "A department deputy role is a year-long journey with your department family, where you'll be able to train together, build close bonds, and get deployed to support or lead multiple projects throughout the year. Being on a project core team is a short-term role (a few months) focused on one specific project or event, where you may serve as a core member or head.",
+    a: "A department deputy role is a year-long commitment and journey with your department, where you'll be able to work together, build close bonds, and be deployed to support or lead projects throughout the year. On the other hand, being a project core team member entails holding a short-term role across a few months, that is focused on one specific project.",
   },
 ];
 
