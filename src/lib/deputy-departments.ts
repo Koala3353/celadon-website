@@ -117,6 +117,10 @@ export interface DeptContact {
   facebook?: string;
   email?: string;
   photo?: string;
+  /** Sub-heading to cluster contacts under within "Contact Us!" — e.g.
+   * separating EBCB from Managers. Contacts without one render in a single
+   * flat grid, as every department but COMMPUB does. */
+  groupLabel?: string;
 }
 
 export interface Department {
@@ -233,7 +237,7 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/commpub-hero.webp", alt: "COMMPUB Staffers SY 2026-2027" },
     cardCover: { src: "/internal/commpub-card-cover.webp", alt: "COMMPUB" },
     cardBlurb:
-      "COMMPUB handles branding, social media, and creative content in graphic, physical design, photo, video, and writing. It aims to bring Celadon’s voice and stories to life.",
+      "COMMPUB produces creative media and documentation as well as promotional material and event design for Celadon. It also oversees the branding and public relations of the organization by managing the organization’s official social media channels.",
     about:
       "The Communications and Publications (COMMPUB) Department produces creative media in various forms and is also responsible for training and developing its members' creative abilities and other relevant skills.",
     visionThrust: [
@@ -348,11 +352,21 @@ export const DEPARTMENTS: Department[] = [
     testimonials: [],
     faqs: [],
     contacts: [
-      { name: "Jillian Yu", role: "VP for Communications and Publications", facebook: "http://fb.com/jillian.yu.758", email: "jillian.yu@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-yu.webp" },
-      { name: "Jillian Dy", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/jillian.dy.961", email: "jillian.dy@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-dy.webp" },
-      { name: "Dia Fernando", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/dia.fernando.9", email: "dia.ainsly.fernando@student.ateneo.edu", photo: "/internal/ebcb/commpub-dia-fernando.webp" },
-      { name: "Simone Chua", role: "AVP for Documentation and Publications", facebook: "http://fb.com/simoneabigailc", email: "simone.chua@student.ateneo.edu", photo: "/internal/ebcb/commpub-simone-chua.webp" },
-      { name: "Abby Tan", role: "AVP for Documentation and Publications", facebook: "http://fb.com/abbytann", email: "elise.tan@student.ateneo.edu", photo: "/internal/ebcb/commpub-abby-tan.webp" },
+      { name: "Jillian Yu", role: "VP for Communications and Publications", facebook: "http://fb.com/jillian.yu.758", email: "jillian.yu@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-yu.webp", groupLabel: "COMMPUB EBCB" },
+      { name: "Jillian Dy", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/jillian.dy.961", email: "jillian.dy@student.ateneo.edu", photo: "/internal/ebcb/commpub-jillian-dy.webp", groupLabel: "COMMPUB EBCB" },
+      { name: "Dia Fernando", role: "AVP for Creative Branding and Design", facebook: "http://fb.com/dia.fernando.9", email: "dia.ainsly.fernando@student.ateneo.edu", photo: "/internal/ebcb/commpub-dia-fernando.webp", groupLabel: "COMMPUB EBCB" },
+      { name: "Simone Chua", role: "AVP for Documentation and Publications", facebook: "http://fb.com/simoneabigailc", email: "simone.chua@student.ateneo.edu", photo: "/internal/ebcb/commpub-simone-chua.webp", groupLabel: "COMMPUB EBCB" },
+      { name: "Abby Tan", role: "AVP for Documentation and Publications", facebook: "http://fb.com/abbytann", email: "elise.tan@student.ateneo.edu", photo: "/internal/ebcb/commpub-abby-tan.webp", groupLabel: "COMMPUB EBCB" },
+      { name: "Lina Syjueco", role: "Digital Creatives Manager", facebook: "https://www.facebook.com/angelina.syjueco.2024", email: "angelina.syjueco@student.ateneo.edu", photo: "/internal/ebcb/commpub-lina-syjueco.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Megan Tan", role: "Digital Creatives Manager", facebook: "https://www.facebook.com/megantan23", email: "megan.ashley.tan@student.ateneo.edu", photo: "/internal/ebcb/commpub-megan-tan.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Erica Lee", role: "Production Design Manager", facebook: "https://www.facebook.com/ericajoy.lee.90", email: "erica.joy.lee@student.ateneo.edu", photo: "/internal/ebcb/commpub-erica-lee.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Trisha Li", role: "Production Design Manager", facebook: "https://www.facebook.com/trisha.maxene.1", email: "trisha.maxene.li@student.ateneo.edu", photo: "/internal/ebcb/commpub-trisha-li.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Casey Cham", role: "Photos Manager", facebook: "https://www.facebook.com/cirelandcc", email: "casey.ireland.cham@student.ateneo.edu", photo: "/internal/ebcb/commpub-casey-cham.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Sabrina Tan", role: "Photos Manager", facebook: "https://www.facebook.com/sabrina.tan.963", email: "sabrina.mikaela.tan@student.ateneo.edu", photo: "/internal/ebcb/commpub-sabrina-tan.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Rafa Belo", role: "Videos Manager", facebook: "https://www.facebook.com/rafabelooo", email: "rafael.belo@student.ateneo.edu", photo: "/internal/ebcb/commpub-rafa-belo.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Claire Mayol", role: "Writing Manager", facebook: "https://www.facebook.com/francisca.claire.mayol", email: "francisca.claire.assisi.mayol@student.ateneo.edu", photo: "/internal/ebcb/commpub-claire-mayol.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Moira Son", role: "Writing Manager", facebook: "https://www.facebook.com/moiraason", email: "moira.genevieve.son@student.ateneo.edu", photo: "/internal/ebcb/commpub-moira-son.webp", groupLabel: "COMMPUB Managers" },
+      { name: "Sophia Cu", role: "Writing Manager", facebook: "https://www.facebook.com/sophia.cu.106", email: "sophia.louise.cu@student.ateneo.edu", photo: "/internal/ebcb/commpub-sophia-cu.webp", groupLabel: "COMMPUB Managers" },
     ],
     photos: [
       "/internal/commpub-photo-ga-2526.webp",
@@ -373,7 +387,7 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/cul-hero.webp", alt: "Ateneo Celadon Cultural Affairs Department" },
     cardCover: { src: "/covers/chinese-new-year.jpg", alt: "CUL" },
     cardBlurb:
-      "CUL is the heart of Celadon. It promotes Filipino-Chinese culture through meaningful events and builds on relevance, appreciation, and cultural connection.",
+      "CUL spearheads the cultivation of the awareness, understanding, and appreciation of Chinese-Filipino culture to both Celadon and the greater Philippine community. It establishes connections and interactions to encourage a mutual acknowledgment of culture.",
     aboutWidth: "wide",
     about: [
       [
@@ -507,23 +521,20 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/exrel-hero.webp", alt: "External Relations Department" },
     cardCover: { src: "/internal/exrel-card-cover.webp", alt: "EXREL" },
     cardBlurb:
-      "EXREL serves as the liaison of Ateneo Celadon towards external organizations and corporations. The department aims to provide value to both the internal and external stakeholders of the organization through engaging in strategic, mutually-beneficial and sustainable partnerships.",
+      "EXREL serves as the official liaison of Ateneo Celadon towards external organizations and corporations. It aims to provide value to both the internal and external stakeholders of the organization through sponsorships and partnerships.",
     about: [
       [
         {
-          text: "The External Relations (EXREL) Department is the matchmaker of Celadon, aiming to strengthen on and off-campus partnerships by ",
+          text: "The External Relations (EXREL) Department is the matchmaker of Celadon, aiming to strengthen on and off-campus partnerships. It does this by ",
         },
         { text: "creating sustainable and beneficial relationships", bold: true },
         { text: " between the organization and " },
         { text: "renowned sponsors and partners", bold: true },
         { text: " through " },
-        { text: "systematic contacting and negotiating, as well as flagship projects", bold: true },
-        { text: " — " },
-        { text: "Binondo Amazing Race (BAR) and Jade Business Summit (JADE)", italic: true },
-        { text: " — " },
-        { text: "and in-house initiatives", bold: true },
-        { text: " such as Celadon's AlumNight and Advocacy Outreach", italic: true },
-        { text: "." },
+        { text: "systematic contacting and negotiating", bold: true },
+        { text: ". It also spearheads " },
+        { text: "flagship projects and in-house initiatives", bold: true },
+        { text: " that keep the organization's network active year-round." },
       ],
       [
         { text: "These endeavours help " },
@@ -551,7 +562,7 @@ export const DEPARTMENTS: Department[] = [
             items: [
               [
                 { text: "EXREL Associates are to be the " },
-                { text: "official liaison of Ateneo Celadon", bold: true },
+                { text: "official liaison of Celadon", bold: true },
                 {
                   text: " towards external organizations (e.g. student organizations, corporate sponsors, advocacy communities, Chinese-Filipino organizations)",
                 },
@@ -571,7 +582,7 @@ export const DEPARTMENTS: Department[] = [
         ],
       },
       {
-        heading: "Positions and Responsibilities",
+        heading: "Tasks and Responsibilities",
         groups: [
           {
             label: "Navigate External Relations for various projects by:",
@@ -716,7 +727,7 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/fin-hero.webp", alt: "Welcome to the FINance Farmily 2026-2027" },
     cardCover: { src: "/internal/fin-card-cover.webp", alt: "FIN" },
     cardBlurb:
-      "FIN manages Celadon’s finances and major fundraising projects. We train members holistically — both financially and entrepreneurially.",
+      "FIN is responsible for all Celadon financial matters including major fundraising projects for the organization and other financial transactions. It is in charge of instilling financial responsibility as well as encouraging sustainable innovation.",
     about: [
       [
         {
@@ -871,7 +882,7 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/hr-hero.webp", alt: "Ateneo Celadon Human Resources Department, 2026-2027" },
     cardCover: { src: "/departments/hr-general-assembly.jpg", alt: "HR" },
     cardBlurb:
-      "HR develops membership development and leadership through meaningful formation and community-building efforts.",
+      "HR centers on projects that provide membership development and leadership formation. It is responsible for fostering an internal organization culture that is embedded with modern Chinese-Filipino values.",
     aboutWidth: "wide",
     about:
       "The Human Resources (HR) Department is the foundation of Celadon's members that works to promote member welfare, engagement, and development. Our department seeks to foster a supportive and inclusive environment where members of Celadon can grow and build meaningful connections while providing opportunities for personal and leadership development.",
@@ -999,7 +1010,7 @@ export const DEPARTMENTS: Department[] = [
     heroImage: { src: "/internal/osr-hero.webp", alt: "Organization Strategies and Research — loading, panda mascot" },
     cardCover: { src: "/internal/osr-card-cover.webp", alt: "OSR" },
     cardBlurb:
-      "OSR develops evaluative and data-driven project and organizational strategies for Celadon’s sustainable growth. Handles research initiatives and back-end work for the organization.",
+      "OSR develops evaluative and data-driven projects and organizational strategies for Celadon’s sustainable growth. The department handles research initiatives and back-end work for the organization.",
     aboutWidth: "wide",
     about: [
       [

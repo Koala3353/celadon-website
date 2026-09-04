@@ -46,8 +46,9 @@ export function TestimonialCard({
        * stay legible regardless of what's behind the card. */}
       <div
         className={cn(
-          "flex items-center gap-3 rounded-2xl bg-white p-3 shadow-[var(--shadow-sm)]",
-          "sm:absolute sm:left-6 sm:z-10 sm:gap-0 sm:rounded-none sm:bg-transparent sm:p-0 sm:shadow-none",
+          "flex items-center gap-3 rounded-2xl bg-white p-3 shadow-[var(--shadow-md)]",
+          isDark ? "" : "ring-1 ring-dept-ink/10",
+          "sm:absolute sm:left-6 sm:z-10 sm:gap-0 sm:rounded-none sm:bg-transparent sm:p-0 sm:shadow-none sm:ring-0",
           headerClassName ?? "sm:top-0"
         )}
       >
@@ -75,7 +76,12 @@ export function TestimonialCard({
             </span>
           </div>
         )}
-        <div className="sm:-ml-4 sm:rounded-full sm:bg-white sm:py-2 sm:pl-7 sm:pr-5 sm:shadow-[var(--shadow-sm)]">
+        <div
+          className={cn(
+            "sm:-ml-4 sm:rounded-full sm:bg-white sm:py-2 sm:pl-7 sm:pr-5 sm:shadow-[var(--shadow-md)]",
+            isDark ? "" : "sm:ring-1 sm:ring-dept-ink/10"
+          )}
+        >
           <p className={cn("text-sm font-bold", isDark ? "text-sky-navy" : "text-dept-ink")}>{name}</p>
           {roleLines.map((line) => (
             <p key={line} className="text-xs leading-tight text-muted-foreground">
