@@ -130,8 +130,25 @@ export interface Department {
   fullName: string;
   accent: DeptAccent;
   /** Illustrated banner from the department's own PDF. Not every department
-   * has one — OSR's source material never included one. */
+   * has one. */
   heroImage?: { src: string; alt: string };
+  /** Insets the hero banner from the viewport edges on desktop instead of
+   * running full-bleed — for a banner whose art doesn't read as well
+   * stretched edge-to-edge. The gutter is filled with a faded, full-bleed
+   * echo of the same banner (rather than a flat color) so it still reads as
+   * one continuous image. Mobile (and narrow tablet widths, for `large`)
+   * stays full-bleed either way. */
+  heroImagePadding?: {
+    /** Bumps the inset size up and delays it to a wider breakpoint (`md`
+     * instead of `sm`) — for a banner that needs a roomier frame. */
+    large?: boolean;
+    /** CSS `object-position` for the crisp centered copy — shift it off
+     * dead-center when the source art has real content (not just ambient
+     * background) sitting close to an edge, so the crop favors hiding that
+     * content instead of leaving a sliver of it sitting right in the fade.
+     * Defaults to centered. */
+    objectPosition?: string;
+  };
   /** Photo cover shown on the hub's department card — distinct from
    * `heroImage`, which is the department's own page banner. */
   cardCover: { src: string; alt: string };
@@ -725,6 +742,7 @@ export const DEPARTMENTS: Department[] = [
     fullName: "Financial Affairs",
     accent: { base: "#16A34A", tint: "#F0FDF4", ink: "#14532D" },
     heroImage: { src: "/internal/fin-hero.webp", alt: "Welcome to the FINance Farmily 2026-2027" },
+    heroImagePadding: {},
     cardCover: { src: "/internal/fin-card-cover.webp", alt: "FIN" },
     cardBlurb:
       "FIN is responsible for all Celadon financial matters including major fundraising projects for the organization and other financial transactions. It is in charge of instilling financial responsibility as well as encouraging sustainable innovation.",
@@ -1008,6 +1026,10 @@ export const DEPARTMENTS: Department[] = [
     fullName: "Organization Strategies and Research",
     accent: { base: "#7C3AED", tint: "#F5F3FF", ink: "#4C1D95" },
     heroImage: { src: "/internal/osr-hero.webp", alt: "Organization Strategies and Research — loading, panda mascot" },
+    // Biased right so the crop hides more of the left-edge chart panel —
+    // that panel otherwise leaves a sliver of real content sitting right in
+    // the fade-to-backdrop zone at the crisp copy's left edge.
+    heroImagePadding: { large: true, objectPosition: "65% center" },
     cardCover: { src: "/internal/osr-card-cover.webp", alt: "OSR" },
     cardBlurb:
       "OSR develops evaluative and data-driven projects and organizational strategies for Celadon’s sustainable growth. The department handles research initiatives and back-end work for the organization.",

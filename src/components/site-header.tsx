@@ -35,27 +35,36 @@ export function SiteHeader() {
       style={{ zIndex: "var(--z-nav)" }}
     >
       <Container className="flex h-16 items-center justify-between sm:h-[4.5rem]">
-        <Link
-          href="/"
-          aria-label="Ateneo Celadon — home"
-          className="flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
-        >
-          <Image
-            src={asset("/brand/dreagle-mark.png")}
-            alt=""
-            width={775}
-            height={775}
-            priority
-            className="h-16 w-auto"
-          />
-          <span className="sr-only">Ateneo Celadon</span>
-        </Link>
+        <div className="flex items-center gap-2 sm:gap-6">
+          <Link
+            href="/"
+            aria-label="Ateneo Celadon — home"
+            className="flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
+          >
+            <Image
+              src={asset("/brand/dreagle-mark.png")}
+              alt=""
+              width={775}
+              height={775}
+              priority
+              className="h-16 w-auto"
+            />
+            <span className="sr-only">Ateneo Celadon</span>
+          </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-1 sm:flex">
-          {NAV.map((item) => (
-            <NavLink key={item.href} item={item} pathname={pathname} />
-          ))}
-        </nav>
+          <nav aria-label="Main" className="hidden items-center gap-1 sm:flex">
+            {NAV.map((item) => (
+              <NavLink key={item.href} item={item} pathname={pathname} />
+            ))}
+          </nav>
+        </div>
+
+        <Link
+          href="/internal"
+          className="pressable hidden items-center rounded-full bg-navy-tint px-4 py-2 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:bg-navy/[0.15] sm:flex"
+        >
+          A-yi&rsquo;s Corner
+        </Link>
 
         <button
           type="button"
@@ -195,6 +204,14 @@ function MobileMenu({ pathname, onClose }: { pathname: string; onClose: () => vo
             />
           ))}
         </nav>
+
+        <Link
+          href="/internal"
+          onClick={onClose}
+          className="mt-6 flex items-center gap-1.5 rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-navy-tint hover:text-navy"
+        >
+          A-yi&rsquo;s Corner <span aria-hidden>&rarr;</span>
+        </Link>
       </div>
     </div>,
     document.body

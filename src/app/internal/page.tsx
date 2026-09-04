@@ -77,7 +77,13 @@ export default function InternalPortalHomePage() {
         </section>
 
         {/* ---- Core Team committees ----------------------------------- */}
-        <section className="py-16 sm:py-20">
+        {/* Flat white, not the ambient wash — this is the last section on
+            the page, and its bottom padding sits directly above the
+            footer's own plain-white margin gap. Letting the wash show
+            through here instead would cut off abruptly right where the
+            footer needs to fade in cleanly (same fix as the dept-apps hub
+            and EBCB directory pages). */}
+        <section className="bg-white py-16 sm:py-20">
           <Container>
             <Reveal className="mx-auto max-w-2xl text-center">
               <p className="sky-display eyebrow text-sky-navy/70" data-reveal>
