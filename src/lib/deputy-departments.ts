@@ -1176,7 +1176,7 @@ export const DEPARTMENTS: Department[] = [
       { date: "January 2027", label: "Second Department Hangout" },
       { date: "Mid January 2027", label: "Workshop 3: Advanced Appscript" },
       { date: "January to May 2027", label: "Second Semester Project Deployments" },
-      { date: "May 2027", label: "Third Department Hangout" },
+      { date: "March 2027", label: "Third Department Hangout" },
     ],
     floatingApplyUrl:
       "https://docs.google.com/forms/d/e/1FAIpQLSflXsyvOgmISRO9kSDI1229_oRkr6wmSbBoaKKjrbvUWcwf_w/viewform",
