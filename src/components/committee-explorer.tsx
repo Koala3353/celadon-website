@@ -20,10 +20,17 @@ export function CommitteeExplorer({ committees }: { committees: CoreTeamCommitte
 
   return (
     <div>
+      {/* A vertical stack of 14 buttons put the detail panel a full page
+          below the picker on mobile — picking a different committee meant
+          scrolling all the way back up, reading, then all the way back
+          down. Below sm this is instead a single horizontally-scrollable
+          row (snapping, no visible scrollbar), so the whole picker stays
+          about one thumb-swipe wide and the detail panel right underneath
+          it never moves. From sm up there's room for the original grid. */}
       <div
         role="tablist"
         aria-label="Core Team committees"
-        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+        className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3"
       >
         {committees.map((c) => {
           const isSelected = c.abbr === selected.abbr;
@@ -35,7 +42,7 @@ export function CommitteeExplorer({ committees }: { committees: CoreTeamCommitte
               aria-selected={isSelected}
               onClick={() => setSelectedAbbr(c.abbr)}
               className={cn(
-                "pressable flex items-center gap-3 rounded-2xl p-4 text-left ring-1 ring-inset transition",
+                "pressable flex shrink-0 snap-start items-center gap-3 whitespace-nowrap rounded-2xl p-4 text-left ring-1 ring-inset transition sm:shrink sm:whitespace-normal",
                 isSelected
                   ? "bg-navy text-white shadow-[var(--shadow-md)] ring-navy"
                   : "bg-white text-navy ring-navy/[0.07] hover:-translate-y-0.5 hover:bg-navy/[0.08] hover:shadow-[var(--shadow-sm)] hover:ring-navy/[0.2]"

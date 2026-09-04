@@ -307,6 +307,18 @@ html {
   }
 }
 
+/* Hides the scrollbar on an otherwise-scrollable strip (e.g. a horizontal
+   chip picker on mobile) — it still scrolls/swipes normally, there's just
+   no visible track cluttering a compact row. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Press feedback, applied to every pressable surface. */
 .pressable {
   transition: transform 160ms var(--ease-out);
