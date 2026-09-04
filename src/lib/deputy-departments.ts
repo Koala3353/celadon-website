@@ -1169,11 +1169,13 @@ export const DEPARTMENTS: Department[] = [
     },
     timeline: [
       { date: "Late September 2026", label: "Department General Assembly" },
+      { date: "September to November 2026", label: "First Semester Project Deployments" },
       { date: "Early to Mid October 2026", label: "Workshop 1: Google Sheets and Appscript" },
       { date: "Mid October 2026", label: "First Department Hangout" },
       { date: "Late October 2026", label: "Workshop 2: Email Blasting & Sustainability Report Creation" },
       { date: "January 2027", label: "Second Department Hangout" },
       { date: "Mid January 2027", label: "Workshop 3: Advanced Appscript" },
+      { date: "January to May 2027", label: "Second Semester Project Deployments" },
       { date: "May 2027", label: "Third Department Hangout" },
     ],
     floatingApplyUrl:
