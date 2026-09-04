@@ -113,9 +113,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  overflow-x: hidden;
 }
 
+/* Only one of html/body may set `overflow`, or the browser gives each its
+   own independent scroll container — the actual page scroll lands on one of
+   them while `position: sticky` headers (children of body) end up anchored
+   to the other, non-scrolling one, and silently stop sticking. */
 html {
   overflow-x: hidden;
   overscroll-behavior-x: none;
