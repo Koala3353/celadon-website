@@ -85,14 +85,22 @@ function DirectorySection({
   heading,
   contacts,
   tone,
+  isLast,
 }: {
   emoji: string;
   heading: string;
   contacts: DeptContact[];
   tone: "white" | "tint";
+  /** The very last section on the page sits directly above the footer's
+   * margin gap. That gap reveals the plain white page background, so this
+   * section needs to actually BE that same flat white at its bottom edge —
+   * otherwise the ambient sky-tint-field wash (visible through the default
+   * "white" tone) cuts off abruptly into the gap instead of blending into
+   * it, reading as a hard seam right before the footer. */
+  isLast?: boolean;
 }) {
   return (
-    <section className={cn("py-14 sm:py-16", tone === "tint" && "bg-sky-blue/[0.06]")}>
+    <section className={cn("py-14 sm:py-16", tone === "tint" && "bg-sky-blue/[0.06]", isLast && "bg-white")}>
       <Container className="flex flex-col gap-8">
         <Reveal className="mx-auto w-full max-w-5xl">
           <h2 className="sky-display flex items-center gap-2 text-2xl font-semibold text-sky-navy sm:text-3xl" data-reveal>
@@ -127,6 +135,7 @@ export default function EbcbDirectoryPage() {
             heading={`${dept.fullName} Department`}
             contacts={dept.contacts}
             tone={i % 2 === 0 ? "tint" : "white"}
+            isLast={i === DEPARTMENTS.length - 1}
           />
         ))}
       </div>

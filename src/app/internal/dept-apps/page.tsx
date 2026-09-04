@@ -63,7 +63,7 @@ export default function DeptAppsHubPage() {
       {/* One continuous ambient wash for the whole page body — sections
           below are spacing and content only, never a new flat background,
           so nothing reads as a stitched-together band. */}
-      <div className="sky-tint-field flex flex-col gap-14 py-14 sm:gap-20 sm:py-20">
+      <div className="sky-tint-field flex flex-col gap-14 pt-14 sm:gap-20 sm:pt-20">
         <section>
           <Container>
             <Reveal>
@@ -262,7 +262,12 @@ export default function DeptAppsHubPage() {
           </Container>
         </section>
 
-        <section>
+        {/* Flat white, not the ambient wash — this is the last thing on the
+            page, and its bottom padding is what sits directly above the
+            footer's own margin gap (which is plain white too). Letting the
+            wash show through here instead would cut off abruptly at that
+            gap, right where the footer art needs to fade in cleanly. */}
+        <section className="bg-white pb-14 sm:pb-20">
           <Container>
             <Reveal className="mx-auto w-full max-w-5xl overflow-hidden rounded-[1.75rem] bg-sky-navy shadow-[var(--shadow-lg)]">
               <div className="relative">

@@ -80,6 +80,21 @@ export function DepartmentPage({ dept }: { dept: Department }) {
   const hasFaqs = dept.faqs.length > 0;
   const hasQaTestimonials = !!dept.qaTestimonials && dept.qaTestimonials.length > 0;
 
+  // Contacts cluster under a subheading when their `groupLabel`s differ from
+  // the previous contact's (e.g. COMMPUB's EBCB vs. Managers) — everyone else
+  // leaves `groupLabel` unset, which collapses this to the old single flat
+  // grid under one implicit group.
+  const contactGroups = dept.contacts.reduce<{ label: string | null; contacts: typeof dept.contacts }[]>(
+    (groups, contact) => {
+      const label = contact.groupLabel ?? null;
+      const last = groups[groups.length - 1];
+      if (last && last.label === label) last.contacts.push(contact);
+      else groups.push({ label, contacts: [contact] });
+      return groups;
+    },
+    []
+  );
+
   // Bands alternate white/dept-tint in render order, but only counting bands
   // that actually render for this department — a department missing a
   // section (e.g. no testimonials) still gets a clean alternation instead of
@@ -588,46 +603,60 @@ export function DepartmentPage({ dept }: { dept: Department }) {
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl">
             <Heading>Contact Us!</Heading>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {dept.contacts.map((contact) => (
-                <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
-                  {contact.photo ? (
-                    <SkeletonImage
-                      src={asset(contact.photo)}
-                      alt={contact.name}
-                      width={112}
-                      height={112}
-                      containerClassName="h-28 w-28 rounded-full"
-                      className="h-28 w-28 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-28 w-28 items-center justify-center rounded-full bg-dept-accent/15">
-                      <span className="display text-2xl text-dept-ink/60">{initials(contact.name)}</span>
-                    </div>
+            <div className="mt-6 flex flex-col gap-8">
+              {contactGroups.map((group, i) => (
+                <div
+                  key={group.label ?? i}
+                  className={cn(i > 0 && "border-t border-dept-ink/10 pt-8")}
+                >
+                  {group.label && (
+                    <p className="mb-4 text-xs font-bold uppercase tracking-wider text-dept-accent">
+                      {group.label}
+                    </p>
                   )}
-                  <p className="font-bold text-dept-ink">{contact.name}</p>
-                  <p className="text-sm text-muted-foreground">{contact.role}</p>
-                  <p className="text-sm">
-                    {contact.facebook && (
-                      <a
-                        href={contact.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-link underline-offset-2 hover:underline"
-                      >
-                        Facebook
-                      </a>
-                    )}
-                    {contact.facebook && contact.email && " | "}
-                    {contact.email && (
-                      <a
-                        href={`mailto:${contact.email}`}
-                        className="text-link underline-offset-2 hover:underline"
-                      >
-                        Email
-                      </a>
-                    )}
-                  </p>
+                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {group.contacts.map((contact) => (
+                      <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
+                        {contact.photo ? (
+                          <SkeletonImage
+                            src={asset(contact.photo)}
+                            alt={contact.name}
+                            width={112}
+                            height={112}
+                            containerClassName="h-28 w-28 rounded-full"
+                            className="h-28 w-28 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-dept-accent/15">
+                            <span className="display text-2xl text-dept-ink/60">{initials(contact.name)}</span>
+                          </div>
+                        )}
+                        <p className="font-bold text-dept-ink">{contact.name}</p>
+                        <p className="text-sm text-muted-foreground">{contact.role}</p>
+                        <p className="text-sm">
+                          {contact.facebook && (
+                            <a
+                              href={contact.facebook}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-link underline-offset-2 hover:underline"
+                            >
+                              Facebook
+                            </a>
+                          )}
+                          {contact.facebook && contact.email && " | "}
+                          {contact.email && (
+                            <a
+                              href={`mailto:${contact.email}`}
+                              className="text-link underline-offset-2 hover:underline"
+                            >
+                              Email
+                            </a>
+                          )}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
