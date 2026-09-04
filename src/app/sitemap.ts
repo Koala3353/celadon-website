@@ -1,6 +1,5 @@
 import { execSync } from "node:child_process";
 import type { MetadataRoute } from "next";
-import { getAllRoleSlugs } from "@/lib/content";
 import { SITE_URL } from "@/lib/site-url";
 
 // Required for a static export — otherwise Next can't tell this route is
@@ -48,7 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "about", changeFrequency: "monthly", priority: 0.7 },
     { path: "departments", changeFrequency: "monthly", priority: 0.7 },
     { path: "projects", changeFrequency: "weekly", priority: 0.7 },
-    { path: "recruitment", changeFrequency: "weekly", priority: 0.9 },
   ];
   const staticRoutes: MetadataRoute.Sitemap = STATIC_PATHS.map(({ path, ...rest }) => ({
     url: `${SITE_URL}/${path ? `${path}/` : ""}`,
@@ -60,12 +58,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // `robots: { index: false }` on the page itself, and never linked from
   // public nav. Listing it here would just be inviting a crawl of a page
   // that has nothing to show an unauthenticated visitor anyway.
-  const roleRoutes: MetadataRoute.Sitemap = getAllRoleSlugs().map((slug) => ({
-    url: `${SITE_URL}/recruitment/roles/${slug}/`,
-    lastModified,
-    changeFrequency: "monthly",
-    priority: 0.5,
-  }));
-
-  return [...staticRoutes, ...roleRoutes];
+  return staticRoutes;
 }

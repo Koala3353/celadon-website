@@ -15,7 +15,6 @@ const NAV = [
   { href: "/about", label: "About Us" },
   { href: "/departments", label: "Departments" },
   { href: "/projects", label: "Projects" },
-  { href: "/recruitment", label: "Recruitment" },
 ];
 
 export function SiteHeader() {
@@ -104,8 +103,8 @@ function NavLink({
   onClick?: () => void;
   variant?: "pill" | "block";
 }) {
-  // Nested routes (/recruitment/roles/rose-sale-log) should still light up
-  // their top-level entry.
+  // Nested routes (e.g. /projects/rose-sale) should still light up their
+  // top-level entry.
   const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
   return (

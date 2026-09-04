@@ -10,7 +10,6 @@ const NAV = [
   { href: "/about", label: "About Us" },
   { href: "/departments", label: "Departments" },
   { href: "/projects", label: "Projects" },
-  { href: "/recruitment", label: "Recruitment" },
 ];
 
 export function SiteFooter() {
