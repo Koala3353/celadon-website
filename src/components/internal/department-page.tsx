@@ -79,7 +79,15 @@ export function DepartmentPage({ dept }: { dept: Department }) {
   // department also has (Committees for FIN, Projects for EXREL) — both are
   // already-visited data, so its overall length varies without hurting the
   // pairing.
-  const timelinePartner = dept.timeline ? (dept.committees ? "committees" : dept.projects ? "projects" : null) : null;
+  const timelinePartner = dept.timeline
+    ? dept.committees
+      ? "committees"
+      : dept.projects
+        ? "projects"
+        : dept.timelineCompanion
+          ? "companion"
+          : null
+    : null;
 
   const hasIntro =
     dept.photos.length > 0 || !!dept.visionThrust || !!(dept.roles && dept.roles.length > 0) || !!dept.whatToExpect;
@@ -435,6 +443,34 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                   </div>
                 </div>
               )}
+              {timelinePartner === "companion" && dept.timelineCompanion && (
+                <div data-reveal>
+                  <Heading>{dept.timelineCompanion.heading}</Heading>
+                  {/* Always a single stacked column here, unlike the same
+                      groupsAsCards section rendered solo (two columns) —
+                      there's only half the row's width to work with once
+                      it's paired with the timeline. */}
+                  <div className="mt-6 flex flex-col gap-4">
+                    {dept.timelineCompanion.groups.map((group, i) => (
+                      <div key={group.label ?? i} className="rounded-2xl bg-dept-tint p-5">
+                        {group.label && (
+                          <p className="mb-2 text-sm font-bold uppercase tracking-wider text-dept-ink/70">
+                            {group.label}
+                          </p>
+                        )}
+                        <ul className="flex flex-col gap-2.5">
+                          {group.items.map((item, j) => (
+                            <li key={j} className="prose-body flex gap-2.5 text-muted-foreground">
+                              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-dept-accent" />
+                              <span>{renderItem(item)}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </Reveal>
           )}
 
@@ -685,6 +721,26 @@ export function DepartmentPage({ dept }: { dept: Department }) {
           </Reveal>
         </Container>
       </section>
+
+      {dept.floatingApplyUrl && (
+        <a
+          href={dept.floatingApplyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            zIndex: "var(--z-nav)",
+            // Clears the iOS home-indicator / gesture bar on notched
+            // phones instead of sitting flush against the very bottom edge.
+            bottom: "max(1rem, env(safe-area-inset-bottom))",
+          }}
+          className="pressable fixed inset-x-4 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center justify-center gap-2 rounded-full bg-dept-accent px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-[var(--shadow-lg)] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dept-accent sm:inset-x-auto sm:right-6 sm:px-6 sm:py-3 sm:text-sm"
+        >
+          <span className="truncate">Apply to {dept.name} now</span>
+          <span aria-hidden className="shrink-0 text-sm sm:text-base">
+            &#8599;
+          </span>
+        </a>
+      )}
     </div>
   );
 }

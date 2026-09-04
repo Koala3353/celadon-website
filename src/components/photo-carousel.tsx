@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+
+/** Below this, a touch drag is read as a tap/scroll rather than a swipe. */
+const SWIPE_THRESHOLD_PX = 40;
 
 /**
  * A small crossfade carousel for department/project photo lists. All slides
@@ -36,6 +39,7 @@ export function PhotoCarousel({
   fit?: "cover" | "contain";
 } & React.HTMLAttributes<HTMLDivElement>) {
   const [index, setIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   if (photos.length === 0) return null;
 
@@ -49,11 +53,21 @@ export function PhotoCarousel({
   return (
     <div
       className={cn(
-        "group relative w-full overflow-hidden",
+        "group relative w-full touch-pan-y select-none overflow-hidden",
         hasLetterbox ? "bg-transparent" : "bg-navy/[0.06]",
         className
       )}
       {...props}
+      onTouchStart={(e) => {
+        touchStartX.current = e.touches[0].clientX;
+      }}
+      onTouchEnd={(e) => {
+        if (touchStartX.current === null) return;
+        const delta = e.changedTouches[0].clientX - touchStartX.current;
+        touchStartX.current = null;
+        if (delta > SWIPE_THRESHOLD_PX) go(-1);
+        else if (delta < -SWIPE_THRESHOLD_PX) go(1);
+      }}
     >
       {items.map((item, i) => (
         <Image

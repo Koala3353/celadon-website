@@ -188,6 +188,16 @@ export interface Department {
   timeline?: DeptTimelineItem[];
   /** EXREL's four flagship projects/initiatives. */
   projects?: DeptProject[];
+  /** OSR-only so far: a `sections`-shaped block (typically a short,
+   * `groupsAsCards` one like "Who are we looking for?") pulled out of the
+   * normal section flow and shown side by side with `timeline` instead —
+   * same idea as `committees`/`projects` pairing with the timeline, for a
+   * department whose natural companion is one of its own sections rather
+   * than a dedicated committees/projects list. Rendered as a single column
+   * of stacked cards (vs. the two-column grid a `groupsAsCards` section
+   * gets when shown solo), since it's now sharing the row with the
+   * timeline. */
+  timelineCompanion?: Pick<DeptSection, "heading" | "groupsAsCards" | "groups">;
   /** OSR-only: real tools/products OSR members have built for Celadon (this
    * site included) — a concrete "if you want to build things like this,
    * this is the department" hook, distinct from `projects`, which covers
@@ -197,6 +207,12 @@ export interface Department {
     blurb: string;
     items: { name: string; description: string; href?: string }[];
   };
+  /** When set, shows a small floating "Apply" pill fixed to the bottom of
+   * the viewport for this department's whole page, linking straight to its
+   * own application form — a persistent CTA for pages long enough that the
+   * hero's apply button has scrolled well out of view. Off by default; only
+   * departments that ask for it get one. */
+  floatingApplyUrl?: string;
   /** Shows the shared Application Instructions section on this department's
    * page. Off by default — COMMPUB is the only department that needs it
    * spelled out, since its multi-pool applications have per-pool additional
@@ -1117,24 +1133,6 @@ export const DEPARTMENTS: Department[] = [
         ],
       },
       {
-        heading: "Who are we looking for?",
-        groupsAsCards: true,
-        groups: [
-          {
-            label: "Driven & Proactive",
-            items: [
-              "Individuals who will dutifully accomplish their tasks by providing technical support and insights and find purpose in doing consultations and meticulous work for the improvement of Celadon.",
-            ],
-          },
-          {
-            label: "Analytical & Eager to Learn",
-            items: [
-              "Team players who have experience working with Google Sheets and Workspace and are eager to develop their soft skills alongside their technical capabilities.",
-            ],
-          },
-        ],
-      },
-      {
         heading: "What's in store for you?",
         images: [
           { src: "/internal/osr-recweek-celaville.webp", alt: "OSR EBCB at RecWeek 2026-2027 Celaville" },
@@ -1151,15 +1149,35 @@ export const DEPARTMENTS: Department[] = [
         ],
       },
     ],
+    timelineCompanion: {
+      heading: "Who are we looking for?",
+      groupsAsCards: true,
+      groups: [
+        {
+          label: "Driven & Proactive",
+          items: [
+            "Individuals who will dutifully accomplish their tasks by providing technical support and insights and find purpose in doing consultations and meticulous work for the improvement of Celadon.",
+          ],
+        },
+        {
+          label: "Analytical & Eager to Learn",
+          items: [
+            "Team players who have experience working with Google Sheets and Workspace and are eager to develop their soft skills alongside their technical capabilities.",
+          ],
+        },
+      ],
+    },
     timeline: [
       { date: "Late September 2026", label: "Department General Assembly" },
-      { date: "Early October 2026", label: "Workshop 1: Google Sheets" },
-      { date: "Early October 2026", label: "Workshop 2: Appscript" },
+      { date: "Early to Mid October 2026", label: "Workshop 1: Google Sheets and Appscript" },
       { date: "Mid October 2026", label: "First Department Hangout" },
-      { date: "Late October 2026", label: "Workshop 3: Email Blasting & Portals" },
-      { date: "Early November 2026", label: "Workshop 4: Advanced Appscript" },
+      { date: "Late October 2026", label: "Workshop 2: Email Blasting & Sustainability Report Creation" },
       { date: "January 2027", label: "Second Department Hangout" },
+      { date: "Mid January 2027", label: "Workshop 3: Advanced Appscript" },
+      { date: "May 2027", label: "Third Department Hangout" },
     ],
+    floatingApplyUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLSflXsyvOgmISRO9kSDI1229_oRkr6wmSbBoaKKjrbvUWcwf_w/viewform",
     applicationNote: { text: "OSR has no additional requirements for Junior Analysts." },
     testimonials: [
       {
