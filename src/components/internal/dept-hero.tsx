@@ -32,7 +32,54 @@ export function DeptHero({ dept }: { dept: Department }) {
         }}
       />
 
-      {dept.heroImage && (
+      {dept.heroImage && dept.heroImagePadding && (
+        <div className="relative w-full overflow-hidden">
+          {/* Full-bleed echo of the same banner, faded, filling the gutter
+              either side of the crisp centered copy below — so the frame
+              reads as one continuous image bleeding off-screen rather than
+              empty color once the crisp copy is inset from the edges.
+              `overflow-hidden` here clips the backdrop's `scale-105` so it
+              doesn't peek out past the section's own bottom edge. */}
+          <Image
+            aria-hidden
+            src={asset(dept.heroImage.src)}
+            alt=""
+            width={1920}
+            height={1080}
+            className="max-h-[60vh] w-full scale-105 object-cover opacity-35"
+          />
+          <div
+            className={cn(
+              "absolute inset-0",
+              dept.heroImagePadding.large
+                ? "md:px-12 lg:px-24 xl:px-40 2xl:px-56"
+                : "sm:px-8 md:px-12 lg:px-20"
+            )}
+          >
+            <Reveal className="relative h-full">
+              <Image
+                src={asset(dept.heroImage.src)}
+                alt={dept.heroImage.alt}
+                fill
+                priority
+                data-reveal
+                className={cn(
+                  "object-cover",
+                  dept.heroImagePadding.large ? "md:rounded-2xl" : "sm:rounded-2xl"
+                )}
+                style={{
+                  objectPosition: dept.heroImagePadding.objectPosition,
+                  maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                }}
+              />
+            </Reveal>
+          </div>
+        </div>
+      )}
+
+      {dept.heroImage && !dept.heroImagePadding && (
         <Reveal>
           <Image
             src={asset(dept.heroImage.src)}
