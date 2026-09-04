@@ -1117,22 +1117,6 @@ export const DEPARTMENTS: Department[] = [
         ],
       },
       {
-        heading: "What's in store for you?",
-        images: [
-          { src: "/internal/osr-recweek-celaville.webp", alt: "OSR EBCB at RecWeek 2026-2027 Celaville" },
-        ],
-        groups: [
-          {
-            label: "As a member of OSR, you may expect to…",
-            items: [
-              "Improve your technical skills as you work and familiarize yourself with data collection and Google Workspace.",
-              "Hone your critical thinking and analytical skills in supporting other departments and/or projects.",
-              "Develop your interpersonal skills as you work collaboratively with other members of OSR and the Celadonean community.",
-            ],
-          },
-        ],
-      },
-      {
         heading: "Who are we looking for?",
         groupsAsCards: true,
         groups: [
@@ -1150,6 +1134,31 @@ export const DEPARTMENTS: Department[] = [
           },
         ],
       },
+      {
+        heading: "What's in store for you?",
+        images: [
+          { src: "/internal/osr-recweek-celaville.webp", alt: "OSR EBCB at RecWeek 2026-2027 Celaville" },
+        ],
+        groups: [
+          {
+            label: "As a member of OSR, you may expect to…",
+            items: [
+              "Improve your technical skills as you work and familiarize yourself with data collection and Google Workspace.",
+              "Hone your critical thinking and analytical skills in supporting other departments and/or projects.",
+              "Develop your interpersonal skills as you work collaboratively with other members of OSR and the Celadonean community.",
+            ],
+          },
+        ],
+      },
+    ],
+    timeline: [
+      { date: "Late September 2026", label: "Department General Assembly" },
+      { date: "Early October 2026", label: "Workshop 1: Google Sheets" },
+      { date: "Early October 2026", label: "Workshop 2: Appscript" },
+      { date: "Mid October 2026", label: "First Department Hangout" },
+      { date: "Late October 2026", label: "Workshop 3: Email Blasting & Portals" },
+      { date: "Early November 2026", label: "Workshop 4: Advanced Appscript" },
+      { date: "January 2027", label: "Second Department Hangout" },
     ],
     applicationNote: { text: "OSR has no additional requirements for Junior Analysts." },
     testimonials: [
