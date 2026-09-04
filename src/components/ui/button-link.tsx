@@ -94,7 +94,7 @@ export function ButtonLink({
   }
 
   return (
-    <Link href={href} className={cn(base, variants[variant], className)}>
+    <Link href={href} className={cn(base, sizes[size], variants[variant], className)}>
       {content}
     </Link>
   );
