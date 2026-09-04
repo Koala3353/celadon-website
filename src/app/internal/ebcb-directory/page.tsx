@@ -133,7 +133,9 @@ export default function EbcbDirectoryPage() {
             key={dept.slug}
             emoji={dept.emoji}
             heading={`${dept.fullName} Department`}
-            contacts={dept.contacts}
+            // The directory is EBCB-only — a department's own page is where
+            // its Managers (e.g. COMMPUB's) get listed, grouped separately.
+            contacts={dept.contacts.filter((c) => !c.groupLabel?.includes("Managers"))}
             tone={i % 2 === 0 ? "tint" : "white"}
             isLast={i === DEPARTMENTS.length - 1}
           />
