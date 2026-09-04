@@ -1097,7 +1097,7 @@ export const DEPARTMENTS: Department[] = [
       {
         heading: "What's in store for you?",
         images: [
-          { src: "/internal/osr-recweek-celaville.webp", alt: "OSR EBCB at RecWeek 2026-2027 Celaville", fit: "contain" },
+          { src: "/internal/osr-recweek-celaville.webp", alt: "OSR EBCB at RecWeek 2026-2027 Celaville" },
         ],
         groups: [
           {
@@ -1175,7 +1175,7 @@ export function getDepartment(slug: string): Department | undefined {
 
 export const HUB_TIMELINE: DeptTimelineItem[] = [
   { date: "September 4–12, 2026", label: "Deputy Application Duration" },
-  { date: "September 8–16, 2026", label: "Interview Dates" },
+  { date: "September 8–15, 2026", label: "Interview Dates" },
   { date: "September 18, 2026", label: "Release of Results" },
 ];
 
