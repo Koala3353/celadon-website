@@ -138,10 +138,35 @@ function NavLink({
   );
 }
 
+// Matches the panel's `duration-300` below — the actual unmount (telling
+// the parent to drop `menuOpen`) waits this long after a close is
+// requested, so the slide-out has time to finish instead of the panel just
+// vanishing mid-transition.
+const MENU_TRANSITION_MS = 300;
+
 function MobileMenu({ pathname, onClose }: { pathname: string; onClose: () => void }) {
+  // Starts closed and flips to open one frame after mount, so the panel's
+  // own transition (rather than its resting state) is what carries it
+  // in — a plain `{menuOpen && <MobileMenu/>}` mount has nothing to
+  // transition *from*, which is why it used to just pop into place.
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  // Every close trigger (backdrop, X, Escape, a nav link) goes through
+  // this instead of calling `onClose` directly, so the panel always gets
+  // to slide back out before it's removed from the DOM.
+  const handleClose = () => {
+    setVisible(false);
+    window.setTimeout(onClose, MENU_TRANSITION_MS);
+  };
+
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleClose();
     };
     document.addEventListener("keydown", onKeyDown);
 
@@ -152,7 +177,8 @@ function MobileMenu({ pathname, onClose }: { pathname: string; onClose: () => vo
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
     };
-  }, [onClose]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return createPortal(
     <div
@@ -165,16 +191,24 @@ function MobileMenu({ pathname, onClose }: { pathname: string; onClose: () => vo
       {/* Darkened backdrop over the rest of the page. */}
       <div
         aria-hidden
-        onClick={onClose}
-        className="absolute inset-0 bg-ink/80 backdrop-blur-sm"
+        onClick={handleClose}
+        className={cn(
+          "absolute inset-0 bg-ink/80 backdrop-blur-sm transition-opacity duration-300 ease-[var(--ease-out)]",
+          visible ? "opacity-100" : "opacity-0"
+        )}
       />
 
-      <div className="absolute inset-y-0 right-0 flex w-full max-w-xs flex-col bg-white p-6 shadow-[var(--shadow-lg)]">
+      <div
+        className={cn(
+          "absolute inset-y-0 right-0 flex w-full max-w-xs flex-col bg-white p-6 shadow-[var(--shadow-lg)] transition-transform duration-300 ease-[var(--ease-out)]",
+          visible ? "translate-x-0" : "translate-x-full"
+        )}
+      >
         <div className="flex items-center justify-between">
           <span className="eyebrow text-accent-ink">Menu</span>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Close menu"
             className="pressable flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-navy-tint focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
           >
@@ -198,7 +232,7 @@ function MobileMenu({ pathname, onClose }: { pathname: string; onClose: () => vo
               key={item.href}
               item={item}
               pathname={pathname}
-              onClick={onClose}
+              onClick={handleClose}
               variant="block"
             />
           ))}
@@ -206,7 +240,7 @@ function MobileMenu({ pathname, onClose }: { pathname: string; onClose: () => vo
 
         <Link
           href="/internal"
-          onClick={onClose}
+          onClick={handleClose}
           className="mt-6 flex items-center gap-1.5 rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-navy-tint hover:text-navy"
         >
           A-yi&rsquo;s Corner <span aria-hidden>&rarr;</span>
