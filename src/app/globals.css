@@ -330,6 +330,46 @@ html {
   }
 }
 
+/* A <details> panel pops open instantly by default — this fades and slides
+   it in instead, on every open (not just the first, scroll-triggered one
+   Reveal handles), so the role accordions on the internal dept-apps pages
+   feel less like a plain native disclosure. */
+@media (prefers-reduced-motion: no-preference) {
+  .accordion-panel {
+    animation: accordion-in 260ms var(--ease-out) both;
+  }
+}
+
+@keyframes accordion-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slow ambient drift for a purely decorative motif — the internal
+   dept-apps pages' corner crane/plane art. Small enough to read as "alive"
+   rather than distracting, and never applied to anything load-bearing. */
+@media (prefers-reduced-motion: no-preference) {
+  .float-slow {
+    animation: float-slow 7s var(--ease-out, ease-in-out) infinite;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--float-rotate, 0deg));
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(var(--float-rotate, 0deg));
+  }
+}
+
 ::selection {
   background: var(--navy);
   color: var(--white);

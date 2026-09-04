@@ -17,7 +17,7 @@ export function RoleAccordion({ roles }: { roles: DeptRole[] }) {
           data-reveal
           className="group rounded-2xl bg-dept-tint p-1.5 ring-1 ring-inset ring-dept-accent/15 transition-shadow duration-300 ease-[var(--ease-out)] open:shadow-[var(--shadow-sm)]"
         >
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[1.125rem] bg-white p-5 shadow-[var(--shadow-sm)] transition-colors hover:bg-dept-tint group-open:rounded-b-none [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[1.125rem] bg-white p-5 shadow-[var(--shadow-sm)] transition-[background-color,box-shadow] duration-300 ease-[var(--ease-out)] hover:bg-dept-tint hover:shadow-[var(--shadow-md)] group-open:rounded-b-none [&::-webkit-details-marker]:hidden">
             <span className="flex items-center gap-3">
               {role.emoji && <span className="text-xl">{role.emoji}</span>}
               <span className="font-extrabold text-dept-ink">{role.title}</span>
@@ -35,7 +35,7 @@ export function RoleAccordion({ roles }: { roles: DeptRole[] }) {
               <path d="m6 9 6 6 6-6" />
             </svg>
           </summary>
-          <div className="rounded-b-[1.125rem] bg-white px-5 pb-5">
+          <div className="accordion-panel rounded-b-[1.125rem] bg-white px-5 pb-5">
             <p className="prose-body text-sm text-dept-ink/70">
               {Array.isArray(role.description)
                 ? role.description.map((run, i) => <AboutRunText key={i} run={run} />)

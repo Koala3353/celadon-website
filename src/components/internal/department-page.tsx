@@ -21,6 +21,15 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
+// Deterministic per-name tilt, same technique as the EBCB directory's
+// contact wall — keeps the grid from reading as a rigid row of identical
+// circles, and straightens out on hover.
+function tiltFor(name: string): number {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) | 0;
+  return ((hash % 5) - 2) * 0.6; // -2.4deg .. 2.4deg
+}
+
 function Heading({ children, normalCase }: { children: React.ReactNode; normalCase?: boolean }) {
   return (
     <h2
@@ -122,7 +131,8 @@ export function DepartmentPage({ dept }: { dept: Department }) {
             width={262}
             height={203}
             aria-hidden
-            className="pointer-events-none absolute -right-10 -top-10 hidden h-48 w-auto rotate-12 object-contain opacity-20 sm:block lg:h-64"
+            style={{ "--float-rotate": "12deg" } as React.CSSProperties}
+            className="float-slow pointer-events-none absolute -right-10 -top-10 hidden h-48 w-auto object-contain opacity-20 sm:block lg:h-64"
           />
           <Container className="relative flex flex-col gap-10 sm:gap-14">
           {dept.photos.length > 0 && dept.visionThrust ? (
@@ -347,8 +357,11 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                         <p className="font-extrabold text-dept-ink">{item.name}</p>
                         <p className="prose-body mt-1.5 text-sm text-muted-foreground">{item.description}</p>
                         {item.href && (
-                          <span className="mt-3 inline-block text-xs font-bold uppercase tracking-wider text-dept-accent">
-                            Visit &#8599;
+                          <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-dept-accent">
+                            Visit
+                            <span className="inline-block transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                              &#8599;
+                            </span>
                           </span>
                         )}
                       </>
@@ -359,7 +372,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="pressable rounded-2xl bg-dept-tint p-5 transition-colors hover:bg-dept-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dept-accent"
+                        className="group pressable lift rounded-2xl bg-dept-tint p-5 transition-colors hover:bg-dept-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dept-accent"
                       >
                         {body}
                       </a>
@@ -414,7 +427,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                   <Heading>Projects &amp; Initiatives</Heading>
                   <div className="mt-6 flex flex-col gap-4">
                     {dept.projects.map((p) => (
-                      <div key={p.name} className="rounded-2xl bg-white p-5 shadow-[var(--shadow-sm)]">
+                      <div key={p.name} className="lift rounded-2xl bg-white p-5 shadow-[var(--shadow-sm)]">
                         <p className="font-extrabold text-dept-ink">{p.name}</p>
                         <p className="prose-body mt-1.5 text-sm text-muted-foreground">{p.description}</p>
                       </div>
@@ -463,7 +476,7 @@ export function DepartmentPage({ dept }: { dept: Department }) {
               <Heading>Projects & Initiatives</Heading>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {dept.projects.map((p) => (
-                  <div key={p.name} className="rounded-2xl bg-white p-5 shadow-[var(--shadow-sm)]" data-reveal>
+                  <div key={p.name} className="lift rounded-2xl bg-white p-5 shadow-[var(--shadow-sm)]" data-reveal>
                     <p className="font-extrabold text-dept-ink">{p.name}</p>
                     <p className="prose-body mt-1.5 text-sm text-muted-foreground">{p.description}</p>
                   </div>
@@ -616,21 +629,30 @@ export function DepartmentPage({ dept }: { dept: Department }) {
                   )}
                   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {group.contacts.map((contact) => (
-                      <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
-                        {contact.photo ? (
-                          <SkeletonImage
-                            src={asset(contact.photo)}
-                            alt={contact.name}
-                            width={112}
-                            height={112}
-                            containerClassName="h-28 w-28 rounded-full"
-                            className="h-28 w-28 rounded-full object-cover"
-                          />
-                        ) : (
-                          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-dept-accent/15">
-                            <span className="display text-2xl text-dept-ink/60">{initials(contact.name)}</span>
-                          </div>
-                        )}
+                      <div
+                        key={contact.name}
+                        data-reveal
+                        className="group flex flex-col items-center gap-2 text-center"
+                      >
+                        <div
+                          className="rounded-full bg-white p-1 shadow-[var(--shadow-sm)] ring-1 ring-inset ring-dept-accent/15 transition-transform duration-300 ease-[var(--ease-out)] group-hover:rotate-0"
+                          style={{ transform: `rotate(${tiltFor(contact.name)}deg)` }}
+                        >
+                          {contact.photo ? (
+                            <SkeletonImage
+                              src={asset(contact.photo)}
+                              alt={contact.name}
+                              width={112}
+                              height={112}
+                              containerClassName="h-28 w-28 rounded-full"
+                              className="h-28 w-28 rounded-full object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-dept-accent/15">
+                              <span className="display text-2xl text-dept-ink/60">{initials(contact.name)}</span>
+                            </div>
+                          )}
+                        </div>
                         <p className="font-bold text-dept-ink">{contact.name}</p>
                         <p className="text-sm text-muted-foreground">{contact.role}</p>
                         <p className="text-sm">
