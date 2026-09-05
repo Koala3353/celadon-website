@@ -128,6 +128,11 @@ export interface Department {
   emoji: string;
   name: string;
   fullName: string;
+  /** What the department calls its own deputies — e.g. CUL's are
+   * "Trainees", OSR's are "Junior Analysts". Shown in the dept-apps hub's
+   * "What are Deputies?" table so applicants aren't caught off guard by a
+   * department page suddenly using its own term instead of "Deputy". */
+  deputyTitle: string;
   accent: DeptAccent;
   /** Illustrated banner from the department's own PDF. Not every department
    * has one. */
@@ -266,6 +271,7 @@ export const DEPARTMENTS: Department[] = [
     emoji: "🎨",
     name: "COMMPUB",
     fullName: "Communications and Publications",
+    deputyTitle: "Staffer",
     accent: { base: "#D97706", tint: "#FDF1E3", ink: "#7C3A0D" },
     heroImage: { src: "/internal/commpub-hero.webp", alt: "COMMPUB Staffers SY 2026-2027" },
     cardCover: { src: "/internal/commpub-card-cover.webp", alt: "COMMPUB" },
@@ -416,6 +422,7 @@ export const DEPARTMENTS: Department[] = [
     emoji: "🐉",
     name: "CUL",
     fullName: "Cultural Affairs",
+    deputyTitle: "Trainee",
     accent: { base: "#DC2626", tint: "#FEF2F2", ink: "#7F1D1D" },
     heroImage: { src: "/internal/cul-hero.webp", alt: "Ateneo Celadon Cultural Affairs Department" },
     cardCover: { src: "/covers/chinese-new-year.jpg", alt: "CUL" },
@@ -550,6 +557,7 @@ export const DEPARTMENTS: Department[] = [
     emoji: "📬",
     name: "EXREL",
     fullName: "External Relations",
+    deputyTitle: "Associate",
     accent: { base: "#2563EB", tint: "#EFF6FF", ink: "#1E3A8A" },
     heroImage: { src: "/internal/exrel-hero.webp", alt: "External Relations Department" },
     cardCover: { src: "/internal/exrel-card-cover.webp", alt: "EXREL" },
@@ -756,6 +764,7 @@ export const DEPARTMENTS: Department[] = [
     emoji: "💸",
     name: "FIN",
     fullName: "Financial Affairs",
+    deputyTitle: "MIT (Manager-in-Training)",
     accent: { base: "#16A34A", tint: "#F0FDF4", ink: "#14532D" },
     heroImage: { src: "/internal/fin-hero.webp", alt: "Welcome to the FINance Farmily 2026-2027" },
     heroImagePadding: {},
@@ -912,6 +921,7 @@ export const DEPARTMENTS: Department[] = [
     emoji: "🫂",
     name: "HR",
     fullName: "Human Resources",
+    deputyTitle: "Deputy",
     accent: { base: "#CA8A04", tint: "#FEFCE8", ink: "#713F12" },
     heroImage: { src: "/internal/hr-hero.webp", alt: "Ateneo Celadon Human Resources Department, 2026-2027" },
     cardCover: { src: "/departments/hr-general-assembly.jpg", alt: "HR" },
@@ -1040,6 +1050,7 @@ export const DEPARTMENTS: Department[] = [
     emoji: "📊",
     name: "OSR",
     fullName: "Organization Strategies and Research",
+    deputyTitle: "Junior Analyst",
     accent: { base: "#7C3AED", tint: "#F5F3FF", ink: "#4C1D95" },
     heroImage: { src: "/internal/osr-hero.webp", alt: "Organization Strategies and Research — loading, panda mascot" },
     // Biased right so the crop hides more of the left-edge chart panel —
