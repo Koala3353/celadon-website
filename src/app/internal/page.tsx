@@ -32,7 +32,7 @@ export default function InternalPortalHomePage() {
           as the dept-apps hub — sections below are spacing and content only. */}
       <div className="sky-tint-field">
         {/* ---- Deputy / Core Team application cards --------------------- */}
-        <section className="py-16 sm:py-20">
+        <section className="pb-8 pt-16 sm:pb-10 sm:pt-20">
           <Container>
             <Reveal stagger={70} className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
               <Link href="/internal/dept-apps" data-reveal className="group pressable">
@@ -83,7 +83,7 @@ export default function InternalPortalHomePage() {
             through here instead would cut off abruptly right where the
             footer needs to fade in cleanly (same fix as the dept-apps hub
             and EBCB directory pages). */}
-        <section className="bg-white py-16 sm:py-20">
+        <section className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-10">
           <Container>
             <Reveal className="mx-auto max-w-2xl text-center">
               <p className="sky-display eyebrow text-sky-navy/70" data-reveal>

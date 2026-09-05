@@ -40,8 +40,10 @@ export default function PrivacyPolicyPage() {
               <Section title="The public website">
                 <p>
                   Browsing ateneoceladon.com doesn&rsquo;t collect any personal
-                  information. There&rsquo;s no analytics, no tracking scripts, and no
-                  cookies set for anyone just reading the site.
+                  information. We use a privacy-friendly analytics tool to see how many
+                  people visit and which pages they read — it doesn&rsquo;t use cookies or
+                  any other tracking technique to identify visitors across sites or
+                  visits, and it doesn&rsquo;t collect personal information.
                 </p>
               </Section>
             </div>
@@ -66,7 +68,7 @@ export default function PrivacyPolicyPage() {
                   <li className="flex gap-2">
                     <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-ink" />
                     <span>
-                      Keep you signed in for 24 hours, via a signed cookie stored in
+                      Keep you signed in for 30 days, via a signed cookie stored in
                       your browser, so you don&rsquo;t have to sign in again on every
                       visit.
                     </span>
@@ -85,7 +87,7 @@ export default function PrivacyPolicyPage() {
                 <p>
                   The member list used for that check is a roster of Celadon
                   member emails. We don&rsquo;t retain a log of sign-ins beyond the
-                  24-hour session cookie itself.
+                  30-day session cookie itself.
                 </p>
               </Section>
             </div>
