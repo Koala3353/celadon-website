@@ -192,44 +192,40 @@ export default function DeptAppsHubPage() {
                     </em>
                     <br />
                     <em className="italic text-sky-navy/70">
-                      Note: You are also allowed to <strong className="font-bold">make edits</strong> to
-                      your application until <strong className="font-bold">September 12, 11:59 PM</strong>{" "}
-                      only.
+                      Note: COMMPUB applicants must complete and submit an additional requirement for the
+                      specific pool they are applying to. Kindly check COMMPUB&rsquo;s page for more
+                      information before applying.
                     </em>
                   </span>
                 </li>
                 <li className="flex gap-2.5">
                   <span className="font-bold text-sky-navy">3.</span>
-                  <em className="italic">
-                    If instructed, complete the <strong className="font-bold">additional requirements</strong>{" "}
-                    for the department/s you are applying to.
-                  </em>
-                </li>
-                <li className="flex gap-2.5">
-                  <span className="font-bold text-sky-navy">4.</span>
                   <span>
                     <strong className="font-bold">Schedule</strong> your{" "}
                     <strong className="font-bold">interview</strong> in this{" "}
-                    <strong className="font-bold">Google Sheet</strong> by following the instructions found
-                    in the landing tab.
+                    <a
+                      href="https://docs.google.com/spreadsheets/d/1jmD8NvEt7MNGrsdcanE8b5s860j5HX8zA_-JYOZrE0s/edit?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-link underline-offset-2 hover:underline"
+                    >
+                      Google Sheet
+                    </a>{" "}
+                    by following the instructions found in the landing tab.
                   </span>
                 </li>
                 <li className="flex gap-2.5">
-                  <span className="font-bold text-sky-navy">5.</span>
+                  <span className="font-bold text-sky-navy">4.</span>
                   <span>
                     Wait for a <strong className="font-bold">confirmation message</strong> from your
                     interviewer. Then, <strong className="font-bold">attend your interview.</strong>
                   </span>
                 </li>
                 <li className="flex gap-2.5">
-                  <span className="font-bold text-sky-navy">6.</span>
+                  <span className="font-bold text-sky-navy">5.</span>
                   <span>Wait for your application results!</span>
                 </li>
               </ol>
-              <p className="prose-body mt-4 text-sm text-sky-navy/70">
-                Note: COMMPUB has an additional requirement for applicants. Check COMMPUB&rsquo;s page before
-                you apply.
-              </p>
             </Reveal>
           </Container>
         </section>
