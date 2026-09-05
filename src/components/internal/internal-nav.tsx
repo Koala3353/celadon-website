@@ -101,7 +101,7 @@ export function InternalNav() {
 }
 
 /**
- * The "Deputy Apps" pill + its departments dropdown. Split out from
+ * The "Deputy Applications" pill + its departments dropdown. Split out from
  * InternalNav so it can be remounted fresh (via `key={pathname}` on the
  * parent) whenever the route changes — that resets `deptsOpen` back to
  * false for free, without an effect calling setState (which both trips the
@@ -119,7 +119,7 @@ function DeptsDropdown({ active }: { active: boolean }) {
       onMouseLeave={() => setDeptsOpen(false)}
     >
       <div className="flex items-center">
-        <NavPill href="/internal/dept-apps" label="Deputy Apps" active={active} />
+        <NavPill href="/internal/dept-apps" label="Deputy Applications" active={active} />
         <button
           type="button"
           onClick={() => setDeptsOpen((v) => !v)}
@@ -287,7 +287,7 @@ function InternalMobileMenu({
             Dashboard
           </Link>
           <Link href="/internal/dept-apps" onClick={handleClose} className={blockClass(deptAppsActive)}>
-            Deputy Apps
+            Deputy Applications
           </Link>
           <div className="ml-3 flex flex-col gap-0.5 border-l border-border pl-3">
             {DEPARTMENTS.map((dept) => (

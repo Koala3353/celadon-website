@@ -131,6 +131,40 @@ export default function DeptAppsHubPage() {
                 </p>
               </div>
             </Reveal>
+
+            {/* Every department calls its deputies something different (CUL's
+                are "Trainees", OSR's are "Junior Analysts", etc.) — spelled
+                out here so that isn't a surprise once someone lands on a
+                specific department's page. */}
+            <Reveal className="mx-auto mt-10 w-full max-w-3xl">
+              <div
+                className="overflow-x-auto rounded-2xl ring-1 ring-sky-navy/10"
+                data-reveal
+              >
+                <table className="w-full border-collapse text-left">
+                  <thead>
+                    <tr className="bg-sky-navy/5">
+                      <th className="sky-display px-5 py-3 text-sm font-semibold text-sky-navy">
+                        Department
+                      </th>
+                      <th className="sky-display px-5 py-3 text-sm font-semibold text-sky-navy">
+                        A deputy in this department is called:
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {DEPARTMENTS.map((dept) => (
+                      <tr key={dept.slug} className="border-t border-sky-navy/10">
+                        <td className="whitespace-nowrap px-5 py-3 text-sm font-semibold text-sky-navy">
+                          <span aria-hidden>{dept.emoji}</span> {dept.name}
+                        </td>
+                        <td className="px-5 py-3 text-sm text-muted-foreground">{dept.deputyTitle}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Reveal>
           </Container>
         </section>
 
@@ -278,7 +312,7 @@ export default function DeptAppsHubPage() {
                         imageSrc={t.photo ? asset(t.photo) : null}
                         testimonialText={t.quote}
                         tone="dark"
-                        headerClassName={t.name === "Claire Chiu" ? "-top-3" : undefined}
+                        pillFrom="xl"
                       />
                     ))}
                   </div>
