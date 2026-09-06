@@ -4,11 +4,9 @@
  * but far smaller since Core Team applicants pick a project + committee
  * rather than reading a whole department page.
  *
- * Project name/blurb text is adapted from each project's entry in
- * content/projects.csv, so it stays consistent with what's already published
- * elsewhere on the site. Card photos are intentionally left unset — real
- * artwork for this wave hasn't been finalized yet — and the UI shows a
- * placeholder in their place until `photo` is filled in per project.
+ * Card photos are intentionally left unset — real artwork for this wave
+ * hasn't been finalized yet — and the UI shows a placeholder in their place
+ * until `photo` is filled in per project.
  */
 
 export interface CoreTeamProject {
@@ -25,34 +23,28 @@ export const CTA_APPLICATION_FORM_URL = "#";
 
 export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
   {
-    slug: "talab-x-faculty-appreciation-week",
-    name: "TALAB x Faculty Appreciation Week",
+    slug: "spring-film-festival",
+    name: "Spring Film Festival",
     blurb:
-      "TALAB is a yearly school-wide event exploring Chinese-Filipino perspectives under one shared theme, paired with Faculty Appreciation Week, where students thank Ateneo's faculty with gifts and letters.",
+      "Spring Film Festival (SFF) bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. Modern representations of culture to be included for the SFF include cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Filipino-Chinese culture.",
   },
   {
-    slug: "lunar-lotus-market",
-    name: "Lunar Lotus Market",
+    slug: "rose-sale",
+    name: "Rose Sale",
     blurb:
-      "Celadon's week-long cultural bazaar, bringing together artists, local businesses, and concessionaires in a curated marketplace on campus.",
+      "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program. Through customizable bouquets and other love centered products, the project provides members and non members of Ateneo Celadon alike a chance to express appreciation for one another. At its heart, Rose Sale is about pausing to cherish the little things, the quiet gestures of care that make love meaningful and leave us with memories to hold onto.",
   },
   {
-    slug: "leadership-development-program",
-    name: "Leadership Development Program",
+    slug: "chinese-new-year",
+    name: "Chinese New Year",
     blurb:
-      "A 3-day, off-campus program that builds members' leadership skills through activity-based modules, experiential learning, and cultural awareness.",
+      "Xīn nián kuài lè! 🧧✨ Chinese New Year 2027 presents: “A Home in Every Hue: Celebrating Culture in Full Color,” a vibrant celebration where traditions, festive customs, and cherished childhood memories come to life. CNY 2027 invites you and the Ateneo community to experience the joy and spirit of the Lunar New Year through activity booths, festive food, exciting events, and colorful decorations. We hope to see you join us in bringing CNY 2027 to life! ❤️",
   },
   {
-    slug: "binondo-amazing-race",
-    name: "Binondo Amazing Race",
+    slug: "jade-business-summit",
+    name: "Jade Business Summit",
     blurb:
-      "An interactive competition of team-based challenges set across the Old Chinatown area, highlighting Binondo's significance to Chinese-Filipino culture.",
-  },
-  {
-    slug: "commpub-staffers",
-    name: "COMMPUB Staffers",
-    blurb:
-      "COMMPUB produces creative media and documentation as well as promotional material and event design for Celadon, and oversees the branding and public relations of the organization.",
+      "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit on November 7–8, 2026 that brings seasoned Chinese-Filipino business leaders and rising young founders together with ~300 students from Ateneo and 10+ partner schools. Thrust: “Heirlooms & Headstarts” · 承先启后 – honoring the enterprises our community was built on (heirlooms) while giving its next generation of founders their early advantage (headstarts).",
   },
 ];
 
@@ -61,11 +53,10 @@ export interface CoreTeamTimelineItem {
   label: string;
 }
 
-// TODO: real dates once Wave 1's schedule is finalized.
 export const CTA_TIMELINE: CoreTeamTimelineItem[] = [
-  { date: "TBD", label: "Application Duration" },
-  { date: "TBD", label: "Interview Dates" },
-  { date: "TBD", label: "Release of Results" },
+  { date: "September 9–18, 2026", label: "Application Duration" },
+  { date: "September 12–22, 2026", label: "Interview Dates" },
+  { date: "September 25, 2026", label: "Release of Results" },
 ];
 
 export const CTA_FAQS: { q: string; a: string }[] = [
