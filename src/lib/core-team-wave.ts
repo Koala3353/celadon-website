@@ -30,12 +30,16 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     name: "Spring Film Festival",
     blurb:
       "Spring Film Festival (SFF) bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation.",
+    photo: { src: "/internal/cta-wave1/sff-hero.webp", alt: "21st Spring Film Festival 2026-2027 — Year of the Fire Goat" },
+    href: "/internal/cta-wave1/spring-film-festival",
   },
   {
     slug: "rose-sale",
     name: "Rose Sale",
     blurb:
       "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program. Through customizable bouquets and other love centered products, the project provides members and non members of Ateneo Celadon alike a chance to express appreciation for one another.",
+    photo: { src: "/internal/cta-wave1/rs-hero.webp", alt: "Rose Sale '27 — Wave 1 Applications" },
+    href: "/internal/cta-wave1/rose-sale",
   },
   {
     slug: "chinese-new-year",
@@ -49,7 +53,9 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     slug: "jade-business-summit",
     name: "Jade Business Summit",
     blurb:
-      "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit on November 7–8, 2026 that brings seasoned Chinese-Filipino business leaders and rising young founders together with ~300 students from Ateneo and 10+ partner schools.",
+      "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall that brings seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students from Ateneo and partner schools through insightful lectures, panel discussions, a networking opportunity, and a pitch workshop that challenges participants to collaborate in developing and presenting SMART business ideas before a panel of ADMU professors.",
+    photo: { src: "/internal/cta-wave1/jade-hero.webp", alt: "Jade Business Summit 2026–2027 — Heirlooms & Headstarts" },
+    href: "/internal/cta-wave1/jade-business-summit",
   },
 ];
 
