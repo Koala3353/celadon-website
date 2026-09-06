@@ -27,7 +27,11 @@ export interface CtaProjectDetail {
   letterSignoff: { highlighted: string; name: string };
   whatIsIt: { heading: string; body: AboutRun[][]; images?: { src: string; alt: string }[] };
   vision: string;
-  testimonials: CtaProjectTestimonial[];
+  /** A single designed graphic (as the source PDF shows it) takes priority
+   * over structured cards when both are given — a project's own testimonial
+   * artwork is worth keeping as-is rather than pulling it apart. */
+  testimonialsImage?: { src: string; alt: string };
+  testimonials?: CtaProjectTestimonial[];
   timeline: DeptTimelineItem[];
   committees: DeptGroup[];
   faqs: { q: string; a: string }[];
@@ -103,22 +107,10 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   },
   vision:
     "To bring Chinese-Filipino culture to life through a celebration that inspires appreciation, strengthens community, and creates meaningful memories for the Ateneo community.",
-  testimonials: [
-    {
-      name: "Franzelle Yulangco",
-      role: "CNY '26 PM",
-      photo: "/internal/cta-wave1/cny-franzelle-yulangco.webp",
-      quote:
-        "Chinese New Year has always been a special day for me to spend time with my family, enjoying good food and fun activities. Being the CNY PM for 2026 gave me the unique opportunity to share this experience with my schoolmates and friends! Each and every activity and stall came to life through everyone's hard work as we worked together to create something for the entire Ateneo community to enjoy, and I'm so grateful to everyone who made it possible. I can't wait to see what this year's CNY will hold!",
-    },
-    {
-      name: "Therese Yap",
-      role: "CNY '26 PM",
-      photo: "/internal/cta-wave1/cny-therese-yap.webp",
-      quote:
-        "Chinese New Year has been part of my Ateneo journey even before I became a Celadonean. The festivities has been a way for me to bring the celebration despite being away from home, and I've always enjoyed participating in the different activities that this project brings every year. Being a project manager for this project brought me great memories, and I have great pride that being part of this core team made an unforgettable mark in my life.",
-    },
-  ],
+  testimonialsImage: {
+    src: "/internal/cta-wave1/cny-testimonials.webp",
+    alt: "Testimonials — CNY '26 PM Franzelle Yulangco and CNY '26 PM Therese Yap",
+  },
   timeline: [
     { date: "September 25, 2026", label: "Release of Wave 1 Results" },
     { date: "September 30, 2026", label: "Heads Onboarding" },

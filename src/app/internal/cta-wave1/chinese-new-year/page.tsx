@@ -139,23 +139,38 @@ export default function ChineseNewYearProjectPage() {
         </Container>
       </section>
 
-      {/* Why join CNY '27? — testimonials */}
+      {/* Why join CNY '27? — testimonials, as the PDF's own designed graphic
+          rather than pulled apart into generic cards. */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading>💬 Why join CNY &lsquo;27?</Heading>
           </Reveal>
-          <Reveal stagger={70} className="mx-auto mt-10 grid w-full max-w-4xl gap-10 sm:grid-cols-2">
-            {project.testimonials.map((t) => (
-              <TestimonialCard
-                key={t.name}
-                name={t.name}
-                role={t.role}
-                imageSrc={t.photo ? asset(t.photo) : null}
-                testimonialText={t.quote}
+          {project.testimonialsImage && (
+            <Reveal className="mx-auto mt-10 w-full max-w-3xl overflow-hidden rounded-2xl shadow-[var(--shadow-md)]">
+              <Image
+                src={asset(project.testimonialsImage.src)}
+                alt={project.testimonialsImage.alt}
+                width={1600}
+                height={900}
+                data-reveal
+                className="w-full object-cover"
               />
-            ))}
-          </Reveal>
+            </Reveal>
+          )}
+          {!project.testimonialsImage && project.testimonials && (
+            <Reveal stagger={70} className="mx-auto mt-10 grid w-full max-w-4xl gap-10 sm:grid-cols-2">
+              {project.testimonials.map((t) => (
+                <TestimonialCard
+                  key={t.name}
+                  name={t.name}
+                  role={t.role}
+                  imageSrc={t.photo ? asset(t.photo) : null}
+                  testimonialText={t.quote}
+                />
+              ))}
+            </Reveal>
+          )}
         </Container>
       </section>
 
