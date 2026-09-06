@@ -80,7 +80,7 @@ export default function ChineseNewYearProjectPage() {
               {project.about}
             </p>
             <div data-reveal>
-              <ButtonLink href={CTA_APPLICATION_FORM_URL} external size="lg">
+              <ButtonLink href={CTA_APPLICATION_FORM_URL} external size="lg" variant="accent">
                 Apply Now
               </ButtonLink>
             </div>
