@@ -109,9 +109,11 @@ export function InternalNav() {
  * `pointer-events` on a link mid-click and eating the click's own default
  * navigation before the browser processes it).
  *
- * Click-to-open only, not hover — a mouse resting near the chevron on its
- * way to the pill (or to a link further along the nav) shouldn't pop the
- * panel open. Closes on an outside click or Escape instead of `mouseleave`.
+ * Opens on hover over the trigger (the pill + its chevron), closes when the
+ * pointer leaves that trigger-and-panel group — not on a plain `mouseleave`
+ * from just the pill, which would close it the instant the pointer moves
+ * down toward the panel itself. A click on the chevron still toggles it
+ * too, for touch/keyboard use where there's no hover to begin with.
  */
 function DeptsDropdown({ active }: { active: boolean }) {
   const [deptsOpen, setDeptsOpen] = useState(false);
@@ -136,7 +138,12 @@ function DeptsDropdown({ active }: { active: boolean }) {
   }, [deptsOpen]);
 
   return (
-    <div ref={rootRef} className="relative">
+    <div
+      ref={rootRef}
+      className="relative"
+      onMouseEnter={() => setDeptsOpen(true)}
+      onMouseLeave={() => setDeptsOpen(false)}
+    >
       <div className="flex items-center">
         <NavPill href="/internal/dept-apps" label="Deputy Applications" active={active} />
         <button
@@ -161,6 +168,10 @@ function DeptsDropdown({ active }: { active: boolean }) {
         </button>
       </div>
 
+      {/* Zero-gap, transparent bridge between the trigger and the panel —
+          without it, moving the mouse straight down crosses dead space,
+          `mouseleave` fires on the wrapper, and the panel closes before you
+          can reach it. */}
       <div className="absolute left-0 top-full w-56 pt-2">
         <div
           className={cn(
