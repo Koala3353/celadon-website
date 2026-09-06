@@ -16,6 +16,9 @@ export interface CoreTeamProject {
   /** Left unset until this wave's project photos are ready — the project
    * card renders a placeholder instead of a broken image in the meantime. */
   photo?: { src: string; alt: string };
+  /** Set once a project has its own detail page (see cta-projects.ts) — the
+   * card becomes a link to it instead of a plain info tile. */
+  href?: string;
 }
 
 // TODO: replace with the real Wave 1 Google Form link once applications open.
@@ -39,6 +42,8 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     name: "Chinese New Year",
     blurb:
       "Xīn nián kuài lè! 🧧✨ Chinese New Year 2027 presents: “A Home in Every Hue: Celebrating Culture in Full Color,” a vibrant celebration where traditions, festive customs, and cherished childhood memories come to life.",
+    photo: { src: "/internal/cta-wave1/cny-hero.webp", alt: "Chinese New Year '27 — A Home in Every Hue: Celebrating Culture in Full Color" },
+    href: "/internal/cta-wave1/chinese-new-year",
   },
   {
     slug: "jade-business-summit",
