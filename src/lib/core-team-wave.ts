@@ -26,25 +26,25 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     slug: "spring-film-festival",
     name: "Spring Film Festival",
     blurb:
-      "Spring Film Festival (SFF) bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. Modern representations of culture to be included for the SFF include cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Filipino-Chinese culture.",
+      "Spring Film Festival (SFF) bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation.",
   },
   {
     slug: "rose-sale",
     name: "Rose Sale",
     blurb:
-      "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program. Through customizable bouquets and other love centered products, the project provides members and non members of Ateneo Celadon alike a chance to express appreciation for one another. At its heart, Rose Sale is about pausing to cherish the little things, the quiet gestures of care that make love meaningful and leave us with memories to hold onto.",
+      "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program. Through customizable bouquets and other love centered products, the project provides members and non members of Ateneo Celadon alike a chance to express appreciation for one another.",
   },
   {
     slug: "chinese-new-year",
     name: "Chinese New Year",
     blurb:
-      "Xīn nián kuài lè! 🧧✨ Chinese New Year 2027 presents: “A Home in Every Hue: Celebrating Culture in Full Color,” a vibrant celebration where traditions, festive customs, and cherished childhood memories come to life. CNY 2027 invites you and the Ateneo community to experience the joy and spirit of the Lunar New Year through activity booths, festive food, exciting events, and colorful decorations. We hope to see you join us in bringing CNY 2027 to life! ❤️",
+      "Xīn nián kuài lè! 🧧✨ Chinese New Year 2027 presents: “A Home in Every Hue: Celebrating Culture in Full Color,” a vibrant celebration where traditions, festive customs, and cherished childhood memories come to life.",
   },
   {
     slug: "jade-business-summit",
     name: "Jade Business Summit",
     blurb:
-      "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit on November 7–8, 2026 that brings seasoned Chinese-Filipino business leaders and rising young founders together with ~300 students from Ateneo and 10+ partner schools. Thrust: “Heirlooms & Headstarts” · 承先启后 – honoring the enterprises our community was built on (heirlooms) while giving its next generation of founders their early advantage (headstarts).",
+      "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit on November 7–8, 2026 that brings seasoned Chinese-Filipino business leaders and rising young founders together with ~300 students from Ateneo and 10+ partner schools.",
   },
 ];
 
