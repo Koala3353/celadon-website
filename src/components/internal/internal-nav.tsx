@@ -109,15 +109,36 @@ export function InternalNav() {
  * `pointer-events` on a link mid-click and eating the click's own default
  * navigation before the browser processes it).
  *
- * Opens on hover over the trigger (the pill + its chevron), closes when the
- * pointer leaves that trigger-and-panel group — not on a plain `mouseleave`
- * from just the pill, which would close it the instant the pointer moves
- * down toward the panel itself. A click on the chevron still toggles it
- * too, for touch/keyboard use where there's no hover to begin with.
+ * Opens on hover over the trigger (the pill + its chevron) or the panel
+ * itself, closes a beat after the pointer leaves both — not the whole
+ * `relative` wrapper, whose box also covers the dead space where the
+ * (currently invisible) panel sits before it's ever opened, which used to
+ * open the menu just from hovering past that empty gap. The short close
+ * delay is what lets the pointer cross the small trigger-to-panel gap
+ * without the panel closing under it. A click on the chevron still toggles
+ * it too, for touch/keyboard use where there's no hover to begin with.
  */
 function DeptsDropdown({ active }: { active: boolean }) {
   const [deptsOpen, setDeptsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const cancelClose = () => {
+    if (closeTimer.current !== null) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const openNow = () => {
+    cancelClose();
+    setDeptsOpen(true);
+  };
+  const closeSoon = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setDeptsOpen(false), 150);
+  };
+
+  useEffect(() => cancelClose, []);
 
   useEffect(() => {
     if (!deptsOpen) return;
@@ -138,13 +159,8 @@ function DeptsDropdown({ active }: { active: boolean }) {
   }, [deptsOpen]);
 
   return (
-    <div
-      ref={rootRef}
-      className="relative"
-      onMouseEnter={() => setDeptsOpen(true)}
-      onMouseLeave={() => setDeptsOpen(false)}
-    >
-      <div className="flex items-center">
+    <div ref={rootRef} className="relative">
+      <div className="flex items-center" onMouseEnter={openNow} onMouseLeave={closeSoon}>
         <NavPill href="/internal/dept-apps" label="Deputy Applications" active={active} />
         <button
           type="button"
@@ -168,12 +184,10 @@ function DeptsDropdown({ active }: { active: boolean }) {
         </button>
       </div>
 
-      {/* Zero-gap, transparent bridge between the trigger and the panel —
-          without it, moving the mouse straight down crosses dead space,
-          `mouseleave` fires on the wrapper, and the panel closes before you
-          can reach it. */}
       <div className="absolute left-0 top-full w-56 pt-2">
         <div
+          onMouseEnter={openNow}
+          onMouseLeave={closeSoon}
           className={cn(
             "grid grid-cols-1 gap-0.5 rounded-2xl bg-white p-2 shadow-[var(--shadow-md)] ring-1 ring-inset ring-border transition-opacity duration-150",
             deptsOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
