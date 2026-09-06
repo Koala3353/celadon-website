@@ -21,10 +21,11 @@ export interface CtaProjectDetail {
   heroImage: { src: string; alt: string };
   /** Short hero blurb, shown under the title. */
   about: string;
-  /** "Dear Applicant" letter from the PMs, as paragraphs. */
+  /** "Dear Applicant" letter from the PMs, as paragraphs — the "Dear
+   * Applicant," heading itself is rendered separately, not part of this. */
   letter: AboutRun[][];
-  letterSignoff: string;
-  whatIsIt: { heading: string; body: string; images?: { src: string; alt: string }[] };
+  letterSignoff: { highlighted: string; name: string };
+  whatIsIt: { heading: string; body: AboutRun[][]; images?: { src: string; alt: string }[] };
   vision: string;
   testimonials: CtaProjectTestimonial[];
   timeline: DeptTimelineItem[];
@@ -46,29 +47,51 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   about:
     "Join us in welcoming the Year of the Fire Goat this February 2–5, 2027! A vibrant celebration where traditions, festive customs, and cherished childhood memories come to life.",
   letter: [
-    [{ text: "Dear Applicant,", bold: true }],
     [
       {
-        text: "We’re so happy to see you here! Thank you for your interest in being part of Chinese New Year 2027, one of Celadon’s major cultural projects.",
+        text: "We’re so happy to see you here! Thank you for your interest in being part of ",
       },
+      { text: "Chinese New Year 2027, one of Celadon’s major cultural projects", bold: true, highlight: true },
+      { text: "." },
     ],
     [
       {
-        text: "Through this celebration we hope to bring Filipino-Chinese culture closer to the Ateneo community by creating a space where everyone can learn, participate, and celebrate together. From interactive booths and cultural activities to performances, exhibits, and food, CNY is more than just a celebration, it is an opportunity to share the traditions, stories, and values that continue to shape our culture.",
+        text: "Through this celebration we hope to bring Filipino-Chinese culture closer to the Ateneo community by creating a space where everyone can learn, participate, and celebrate together. From ",
+      },
+      { text: "interactive booths and cultural activities to performances, exhibits, and food", bold: true, highlight: true },
+      {
+        text: ", CNY is more than just a celebration, it is an opportunity to share the traditions, stories, and values that continue to shape our culture.",
       },
     ],
     [
-      { text: "“CNY 2027: A Home in Every Hue: Celebrating Culture in Full Color”", bold: true },
+      { text: "“CNY 2027: A Home in Every Hue: Celebrating Culture in Full Color”", bold: true, highlight: true },
       {
         text: " is inspired by the warmth of childhood memories, familiar traditions, and festive food. We hope to create a celebration that feels welcoming, meaningful, and familiar. We’d love to have you be part of the team that brings this vision to life!",
       },
     ],
     [{ text: "Join us in welcoming the Year of the Fire Goat this February 2–5, 2027! ✨🧧🐐" }],
   ],
-  letterSignoff: "With joy in every hue, Claire and Jenny",
+  letterSignoff: { highlighted: "With joy in every hue,", name: "Claire and Jenny" },
   whatIsIt: {
-    heading: "What is Chinese New Year?",
-    body: "Chinese New Year is a celebration rooted in tradition, family, and community, marking the start of a new year and welcoming it with hopes of prosperity, luck, and renewal. In the Filipino-Chinese community, these traditions have become part of a rich cultural heritage that continues to shape our communities today. Beyond the festivities, CNY is an opportunity to learn about the stories behind traditions, appreciate cultural heritage, and come together across different backgrounds. It reminds us that culture can be both something we inherit and something we share with others.",
+    heading: "🧧 What is Chinese New Year?",
+    body: [
+      [
+        { text: "Chinese New Year is a celebration rooted in " },
+        { text: "tradition, family, and community", bold: true, highlight: true },
+        { text: ", marking the start of a new year and welcoming it with hopes of " },
+        { text: "prosperity, luck, and renewal", bold: true, highlight: true },
+        {
+          text: ". In the Filipino-Chinese community, these traditions have become part of a rich cultural heritage that continues to shape our communities today.",
+        },
+      ],
+      [
+        {
+          text: "Beyond the festivities, CNY is an opportunity to learn about the stories behind traditions, appreciate cultural heritage, and come together across different backgrounds. It reminds us that ",
+        },
+        { text: "culture can be both something we inherit and something we share with others", bold: true, highlight: true },
+        { text: "." },
+      ],
+    ],
     images: [
       { src: "/internal/cta-wave1/cny-event-p6.webp", alt: "A past Ateneo Celadon Chinese New Year celebration's decorated campus walkway" },
       { src: "/internal/cta-wave1/cny-event-p9.webp", alt: "Members playing mahjong at a past CNY celebration" },

@@ -27,9 +27,12 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
+// Matches the instructions PDF's own heading style — bold, colored, normal
+// case with a leading emoji icon — rather than the deputy hub's uppercase
+// display type, which the PDF doesn't use anywhere.
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="display text-2xl text-dept-ink sm:text-3xl" data-reveal>
+    <h2 className="text-xl font-extrabold text-dept-accent sm:text-2xl" data-reveal>
       {children}
     </h2>
   );
@@ -89,13 +92,20 @@ export default function ChineseNewYearProjectPage() {
       <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4">
+            <p className="flex items-center gap-2 text-xl font-extrabold text-dept-accent" data-reveal>
+              <span aria-hidden>✨</span> Dear Applicant,
+            </p>
             <RichParagraphs
               paragraphs={project.letter}
               className="flex flex-col gap-4"
               paragraphClassName="prose-body text-dept-ink/80"
             />
-            <p className="prose-body font-semibold text-dept-ink" data-reveal>
-              {project.letterSignoff}
+            <p className="text-right" data-reveal>
+              <mark className="rounded-[2px] bg-red-200/70 px-0.5 font-semibold text-dept-ink">
+                {project.letterSignoff.highlighted}
+              </mark>
+              <br />
+              <span className="prose-body text-dept-ink">{project.letterSignoff.name}</span>
             </p>
           </Reveal>
         </Container>
@@ -104,25 +114,25 @@ export default function ChineseNewYearProjectPage() {
       {/* What is Chinese New Year? + Vision */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-[1fr_1.1fr] md:items-center md:gap-12">
+          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
+            <div className="flex flex-col gap-4 text-left">
+              <Heading>{project.whatIsIt.heading}</Heading>
+              <RichParagraphs
+                paragraphs={project.whatIsIt.body}
+                className="flex flex-col gap-4"
+                paragraphClassName="prose-body text-dept-ink/80"
+              />
+            </div>
             <PhotoCarousel
               photos={(project.whatIsIt.images ?? []).map((img) => ({ src: asset(img.src) }))}
               alt={project.whatIsIt.heading}
               className="aspect-[4/3] w-full rounded-2xl shadow-[var(--shadow-md)]"
             />
-            <div className="flex flex-col gap-4 text-left">
-              <Heading>{project.whatIsIt.heading}</Heading>
-              <p className="prose-body text-dept-ink/80" data-reveal>
-                {project.whatIsIt.body}
-              </p>
-            </div>
           </Reveal>
 
-          <Reveal className="mx-auto mt-10 w-full max-w-3xl rounded-2xl bg-white p-6 text-center ring-1 ring-inset ring-dept-accent/15 sm:p-8">
-            <p className="text-xs font-bold uppercase tracking-wider text-dept-accent" data-reveal>
-              Vision
-            </p>
-            <p className="prose-body mt-2 text-dept-ink/80" data-reveal>
+          <Reveal className="mx-auto mt-10 flex w-full max-w-3xl flex-col gap-3 text-left">
+            <Heading>🎯 Vision</Heading>
+            <p className="prose-body text-dept-ink/80" data-reveal>
               {project.vision}
             </p>
           </Reveal>
@@ -132,8 +142,8 @@ export default function ChineseNewYearProjectPage() {
       {/* Why join CNY '27? — testimonials */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl text-center">
-            <Heading>Why join CNY &lsquo;27?</Heading>
+          <Reveal className="mx-auto w-full max-w-3xl text-left">
+            <Heading>💬 Why join CNY &lsquo;27?</Heading>
           </Reveal>
           <Reveal stagger={70} className="mx-auto mt-10 grid w-full max-w-4xl gap-10 sm:grid-cols-2">
             {project.testimonials.map((t) => (
@@ -152,8 +162,8 @@ export default function ChineseNewYearProjectPage() {
       {/* Timeline */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-2xl text-center">
-            <Heading>Project Timeline</Heading>
+          <Reveal className="mx-auto w-full max-w-2xl text-left">
+            <Heading>📌 Project Timeline</Heading>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-xl">
             <Timeline items={project.timeline} />
@@ -164,8 +174,8 @@ export default function ChineseNewYearProjectPage() {
       {/* Core Team Committees */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl text-center">
-            <Heading>Core Team Committees</Heading>
+          <Reveal className="mx-auto w-full max-w-3xl text-left">
+            <Heading>👥 Core Team Committees</Heading>
             <p className="prose-body mt-3 text-muted-foreground" data-reveal>
               Open a committee to see its description and general responsibilities.
             </p>
@@ -180,7 +190,7 @@ export default function ChineseNewYearProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl">
-            <Heading>FAQs</Heading>
+            <Heading>❓ FAQs</Heading>
             <div className="mt-6 flex flex-col gap-6">
               {project.faqs.map((faq) => (
                 <div key={faq.q} data-reveal>
@@ -199,8 +209,8 @@ export default function ChineseNewYearProjectPage() {
           right where the footer art needs to fade in cleanly. */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl">
-            <Heading>Reach out to your PMs!</Heading>
+          <Reveal className="mx-auto w-full max-w-3xl text-left">
+            <Heading>✉️ Reach out to your PMs:</Heading>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               {project.contacts.map((contact) => (
                 <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
