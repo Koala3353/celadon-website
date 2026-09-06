@@ -1,6 +1,6 @@
 import type { DeptTimelineItem } from "@/lib/deputy-departments";
 
-export function Timeline({ items }: { items: DeptTimelineItem[] }) {
+function TimelineColumn({ items }: { items: DeptTimelineItem[] }) {
   return (
     <ol className="flex flex-col gap-0">
       {items.map((item, i) => (
@@ -16,5 +16,27 @@ export function Timeline({ items }: { items: DeptTimelineItem[] }) {
         </li>
       ))}
     </ol>
+  );
+}
+
+export function Timeline({
+  items,
+  columns = 1,
+}: {
+  items: DeptTimelineItem[];
+  /** Split a long timeline into two side-by-side columns (first half, then
+   * second half) instead of one tall single-file list — for a project like
+   * Rose Sale whose timeline has far more entries than CNY/JADE/SFF's. Each
+   * column gets its own connecting line rather than one spanning both. */
+  columns?: 1 | 2;
+}) {
+  if (columns === 1) return <TimelineColumn items={items} />;
+
+  const half = Math.ceil(items.length / 2);
+  return (
+    <div className="grid gap-x-8 sm:grid-cols-2">
+      <TimelineColumn items={items.slice(0, half)} />
+      <TimelineColumn items={items.slice(half)} />
+    </div>
   );
 }

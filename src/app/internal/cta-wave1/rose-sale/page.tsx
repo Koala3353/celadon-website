@@ -194,8 +194,8 @@ export default function RoseSaleProjectPage() {
           <Reveal className="mx-auto w-full max-w-2xl text-left">
             <Heading>📌 Project Timeline</Heading>
           </Reveal>
-          <Reveal className="mx-auto mt-10 w-full max-w-xl">
-            <Timeline items={project.timeline} />
+          <Reveal className="mx-auto mt-10 w-full max-w-3xl">
+            <Timeline items={project.timeline} columns={2} />
           </Reveal>
         </Container>
       </section>
