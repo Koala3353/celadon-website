@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
@@ -108,16 +108,35 @@ export function InternalNav() {
  * react-hooks/set-state-in-effect lint rule and, worse, risks toggling
  * `pointer-events` on a link mid-click and eating the click's own default
  * navigation before the browser processes it).
+ *
+ * Click-to-open only, not hover — a mouse resting near the chevron on its
+ * way to the pill (or to a link further along the nav) shouldn't pop the
+ * panel open. Closes on an outside click or Escape instead of `mouseleave`.
  */
 function DeptsDropdown({ active }: { active: boolean }) {
   const [deptsOpen, setDeptsOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!deptsOpen) return;
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setDeptsOpen(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDeptsOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [deptsOpen]);
 
   return (
-    <div
-      className="group relative"
-      onMouseEnter={() => setDeptsOpen(true)}
-      onMouseLeave={() => setDeptsOpen(false)}
-    >
+    <div ref={rootRef} className="relative">
       <div className="flex items-center">
         <NavPill href="/internal/dept-apps" label="Deputy Applications" active={active} />
         <button
@@ -142,10 +161,6 @@ function DeptsDropdown({ active }: { active: boolean }) {
         </button>
       </div>
 
-      {/* Zero-gap, transparent bridge between the trigger and the panel —
-          without it, moving the mouse straight down crosses dead space,
-          `mouseleave` fires on .group, and the panel closes before you can
-          reach it. */}
       <div className="absolute left-0 top-full w-56 pt-2">
         <div
           className={cn(
