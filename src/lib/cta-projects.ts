@@ -359,10 +359,8 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
       },
     ],
     [
-      { text: "This year marks the second iteration since the revival of the Jade Business Summit, and with it comes an opportunity to " },
-      { text: "rebuild the project into something bigger, bolder, and more impactful on the next generation of leaders and entrepreneurs", bold: true, highlight: true },
       {
-        text: ". JADE is envisioned as a space where people can step beyond what they already know, and discover new perspectives, connect with the industries, ideas, and people shaping the future of Filipino-Chinese business.",
+        text: "This year marks the second iteration since the revival of the Jade Business Summit, and with it comes an opportunity to rebuild the project into something bigger, bolder, and more impactful on the next generation of leaders and entrepreneurs. JADE is envisioned as a space where people can step beyond what they already know, and discover new perspectives, connect with the industries, ideas, and people shaping the future of Filipino-Chinese business.",
       },
     ],
     [
@@ -371,9 +369,9 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
       },
     ],
     [
-      { text: "We’re so excited to have you with us as we continue to " },
-      { text: "bring JADE back to life", bold: true, highlight: true },
-      { text: ". Thank you for believing in this revival and for choosing to be part of the journey. We can’t wait to see what we build together." },
+      {
+        text: "We’re so excited to have you with us as we continue to bring JADE back to life. Thank you for believing in this revival and for choosing to be part of the journey. We can’t wait to see what we build together.",
+      },
     ],
   ],
   letterSignoff: { highlighted: "All the best,", name: "Lorien Lee and Princess Datu" },
@@ -381,9 +379,9 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
     heading: "💼 What is the Jade Business Summit?",
     body: [
       [
-        { text: "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall that brings seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students from Ateneo and partner schools through insightful lectures, panel discussions, a networking opportunity, and a " },
-        { text: "pitch workshop that challenges participants to collaborate in developing and presenting SMART business ideas before a panel of ADMU professors", bold: true, highlight: true },
-        { text: "." },
+        {
+          text: "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall that brings seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students from Ateneo and partner schools through insightful lectures, panel discussions, a networking opportunity, and a pitch workshop that challenges participants to collaborate in developing and presenting SMART business ideas before a panel of ADMU professors.",
+        },
       ],
     ],
     images: [
@@ -418,7 +416,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
       ],
     },
     {
-      label: "Recruitment & Secretariat 📝 · 3 Core",
+      label: "Recruitment and Strategy 📝 · 3 Core",
       items: [
         "Manage participant registration, confirmation, attendance tracking, and certificate preparation",
         "Establish and manage the ambassadorship system to target high school student councils and college organizations",

@@ -111,9 +111,7 @@ export default function RoseSaleProjectPage() {
               paragraphClassName="prose-body text-dept-ink/80"
             />
             <p className="text-right" data-reveal>
-              <mark className="rounded-[2px] bg-amber-200/70 px-0.5 font-semibold text-dept-ink">
-                {project.letterSignoff.highlighted}
-              </mark>
+              <span className="prose-body text-dept-ink">{project.letterSignoff.highlighted}</span>
               <br />
               <span className="prose-body text-dept-ink">{project.letterSignoff.name}</span>
             </p>
