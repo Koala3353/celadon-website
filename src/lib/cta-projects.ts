@@ -24,7 +24,7 @@ export interface CtaProjectDetail {
   /** "Dear Applicant" letter from the PMs, as paragraphs. */
   letter: AboutRun[][];
   letterSignoff: string;
-  whatIsIt: { heading: string; body: string; image?: { src: string; alt: string } };
+  whatIsIt: { heading: string; body: string; images?: { src: string; alt: string }[] };
   vision: string;
   testimonials: CtaProjectTestimonial[];
   timeline: DeptTimelineItem[];
@@ -69,7 +69,14 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   whatIsIt: {
     heading: "What is Chinese New Year?",
     body: "Chinese New Year is a celebration rooted in tradition, family, and community, marking the start of a new year and welcoming it with hopes of prosperity, luck, and renewal. In the Filipino-Chinese community, these traditions have become part of a rich cultural heritage that continues to shape our communities today. Beyond the festivities, CNY is an opportunity to learn about the stories behind traditions, appreciate cultural heritage, and come together across different backgrounds. It reminds us that culture can be both something we inherit and something we share with others.",
-    image: { src: "/internal/cta-wave1/cny-lion-dance.webp", alt: "Lion dance performance at a past Ateneo Celadon Chinese New Year celebration" },
+    images: [
+      { src: "/internal/cta-wave1/cny-event-p6.webp", alt: "A past Ateneo Celadon Chinese New Year celebration's decorated campus walkway" },
+      { src: "/internal/cta-wave1/cny-event-p9.webp", alt: "Members playing mahjong at a past CNY celebration" },
+      { src: "/internal/cta-wave1/cny-event-p10.webp", alt: "A guzheng performance at a past CNY celebration" },
+      { src: "/internal/cta-wave1/cny-event-p5.webp", alt: "Members in red at a past CNY celebration" },
+      { src: "/internal/cta-wave1/cny-event-p7.webp", alt: "An activity booth at a past CNY celebration" },
+      { src: "/internal/cta-wave1/cny-event-p11.webp", alt: "A booth activity at a past CNY celebration" },
+    ],
   },
   vision:
     "To bring Chinese-Filipino culture to life through a celebration that inspires appreciation, strengthens community, and creates meaningful memories for the Ateneo community.",

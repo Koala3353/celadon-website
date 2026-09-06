@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
+import { PhotoCarousel } from "@/components/photo-carousel";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
@@ -104,14 +105,11 @@ export default function ChineseNewYearProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-[1fr_1.1fr] md:items-center md:gap-12">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]">
-              <SkeletonImage
-                src={asset(project.whatIsIt.image!.src)}
-                alt={project.whatIsIt.image!.alt}
-                fill
-                className="object-cover"
-              />
-            </div>
+            <PhotoCarousel
+              photos={(project.whatIsIt.images ?? []).map((img) => ({ src: asset(img.src) }))}
+              alt={project.whatIsIt.heading}
+              className="aspect-[4/3] w-full rounded-2xl shadow-[var(--shadow-md)]"
+            />
             <div className="flex flex-col gap-4 text-left">
               <Heading>{project.whatIsIt.heading}</Heading>
               <p className="prose-body text-dept-ink/80" data-reveal>

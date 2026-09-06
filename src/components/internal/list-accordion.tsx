@@ -33,8 +33,9 @@ export function ListAccordion({ groups }: { groups: DeptGroup[] }) {
           <div className="rounded-b-[1.125rem] bg-white px-5 pb-5">
             <ul className="flex flex-col gap-1.5">
               {group.items.map((item, i) => (
-                <li key={i} className="prose-body text-sm text-muted-foreground">
-                  {renderItem(item)}
+                <li key={i} className="prose-body flex gap-2 text-sm text-muted-foreground">
+                  <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-dept-accent" />
+                  <span>{renderItem(item)}</span>
                 </li>
               ))}
             </ul>
