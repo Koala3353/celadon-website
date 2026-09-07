@@ -110,7 +110,7 @@ export default function SpringFilmFestivalProjectPage() {
             <div className="flex flex-col gap-4 text-left">
               <Heading>{project.whatIsIt.heading}</Heading>
               <RichParagraphs
-                paragraphs={project.whatIsIt.body}
+                paragraphs={project.whatIsIt.body.slice(0, -1)}
                 className="flex flex-col gap-4"
                 paragraphClassName="prose-body text-dept-ink/80"
               />
@@ -119,6 +119,14 @@ export default function SpringFilmFestivalProjectPage() {
               photos={(project.whatIsIt.images ?? []).map((img) => ({ src: asset(img.src) }))}
               alt={project.whatIsIt.heading}
               className="aspect-[4/3] w-full rounded-2xl shadow-[var(--shadow-md)]"
+            />
+          </Reveal>
+
+          <Reveal className="mx-auto mt-4 w-full max-w-5xl text-left">
+            <RichParagraphs
+              paragraphs={project.whatIsIt.body.slice(-1)}
+              className="flex flex-col gap-4"
+              paragraphClassName="prose-body text-dept-ink/80"
             />
           </Reveal>
 
