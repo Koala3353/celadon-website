@@ -26,7 +26,7 @@ export interface CtaProjectDetail {
   letter: AboutRun[][];
   letterSignoff: { highlighted: string; name: string };
   whatIsIt: { heading: string; body: AboutRun[][]; images?: { src: string; alt: string }[] };
-  vision: string;
+  vision: AboutRun[][];
   /** A single designed graphic (as the source PDF shows it) takes priority
    * over structured cards when both are given — a project's own testimonial
    * artwork is worth keeping as-is rather than pulling it apart. */
@@ -34,7 +34,7 @@ export interface CtaProjectDetail {
   testimonials?: CtaProjectTestimonial[];
   timeline: DeptTimelineItem[];
   committees: DeptGroup[];
-  faqs: { q: string; a: string }[];
+  faqs: { q: string; a: AboutRun[][] }[];
   contacts: DeptContact[];
 }
 
@@ -105,8 +105,13 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       { src: "/internal/cta-wave1/cny-event-p11.webp", alt: "A booth activity at a past CNY celebration" },
     ],
   },
-  vision:
-    "To bring Chinese-Filipino culture to life through a celebration that inspires appreciation, strengthens community, and creates meaningful memories for the Ateneo community.",
+  vision: [
+    [
+      {
+        text: "To bring Chinese-Filipino culture to life through a celebration that inspires appreciation, strengthens community, and creates meaningful memories for the Ateneo community.",
+      },
+    ],
+  ],
   testimonialsImage: {
     src: "/internal/cta-wave1/cny-testimonials.webp",
     alt: "Testimonials — CNY '26 PM Franzelle Yulangco and CNY '26 PM Therese Yap",
@@ -305,23 +310,41 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   faqs: [
     {
       q: "Who can apply for the CNY Core Team?",
-      a: "Any interested Celadonean who is willing to contribute to the project may apply. Previous experience is not required.",
+      a: [[{ text: "Any interested Celadonean who is willing to contribute to the project may apply. Previous experience is not required." }]],
     },
     {
       q: "Can I apply for more than one committee?",
-      a: "Yes! You may apply for up to two committees.",
+      a: [[{ text: "Yes! You may apply for up to two committees." }]],
     },
     {
       q: "What is the difference between a Core Member and a Head?",
-      a: "Core Members work closely with their committee to accomplish assigned tasks and contribute to the planning and execution of CNY. Heads oversee their committee, delegate responsibilities, track progress, and coordinate with the PMs and other committees.",
+      a: [
+        [
+          {
+            text: "Core Members work closely with their committee to accomplish assigned tasks and contribute to the planning and execution of CNY. Heads oversee their committee, delegate responsibilities, track progress, and coordinate with the PMs and other committees.",
+          },
+        ],
+      ],
     },
     {
       q: "What if I don't have a lot of knowledge about Chinese-Filipino culture?",
-      a: "That's completely okay! CNY is also an opportunity to learn. What matters most is your willingness to understand, appreciate, and respectfully engage with the culture.",
+      a: [
+        [
+          {
+            text: "That's completely okay! CNY is also an opportunity to learn. What matters most is your willingness to understand, appreciate, and respectfully engage with the culture.",
+          },
+        ],
+      ],
     },
     {
       q: "Is the workload for CNY heavy, and how much commitment is expected?",
-      a: "CNY is a major project that involves preparation before and throughout the celebration. Members are expected to actively participate in committee meetings, assigned tasks, and event days, but the PMs will be there to guide you every step of the way — just stay engaged and be transparent with your availability ❤️",
+      a: [
+        [
+          {
+            text: "CNY is a major project that involves preparation before and throughout the celebration. Members are expected to actively participate in committee meetings, assigned tasks, and event days, but the PMs will be there to guide you every step of the way — just stay engaged and be transparent with your availability ❤️",
+          },
+        ],
+      ],
     },
   ],
   contacts: [
@@ -389,8 +412,23 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
       { src: "/internal/cta-wave1/jade-event-2.webp", alt: "A group photo from a past JADE Business Summit" },
     ],
   },
-  vision:
-    "The JADE Business Summit 2026-2027 envisions a gathering that celebrates the enterprises, values, and stories that have shaped our community, while empowering the next generation to build upon what came before. The project is guided by the Chinese principle 承先启后 (Chéngxiānqǐhòu), to carry forward the legacy of the past while opening the way for the future. As such, this year's summit explores the relationship between heritage and entrepreneurship whilst recognizing that every new venture begins with something inherited, learned, or passed down. Through conversations with established encounters with established and emerging founders alike, alongside opportunities to explore the realities of building a business, JADE aims to pass on the lessons behind enduring legacies while giving aspiring entrepreneurs the knowledge, networks, and perspective to take their first steps. This year's thrust, “Heirlooms & Headstarts,” represents this balance through the heirlooms we inherit and the headstarts that allow us to build on and innovate with the past. With the recent revival of JADE, we look to honor what has already been set in stone, and to seek what the next generation can build from it.",
+  vision: [
+    [
+      {
+        text: "The JADE Business Summit 2026-2027 envisions a gathering that celebrates the enterprises, values, and stories that have shaped our community, while empowering the next generation to build upon what came before. The project is guided by the Chinese principle 承先启后 (Chéngxiānqǐhòu), to carry forward the legacy of the past while opening the way for the future. As such, this year's summit explores the relationship between heritage and entrepreneurship whilst recognizing that every new venture begins with something inherited, learned, or passed down.",
+      },
+    ],
+    [
+      {
+        text: "Through conversations with established encounters with established and emerging founders alike, alongside opportunities to explore the realities of building a business, JADE aims to pass on the lessons behind enduring legacies while giving aspiring entrepreneurs the knowledge, networks, and perspective to take their first steps. This year's thrust, “Heirlooms & Headstarts,” represents this balance through the heirlooms we inherit and the headstarts that allow us to build on and innovate with the past.",
+      },
+    ],
+    [
+      {
+        text: "With the recent revival of JADE, we look to honor what has already been set in stone, and to seek what the next generation can build from it.",
+      },
+    ],
+  ],
   timeline: [
     { date: "September 24, 2026", label: "Release of Wave 1 Application Results" },
     { date: "October 2, 2026", label: "Core Team 1st General Assembly" },
@@ -544,9 +582,18 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
         { text: "." },
       ],
     ],
+    images: [
+      { src: "/internal/cta-wave1/sff-event-1.webp", alt: "A lion dance performance at a past Spring Film Festival in Shangri-La Plaza" },
+      { src: "/internal/cta-wave1/sff-event-2.webp", alt: "The Spring Film Festival core team and organizers at a past event" },
+    ],
   },
-  vision:
-    "The Spring Film Festival aims to leave a lasting impression on the community through colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with them — to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
+  vision: [
+    [
+      {
+        text: "The Spring Film Festival aims to leave a lasting impression on the community through colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with–to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
+      },
+    ],
+  ],
   timeline: [
     { date: "September 9, 2026", label: "Opening of Wave 1 Core Team Applications" },
     { date: "September 14–22, 2026", label: "Interview Period for Spring Film Festival Core Team Applications" },
@@ -703,35 +750,111 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
   faqs: [
     {
       q: "Do I need to submit extra requirements?",
-      a: "Yes, applicants for Digital Creatives, Production Design, and Documentation & Publications will be asked to submit an additional requirement, as outlined by COMMPUB and the Project Managers.",
+      a: [
+        [
+          {
+            text: "Yes, applicants for Digital Creatives, Production Design, and Documentation & Publications will be asked to submit an additional requirement, as outlined by COMMPUB and the Project Managers.",
+          },
+        ],
+      ],
     },
     {
       q: "Can I apply to more than one committee?",
-      a: "Yes! You may apply to a maximum of two committees. However, please note that you will only be assigned to only one committee.",
+      a: [
+        [
+          {
+            text: "Yes! You may apply to a maximum of two committees. However, please note that you will only be assigned to only one committee.",
+          },
+        ],
+      ],
     },
     {
       q: "Can I apply to more than one project aside from the Spring Film Festival?",
-      a: "Yes, all applicants within the project of Ateneo Celadon are allowed to apply for more than one project regardless of the date of its project execution; provided that the applicant is able to properly manage their workload and account for the events arising from commitment in two or more projects.",
+      a: [
+        [
+          {
+            text: "Yes, all applicants within the project of Ateneo Celadon are allowed to apply for more than one project regardless of the date of its project execution; provided that the applicant is able to properly manage their workload and account for the events arising from commitment in two or more projects.",
+          },
+        ],
+      ],
     },
     {
       q: "Can I apply as a Department Deputy as well as a Core Team Member at the same time?",
-      a: "Yes, it is possible for a member of Ateneo Celadon to be a department deputy as well as a core team member at the same time. However, keep in mind that deputies take on a year-long role in supporting Ateneo Celadon in its different departments which mainly consists of project deployment as a core team member of other projects and other additional tasks within your chosen department. If you are interested in applying as a Department Deputy, more information could be found in this link: https://ateneoceladon.com/internal/dept-apps/. Applications are open until September 12, 2026 unless extended.",
+      a: [
+        [
+          { text: "Yes, it is possible for a member of Ateneo Celadon to be a department deputy as well as a core team member at the same time. However, keep in mind that deputies take on a year-long role in supporting Ateneo Celadon in its different departments which mainly consists of " },
+          { text: "project deployment as a core team member of other projects", bold: true },
+          { text: " and " },
+          { text: "other additional tasks within your chosen department", bold: true },
+          { text: "." },
+        ],
+        [
+          {
+            text: "If you are interested in applying as a Department Deputy, more information could be found in this link: https://ateneoceladon.com/internal/dept-apps/. Applications are open until September 12, 2026 unless extended.",
+          },
+        ],
+      ],
     },
     {
       q: "Where will the Spring Film Festival be located?",
-      a: "The Spring Film Festival will be located in Shangri-La Plaza, with the location below being its exact address: EDSA corner Shaw Boulevard, Ortigas Center, Mandaluyong City, Metro Manila, Philippines. The location of the Spring Film Festival widely varies compared to the location of other events within Ateneo Celadon. However, the mode of transportation from Ateneo de Manila University to Shangri-La Plaza will be meticulously planned as we progress through the planning phase of the project.",
+      a: [
+        [
+          {
+            text: "The Spring Film Festival will be located in Shangri-La Plaza, with the location below being its exact address: EDSA corner Shaw Boulevard, Ortigas Center, Mandaluyong City, Metro Manila, Philippines.",
+          },
+        ],
+        [
+          {
+            text: "The location of the Spring Film Festival widely varies compared to the location of other events within Ateneo Celadon. However, the mode of transportation from Ateneo de Manila University to Shangri-La Plaza will be meticulously planned as we progress through the planning phase of the project.",
+          },
+        ],
+      ],
     },
     {
       q: "Do I need to be present in all the three-days in Shangri-La for the project execution of the Spring Film Festival?",
-      a: "It is highly encouraged to be present in all three days of the Spring Film Festival not only for the provision of assistance when needed but also to interact with the other stakeholders of the event. However, we also understand that everyone needs to accommodate their personal and academic commitments. As long as these commitments are duly and timely communicated to the project managers and their respective heads, we will be lenient in the absence of core team members.",
+      a: [
+        [
+          {
+            text: "It is highly encouraged to be present in all three days of the Spring Film Festival not only for the provision of assistance when needed but also to interact with the other stakeholders of the event. However, we also understand that everyone needs to accommodate their personal and academic commitments. As long as these commitments are duly and timely communicated to the project managers and their respective heads, we will be lenient in the absence of core team members.",
+          },
+        ],
+      ],
     },
     {
       q: "How heavy is the workload?",
-      a: "The workload is manageable and can be balanced with your academic, social, and personal life. However, there may be busier periods, especially as deadlines and the event draw near, when the workload may become more demanding. With proper time management, communication, and team effort, it will be manageable alongside your other commitments.",
+      a: [
+        [
+          {
+            text: "The workload is manageable and can be balanced with your academic, social, and personal life. However, there may be busier periods, especially as deadlines and the event draw near, when the workload may become more demanding. With proper time management, communication, and team effort, it will be manageable alongside your other commitments.",
+          },
+        ],
+      ],
     },
     {
       q: "Will I be working with other people outside of the Spring Film Festival?",
-      a: "It is likely that working as a core team for the Spring Film Festival will involve working with other stakeholders of the event. Internally, the Spring Film Festival may closely work alongside the Cultural Affairs Department (CUL) of Ateneo Celadon to manage the cultural discourse of the organization, as well as its other departments. The Spring Film Festival will also work closely with the Ateneo Ricardo Leong Center for Chinese Studies (RLCCS) as the project is implemented in partnership with them. Externally, the Spring Film Festival, especially its core team members, may involve working with external parties which depend on the committee chosen. For instance, the External Relations and the Logistics Committee may have to coordinate with its sought partners in order to fulfill their formed agreements. However, the project execution of the Spring Film Festival will most likely involve the interaction with guests and employees regardless of the committee and position chosen.",
+      a: [
+        [
+          {
+            text: "It is likely that working as a core team for the Spring Film Festival will involve working with other stakeholders of the event.",
+          },
+        ],
+        [
+          { text: "Internally, the Spring Film Festival may closely work alongside the " },
+          { text: "Cultural Affairs Department (CUL)", bold: true },
+          { text: " of Ateneo Celadon to manage the cultural discourse of the organization, as well as its other departments. The Spring Film Festival will also work closely with the Ateneo " },
+          { text: "Ricardo Leong Center for Chinese Studies (RLCCS)", bold: true },
+          { text: " as the project is implemented in partnership with them." },
+        ],
+        [
+          { text: "Externally, the Spring Film Festival, especially its core team members, may involve working with external parties which " },
+          { text: "depend on the committee chosen", bold: true },
+          {
+            text: ". For instance, the External Relations and the Logistics Committee may have to coordinate with its sought partners in order to fulfill their formed agreements. However, the project execution of the Spring Film Festival will most likely involve the ",
+          },
+          { text: "interaction with guests and employees regardless of the committee and position chosen", bold: true },
+          { text: "." },
+        ],
+      ],
     },
   ],
   contacts: [
@@ -798,8 +921,25 @@ export const ROSE_SALE: CtaProjectDetail = {
       { src: "/internal/cta-wave1/rs-event-6.webp", alt: "Two Rose Sale core team members holding pink flowers" },
     ],
   },
-  vision:
-    "In a world where the days pass like scenes in a story and the streets hum with passing footsteps, it's easy to lose sight of what brought us here when we're always looking toward what could take us there. This year, we want to slow down, step away from the 2x speed we've been moving at for most of our lives, and take a moment to notice the things we've passed along the way. We want this year's Rose Sale to break this cycle and take time to appreciate love in all forms. Because in all of them, one thing remains constant: the quiet acts of care that nurtured who we are today, filling our hearts with nostalgia for the little things that weave our story of love. At its heart, Rose Sale is about pausing to cherish the little things, the quiet gestures of care that make love meaningful and leave us with memories to hold onto.",
+  vision: [
+    [
+      {
+        text: "In a world where the days pass like scenes in a story and the streets hum with passing footsteps, it's easy to lose sight of what brought us here when we're always looking toward what could take us there. This year, we want to slow down, step away from the 2x speed we've been moving at for most of our lives, and take a moment to notice the things we've passed along the way.",
+      },
+    ],
+    [
+      { text: "We want this year's Rose Sale to break this cycle and " },
+      { text: "take time to appreciate love in all forms", highlight: true },
+      { text: ". Because in all of them, " },
+      {
+        text: "one thing remains constant: the quiet acts of care that nurtured who we are today, filling our hearts with nostalgia for the little things that weave our story of love",
+        highlight: true,
+      },
+      {
+        text: ". At its heart, Rose Sale is about pausing to cherish the little things, the quiet gestures of care that make love meaningful and leave us with memories to hold onto.",
+      },
+    ],
+  ],
   testimonials: [
     {
       name: "Ailyse 😌🌷",
@@ -895,8 +1035,12 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Conceptualize, create, and develop content for online promotions",
         "Ensure consistent and effective branding across all materials",
         [
+          { text: "Additional Requirement: Please refer to the document below for the Additional Requirements for ", italic: true },
+          { text: "Digital Creatives, Production Design, and Documentation & Publications", italic: true, bold: true },
+          { text: " applicants. (For ", italic: true },
+          { text: "Documentation & Publications", italic: true, bold: true },
           {
-            text: "Additional Requirement: Please refer to the document below for the Additional Requirements for Digital Creatives, Production Design, and Documentation & Publications applicants. (For Documentation & Publications, choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
+            text: ", choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
             italic: true,
           },
         ],
@@ -915,8 +1059,12 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Create and manage video content for promotional purposes",
         "Document the event and compile content for post-event use",
         [
+          { text: "Additional Requirement: Please refer to the document below for the Additional Requirements for ", italic: true },
+          { text: "Digital Creatives, Production Design, and Documentation & Publications", italic: true, bold: true },
+          { text: " applicants. (For ", italic: true },
+          { text: "Documentation & Publications", italic: true, bold: true },
           {
-            text: "Additional Requirement: Please refer to the document below for the Additional Requirements for Digital Creatives, Production Design, and Documentation & Publications applicants. (For Documentation & Publications, choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
+            text: ", choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
             italic: true,
           },
         ],
@@ -934,8 +1082,12 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Direct creative strategies for Rose Sale physical/onsite promotions (e.g., DP shoot, promotional videos, product shooting)",
         "Conceptualize set design during onsite selling",
         [
+          { text: "Additional Requirement: Please refer to the document below for the Additional Requirements for ", italic: true },
+          { text: "Digital Creatives, Production Design, and Documentation & Publications", italic: true, bold: true },
+          { text: " applicants. (For ", italic: true },
+          { text: "Documentation & Publications", italic: true, bold: true },
           {
-            text: "Additional Requirement: Please refer to the document below for the Additional Requirements for Digital Creatives, Production Design, and Documentation & Publications applicants. (For Documentation & Publications, choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
+            text: ", choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
             italic: true,
           },
         ],
@@ -945,23 +1097,47 @@ export const ROSE_SALE: CtaProjectDetail = {
   faqs: [
     {
       q: "Will we have to sign up for onsite shifts?",
-      a: "Yes! Each core member will have their chance to handle various sales, shopkeeping, flower-wrapping, and roving roles throughout Valentine's week, as the highlight of the Rose Sale Core experience!",
+      a: [
+        [
+          {
+            text: "Yes! Each core member will have their chance to handle various sales, shopkeeping, flower-wrapping, and roving roles throughout Valentine's week, as the highlight of the Rose Sale Core experience!",
+          },
+        ],
+      ],
     },
     {
       q: "Can I join multiple core team committees?",
-      a: "You can apply to a maximum of two core team committees or positions for the entire project. However, you will only be accepted in one committee or position.",
+      a: [
+        [
+          {
+            text: "You can apply to a maximum of two core team committees or positions for the entire project. However, you will only be accepted in one committee or position.",
+          },
+        ],
+      ],
     },
     {
       q: "Do we need to submit any additional requirements?",
-      a: "No need! Just let your passion and personality shine through your interview.",
+      a: [[{ text: "No need! Just let your passion and personality shine through your interview." }]],
     },
     {
       q: "How often will we meet as a core team? Will there be work during the break?",
-      a: "We'll only meet a maximum of once a week, which will be conducted hybrid/online. Meetings with core team committees will be at the discretion of the core team heads. Online work during the break will be minimal and voluntary. Although the work may sometimes feel heavy, we promise that our work environment will always be healthy!",
+      a: [
+        [
+          {
+            text: "We'll only meet a maximum of once a week, which will be conducted hybrid/online. Meetings with core team committees will be at the discretion of the core team heads. Online work during the break will be minimal and voluntary. Although the work may sometimes feel heavy, we promise that our work environment will always be healthy!",
+          },
+        ],
+      ],
     },
     {
       q: "What would my workload look like as a core team member?",
-      a: "The workload will inevitably get heavier as the Rose Sale week gets closer, but it should still be more than manageable with the support and consideration of your heads and project managers!",
+      a: [
+        [
+          {
+            text: "The workload will inevitably get heavier as the Rose Sale week gets closer, but it should still be more than manageable with the support and consideration of your heads and project managers!",
+          },
+        ],
+      ],
     },
   ],
   contacts: [

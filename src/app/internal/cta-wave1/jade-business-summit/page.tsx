@@ -161,9 +161,12 @@ export default function JadeBusinessSummitProjectPage() {
 
           <Reveal className="mx-auto mt-10 flex w-full max-w-3xl flex-col gap-3 text-left">
             <Heading>🎯 Vision & Thrust</Heading>
-            <p className="prose-body text-dept-ink/80" data-reveal>
-              {project.vision}
-            </p>
+            <RichParagraphs
+              paragraphs={project.vision}
+              className="flex flex-col gap-4"
+              paragraphClassName="prose-body text-dept-ink/80"
+              data-reveal
+            />
           </Reveal>
         </Container>
       </section>

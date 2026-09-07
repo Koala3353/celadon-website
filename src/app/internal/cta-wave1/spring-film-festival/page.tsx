@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
+import { PhotoCarousel } from "@/components/photo-carousel";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { CTA_APPLICATION_FORM_URL } from "@/lib/core-team-wave";
@@ -105,20 +106,30 @@ export default function SpringFilmFestivalProjectPage() {
       {/* What is the Spring Film Festival? + Vision */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto flex w-full max-w-3xl flex-col gap-4 text-left">
-            <Heading>{project.whatIsIt.heading}</Heading>
-            <RichParagraphs
-              paragraphs={project.whatIsIt.body}
-              className="flex flex-col gap-4"
-              paragraphClassName="prose-body text-dept-ink/80"
+          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
+            <div className="flex flex-col gap-4 text-left">
+              <Heading>{project.whatIsIt.heading}</Heading>
+              <RichParagraphs
+                paragraphs={project.whatIsIt.body}
+                className="flex flex-col gap-4"
+                paragraphClassName="prose-body text-dept-ink/80"
+              />
+            </div>
+            <PhotoCarousel
+              photos={(project.whatIsIt.images ?? []).map((img) => ({ src: asset(img.src) }))}
+              alt={project.whatIsIt.heading}
+              className="aspect-[4/3] w-full rounded-2xl shadow-[var(--shadow-md)]"
             />
           </Reveal>
 
           <Reveal className="mx-auto mt-10 flex w-full max-w-3xl flex-col gap-3 text-left">
             <Heading>🏮 Vision & Thrust</Heading>
-            <p className="prose-body text-dept-ink/80" data-reveal>
-              {project.vision}
-            </p>
+            <RichParagraphs
+              paragraphs={project.vision}
+              className="flex flex-col gap-4"
+              paragraphClassName="prose-body text-dept-ink/80"
+              data-reveal
+            />
           </Reveal>
         </Container>
       </section>
@@ -165,7 +176,11 @@ export default function SpringFilmFestivalProjectPage() {
               {appFaqs.map((faq) => (
                 <div key={faq.q} data-reveal>
                   <p className="font-bold text-dept-ink">{faq.q}</p>
-                  <p className="prose-body mt-1.5 text-muted-foreground">{faq.a}</p>
+                  <RichParagraphs
+                    paragraphs={faq.a}
+                    className="mt-1.5 flex flex-col gap-2"
+                    paragraphClassName="prose-body text-muted-foreground"
+                  />
                 </div>
               ))}
             </div>
@@ -176,7 +191,11 @@ export default function SpringFilmFestivalProjectPage() {
               {projectFaqs.map((faq) => (
                 <div key={faq.q} data-reveal>
                   <p className="font-bold text-dept-ink">{faq.q}</p>
-                  <p className="prose-body mt-1.5 text-muted-foreground">{faq.a}</p>
+                  <RichParagraphs
+                    paragraphs={faq.a}
+                    className="mt-1.5 flex flex-col gap-2"
+                    paragraphClassName="prose-body text-muted-foreground"
+                  />
                 </div>
               ))}
             </div>

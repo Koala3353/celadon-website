@@ -140,9 +140,12 @@ export default function RoseSaleProjectPage() {
 
           <Reveal className="mx-auto mt-10 flex w-full max-w-3xl flex-col gap-3 text-left">
             <Heading>🌷 Vision and Thrust</Heading>
-            <p className="prose-body text-dept-ink/80" data-reveal>
-              {project.vision}
-            </p>
+            <RichParagraphs
+              paragraphs={project.vision}
+              className="flex flex-col gap-4"
+              paragraphClassName="prose-body text-dept-ink/80"
+              data-reveal
+            />
           </Reveal>
         </Container>
       </section>
@@ -259,7 +262,11 @@ export default function RoseSaleProjectPage() {
               {project.faqs.map((faq) => (
                 <div key={faq.q} data-reveal>
                   <p className="font-bold text-dept-ink">{faq.q}</p>
-                  <p className="prose-body mt-1.5 text-muted-foreground">{faq.a}</p>
+                  <RichParagraphs
+                    paragraphs={faq.a}
+                    className="mt-1.5 flex flex-col gap-2"
+                    paragraphClassName="prose-body text-muted-foreground"
+                  />
                 </div>
               ))}
             </div>
