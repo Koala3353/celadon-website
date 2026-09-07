@@ -10,8 +10,14 @@ import type { Department } from "@/lib/deputy-departments";
  * icon badge. The department name sits directly on the tint, colored by the
  * accent's ink, so each card reads as a distinct color-block rather than a
  * repeat of the same white card shape six times over.
+ *
+ * Uses the department's own page banner (`heroImage`) rather than
+ * `cardCover`, so this card and the page it links to lead with the same
+ * art — falling back to `cardCover` only for a department without one.
  */
 export function DepartmentCard({ dept }: { dept: Department }) {
+  const cover = dept.heroImage ?? dept.cardCover;
+
   return (
     <Link
       href={`/internal/dept-apps/${dept.slug}`}
@@ -31,7 +37,7 @@ export function DepartmentCard({ dept }: { dept: Department }) {
       <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-dept-tint">
         <div className="relative aspect-[16/10] w-full overflow-hidden">
           <SkeletonImage
-            src={asset(dept.cardCover.src)}
+            src={asset(cover.src)}
             alt=""
             fill
             sizes="(min-width: 640px) 33vw, 100vw"
