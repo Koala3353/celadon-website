@@ -47,7 +47,10 @@ export default function JadeBusinessSummitProjectPage() {
         } as React.CSSProperties
       }
     >
-      <section className="relative overflow-hidden bg-dept-tint text-dept-ink">
+      <section
+        className="relative overflow-hidden text-dept-ink"
+        style={{ backgroundColor: "color-mix(in srgb, var(--dept-accent) 20%, white)" }}
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
