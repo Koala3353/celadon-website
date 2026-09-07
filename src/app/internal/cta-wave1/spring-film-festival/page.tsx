@@ -141,7 +141,10 @@ export default function SpringFilmFestivalProjectPage() {
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading>👥 List of Committees</Heading>
             <p className="prose-body mt-3 text-muted-foreground" data-reveal>
-              Open a committee to see its description and general responsibilities.
+              The eight committees of the Spring Film Festival make up the different teams that help the
+              Spring Film Festival reach its project goals, each having distinct yet complementary
+              responsibilities. Found below are the descriptions, expectations, and common responsibilities of
+              each committee.
             </p>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">

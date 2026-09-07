@@ -245,7 +245,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
         "Coordinate with other committees on their creative needs",
         [
           {
-            text: "Note: There will be additional requirements for DigiC committee applicants. Kindly follow all pertinent instructions sent to you.",
+            text: "Note: There will be additional requirements for DigiC committee applicants. Kindly follow all pertinent instructions in this document.",
             italic: true,
           },
         ],
@@ -266,7 +266,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
         "Coordinate with other relevant committees regarding onsite gimmicks, designs, and materials",
         [
           {
-            text: "Note: There will be additional requirements for Prod committee applicants. Kindly follow all pertinent instructions sent to you.",
+            text: "Note: There will be additional requirements for Prod committee applicants. Kindly follow all pertinent instructions in this document.",
             italic: true,
           },
         ],
@@ -295,7 +295,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
         "Coordinate with other committees for necessary information and content",
         [
           {
-            text: "Note: There will be additional requirements for DocPub committee applicants. Kindly follow all pertinent instructions sent to you.",
+            text: "Note: There will be additional requirements for DocPub committee applicants. Kindly follow all pertinent instructions in this document.",
             italic: true,
           },
         ],
@@ -321,7 +321,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
     },
     {
       q: "Is the workload for CNY heavy, and how much commitment is expected?",
-      a: "CNY is a major project that involves preparation before and throughout the celebration. Members are expected to actively participate in committee meetings, assigned tasks, and event days, but the PMs will be there to guide you every step of the way — just stay engaged and be transparent with your availability.",
+      a: "CNY is a major project that involves preparation before and throughout the celebration. Members are expected to actively participate in committee meetings, assigned tasks, and event days, but the PMs will be there to guide you every step of the way — just stay engaged and be transparent with your availability ❤️",
     },
   ],
   contacts: [
@@ -390,7 +390,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
     ],
   },
   vision:
-    "The JADE Business Summit 2026-2027 envisions a gathering that celebrates the enterprises, values, and stories that have shaped our community, while empowering the next generation to build upon what came before. The project is guided by the Chinese principle 承先启后 (Chéngxiānqǐhòu) — to carry forward the legacy of the past while opening the way for the future. This year's summit explores the relationship between heritage and entrepreneurship, recognizing that every new venture begins with something inherited, learned, or passed down. Through conversations with established and emerging founders alike, alongside opportunities to explore the realities of building a business, JADE aims to pass on the lessons behind enduring legacies while giving aspiring entrepreneurs the knowledge, networks, and perspective to take their first steps. This year's thrust, “Heirlooms & Headstarts,” represents this balance through the heirlooms we inherit and the headstarts that allow us to build on and innovate with the past.",
+    "The JADE Business Summit 2026-2027 envisions a gathering that celebrates the enterprises, values, and stories that have shaped our community, while empowering the next generation to build upon what came before. The project is guided by the Chinese principle 承先启后 (Chéngxiānqǐhòu), to carry forward the legacy of the past while opening the way for the future. As such, this year's summit explores the relationship between heritage and entrepreneurship whilst recognizing that every new venture begins with something inherited, learned, or passed down. Through conversations with established encounters with established and emerging founders alike, alongside opportunities to explore the realities of building a business, JADE aims to pass on the lessons behind enduring legacies while giving aspiring entrepreneurs the knowledge, networks, and perspective to take their first steps. This year's thrust, “Heirlooms & Headstarts,” represents this balance through the heirlooms we inherit and the headstarts that allow us to build on and innovate with the past. With the recent revival of JADE, we look to honor what has already been set in stone, and to seek what the next generation can build from it.",
   timeline: [
     { date: "September 24, 2026", label: "Release of Wave 1 Application Results" },
     { date: "October 2, 2026", label: "Core Team 1st General Assembly" },
@@ -524,11 +524,10 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
           text: "The Spring Film Festival is a three-day event that bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. The activities that encompass the Spring Film Festival consist of cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Filipino-Chinese culture.",
         },
       ],
-      [
-        {
-          text: "The Spring Film Festival is divided into three events: (1) Gala Night, featuring performances of dancing, singing, and music talents; (2) Workshop Day, which places cultural workshops in the spotlight; and (3) Culminating Night, which concludes the festival through workshops and performances.",
-        },
-      ],
+      [{ text: "The Spring Film Festival is divided into three events:" }],
+      [{ text: "(1) Gala Night that features performances of dancing, singing, and music talents;" }],
+      [{ text: "(2) Workshop Day that places cultural workshops in the spotlight;" }],
+      [{ text: "(3) and Culminating Night that concludes the Spring Film Festival through workshops and performances." }],
       [
         { text: "The 21st Spring Film Festival marks the 21st iteration of the event by " },
         { text: "Ateneo Celadon", bold: true },
@@ -536,9 +535,9 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
         { text: "Ateneo Ricardo Leong Center for Chinese Studies (RLCCS)", bold: true },
         { text: ", each occurrence bearing a legacy of bringing the Filipino-Chinese culture to broader audiences. The theme for the 21st Spring Film Festival mainly revolves around the " },
         { text: "Year of the Fire Goat", bold: true },
-        { text: ", which symbolizes " },
+        { text: " which symbolizes " },
         { text: "harmonious connection in new beginnings", bold: true },
-        { text: ". Thus, the activities to be featured aim to emphasize the theme of " },
+        { text: ". Thus, the activities to be featured in the 21st Spring Film Festival aim to emphasize the theme of " },
         { text: "forming and nurturing stronger relationships", bold: true },
         { text: " in the celebration of " },
         { text: "creative and innovative activities", bold: true },
@@ -566,7 +565,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "One of the key committees in the Spring Film Festival, responsible for creatively communicating information and events to the broader audience — a chance to sharpen written and verbal communication skills, including comprehensive framing of information.",
+            text: "The Communications and Publications committee is one of the key committees in the Spring Film Festival who is responsible for creatively communicating information and events to the broader audience. It is through this committee that one may be able to sharpen their communication skills in both written and verbal communication, including comprehensive framing of information.",
             italic: true,
           },
         ],
@@ -582,7 +581,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "Among the most crucial committees in developing the artistic and creative concept of the event — exposes members to digital art mediums like Canva and Procreate, working closely with other stakeholders to uphold a unified creative vision.",
+            text: "The Digital Creatives committee of the Spring Film Festival is among the most crucial committees in developing the artistic and creative concept of the event. Contributing as a core team member of the Digital Creatives Committee shall expose one to utilizing mediums of digital art not limited to Canva, Procreate, and many more. Lastly, as one of the creative cornerstones of the Spring Film Festival, it is likely that the Digital Creatives Team shall collaborate with other stakeholders in order to uphold a unified creative vision that expresses the Spring Film Festival for what it is.",
             italic: true,
           },
         ],
@@ -598,7 +597,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "Material towards the preservation of memory through photo and video mediums — a chance to sharpen photography and videography skills, as well as framing, lighting, and visualization techniques.",
+            text: "The Documentations Committee of the Spring Film Festival is material towards the preservation of memory through photo and video mediums. By joining this committee, one will be able to sharpen their knowledge in using photography and videography devices and applications, as well as implicit skills and techniques such as framing, lighting, visualization, and many more.",
             italic: true,
           },
         ],
@@ -615,7 +614,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "Distinguished from Digital Creatives and Programs by its focus on the physically onsite activities of the Spring Film Festival, working closely with both departments to apply creative and interactive onsite plans during production and execution.",
+            text: "The Production Design Committee, distinguishes itself from the Digital Creatives and Programs Department, for the application of creative design concepts towards the physically onsite activities of the Spring Film Festival. The Production Committee however, shall closely work with the mentioned departments in applying creative and interactive onsite plans during the project publication and execution of the Spring Film Festival.",
             italic: true,
           },
         ],
@@ -632,7 +631,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "Forms and strengthens bonds with parties external to Ateneo Celadon — an opportunity to develop communication and negotiation skills, and build knowledge of agreements, obligations, and protecting the organization's interests.",
+            text: "The External Relations Committee is a relevant committee in forming and strengthening bonds with parties external to Ateneo Celadon. Further, the bonds that the External Relations Committee forms through this project may also have the potential to become strong partners that Ateneo Celadon could thrive with indefinitely. Through this committee, members may be able to develop strengths in communication and negotiation, as well as build knowledge towards communication mediums (e.g. email, Mailmeteor, Viber), agreements (e.g. contracts), obligations (e.g. fulfilling responsibilities), and protecting one's interests (e.g. preventing breach of agreement).",
             italic: true,
           },
         ],
@@ -649,7 +648,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "Responsible for the procurement of materials for the project's use — rooms, transportation, consumables, gimmick materials, decorations, and other miscellaneous materials — highly important to every department, especially those dependent on physical materials.",
+            text: "The Logistics Committee is responsible for the procurement of materials for use of the project. These materials may be of any nature ranging from rooms, transportation, consumables (e.g. food and water), gimmick materials, decorations, and other miscellaneous materials. The contributions made by this committee are highly important towards the accomplishment of roles and responsibilities in all departments, especially those highly dependent on physical materials.",
             italic: true,
           },
         ],
@@ -664,7 +663,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "Entertains all concerns related to the progression of the program presented to guests and stakeholders — one of the most demanding committees, but one that offers a mix of creative concept development, clear communication, and organized planning.",
+            text: "The Programs Committee entertains all concerns related to the progression of the program presented to all guests and stakeholders participating in the Spring Film Festival. It is also one of the most demanding committees in terms of output generation which requires proper planning and communication with the project team. On the other hand, contributing in this department equips core team members with vast experience and opportunities which include a mix of creative concept development, clear writing and communication, organized compilation of information, and many more.",
             italic: true,
           },
         ],
@@ -681,11 +680,17 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "Works towards the data collection, interpretation, and evaluation of the project to determine whether its accomplishments align with its goals, compiling a sustainability report to help the organization improve future initiatives — alongside recruitment manuals, orientation, and volunteer coordination.",
+            text: "The Recruitment and Secretariat Committee work towards the data collection, interpretation, and evaluation of the project in order to determine whether the project's accomplishments still align with the prescribed and formulated goals. Afterwards, all data and interpretations shall be compiled to develop the project's sustainability report that could help the organization improve its future initiatives.",
             italic: true,
           },
         ],
-        [{ text: "Responsibilities", bold: true }],
+        [
+          {
+            text: "However, the Spring Film Festival also aims to present the Recruitment and Secretariat Committee with more opportunities to grow aside from data collection and interpretation which are not limited to the creation of manuals for the project's use, as well as orientation and coordination with volunteers.",
+            italic: true,
+          },
+        ],
+        [{ text: "In the project planning and execution phases of the project, the responsibilities include:", bold: true }],
         "Creation of recruitment forms for volunteers",
         "Creation of evaluation forms",
         "Creation of volunteer and RecSec Manuals",
@@ -702,31 +707,31 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     },
     {
       q: "Can I apply to more than one committee?",
-      a: "Yes! You may apply to a maximum of two committees. However, please note that you will only be assigned to one committee.",
+      a: "Yes! You may apply to a maximum of two committees. However, please note that you will only be assigned to only one committee.",
     },
     {
       q: "Can I apply to more than one project aside from the Spring Film Festival?",
-      a: "Yes, all applicants are allowed to apply for more than one project regardless of the date of its execution, provided that you're able to properly manage your workload and account for the events arising from commitment in two or more projects.",
+      a: "Yes, all applicants within the project of Ateneo Celadon are allowed to apply for more than one project regardless of the date of its project execution; provided that the applicant is able to properly manage their workload and account for the events arising from commitment in two or more projects.",
     },
     {
       q: "Can I apply as a Department Deputy as well as a Core Team Member at the same time?",
-      a: "Yes, it's possible to be a department deputy as well as a core team member at the same time. Keep in mind that deputies take on a year-long role supporting Ateneo Celadon across its departments, mainly through project deployment as a core team member of other projects and other additional tasks within your chosen department. If you're interested in applying as a Department Deputy, more information can be found at /internal/dept-apps.",
+      a: "Yes, it is possible for a member of Ateneo Celadon to be a department deputy as well as a core team member at the same time. However, keep in mind that deputies take on a year-long role in supporting Ateneo Celadon in its different departments which mainly consists of project deployment as a core team member of other projects and other additional tasks within your chosen department. If you are interested in applying as a Department Deputy, more information could be found in this link: https://ateneoceladon.com/internal/dept-apps/. Applications are open until September 12, 2026 unless extended.",
     },
     {
       q: "Where will the Spring Film Festival be located?",
-      a: "The Spring Film Festival will be located in Shangri-La Plaza (EDSA corner Shaw Boulevard, Ortigas Center, Mandaluyong City). Transportation from Ateneo de Manila University to the venue will be meticulously planned as we progress through the planning phase.",
+      a: "The Spring Film Festival will be located in Shangri-La Plaza, with the location below being its exact address: EDSA corner Shaw Boulevard, Ortigas Center, Mandaluyong City, Metro Manila, Philippines. The location of the Spring Film Festival widely varies compared to the location of other events within Ateneo Celadon. However, the mode of transportation from Ateneo de Manila University to Shangri-La Plaza will be meticulously planned as we progress through the planning phase of the project.",
     },
     {
-      q: "Do I need to be present all three days in Shangri-La for the project execution?",
-      a: "It's highly encouraged to be present all three days, both to assist when needed and to interact with the event's other stakeholders. That said, we understand everyone has personal and academic commitments — as long as these are communicated to the project managers and heads in a duly and timely manner, we'll be lenient about absences.",
+      q: "Do I need to be present in all the three-days in Shangri-La for the project execution of the Spring Film Festival?",
+      a: "It is highly encouraged to be present in all three days of the Spring Film Festival not only for the provision of assistance when needed but also to interact with the other stakeholders of the event. However, we also understand that everyone needs to accommodate their personal and academic commitments. As long as these commitments are duly and timely communicated to the project managers and their respective heads, we will be lenient in the absence of core team members.",
     },
     {
       q: "How heavy is the workload?",
-      a: "The workload is manageable and can be balanced with your academic, social, and personal life, though it may become more demanding as deadlines and the event draw near. With proper time management, communication, and team effort, it'll be manageable alongside your other commitments.",
+      a: "The workload is manageable and can be balanced with your academic, social, and personal life. However, there may be busier periods, especially as deadlines and the event draw near, when the workload may become more demanding. With proper time management, communication, and team effort, it will be manageable alongside your other commitments.",
     },
     {
       q: "Will I be working with other people outside of the Spring Film Festival?",
-      a: "Likely, yes. Internally, SFF may closely work alongside Ateneo Celadon's Cultural Affairs Department (CUL) and other departments. Externally, it partners with the Ateneo Ricardo Leong Center for Chinese Studies (RLCCS), and committees like External Relations and Logistics may coordinate with outside partners — though project execution will most likely involve interacting with guests and employees regardless of committee.",
+      a: "It is likely that working as a core team for the Spring Film Festival will involve working with other stakeholders of the event. Internally, the Spring Film Festival may closely work alongside the Cultural Affairs Department (CUL) of Ateneo Celadon to manage the cultural discourse of the organization, as well as its other departments. The Spring Film Festival will also work closely with the Ateneo Ricardo Leong Center for Chinese Studies (RLCCS) as the project is implemented in partnership with them. Externally, the Spring Film Festival, especially its core team members, may involve working with external parties which depend on the committee chosen. For instance, the External Relations and the Logistics Committee may have to coordinate with its sought partners in order to fulfill their formed agreements. However, the project execution of the Spring Film Festival will most likely involve the interaction with guests and employees regardless of the committee and position chosen.",
     },
   ],
   contacts: [
