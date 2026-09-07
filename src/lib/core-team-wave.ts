@@ -9,6 +9,7 @@
  * until `photo` is filled in per project.
  */
 import { CHINESE_NEW_YEAR, JADE_BUSINESS_SUMMIT, ROSE_SALE, SPRING_FILM_FESTIVAL } from "@/lib/cta-projects";
+import type { AboutRun } from "@/lib/deputy-departments";
 
 export interface CoreTeamProject {
   slug: string;
@@ -83,7 +84,7 @@ export const CTA_TIMELINE: CoreTeamTimelineItem[] = [
   { date: "September 25, 2026", label: "Release of Results" },
 ];
 
-export const CTA_FAQS: { q: string; a: string }[] = [
+export const CTA_FAQS: { q: string; a: string | AboutRun[][] }[] = [
   {
     q: "Can I apply to more than one project?",
     a: "Yes — there's no limit on how many of the projects above you can apply to.",
@@ -95,5 +96,22 @@ export const CTA_FAQS: { q: string; a: string }[] = [
   {
     q: "Do all committees have additional requirements?",
     a: "It depends on the project and committee you're applying to — check each project's own instructions before you apply.",
+  },
+  {
+    q: "Can I apply as a Department Deputy as well as a Core Team Member at the same time?",
+    a: [
+      [
+        { text: "Yes, it is possible for a member of Ateneo Celadon to be a department deputy as well as a core team member at the same time. However, keep in mind that deputies take on a year-long role in supporting Ateneo Celadon in its different departments which mainly consists of " },
+        { text: "project deployment as a core team member of other projects", bold: true },
+        { text: " and " },
+        { text: "other additional tasks within your chosen department", bold: true },
+        { text: "." },
+      ],
+      [
+        { text: "If you are interested in applying as a Department Deputy, more information could be found in this link: " },
+        { text: "https://ateneoceladon.com/internal/dept-apps/", href: "https://ateneoceladon.com/internal/dept-apps/" },
+        { text: ". Applications are open until September 12, 2026 unless extended." },
+      ],
+    ],
   },
 ];

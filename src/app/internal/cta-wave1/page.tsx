@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
 import { SkyHero } from "@/components/internal/sky-hero";
+import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
 import { ProjectCard } from "@/components/internal/project-card";
 import { cn } from "@/lib/cn";
@@ -178,9 +179,17 @@ export default function CoreTeamApplicationsHubPage() {
                 {CTA_FAQS.map((faq) => (
                   <div key={faq.q}>
                     <p className="font-bold text-sky-navy">{faq.q}</p>
-                    <p className="prose-body mt-1.5 rounded-xl bg-sky-peach/25 p-4 text-sky-navy/80">
-                      {faq.a}
-                    </p>
+                    {typeof faq.a === "string" ? (
+                      <p className="prose-body mt-1.5 rounded-xl bg-sky-peach/25 p-4 text-sky-navy/80">
+                        {faq.a}
+                      </p>
+                    ) : (
+                      <RichParagraphs
+                        paragraphs={faq.a}
+                        className="mt-1.5 flex flex-col gap-2 rounded-xl bg-sky-peach/25 p-4"
+                        paragraphClassName="prose-body text-sky-navy/80"
+                      />
+                    )}
                   </div>
                 ))}
               </div>

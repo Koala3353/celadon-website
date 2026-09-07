@@ -797,23 +797,6 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      q: "Can I apply as a Department Deputy as well as a Core Team Member at the same time?",
-      a: [
-        [
-          { text: "Yes, it is possible for a member of Ateneo Celadon to be a department deputy as well as a core team member at the same time. However, keep in mind that deputies take on a year-long role in supporting Ateneo Celadon in its different departments which mainly consists of " },
-          { text: "project deployment as a core team member of other projects", bold: true },
-          { text: " and " },
-          { text: "other additional tasks within your chosen department", bold: true },
-          { text: "." },
-        ],
-        [
-          {
-            text: "If you are interested in applying as a Department Deputy, more information could be found in this link: https://ateneoceladon.com/internal/dept-apps/. Applications are open until September 12, 2026 unless extended.",
-          },
-        ],
-      ],
-    },
-    {
       q: "Where will the Spring Film Festival be located?",
       a: [
         [

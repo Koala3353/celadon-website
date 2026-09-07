@@ -36,7 +36,7 @@ function Heading({ children }: { children: React.ReactNode }) {
 
 export default function SpringFilmFestivalProjectPage() {
   const project = SPRING_FILM_FESTIVAL;
-  const [appFaqs, projectFaqs] = [project.faqs.slice(0, 4), project.faqs.slice(4)];
+  const [appFaqs, projectFaqs] = [project.faqs.slice(0, 3), project.faqs.slice(3)];
 
   return (
     <div
