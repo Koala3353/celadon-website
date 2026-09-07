@@ -18,6 +18,7 @@ export function AboutRunText({ run }: { run: AboutRun }) {
   if (run.bold) node = <strong className="font-bold">{node}</strong>;
   if (run.underline) node = <span className="underline">{node}</span>;
   if (run.accent) node = <span className="text-dept-accent">{node}</span>;
+  if (run.highlight) node = <mark className="rounded-[2px] bg-amber-200/70 px-0.5">{node}</mark>;
   return <>{node}</>;
 }
 

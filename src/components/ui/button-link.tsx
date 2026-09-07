@@ -16,7 +16,7 @@ export function ButtonLink({
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "outline" | "onNavy";
+  variant?: "primary" | "outline" | "onNavy" | "accent";
   size?: "md" | "lg";
   external?: boolean;
   className?: string;
@@ -36,12 +36,18 @@ export function ButtonLink({
       "bg-transparent text-navy ring-2 ring-inset ring-navy outline-navy transition-colors hover:bg-navy hover:text-white",
     onNavy:
       "bg-white text-navy outline-white transition-colors hover:bg-on-navy",
+    /** For a page themed via `--dept-accent` (a department page, or a Core
+     * Team project page like CNY's) instead of the site's fixed navy brand
+     * color. */
+    accent:
+      "bg-dept-accent text-white outline-dept-accent transition-opacity hover:opacity-90",
   } as const;
 
   const discs = {
     primary: "bg-white/15",
     outline: "bg-navy/10 group-hover:bg-white/20",
     onNavy: "bg-navy/10",
+    accent: "bg-white/15",
   } as const;
 
   const discSizes = {

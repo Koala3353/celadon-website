@@ -34,6 +34,11 @@ export interface AboutRun {
   /** Renders in the department's own accent color instead of the default ink
    * — for a word/phrase a department's own PDF highlights in color. */
   accent?: boolean;
+  /** A marker-style highlight background — for a source PDF that uses actual
+   * text-highlighter emphasis (e.g. CNY's) rather than just bold. Distinct
+   * from `accent`, which recolors the text itself instead of adding a
+   * background behind it. */
+  highlight?: boolean;
 }
 
 export interface DeptSection {
@@ -92,6 +97,10 @@ export interface DeptRole {
 export interface DeptTimelineItem {
   date: string;
   label: string;
+  /** Marks an entry the source doc itself calls out (e.g. via a colored
+   * table row) as more significant than the rest — rendered with a bigger
+   * dot, "critical" bigger still. Most timelines leave this unset. */
+  emphasis?: "notable" | "critical";
 }
 
 export interface DeptProject {
