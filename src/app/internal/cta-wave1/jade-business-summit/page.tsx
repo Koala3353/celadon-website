@@ -69,13 +69,18 @@ export default function JadeBusinessSummitProjectPage() {
           />
         </Reveal>
 
-        {/* `lg`+: same inset/padded frame, faded full-bleed echo, and
-            edge-mask fade as FIN/OSR's own headers — but `object-contain`
-            rather than their `object-cover`, since the dragon and "Jade
-            Business Summit" text both run edge-to-edge in the source art
-            with no safe margin, so cropping cuts the text off. Contain
-            keeps the whole banner visible while the surrounding padding
-            still absorbs the extra desktop width. */}
+        {/* `lg`+: same inset/padded frame and faded full-bleed echo as
+            FIN/OSR's own headers — but `object-contain` rather than their
+            `object-cover`, since the dragon and "Jade Business Summit"
+            text both run edge-to-edge in the source art with no safe
+            margin, so cropping cuts the text off. Contain keeps the whole
+            banner visible while the surrounding padding still absorbs the
+            extra desktop width. A mask-image fade on the image itself
+            would be invisible here (it'd only fade the already-empty
+            letterboxed margin, not any real content), so the fade is two
+            plain gradient bars over the frame's own left/right edges
+            instead — a decorative match for FIN/OSR's look rather than a
+            blend into the echo behind it. */}
         <div className="relative hidden w-full overflow-hidden lg:block">
           <Image
             aria-hidden
@@ -94,11 +99,14 @@ export default function JadeBusinessSummitProjectPage() {
                 priority
                 data-reveal
                 className="rounded-2xl object-contain"
-                style={{
-                  maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-                }}
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 left-0 w-16 rounded-l-2xl bg-gradient-to-r from-dept-tint to-transparent sm:w-24"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 right-0 w-16 rounded-r-2xl bg-gradient-to-l from-dept-tint to-transparent sm:w-24"
               />
             </Reveal>
           </div>
