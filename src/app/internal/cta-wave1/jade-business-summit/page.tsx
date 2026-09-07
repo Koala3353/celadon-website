@@ -69,13 +69,13 @@ export default function JadeBusinessSummitProjectPage() {
           />
         </Reveal>
 
-        {/* `lg`+: the dragon and "Jade Business Summit" text both run
-            edge-to-edge with no safe margin, so cropping (`object-cover`,
-            as FIN/OSR's own inset banners use) cuts the text off. Shown in
-            full instead (`object-contain`) inside the same inset/padded
-            frame, with a full-bleed, faded echo of the banner filling the
-            gutter on either side so the extra width at desktop doesn't
-            read as empty space. */}
+        {/* `lg`+: same inset/padded frame, faded full-bleed echo, and
+            edge-mask fade as FIN/OSR's own headers — but `object-contain`
+            rather than their `object-cover`, since the dragon and "Jade
+            Business Summit" text both run edge-to-edge in the source art
+            with no safe margin, so cropping cuts the text off. Contain
+            keeps the whole banner visible while the surrounding padding
+            still absorbs the extra desktop width. */}
         <div className="relative hidden w-full overflow-hidden lg:block">
           <Image
             aria-hidden
@@ -94,6 +94,11 @@ export default function JadeBusinessSummitProjectPage() {
                 priority
                 data-reveal
                 className="rounded-2xl object-contain"
+                style={{
+                  maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                }}
               />
             </Reveal>
           </div>
