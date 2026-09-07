@@ -11,12 +11,14 @@ import type { Department } from "@/lib/deputy-departments";
  * accent's ink, so each card reads as a distinct color-block rather than a
  * repeat of the same white card shape six times over.
  *
- * Uses the department's own page banner (`heroImage`) rather than
- * `cardCover`, so this card and the page it links to lead with the same
- * art — falling back to `cardCover` only for a department without one.
+ * Uses `cardCover` rather than the page's own `heroImage` banner —
+ * `heroImage` is designed for a full-width page hero, and several
+ * departments' banners crop badly (or cut off their own name) at this
+ * card's much narrower 16:10 box, which is why `cardCover` exists as its
+ * own dedicated, pre-cropped asset per department.
  */
 export function DepartmentCard({ dept }: { dept: Department }) {
-  const cover = dept.heroImage ?? dept.cardCover;
+  const cover = dept.cardCover;
 
   return (
     <Link

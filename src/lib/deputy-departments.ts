@@ -425,7 +425,7 @@ export const DEPARTMENTS: Department[] = [
     deputyTitle: "Trainee",
     accent: { base: "#DC2626", tint: "#FEF2F2", ink: "#7F1D1D" },
     heroImage: { src: "/internal/cul-hero.webp", alt: "Ateneo Celadon Cultural Affairs Department" },
-    cardCover: { src: "/covers/chinese-new-year.jpg", alt: "CUL" },
+    cardCover: { src: "/internal/cul-card-cover.webp", alt: "Ateneo Celadon Cultural Affairs Department" },
     cardBlurb:
       "CUL spearheads the cultivation of the awareness, understanding, and appreciation of Chinese-Filipino culture to both Celadon and the greater Philippine community. It establishes connections and interactions to encourage a mutual acknowledgment of culture.",
     aboutWidth: "wide",
@@ -924,7 +924,7 @@ export const DEPARTMENTS: Department[] = [
     deputyTitle: "Deputy",
     accent: { base: "#CA8A04", tint: "#FEFCE8", ink: "#713F12" },
     heroImage: { src: "/internal/hr-hero.webp", alt: "Ateneo Celadon Human Resources Department, 2026-2027" },
-    cardCover: { src: "/departments/hr-general-assembly.jpg", alt: "HR" },
+    cardCover: { src: "/internal/hr-card-cover.webp", alt: "Ateneo Celadon Human Resources Department" },
     cardBlurb:
       "HR centers on projects that provide membership development and leadership formation. It is responsible for fostering an internal organization culture that is embedded with modern Chinese-Filipino values.",
     aboutWidth: "wide",
