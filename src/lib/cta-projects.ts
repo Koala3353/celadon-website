@@ -750,7 +750,7 @@ export const ROSE_SALE: CtaProjectDetail = {
   name: "RS '27",
   fullName: "Rose Sale 2027",
   thrust: "Celadon's annual Valentine's fundraising project",
-  accent: { base: "#DB2777", tint: "#FDF2F8", ink: "#831843" },
+  accent: { base: "#DB2777", tint: "#FFF9EC", ink: "#831843" },
   heroImage: {
     src: "/internal/cta-wave1/rs-hero.webp",
     alt: "Rose Sale '27 — Wave 1 Applications",
