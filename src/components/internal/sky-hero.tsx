@@ -20,6 +20,7 @@ export function SkyHero({
   description,
   heroImage,
   backgroundImage,
+  plain,
   children,
 }: {
   eyebrow?: string;
@@ -29,11 +30,14 @@ export function SkyHero({
   /** A photo behind the usual title/description text, in place of the
    * sky-field gradient — unlike `heroImage`, the text still renders on top. */
   backgroundImage?: string;
+  /** Drop the sky-field gradient, grid, and cloud/crane/airplane motifs
+   * entirely, leaving just the eyebrow/title text on a plain background. */
+  plain?: boolean;
   children?: React.ReactNode;
 }) {
   return (
     <section
-      className={cn("relative overflow-hidden text-sky-navy", !backgroundImage && "sky-field")}
+      className={cn("relative overflow-hidden text-sky-navy", !backgroundImage && !plain && "sky-field")}
       style={
         backgroundImage
           ? { backgroundImage: `url(${asset(backgroundImage)})`, backgroundSize: "cover", backgroundPosition: "center" }
@@ -42,7 +46,7 @@ export function SkyHero({
     >
       {/* Institutional hairline grid, same technique as the public site's
           navy hero bands, so the two heroes read as the same family. */}
-      {!heroImage && !backgroundImage && <div className="absolute inset-0 sky-grid" />}
+      {!heroImage && !backgroundImage && !plain && <div className="absolute inset-0 sky-grid" />}
       {backgroundImage && <div className="absolute inset-0 bg-sky-navy/45" aria-hidden />}
 
       {heroImage ? (
@@ -58,7 +62,8 @@ export function SkyHero({
           />
         </Reveal>
       ) : (
-        !backgroundImage && (
+        !backgroundImage &&
+        !plain && (
           <>
             <Image
               src={asset("/internal/motif-cloud-real.webp")}
@@ -137,7 +142,7 @@ export function SkyHero({
 
       {/* Soft fade into whatever tinted body follows, so the hero and the
           page below read as one continuous surface instead of a hard seam. */}
-      {!heroImage && !backgroundImage && (
+      {!heroImage && !backgroundImage && !plain && (
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white/70"

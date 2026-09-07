@@ -43,7 +43,7 @@ function SectionHeading({
 export default function CoreTeamApplicationsHubPage() {
   return (
     <>
-      <SkyHero eyebrow="Wave 1" title="Core Team Applications" />
+      <SkyHero eyebrow="Wave 1" title="Core Team Applications" plain />
 
       {/* One continuous ambient wash for the whole page body, same technique
           as the deputy hub — sections below are spacing and content only. */}
