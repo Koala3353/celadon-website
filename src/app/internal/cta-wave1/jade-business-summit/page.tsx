@@ -56,12 +56,8 @@ export default function JadeBusinessSummitProjectPage() {
               "radial-gradient(60% 55% at 85% 0%, color-mix(in srgb, var(--dept-accent) 20%, transparent) 0%, transparent 65%)",
           }}
         />
-        {/* Plain full-bleed banner at every width — unlike FIN/OSR's
-            banners, JADE's dragon and "Jade Business Summit" text both run
-            edge-to-edge with no safe margin, so the lg+ inset/fade-echo
-            treatment used for those two ends up doubling and clipping the
-            text instead of framing it. */}
-        <Reveal>
+        {/* Below `lg`, the plain full-bleed banner. */}
+        <Reveal className="lg:hidden">
           <Image
             src={asset(project.heroImage.src)}
             alt={project.heroImage.alt}
@@ -72,6 +68,36 @@ export default function JadeBusinessSummitProjectPage() {
             className="max-h-[60vh] w-full object-cover"
           />
         </Reveal>
+
+        {/* `lg`+: the dragon and "Jade Business Summit" text both run
+            edge-to-edge with no safe margin, so cropping (`object-cover`,
+            as FIN/OSR's own inset banners use) cuts the text off. Shown in
+            full instead (`object-contain`) inside the same inset/padded
+            frame, with a full-bleed, faded echo of the banner filling the
+            gutter on either side so the extra width at desktop doesn't
+            read as empty space. */}
+        <div className="relative hidden w-full overflow-hidden lg:block">
+          <Image
+            aria-hidden
+            src={asset(project.heroImage.src)}
+            alt=""
+            width={1920}
+            height={1080}
+            className="max-h-[60vh] w-full scale-105 object-cover opacity-35"
+          />
+          <div className="absolute inset-0 lg:px-8 xl:px-16 2xl:px-24">
+            <Reveal className="relative h-full">
+              <Image
+                src={asset(project.heroImage.src)}
+                alt={project.heroImage.alt}
+                fill
+                priority
+                data-reveal
+                className="rounded-2xl object-contain"
+              />
+            </Reveal>
+          </div>
+        </div>
 
         <Container className="relative flex flex-col items-center gap-5 pb-10 pt-12 text-center sm:pb-14 sm:pt-16">
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
