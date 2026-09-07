@@ -550,14 +550,14 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     "The Spring Film Festival aims to leave a lasting impression on the community through colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with them — to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
   timeline: [
     { date: "September 9, 2026", label: "Opening of Wave 1 Core Team Applications" },
-    { date: "September 14–22, 2026", label: "Interview Period for SFF Core Team Applications" },
+    { date: "September 14–22, 2026", label: "Interview Period for Spring Film Festival Core Team Applications" },
     { date: "September 25, 2026", label: "Release of Results" },
     { date: "September 28, 2026", label: "Core Team Heads Onboarding" },
     { date: "October 2, 2026", label: "Core Team General Assembly" },
     { date: "October 5, 2026 – February 4, 2027", label: "Project Planning, Organizing, Leading, and Controlling" },
-    { date: "February 5, 2027", label: "Gala Night" },
-    { date: "February 6, 2027", label: "Workshop Day" },
-    { date: "February 7, 2027", label: "Culminating Night" },
+    { date: "February 5, 2027", label: "Project Execution: Spring Film Festival Gala Night" },
+    { date: "February 6, 2027", label: "Project Execution: Spring Film Festival Workshop Day" },
+    { date: "February 7, 2027", label: "Project Execution: Spring Film Festival Culminating Night" },
     { date: "February 8 – March 1, 2027", label: "Project Evaluation" },
   ],
   committees: [
@@ -756,7 +756,7 @@ export const ROSE_SALE: CtaProjectDetail = {
     alt: "Rose Sale '27 — Wave 1 Applications",
   },
   about:
-    "Rose Sale, Celadon's annual Valentine's fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program — running February 9–15, 2027.",
+    "Rose Sale, Celadon's annual Valentine's fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program.",
   letter: [
     [
       {
@@ -769,7 +769,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       },
     ],
   ],
-  letterSignoff: { highlighted: "With much love,", name: "Ailyse and Chels" },
+  letterSignoff: { highlighted: "With much love,", name: "Ailyse 😌🌷 and Chels 😋✌️" },
   whatIsIt: {
     heading: "💐 What is Rose Sale?",
     body: [
@@ -780,7 +780,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
       [
         {
-          text: "Through customizable bouquets and other love-centered products, the project provides members and non-members of Ateneo Celadon alike a chance to express appreciation for one another.",
+          text: "Through customizable bouquets and other love centered products, the project provides members and non members of Ateneo Celadon alike a chance to express appreciation for one another.",
         },
       ],
     ],
@@ -794,16 +794,16 @@ export const ROSE_SALE: CtaProjectDetail = {
     ],
   },
   vision:
-    "This year, we want to slow down, step away from the 2x speed we've been moving at for most of our lives, and take a moment to notice the things we've passed along the way. We want this year's Rose Sale to break this cycle and take time to appreciate love in all forms — because in all of them, one thing remains constant: the quiet acts of care that nurtured who we are today, filling our hearts with nostalgia for the little things that weave our story of love. At its heart, Rose Sale is about pausing to cherish the little things, the quiet gestures of care that make love meaningful and leave us with memories to hold onto.",
+    "In a world where the days pass like scenes in a story and the streets hum with passing footsteps, it's easy to lose sight of what brought us here when we're always looking toward what could take us there. This year, we want to slow down, step away from the 2x speed we've been moving at for most of our lives, and take a moment to notice the things we've passed along the way. We want this year's Rose Sale to break this cycle and take time to appreciate love in all forms. Because in all of them, one thing remains constant: the quiet acts of care that nurtured who we are today, filling our hearts with nostalgia for the little things that weave our story of love. At its heart, Rose Sale is about pausing to cherish the little things, the quiet gestures of care that make love meaningful and leave us with memories to hold onto.",
   testimonials: [
     {
-      name: "Ailyse",
+      name: "Ailyse 😌🌷",
       role: "Rose Sale Project Manager",
       quote:
         "Rose Sale has been such a big part of my Celadon journey. It has given me so many opportunities to learn, grow, and discover myself as both a leader and a member of the organization. From the preparations and selling week to the advocacy, every part of the experience has been nothing short of special. The people I have met, the lessons I have learned, and the memories we have made will always hold a special place in my college journey. As I look back on everything Rose Sale has given me, I can only hope to give that same sense of fulfillment, fun, and cherished memories to the next team of RS '27. May you find in Rose Sale the same joy, growth, and people that made this experience so meaningful to me.",
     },
     {
-      name: "Chels",
+      name: "Chels 😋✌️",
       role: "Rose Sale Project Manager",
       quote:
         "Unlike what I was expecting, Rose Sale honestly really made a mark on what work and organization, specifically Celadon, means to me. It's a recurring thing I always say, but to me, Celadon has really become a family who brings meaning to what I do and motivates me for what's next.",
@@ -856,7 +856,7 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Assist in data analysis and project-end report",
         [
           {
-            text: "Technical Requirement: during the interview, applicants will be given a task on Google Sheets — based on willingness to learn and analyze.",
+            text: "Technical Requirement: During the interview, applications will be given a task on Google Sheets. *Based on willingness to learn and analyze",
             italic: true,
           },
         ],
@@ -882,8 +882,8 @@ export const ROSE_SALE: CtaProjectDetail = {
         [{ text: "Competencies", bold: true }],
         "Detail-oriented",
         "Diligent attention to deadlines",
-        "Digital design proficiency, artistic abilities (drawing, painting, etc.)",
-        "Proficient or familiar with (or eager to learn!) Canva, Adobe Photoshop, Adobe Illustrator, or other graphic design software",
+        "Digital design proficiency, artistic abilities (drawing, painting, etc)",
+        "Proficient or familiar (or eager to learn!) using Canva, Adobe Photoshop, Adobe Illustrator, or other graphic design editing software",
         "Open to changes and constructive criticism",
         [{ text: "Deliverables", bold: true }],
         "Design visual elements of the project (branding, logo, publication materials, DP frame, etc.)",
@@ -891,7 +891,7 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Ensure consistent and effective branding across all materials",
         [
           {
-            text: "Additional Requirement: there will be additional requirements for Digital Creatives, Production Design, and Documentation & Publications applicants (for Documentation & Publications, choose ONE: Writing, Photos, or Videos) — details will be shared directly with applicants. Please follow all instructions carefully; failure to do so may result in your application being voided.",
+            text: "Additional Requirement: Please refer to the document below for the Additional Requirements for Digital Creatives, Production Design, and Documentation & Publications applicants. (For Documentation & Publications, choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
             italic: true,
           },
         ],
@@ -911,7 +911,7 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Document the event and compile content for post-event use",
         [
           {
-            text: "Additional Requirement: there will be additional requirements for Digital Creatives, Production Design, and Documentation & Publications applicants (for Documentation & Publications, choose ONE: Writing, Photos, or Videos) — details will be shared directly with applicants. Please follow all instructions carefully; failure to do so may result in your application being voided.",
+            text: "Additional Requirement: Please refer to the document below for the Additional Requirements for Digital Creatives, Production Design, and Documentation & Publications applicants. (For Documentation & Publications, choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
             italic: true,
           },
         ],
@@ -930,7 +930,7 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Conceptualize set design during onsite selling",
         [
           {
-            text: "Additional Requirement: there will be additional requirements for Digital Creatives, Production Design, and Documentation & Publications applicants (for Documentation & Publications, choose ONE: Writing, Photos, or Videos) — details will be shared directly with applicants. Please follow all instructions carefully; failure to do so may result in your application being voided.",
+            text: "Additional Requirement: Please refer to the document below for the Additional Requirements for Digital Creatives, Production Design, and Documentation & Publications applicants. (For Documentation & Publications, choose ONE: Writing, Photos, or Videos) Please follow all instructions carefully. Failure to do so may result in your application being voided.",
             italic: true,
           },
         ],
@@ -944,7 +944,7 @@ export const ROSE_SALE: CtaProjectDetail = {
     },
     {
       q: "Can I join multiple core team committees?",
-      a: "You can apply to a maximum of two core team committees or positions for the entire project. However, you will only be accepted into one committee or position.",
+      a: "You can apply to a maximum of two core team committees or positions for the entire project. However, you will only be accepted in one committee or position.",
     },
     {
       q: "Do we need to submit any additional requirements?",
@@ -952,7 +952,7 @@ export const ROSE_SALE: CtaProjectDetail = {
     },
     {
       q: "How often will we meet as a core team? Will there be work during the break?",
-      a: "We'll only meet a maximum of once a week, conducted hybrid/online. Meetings with core team committees will be at the discretion of the core team heads. Online work during the break will be minimal and voluntary — the work may sometimes feel heavy, but we promise a healthy work environment!",
+      a: "We'll only meet a maximum of once a week, which will be conducted hybrid/online. Meetings with core team committees will be at the discretion of the core team heads. Online work during the break will be minimal and voluntary. Although the work may sometimes feel heavy, we promise that our work environment will always be healthy!",
     },
     {
       q: "What would my workload look like as a core team member?",

@@ -42,7 +42,7 @@ const LOOKING_FOR = [
 
 const WHAT_TO_EXPECT = [
   "Customizable bouquet bloom bar",
-  "Bouquet and package products display",
+  "Bouquet and packages products display",
   "Advocacy program",
 ];
 
