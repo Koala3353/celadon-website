@@ -126,7 +126,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   ],
   committees: [
     {
-      label: "Programs 🎉 · 2 heads, 5 cores",
+      label: "Programs 🎉 · 2 Heads, 5 Core",
       items: [
         [
           {
@@ -141,7 +141,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Logistics 📦 · 2 heads, 5 cores",
+      label: "Logistics 📦 · 2 Heads, 5 Core",
       items: [
         [
           {
@@ -156,7 +156,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Food 🥟 · 2 heads, 5 cores",
+      label: "Food 🥟 · 2 Heads, 5 Core",
       items: [
         [
           {
@@ -172,7 +172,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "External Relations 🤝 · 2 heads, 4 cores",
+      label: "External Relations 🤝 · 2 Heads, 4 Core",
       items: [
         [
           {
@@ -188,7 +188,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Fundraising 🤑 · 2 heads, 5 cores",
+      label: "Fundraising 🤑 · 2 Heads, 5 Core",
       items: [
         [
           {
@@ -204,7 +204,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Operations ⚙️ · 2 heads, 4 cores",
+      label: "Operations ⚙️ · 2 Heads, 4 Core",
       items: [
         [
           {
@@ -219,7 +219,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Volunteers 👤 · 2 heads, 2 cores",
+      label: "Volunteers 👤 · 2 Heads, 2 Core",
       items: [
         [
           {
@@ -235,7 +235,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Digital Creatives 🎨 · 2 heads, 3 cores",
+      label: "Digital Creatives 🎨 · 2 Heads, 3 Core",
       items: [
         [
           {
@@ -257,7 +257,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Production Design 🖼 · 2 heads, 5 cores",
+      label: "Production Design 🖼 · 2 Heads, 5 Core",
       items: [
         [
           {
@@ -278,7 +278,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Documentation and Publications 📸 · 2 heads, 8 cores",
+      label: "Documentation and Publications 📸 · 2 Heads, 8 Core",
       items: [
         [
           {
@@ -430,7 +430,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
     ],
   ],
   timeline: [
-    { date: "September 24, 2026", label: "Release of Wave 1 Application Results" },
+    { date: "September 25, 2026", label: "Release of Wave 1 Application Results" },
     { date: "October 2, 2026", label: "Core Team 1st General Assembly" },
     { date: "October 2 – November 6, 2026", label: "Wave 1 Working Timeline" },
     { date: "October 27, 2026", label: "Core-wide Dry Run" },

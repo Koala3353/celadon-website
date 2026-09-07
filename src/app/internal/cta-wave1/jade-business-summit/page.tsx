@@ -183,11 +183,11 @@ export default function JadeBusinessSummitProjectPage() {
         </Container>
       </section>
 
-      {/* Open Core Team Positions */}
+      {/* Core Team Committees */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
-            <Heading>👥 Open Core Team Positions</Heading>
+            <Heading>👥 Core Team Committees</Heading>
             <p className="prose-body mt-3 text-muted-foreground" data-reveal>
               Open a position to see its general responsibilities.
             </p>
