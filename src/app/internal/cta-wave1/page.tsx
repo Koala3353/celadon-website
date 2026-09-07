@@ -87,12 +87,16 @@ export default function CoreTeamApplicationsHubPage() {
           <Container>
             <Reveal className="mx-auto w-full max-w-3xl text-center">
               <SectionHeading>What is a Core Team?</SectionHeading>
-              <p className="prose-body mt-4 text-muted-foreground">
-                A Core Team is the heart of every project, made up of passionate members organized into
-                committees under each project&rsquo;s Project Managers. Unlike a year-long deputy role, a
-                Core Team commitment runs for just one project, making it a great way to get involved
-                without a full-year commitment.
-              </p>
+              <div className="mt-4 flex flex-col gap-3">
+                <p className="prose-body text-muted-foreground">
+                  A Core Team in Celadon is the heart of every project, made up of passionate members who
+                  bring ideas to life and make things happen.
+                </p>
+                <p className="prose-body text-muted-foreground">
+                  It is made up of committees, each led by a Core Team Head to focus on different parts of
+                  the project, all working together under the guidance of the Project Managers.
+                </p>
+              </div>
             </Reveal>
           </Container>
         </section>
