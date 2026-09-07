@@ -70,17 +70,13 @@ export default function JadeBusinessSummitProjectPage() {
         </Reveal>
 
         {/* `lg`+: same inset/padded frame and faded full-bleed echo as
-            FIN/OSR's own headers — but `object-contain` rather than their
-            `object-cover`, since the dragon and "Jade Business Summit"
-            text both run edge-to-edge in the source art with no safe
-            margin, so cropping cuts the text off. Contain keeps the whole
-            banner visible while the surrounding padding still absorbs the
-            extra desktop width. A mask-image fade on the image itself
-            would be invisible here (it'd only fade the already-empty
-            letterboxed margin, not any real content), so the fade is two
-            plain gradient bars over the frame's own left/right edges
-            instead — a decorative match for FIN/OSR's look rather than a
-            blend into the echo behind it. */}
+            FIN/OSR's own headers. The crisp copy is boxed to the banner's
+            own 16:9 ratio (rather than stretched to fill the whole padded
+            area) so it never crops the dragon or "Jade Business Summit"
+            text — both run edge-to-edge in the source art with no safe
+            margin — while still matching the box exactly enough for the
+            mask-image fade to blend its real edges into the same blurred
+            echo behind it, the way FIN/OSR's own crop-based fade does. */}
         <div className="relative hidden w-full overflow-hidden lg:block">
           <Image
             aria-hidden
@@ -90,8 +86,8 @@ export default function JadeBusinessSummitProjectPage() {
             height={1080}
             className="max-h-[60vh] w-full scale-105 object-cover opacity-35"
           />
-          <div className="absolute inset-0 lg:px-8 xl:px-16 2xl:px-24">
-            <Reveal className="relative h-full">
+          <div className="absolute inset-0 flex items-center justify-center lg:px-8 xl:px-16 2xl:px-24">
+            <Reveal className="relative aspect-video h-full max-w-full">
               <Image
                 src={asset(project.heroImage.src)}
                 alt={project.heroImage.alt}
@@ -99,14 +95,11 @@ export default function JadeBusinessSummitProjectPage() {
                 priority
                 data-reveal
                 className="rounded-2xl object-contain"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-y-0 left-0 w-16 rounded-l-2xl bg-gradient-to-r from-dept-tint to-transparent sm:w-24"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-y-0 right-0 w-16 rounded-r-2xl bg-gradient-to-l from-dept-tint to-transparent sm:w-24"
+                style={{
+                  maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                }}
               />
             </Reveal>
           </div>
