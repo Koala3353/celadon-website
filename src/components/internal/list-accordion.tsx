@@ -3,12 +3,17 @@ import { cn } from "@/lib/cn";
 import type { AboutRun, DeptGroup } from "@/lib/deputy-departments";
 
 /** A bare bold-only run (e.g. "Competencies", "Deliverables", "Photos") acts
- * as a sub-heading within a committee's items rather than a bullet of its
- * own — it introduces the bullets that follow it, so it renders without a
- * dot and with a little extra breathing room above it. */
-function isSubheading(item: string | AboutRun[]): boolean {
-  return Array.isArray(item) && item.length === 1 && item[0].bold === true &&
-    !item[0].italic && !item[0].underline && !item[0].accent && !item[0].highlight;
+ * as a sub-heading within a committee's items, and a bare italic-only run
+ * (a committee's description paragraph, or a trailing "Note:"/"Additional
+ * Requirement:" aside) reads as body copy rather than a checklist entry —
+ * neither is a bullet of its own, so both render without a dot. */
+function freeformBlockStyle(item: string | AboutRun[]): "bold" | "italic" | null {
+  if (!Array.isArray(item) || item.length !== 1) return null;
+  const run = item[0];
+  if (run.underline || run.accent || run.highlight) return null;
+  if (run.bold && !run.italic) return "bold";
+  if (run.italic && !run.bold) return "italic";
+  return null;
 }
 
 /**
@@ -42,18 +47,29 @@ export function ListAccordion({ groups }: { groups: DeptGroup[] }) {
           </summary>
           <div className="rounded-b-[1.125rem] bg-white px-5 pb-5">
             <ul className="flex flex-col gap-1.5">
-              {group.items.map((item, i) =>
-                isSubheading(item) ? (
-                  <li key={i} className={cn("prose-body text-sm font-bold text-dept-ink", i > 0 && "mt-2")}>
-                    {renderItem(item)}
-                  </li>
-                ) : (
+              {group.items.map((item, i) => {
+                const block = freeformBlockStyle(item);
+                if (block) {
+                  return (
+                    <li
+                      key={i}
+                      className={cn(
+                        "prose-body text-sm",
+                        block === "bold" ? "font-bold text-dept-ink" : "text-muted-foreground",
+                        i > 0 && "mt-2"
+                      )}
+                    >
+                      {renderItem(item)}
+                    </li>
+                  );
+                }
+                return (
                   <li key={i} className="prose-body flex gap-2 text-sm text-muted-foreground">
                     <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-dept-accent" />
                     <span>{renderItem(item)}</span>
                   </li>
-                )
-              )}
+                );
+              })}
             </ul>
           </div>
         </details>
