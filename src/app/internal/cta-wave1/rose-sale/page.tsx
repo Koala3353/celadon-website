@@ -154,7 +154,10 @@ export default function RoseSaleProjectPage() {
             />
           </Reveal>
 
-          <Reveal className="mx-auto mt-10 grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
+          <Reveal className="mx-auto mt-10 grid w-full max-w-5xl gap-8 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-10">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+              <Image src={asset("/internal/cta-wave1/rs-vision.webp")} alt="Core team members arranging flowers at a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+            </div>
             <div className="flex flex-col gap-3 text-left">
               <Heading>🌷 Vision and Thrust</Heading>
               <RichParagraphs
@@ -162,9 +165,6 @@ export default function RoseSaleProjectPage() {
                 className="flex flex-col gap-4"
                 paragraphClassName="prose-body text-dept-ink/80"
               />
-            </div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
-              <Image src={asset("/internal/cta-wave1/rs-vision.webp")} alt="Core team members arranging flowers at a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
             </div>
           </Reveal>
         </Container>
