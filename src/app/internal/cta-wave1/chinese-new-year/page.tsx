@@ -213,11 +213,16 @@ export default function ChineseNewYearProjectPage() {
               {project.faqs.map((faq) => (
                 <div key={faq.q} data-reveal>
                   <p className="font-bold text-dept-ink">{faq.q}</p>
-                  <RichParagraphs
-                    paragraphs={faq.a}
-                    className="mt-1.5 flex flex-col gap-2"
-                    paragraphClassName="prose-body text-muted-foreground"
-                  />
+                  <div className="mt-1.5 flex gap-2">
+                    <span aria-hidden className="text-dept-accent">
+                      ⊹
+                    </span>
+                    <RichParagraphs
+                      paragraphs={faq.a}
+                      className="flex flex-col gap-2"
+                      paragraphClassName="prose-body text-muted-foreground"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
