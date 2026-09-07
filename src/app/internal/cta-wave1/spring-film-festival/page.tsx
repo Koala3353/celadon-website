@@ -115,7 +115,7 @@ export default function SpringFilmFestivalProjectPage() {
           </Reveal>
 
           <Reveal className="mx-auto mt-10 flex w-full max-w-3xl flex-col gap-3 text-left">
-            <Heading>🏮 Vision & Mission</Heading>
+            <Heading>🏮 Vision & Thrust</Heading>
             <p className="prose-body text-dept-ink/80" data-reveal>
               {project.vision}
             </p>

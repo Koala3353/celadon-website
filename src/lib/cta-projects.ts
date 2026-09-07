@@ -521,7 +521,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     body: [
       [
         {
-          text: "The Spring Film Festival is a three-day event that bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. The activities that encompass the Spring Film Festival consist of community-building opportunities not limited to cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Filipino-Chinese culture.",
+          text: "The Spring Film Festival is a three-day event that bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. The activities that encompass the Spring Film Festival consist of cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Filipino-Chinese culture.",
         },
       ],
       [
@@ -547,7 +547,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     ],
   },
   vision:
-    "The Year of the Fire Goat aims to represent the progression of the Chinese Zodiac for 2027. Just like the fire goat, this year's Spring Film Festival aims to represent striving towards a future of hope while leaving a lasting impression and impact on the beauty of Chinese values, art, and culture. Our mission is to leave a lasting impression on the community through colorful performances, Chinese film viewing, and cultural workshops — so that audiences carry a piece of Chinese art, culture, and values with them, to their homes, to the new year, and to their community, and a piece of Chinese history in their hearts and present lives.",
+    "The Spring Film Festival aims to leave a lasting impression on the community through colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with them — to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
   timeline: [
     { date: "September 9, 2026", label: "Opening of Wave 1 Core Team Applications" },
     { date: "September 14–22, 2026", label: "Interview Period for SFF Core Team Applications" },
@@ -562,7 +562,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
   ],
   committees: [
     {
-      label: "Communications and Publications 📣",
+      label: "Communications and Publications 📣 · 1 Head, 3 Core",
       items: [
         [
           {
@@ -578,7 +578,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Digital Creatives 🎨",
+      label: "Digital Creatives 🎨 · 2 Heads, 4 Core",
       items: [
         [
           {
@@ -594,7 +594,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Documentations 📸",
+      label: "Documentations and Publications 📸 · 2 Heads, 6 Core",
       items: [
         [
           {
@@ -611,7 +611,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Production Design 🎭",
+      label: "Production Design 🎭 · 1 Head, 1 Core",
       items: [
         [
           {
@@ -628,7 +628,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "External Relations 🤝",
+      label: "External Relations 🤝 · 2 Heads, 6 Core",
       items: [
         [
           {
@@ -645,7 +645,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Logistics 📦",
+      label: "Logistics 📦 · 2 Heads, 5 Core",
       items: [
         [
           {
@@ -660,7 +660,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Programs 🎤",
+      label: "Programs 🎤 · 2 Heads, 6 Core",
       items: [
         [
           {
@@ -677,7 +677,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Recruitment and Secretariat 📝",
+      label: "Recruitment and Secretariat 📝 · 2 Heads, 5 Core",
       items: [
         [
           {
