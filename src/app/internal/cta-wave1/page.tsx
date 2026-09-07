@@ -75,7 +75,7 @@ export default function CoreTeamApplicationsHubPage() {
             <Reveal className="mx-auto w-full max-w-5xl">
               <SectionHeading size="lg">Meet the Projects!</SectionHeading>
             </Reveal>
-            <Reveal stagger={60} className="mx-auto mt-10 grid w-full max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Reveal stagger={60} className="mx-auto mt-10 grid w-full max-w-3xl gap-6 sm:grid-cols-2">
               {CORE_TEAM_PROJECTS.map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
