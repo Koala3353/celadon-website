@@ -155,8 +155,8 @@ export default function RoseSaleProjectPage() {
           </Reveal>
 
           <Reveal className="mx-auto mt-10 grid w-full max-w-5xl gap-8 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-10">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
-              <Image src={asset("/internal/cta-wave1/rs-vision.webp")} alt="Core team members arranging flowers at a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+            <div className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)] md:block" data-reveal>
+              <Image src={asset("/internal/cta-wave1/rs-vision.webp")} alt="Core team members arranging flowers at a past Rose Sale" fill sizes="40vw" className="object-cover" />
             </div>
             <div className="flex flex-col gap-3 text-left">
               <Heading>🌷 Vision and Thrust</Heading>
