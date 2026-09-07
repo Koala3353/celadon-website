@@ -191,9 +191,16 @@ export default function JadeBusinessSummitProjectPage() {
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading>👥 Core Team Committees</Heading>
-            <p className="prose-body mt-3 text-muted-foreground" data-reveal>
-              Open a position to see its general responsibilities.
-            </p>
+            <div className="mt-3 flex flex-col gap-2">
+              <p className="prose-body text-muted-foreground" data-reveal>
+                A Core Team in Celadon is the heart of every project, made up of passionate members who bring
+                ideas to life and make things happen.
+              </p>
+              <p className="prose-body text-muted-foreground" data-reveal>
+                It is made up of committees, each led by a Core Team Head to focus on different parts of the
+                project, all working together under the guidance of the Project Managers.
+              </p>
+            </div>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">
             <ListAccordion groups={project.committees} />
