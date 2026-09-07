@@ -952,8 +952,6 @@ export const ROSE_SALE: CtaProjectDetail = {
     },
   ],
   timeline: [
-    { date: "September 21, 2026", label: "Release of Wave 1 Results" },
-    { date: "September 24, 2026", label: "Heads Onboarding" },
     { date: "September 28, 2026", label: "1st General Assembly", emphasis: "notable" },
     { date: "October 12–16, 2026", label: "Committees Onboarding (Online)", emphasis: "notable" },
     { date: "TBA", label: "Wave 2 Applications (Florists, Deliveries)", emphasis: "notable" },
