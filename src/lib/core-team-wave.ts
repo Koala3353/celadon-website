@@ -12,6 +12,8 @@
 export interface CoreTeamProject {
   slug: string;
   name: string;
+  /** Shown beside the name on the project card — not every project has one. */
+  emoji?: string;
   blurb: string;
   /** Left unset until this wave's project photos are ready — the project
    * card renders a placeholder instead of a broken image in the meantime. */
@@ -28,13 +30,16 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
   {
     slug: "spring-film-festival",
     name: "Spring Film Festival",
-    blurb: "Spring Film Festival (SFF) bridges tradition and modernity through cultural workshops, film viewing, and performances.",
+    emoji: "🌸",
+    blurb:
+      "The Spring Film Festival (SFF) is a three-day event in Shangri-La that showcases cultural workshops, movie screenings, and diverse performances to promote Chinese culture, art, and history to the Filipino-Chinese community.",
     photo: { src: "/internal/cta-wave1/sff-hero.webp", alt: "21st Spring Film Festival 2026-2027 — Year of the Fire Goat" },
     href: "/internal/cta-wave1/spring-film-festival",
   },
   {
     slug: "rose-sale",
     name: "Rose Sale",
+    emoji: "🌹",
     blurb:
       "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community. Through customizable bouquets and other love-centered products, it gives everyone a chance to express appreciation for one another.",
     photo: { src: "/internal/cta-wave1/rs-hero.webp", alt: "Rose Sale '27 — Wave 1 Applications" },
@@ -43,6 +48,7 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
   {
     slug: "chinese-new-year",
     name: "Chinese New Year",
+    emoji: "🧧",
     blurb: "Xīn nián kuài lè! 🧧✨ A vibrant celebration where Chinese-Filipino traditions, festive customs, and cherished childhood memories come to life.",
     photo: { src: "/internal/cta-wave1/cny-hero.webp", alt: "Chinese New Year '27 — A Home in Every Hue: Celebrating Culture in Full Color" },
     href: "/internal/cta-wave1/chinese-new-year",

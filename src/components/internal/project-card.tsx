@@ -30,7 +30,9 @@ function ProjectCardCover({ project, linked }: { project: CoreTeamProject; linke
 function ProjectCardBody({ project }: { project: CoreTeamProject }) {
   return (
     <div className="flex flex-1 flex-col gap-1 p-5">
-      <span className="sky-display text-lg font-semibold text-sky-navy">{project.name}</span>
+      <span className="sky-display text-lg font-semibold text-sky-navy">
+        {project.name} {project.emoji && <span aria-hidden>{project.emoji}</span>}
+      </span>
       <p className="prose-body mt-2 text-sm text-muted-foreground">{project.blurb}</p>
       {project.href && (
         <span className="mt-auto flex items-center gap-1 pt-4 text-sm font-bold text-sky-blue">
