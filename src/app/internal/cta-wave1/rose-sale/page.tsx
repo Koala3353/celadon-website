@@ -51,6 +51,17 @@ const OUR_PROMISES = [
   "Rose Sale will be a social, hardworking, and healthy working environment that credits and trains you!",
 ];
 
+// One photo per committee, in the same order as ROSE_SALE.committees — matches
+// how the doc places a specific picture beside each one.
+const RS_COMMITTEE_PHOTOS = [
+  { src: "/internal/cta-wave1/rs-committee-logistics.webp", alt: "The Logistics committee preparing bouquets at a past Rose Sale" },
+  { src: "/internal/cta-wave1/rs-committee-operations.webp", alt: "The Operations committee assembling orders at a past Rose Sale" },
+  { src: "/internal/cta-wave1/rs-committee-exrel.webp", alt: "A sponsored bouquet from a past Rose Sale, coordinated by External Relations" },
+  { src: "/internal/cta-wave1/rs-committee-digic.webp", alt: "Digital Creatives' sticker and merch designs from a past Rose Sale" },
+  { src: "/internal/cta-wave1/rs-committee-docpub.webp", alt: "Documentations and Publications members photographing a past Rose Sale" },
+  { src: "/internal/cta-wave1/rs-committee-proddesign.webp", alt: "Flower displays styled by Production Design at a past Rose Sale" },
+];
+
 export default function RoseSaleProjectPage() {
   const project = ROSE_SALE;
 
@@ -101,20 +112,25 @@ export default function RoseSaleProjectPage() {
       {/* Letter from the PMs */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-            <p className="text-xl font-extrabold text-dept-accent" data-reveal>
-              Dear Applicant,
-            </p>
-            <RichParagraphs
-              paragraphs={project.letter}
-              className="flex flex-col gap-4"
-              paragraphClassName="prose-body text-dept-ink/80"
-            />
-            <p className="text-right" data-reveal>
-              <span className="prose-body text-dept-ink">{project.letterSignoff.highlighted}</span>
-              <br />
-              <span className="prose-body text-dept-ink">{project.letterSignoff.name}</span>
-            </p>
+          <Reveal className="mx-auto grid w-full max-w-4xl gap-8 md:grid-cols-[1fr_1.3fr] md:items-start">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+              <Image src={asset("/internal/cta-wave1/rs-letter.webp")} alt="Members browsing bouquets at a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+            </div>
+            <div className="flex flex-col gap-4">
+              <p className="text-xl font-extrabold text-dept-accent" data-reveal>
+                Dear Applicant,
+              </p>
+              <RichParagraphs
+                paragraphs={project.letter}
+                className="flex flex-col gap-4"
+                paragraphClassName="prose-body text-dept-ink/80"
+              />
+              <p className="text-right" data-reveal>
+                <span className="prose-body text-dept-ink">{project.letterSignoff.highlighted}</span>
+                <br />
+                <span className="prose-body text-dept-ink">{project.letterSignoff.name}</span>
+              </p>
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -138,14 +154,18 @@ export default function RoseSaleProjectPage() {
             />
           </Reveal>
 
-          <Reveal className="mx-auto mt-10 flex w-full max-w-3xl flex-col gap-3 text-left">
-            <Heading>🌷 Vision and Thrust</Heading>
-            <RichParagraphs
-              paragraphs={project.vision}
-              className="flex flex-col gap-4"
-              paragraphClassName="prose-body text-dept-ink/80"
-              data-reveal
-            />
+          <Reveal className="mx-auto mt-10 grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
+            <div className="flex flex-col gap-3 text-left">
+              <Heading>🌷 Vision and Thrust</Heading>
+              <RichParagraphs
+                paragraphs={project.vision}
+                className="flex flex-col gap-4"
+                paragraphClassName="prose-body text-dept-ink/80"
+              />
+            </div>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+              <Image src={asset("/internal/cta-wave1/rs-vision.webp")} alt="Core team members arranging flowers at a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -175,16 +195,21 @@ export default function RoseSaleProjectPage() {
       {/* Who are we looking for? */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-2xl text-left">
-            <Heading>🕵️‍♀️ Who are we looking for?</Heading>
-            <ul className="mt-4 flex flex-col gap-2">
-              {LOOKING_FOR.map((item) => (
-                <li key={item} className="prose-body flex gap-2 text-sm text-dept-ink/80" data-reveal>
-                  <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-dept-accent" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+          <Reveal className="mx-auto grid w-full max-w-4xl gap-8 md:grid-cols-[1fr_1fr] md:items-center">
+            <div className="text-left">
+              <Heading>🕵️‍♀️ Who are we looking for?</Heading>
+              <ul className="mt-4 flex flex-col gap-2">
+                {LOOKING_FOR.map((item) => (
+                  <li key={item} className="prose-body flex gap-2 text-sm text-dept-ink/80" data-reveal>
+                    <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-dept-accent" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+              <Image src={asset("/internal/cta-wave1/rs-looking-for.webp")} alt="A Valentine's bouquet of roses and gerberas from a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -211,7 +236,7 @@ export default function RoseSaleProjectPage() {
             </p>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">
-            <ListAccordion groups={project.committees} />
+            <ListAccordion groups={project.committees} photos={RS_COMMITTEE_PHOTOS} />
           </Reveal>
         </Container>
       </section>

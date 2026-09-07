@@ -913,12 +913,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
     ],
     images: [
-      { src: "/internal/cta-wave1/rs-event-1.webp", alt: "A past Rose Sale flower-archway booth with Celadon Rose Sale signage" },
-      { src: "/internal/cta-wave1/rs-event-2.webp", alt: "Flowers being arranged for a past Rose Sale" },
-      { src: "/internal/cta-wave1/rs-event-3.webp", alt: "Rose Sale core team members documenting the event" },
-      { src: "/internal/cta-wave1/rs-event-4.webp", alt: "A candid moment at a past Rose Sale selling week" },
-      { src: "/internal/cta-wave1/rs-event-5.webp", alt: "Core team members wrapping a bouquet at a past Rose Sale" },
-      { src: "/internal/cta-wave1/rs-event-6.webp", alt: "Two Rose Sale core team members holding pink flowers" },
+      { src: "/internal/cta-wave1/rs-what-is.webp", alt: "A past Rose Sale flower-archway booth with Celadon Rose Sale signage" },
     ],
   },
   vision: [
@@ -944,12 +939,14 @@ export const ROSE_SALE: CtaProjectDetail = {
     {
       name: "Ailyse 😌🌷",
       role: "Rose Sale Project Manager",
+      photo: "/internal/cta-wave1/rs-testimonial-ailyse.webp",
       quote:
         "Rose Sale has been such a big part of my Celadon journey. It has given me so many opportunities to learn, grow, and discover myself as both a leader and a member of the organization. From the preparations and selling week to the advocacy, every part of the experience has been nothing short of special. The people I have met, the lessons I have learned, and the memories we have made will always hold a special place in my college journey. As I look back on everything Rose Sale has given me, I can only hope to give that same sense of fulfillment, fun, and cherished memories to the next team of RS '27. May you find in Rose Sale the same joy, growth, and people that made this experience so meaningful to me.",
     },
     {
       name: "Chels 😋✌️",
       role: "Rose Sale Project Manager",
+      photo: "/internal/cta-wave1/rs-testimonial-chels.webp",
       quote:
         "Unlike what I was expecting, Rose Sale honestly really made a mark on what work and organization, specifically Celadon, means to me. It's a recurring thing I always say, but to me, Celadon has really become a family who brings meaning to what I do and motivates me for what's next.",
     },
