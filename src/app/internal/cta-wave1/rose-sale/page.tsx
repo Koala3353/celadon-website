@@ -177,7 +177,7 @@ export default function RoseSaleProjectPage() {
             <Reveal className="mx-auto w-full max-w-3xl text-left">
               <Heading>💬 Testimonies</Heading>
             </Reveal>
-            <Reveal stagger={70} className="mx-auto mt-10 grid w-full max-w-4xl gap-10 sm:grid-cols-2">
+            <Reveal stagger={70} className="mx-auto mt-10 flex w-full max-w-2xl flex-col gap-10">
               {project.testimonials.map((t) => (
                 <TestimonialCard
                   key={t.name}

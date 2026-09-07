@@ -1,4 +1,14 @@
+import { cn } from "@/lib/cn";
 import type { DeptTimelineItem } from "@/lib/deputy-departments";
+
+// "notable" grows the dot a bit within the department's own accent; "critical"
+// grows it further still and switches to the department's darker ink shade,
+// so a doc's own two-tier highlighting (e.g. Rose Sale's yellow vs. salmon
+// timeline rows) reads as two distinct levels here too.
+const DOT_STYLES = {
+  notable: "mt-1 h-4 w-4 bg-dept-accent ring-[5px] ring-dept-accent/20",
+  critical: "mt-0.5 h-5 w-5 bg-dept-ink ring-[5px] ring-dept-ink/20",
+} as const;
 
 function TimelineColumn({ items }: { items: DeptTimelineItem[] }) {
   return (
@@ -6,7 +16,12 @@ function TimelineColumn({ items }: { items: DeptTimelineItem[] }) {
       {items.map((item, i) => (
         <li key={i} data-reveal className="flex gap-4">
           <div className="flex flex-col items-center">
-            <span className="mt-1.5 h-3 w-3 shrink-0 rounded-full bg-dept-accent ring-4 ring-dept-accent/15" />
+            <span
+              className={cn(
+                "shrink-0 rounded-full",
+                item.emphasis ? DOT_STYLES[item.emphasis] : "mt-1.5 h-3 w-3 bg-dept-accent ring-4 ring-dept-accent/15"
+              )}
+            />
             {i < items.length - 1 && <span className="w-px flex-1 bg-dept-accent/20" />}
           </div>
           <div className="pb-7">

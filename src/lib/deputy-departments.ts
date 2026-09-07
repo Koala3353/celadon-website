@@ -97,6 +97,10 @@ export interface DeptRole {
 export interface DeptTimelineItem {
   date: string;
   label: string;
+  /** Marks an entry the source doc itself calls out (e.g. via a colored
+   * table row) as more significant than the rest — rendered with a bigger
+   * dot, "critical" bigger still. Most timelines leave this unset. */
+  emphasis?: "notable" | "critical";
 }
 
 export interface DeptProject {

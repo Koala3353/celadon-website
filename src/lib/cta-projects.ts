@@ -954,24 +954,24 @@ export const ROSE_SALE: CtaProjectDetail = {
   timeline: [
     { date: "September 21, 2026", label: "Release of Wave 1 Results" },
     { date: "September 24, 2026", label: "Heads Onboarding" },
-    { date: "September 28, 2026", label: "1st General Assembly" },
-    { date: "October 12–16, 2026", label: "Committees Onboarding (Online)" },
-    { date: "TBA", label: "Wave 2 Applications (Florists, Deliveries)" },
-    { date: "TBA", label: "Flower-Wrapping Workshop" },
+    { date: "September 28, 2026", label: "1st General Assembly", emphasis: "notable" },
+    { date: "October 12–16, 2026", label: "Committees Onboarding (Online)", emphasis: "notable" },
+    { date: "TBA", label: "Wave 2 Applications (Florists, Deliveries)", emphasis: "notable" },
+    { date: "TBA", label: "Flower-Wrapping Workshop", emphasis: "notable" },
     { date: "November 16–20, 2026", label: "Finalize Product List, Prices, Sponsorships, and Publication Materials" },
     { date: "December 12, 2026", label: "Order Non-Flower Products" },
-    { date: "TBA", label: "Wave 3 Applications (Sales)" },
+    { date: "TBA", label: "Wave 3 Applications (Sales)", emphasis: "notable" },
     { date: "January 25 – February 8, 2027", label: "Implement Marketing Strategies" },
-    { date: "January 25, 2027", label: "Release of Pre-Order Form" },
-    { date: "January 30, 2027", label: "Systems Orientation" },
-    { date: "February 2, 2027", label: "Sales Workshop" },
-    { date: "February 9–15, 2027", label: "Valentine's Onsite Selling Week" },
+    { date: "January 25, 2027", label: "Release of Pre-Order Form", emphasis: "critical" },
+    { date: "January 30, 2027", label: "Systems Orientation", emphasis: "notable" },
+    { date: "February 2, 2027", label: "Sales Workshop", emphasis: "notable" },
+    { date: "February 9–15, 2027", label: "Valentine's Onsite Selling Week", emphasis: "critical" },
     { date: "February 27, 2027", label: "Advocacy Program" },
     { date: "March 3, 2027", label: "Post Documentation Album" },
   ],
   committees: [
     {
-      label: "Logistics 🪻",
+      label: "Logistics 🪻 · 2 Heads, 5 Core",
       items: [
         [{ text: "Competencies", bold: true }],
         "Strong negotiation skills",
@@ -985,7 +985,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
     },
     {
-      label: "Operations 🌸",
+      label: "Operations 🌸 · 1 Head, 3 Core",
       items: [
         [{ text: "Competencies", bold: true }],
         "Attentive to detail",
@@ -1005,7 +1005,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
     },
     {
-      label: "External Relations 🌻",
+      label: "External Relations 🌻 · 1 Head, 3 Core",
       items: [
         [{ text: "Competencies", bold: true }],
         "Determined to accomplish their tasks and goals",
@@ -1019,7 +1019,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
     },
     {
-      label: "Digital Creatives 🌼",
+      label: "Digital Creatives 🌼 · 1 Head, 6 Core",
       items: [
         [{ text: "Competencies", bold: true }],
         "Detail-oriented",
@@ -1044,7 +1044,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
     },
     {
-      label: "Documentations and Publications 🌺",
+      label: "Documentations and Publications 🌺 · 2 Heads, 7 Core",
       items: [
         [{ text: "Competencies", bold: true }],
         "Proficient in photo and video editing",
@@ -1068,7 +1068,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
     },
     {
-      label: "Production Design 🌷",
+      label: "Production Design 🌷 · 1 Head, 5 Core",
       items: [
         [{ text: "Competencies", bold: true }],
         "Awareness of current design trends",
