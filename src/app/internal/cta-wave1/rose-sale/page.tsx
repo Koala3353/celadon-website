@@ -221,6 +221,15 @@ export default function RoseSaleProjectPage() {
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading>🎁 What We&rsquo;re Bringing this Year!</Heading>
+            <div className="mt-6 overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+              <Image
+                src={asset("/internal/cta-wave1/rs-bringing.webp")}
+                alt="The Rose Sale core team at their booth, selling bouquets and flower arrangements"
+                width={1696}
+                height={1146}
+                className="w-full object-cover"
+              />
+            </div>
             <div className="mt-6 grid gap-8 sm:grid-cols-2">
               <div>
                 <p className="font-bold text-dept-ink" data-reveal>
