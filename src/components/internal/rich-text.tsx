@@ -19,6 +19,13 @@ export function AboutRunText({ run }: { run: AboutRun }) {
   if (run.underline) node = <span className="underline">{node}</span>;
   if (run.accent) node = <span className="text-dept-accent">{node}</span>;
   if (run.highlight) node = <mark className="rounded-[2px] bg-amber-200/70 px-0.5">{node}</mark>;
+  if (run.href) {
+    node = (
+      <a href={run.href} target="_blank" rel="noopener noreferrer" className="text-link underline-offset-2 hover:underline">
+        {node}
+      </a>
+    );
+  }
   return <>{node}</>;
 }
 

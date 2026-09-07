@@ -250,9 +250,15 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
         "Coordinate with other committees on their creative needs",
         [
           {
-            text: "Note: There will be additional requirements for DigiC committee applicants. Kindly follow all pertinent instructions in this document.",
+            text: "Note: There will be additional requirements for DigiC committee applicants. Kindly follow all pertinent instructions in ",
             italic: true,
           },
+          {
+            text: "this document",
+            italic: true,
+            href: "https://docs.google.com/document/d/1v1f9fZvHbzmIBWXJKkLLCm43MOB3YDo-g0TW1P6c7Rw/edit?tab=t.0",
+          },
+          { text: ".", italic: true },
         ],
       ],
     },
@@ -271,9 +277,15 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
         "Coordinate with other relevant committees regarding onsite gimmicks, designs, and materials",
         [
           {
-            text: "Note: There will be additional requirements for Prod committee applicants. Kindly follow all pertinent instructions in this document.",
+            text: "Note: There will be additional requirements for Prod committee applicants. Kindly follow all pertinent instructions in ",
             italic: true,
           },
+          {
+            text: "this document",
+            italic: true,
+            href: "https://docs.google.com/document/d/1v1f9fZvHbzmIBWXJKkLLCm43MOB3YDo-g0TW1P6c7Rw/edit?tab=t.0",
+          },
+          { text: ".", italic: true },
         ],
       ],
     },
@@ -300,9 +312,15 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
         "Coordinate with other committees for necessary information and content",
         [
           {
-            text: "Note: There will be additional requirements for DocPub committee applicants. Kindly follow all pertinent instructions in this document.",
+            text: "Note: There will be additional requirements for DocPub committee applicants. Kindly follow all pertinent instructions in ",
             italic: true,
           },
+          {
+            text: "this document",
+            italic: true,
+            href: "https://docs.google.com/document/d/1v1f9fZvHbzmIBWXJKkLLCm43MOB3YDo-g0TW1P6c7Rw/edit?tab=t.0",
+          },
+          { text: ".", italic: true },
         ],
       ],
     },

@@ -39,6 +39,9 @@ export interface AboutRun {
    * from `accent`, which recolors the text itself instead of adding a
    * background behind it. */
   highlight?: boolean;
+  /** Renders this run as a link to an external URL (e.g. a source doc a
+   * committee note points readers to) instead of plain text. */
+  href?: string;
 }
 
 export interface DeptSection {
