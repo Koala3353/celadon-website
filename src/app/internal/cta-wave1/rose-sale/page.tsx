@@ -51,17 +51,6 @@ const OUR_PROMISES = [
   "Rose Sale will be a social, hardworking, and healthy working environment that credits and trains you!",
 ];
 
-// One photo per committee, in the same order as ROSE_SALE.committees — matches
-// how the doc places a specific picture beside each one.
-const RS_COMMITTEE_PHOTOS = [
-  { src: "/internal/cta-wave1/rs-committee-logistics.webp", alt: "The Logistics committee preparing bouquets at a past Rose Sale" },
-  { src: "/internal/cta-wave1/rs-committee-operations.webp", alt: "The Operations committee assembling orders at a past Rose Sale" },
-  { src: "/internal/cta-wave1/rs-committee-exrel.webp", alt: "A sponsored bouquet from a past Rose Sale, coordinated by External Relations" },
-  { src: "/internal/cta-wave1/rs-committee-digic.webp", alt: "Digital Creatives' sticker and merch designs from a past Rose Sale" },
-  { src: "/internal/cta-wave1/rs-committee-docpub.webp", alt: "Documentations and Publications members photographing a past Rose Sale" },
-  { src: "/internal/cta-wave1/rs-committee-proddesign.webp", alt: "Flower displays styled by Production Design at a past Rose Sale" },
-];
-
 export default function RoseSaleProjectPage() {
   const project = ROSE_SALE;
 
@@ -236,7 +225,7 @@ export default function RoseSaleProjectPage() {
             </p>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">
-            <ListAccordion groups={project.committees} photos={RS_COMMITTEE_PHOTOS} />
+            <ListAccordion groups={project.committees} />
           </Reveal>
         </Container>
       </section>
