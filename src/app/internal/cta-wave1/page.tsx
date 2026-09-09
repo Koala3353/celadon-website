@@ -43,7 +43,20 @@ function SectionHeading({
 
 export default function CoreTeamApplicationsHubPage() {
   return (
-    <>
+    <div
+      style={
+        {
+          // A distinct slice of the same CelaSkies palette from the
+          // dept-apps hub — swapping the "cool" pair (blue/peach) for the
+          // brandbook's teal/gray secondary swatches, so this hub reads as
+          // its own space rather than a blue-and-peach reskin, while
+          // sky-navy (ink) and sky-teal stay shared with dept-apps as the
+          // one constant running through both.
+          "--sky-blue": "var(--sky-pink)",
+          "--sky-peach": "var(--sky-gray)",
+        } as React.CSSProperties
+      }
+    >
       <SkyHero eyebrow="Wave 1" title="Core Team Applications" plain />
 
       {/* One continuous ambient wash for the whole page body, same technique
@@ -197,6 +210,6 @@ export default function CoreTeamApplicationsHubPage() {
           </Container>
         </section>
       </div>
-    </>
+    </div>
   );
 }

@@ -61,11 +61,11 @@
      time-boxed identity layered on top of the perennial brand. */
   --sky-blue: #4a9fd8;
   --sky-peach: #f5d9a8;
-  --sky-teal: #9cc5c5;
+  --sky-teal: #99c4cc;
   --sky-navy: #1b3a6b;
   --sky-mint: #a3c9c7;
-  --sky-pink: #f5cdd3;
-  --sky-gray: #d4d0d8;
+  --sky-pink: #f5d8dd;
+  --sky-gray: #d3cfda;
 
   /* Per-department accent — the *values* are set inline per page (see
      Department.accent in deputy-departments.ts), not here. Declaring the
@@ -246,9 +246,9 @@ html {
    reading as a patchwork of separate backgrounds. */
 .sky-tint-field {
   background:
-    radial-gradient(55% 45% at 10% 0%, rgba(74, 159, 216, 0.1) 0%, transparent 65%),
-    radial-gradient(50% 45% at 100% 15%, rgba(245, 217, 168, 0.28) 0%, transparent 60%),
-    radial-gradient(60% 50% at 50% 100%, rgba(156, 197, 197, 0.14) 0%, transparent 65%),
+    radial-gradient(55% 45% at 10% 0%, color-mix(in srgb, var(--sky-blue) 10%, transparent) 0%, transparent 65%),
+    radial-gradient(50% 45% at 100% 15%, color-mix(in srgb, var(--sky-peach) 28%, transparent) 0%, transparent 60%),
+    radial-gradient(60% 50% at 50% 100%, color-mix(in srgb, var(--sky-teal) 14%, transparent) 0%, transparent 65%),
     var(--white);
 }
 
