@@ -5,16 +5,17 @@ import { cn } from "@/lib/cn";
 import type { AboutRun, DeptGroup } from "@/lib/deputy-departments";
 
 /** A bare bold-only run (e.g. "Competencies", "Deliverables", "Photos") acts
- * as a sub-heading within a committee's items, and a bare italic-only run
- * (a committee's description paragraph, or a trailing "Note:"/"Additional
- * Requirement:" aside) reads as body copy rather than a checklist entry —
- * neither is a bullet of its own, so both render without a dot. */
+ * as a sub-heading within a committee's items, and an all-italic run or
+ * sequence of runs (a committee's description paragraph, or a trailing
+ * "Note:"/"Additional Requirement:" aside — possibly with a linked phrase
+ * like "this document" in the middle) reads as body copy rather than a
+ * checklist entry — neither is a bullet of its own, so both render without
+ * a dot. */
 function freeformBlockStyle(item: string | AboutRun[]): "bold" | "italic" | null {
-  if (!Array.isArray(item) || item.length !== 1) return null;
-  const run = item[0];
-  if (run.underline || run.accent || run.highlight) return null;
-  if (run.bold && !run.italic) return "bold";
-  if (run.italic && !run.bold) return "italic";
+  if (!Array.isArray(item) || item.length === 0) return null;
+  if (item.some((run) => run.underline || run.accent || run.highlight)) return null;
+  if (item.every((run) => run.bold && !run.italic)) return "bold";
+  if (item.every((run) => run.italic && !run.bold)) return "italic";
   return null;
 }
 
