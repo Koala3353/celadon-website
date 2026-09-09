@@ -98,6 +98,10 @@ export const CTA_FAQS: { q: string; a: string | AboutRun[][] }[] = [
     a: "It depends on the project and committee you're applying to — check each project's own instructions before you apply.",
   },
   {
+    q: "What is the difference between a Core Member and a Head?",
+    a: "Core Members work closely with their committee to accomplish assigned tasks and contribute to the planning and execution of the project. Heads oversee their committee, delegate responsibilities, track progress, and coordinate with the PMs and other committees.",
+  },
+  {
     q: "Can I apply as a Department Deputy as well as a Core Team Member at the same time?",
     a: [
       [

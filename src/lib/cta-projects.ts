@@ -335,16 +335,6 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       a: [[{ text: "Yes! You may apply for up to two committees." }]],
     },
     {
-      q: "What is the difference between a Core Member and a Head?",
-      a: [
-        [
-          {
-            text: "Core Members work closely with their committee to accomplish assigned tasks and contribute to the planning and execution of CNY. Heads oversee their committee, delegate responsibilities, track progress, and coordinate with the PMs and other committees.",
-          },
-        ],
-      ],
-    },
-    {
       q: "What if I don't have a lot of knowledge about Chinese-Filipino culture?",
       a: [
         [
