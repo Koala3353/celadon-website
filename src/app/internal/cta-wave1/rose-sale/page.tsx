@@ -73,12 +73,27 @@ export default function RoseSaleProjectPage() {
               "radial-gradient(60% 55% at 85% 0%, color-mix(in srgb, var(--dept-accent) 20%, transparent) 0%, transparent 65%)",
           }}
         />
-        <Reveal>
+        {/* Below `lg`, the taller crop (more headroom around the flowers)
+            reads better full-bleed; `lg`+ switches to a shorter, wider crop
+            of the same artwork so the banner doesn't run too tall next to
+            the page's own content width. */}
+        <Reveal className="lg:hidden">
           <Image
             src={asset(project.heroImage.src)}
             alt={project.heroImage.alt}
             width={1920}
-            height={1080}
+            height={865}
+            priority
+            data-reveal
+            className="max-h-[60vh] w-full object-cover"
+          />
+        </Reveal>
+        <Reveal className="hidden lg:block">
+          <Image
+            src={asset("/internal/cta-wave1/rs-hero-desktop.webp")}
+            alt={project.heroImage.alt}
+            width={1920}
+            height={498}
             priority
             data-reveal
             className="max-h-[60vh] w-full object-cover"
