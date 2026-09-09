@@ -126,7 +126,7 @@ export default function CoreTeamApplicationsHubPage() {
           </Container>
         </section>
 
-        <section className="bg-sky-teal/20 py-12 sm:py-16">
+        <section className="bg-sky-blue/20 py-12 sm:py-16">
           <Container>
             <Reveal className="mx-auto w-full max-w-2xl" data-reveal>
               <SectionHeading>How to apply</SectionHeading>
