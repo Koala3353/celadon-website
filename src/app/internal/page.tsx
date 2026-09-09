@@ -68,7 +68,7 @@ export default function InternalPortalHomePage() {
                     Applications for project Core Team roles aren&rsquo;t open yet.
                   </p>
                   <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Stay tuned for the 2nd week of September
+                    Stay tuned for the 3rd week of September
                   </p>
                 </Card>
               </div>
