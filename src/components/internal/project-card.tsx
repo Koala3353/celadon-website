@@ -13,6 +13,7 @@ function ProjectCardCover({ project, linked }: { project: CoreTeamProject; linke
           alt={project.photo.alt}
           fill
           sizes="(min-width: 640px) 50vw, 100vw"
+          style={project.photoPosition ? { objectPosition: project.photoPosition } : undefined}
           className={cn("object-cover", linked && "transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-105")}
         />
       ) : (

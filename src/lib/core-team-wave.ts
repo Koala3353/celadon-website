@@ -24,6 +24,11 @@ export interface CoreTeamProject {
   /** Left unset until this wave's project photos are ready — the project
    * card renders a placeholder instead of a broken image in the meantime. */
   photo?: { src: string; alt: string };
+  /** CSS object-position for the card's cover crop — for a banner whose own
+   * title text isn't centered in the source art (e.g. Rose Sale's sits
+   * toward the right), so the card's narrower 16:10 crop keeps it centered
+   * instead of defaulting to the image's literal center. */
+  photoPosition?: string;
   /** Set once a project has its own detail page (see cta-projects.ts) — the
    * card becomes a link to it instead of a plain info tile. */
   href?: string;
@@ -51,6 +56,7 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     blurb:
       "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community. Through customizable bouquets and other love-centered products, it gives everyone a chance to express appreciation for one another.",
     photo: { src: "/internal/cta-wave1/rs-hero.webp", alt: "Rose Sale '27 — Wave 1 Applications" },
+    photoPosition: "90% center",
     href: "/internal/cta-wave1/rose-sale",
   },
   {

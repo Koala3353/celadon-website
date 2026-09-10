@@ -987,7 +987,7 @@ export const ROSE_SALE: CtaProjectDetail = {
         "Assist in data analysis and project-end report",
         [
           {
-            text: "Technical Requirement: During the interview, applications will be given a task on Google Sheets. *Based on willingness to learn and analyze",
+            text: "Technical Requirement: During the interview, applicants will be given a task on Google Sheets. *Based on willingness to learn and analyze",
             italic: true,
           },
         ],
