@@ -854,12 +854,14 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       role: "Spring Film Festival Project Manager",
       email: "chelsea.marie.morales@student.ateneo.edu",
       facebook: "https://fb.com/chelseamarie0908",
+      photo: "/internal/cta-wave1/sff-pm-chelsea.webp",
     },
     {
       name: "Raeka Eirene Tan",
       role: "Spring Film Festival Project Manager",
       email: "eirene.tan@student.ateneo.edu",
       facebook: "https://fb.com/raekaeirene",
+      photo: "/internal/cta-wave1/sff-pm-raeka.webp",
     },
   ],
 };
