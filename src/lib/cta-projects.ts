@@ -1129,18 +1129,18 @@ export const ROSE_SALE: CtaProjectDetail = {
   ],
   contacts: [
     {
-      name: "Ailyse Lim",
-      role: "Rose Sale Project Manager",
-      email: "ailyse.erlisha.lim@student.ateneo.edu",
-      facebook: "https://fb.com/lyse.lim.3",
-      photo: "/internal/cta-wave1/rs-testimonial-ailyse.webp",
-    },
-    {
       name: "Chels Dagdag",
       role: "Rose Sale Project Manager",
       email: "chelsea.linder.dagdag@student.ateneo.edu",
       facebook: "https://fb.com/chelsea.dagdag.9",
       photo: "/internal/cta-wave1/rs-pm-chels.webp",
+    },
+    {
+      name: "Ailyse Lim",
+      role: "Rose Sale Project Manager",
+      email: "ailyse.erlisha.lim@student.ateneo.edu",
+      facebook: "https://fb.com/lyse.lim.3",
+      photo: "/internal/cta-wave1/rs-testimonial-ailyse.webp",
     },
   ],
 };

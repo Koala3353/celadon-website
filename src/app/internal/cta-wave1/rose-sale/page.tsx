@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
-import { SkeletonImage } from "@/components/ui/skeleton-image";
 import { ButtonLink } from "@/components/ui/button-link";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { Timeline } from "@/components/internal/timeline";
@@ -18,14 +17,6 @@ export const metadata: Metadata = {
   title: "Rose Sale — Core Team Applications",
   robots: { index: false, follow: false },
 };
-
-function initials(name: string): string {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
-}
 
 function Heading({ children }: { children: React.ReactNode }) {
   return (
@@ -73,27 +64,12 @@ export default function RoseSaleProjectPage() {
               "radial-gradient(60% 55% at 85% 0%, color-mix(in srgb, var(--dept-accent) 20%, transparent) 0%, transparent 65%)",
           }}
         />
-        {/* Below `lg`, the taller crop (more headroom around the flowers)
-            reads better full-bleed; `lg`+ switches to a shorter, wider crop
-            of the same artwork so the banner doesn't run too tall next to
-            the page's own content width. */}
-        <Reveal className="lg:hidden">
+        <Reveal>
           <Image
             src={asset(project.heroImage.src)}
             alt={project.heroImage.alt}
             width={1920}
             height={865}
-            priority
-            data-reveal
-            className="max-h-[60vh] w-full object-cover"
-          />
-        </Reveal>
-        <Reveal className="hidden lg:block">
-          <Image
-            src={asset("/internal/cta-wave1/rs-hero-desktop.webp")}
-            alt={project.heroImage.alt}
-            width={1920}
-            height={498}
             priority
             data-reveal
             className="max-h-[60vh] w-full object-cover"
@@ -321,25 +297,27 @@ export default function RoseSaleProjectPage() {
       {/* Flat white — last section, footer sits directly below. */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl text-left">
+          <Reveal className="mx-auto w-full max-w-2xl text-left">
             <Heading>✉️ Contact us!</Heading>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2">
+            {/* RS's own doc pairs its two PMs under one shared candid photo
+                and caption rather than individual headshots — reproduced
+                as-is here instead of the other projects' per-contact photo
+                grid. */}
+            <div className="mt-6 flex flex-col items-center gap-4 text-center" data-reveal>
+              <div className="relative aspect-square w-full max-w-xs overflow-hidden rounded-2xl shadow-[var(--shadow-md)]">
+                <Image
+                  src={asset("/internal/cta-wave1/rs-contact-photo.webp")}
+                  alt="Chels and Ailyse sharing drinks at a restaurant"
+                  fill
+                  sizes="320px"
+                  className="object-cover"
+                />
+              </div>
+              <p className="prose-body text-muted-foreground">In Rose Sale, we will always have drinks (Chagee)!</p>
+            </div>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
               {project.contacts.map((contact) => (
-                <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
-                  {contact.photo ? (
-                    <SkeletonImage
-                      src={asset(contact.photo)}
-                      alt={contact.name}
-                      width={112}
-                      height={112}
-                      containerClassName="h-28 w-28 rounded-full"
-                      className="h-28 w-28 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-28 w-28 items-center justify-center rounded-full bg-dept-accent/15">
-                      <span className="display text-2xl text-dept-ink/60">{initials(contact.name)}</span>
-                    </div>
-                  )}
+                <div key={contact.name} className="flex flex-col items-center gap-1 text-center" data-reveal>
                   <p className="font-bold text-dept-ink">{contact.name}</p>
                   <p className="text-sm text-muted-foreground">{contact.role}</p>
                   <p className="text-sm">
