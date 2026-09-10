@@ -361,6 +361,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       role: "Chinese New Year Project Manager",
       email: "claire.chiu@student.ateneo.edu",
       facebook: "https://fb.com/claireyoungchiu",
+      photo: "/internal/cta-wave1/cny-pm-claire.webp",
     },
     {
       name: "Jenny Wang",
@@ -1137,6 +1138,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       role: "Rose Sale Project Manager",
       email: "chelsea.linder.dagdag@student.ateneo.edu",
       facebook: "https://fb.com/chelsea.dagdag.9",
+      photo: "/internal/cta-wave1/rs-pm-chels.webp",
     },
   ],
 };
