@@ -67,7 +67,7 @@ export function ListAccordion({ groups, photos }: { groups: DeptGroup[]; photos?
             data-reveal
             className="group rounded-2xl bg-dept-tint p-1.5 ring-1 ring-inset ring-dept-accent/15 transition-shadow duration-300 ease-[var(--ease-out)] open:shadow-[var(--shadow-sm)]"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[1.125rem] bg-white p-5 shadow-[var(--shadow-sm)] transition-colors hover:bg-dept-tint group-open:rounded-b-none [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[1.125rem] bg-white p-5 shadow-[var(--shadow-sm)] transition-colors hover:bg-dept-tint group-open:rounded-b-none group-open:hover:bg-white [&::-webkit-details-marker]:hidden">
               <span className="font-extrabold text-dept-ink">{group.label}</span>
               <svg
                 viewBox="0 0 24 24"
