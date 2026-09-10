@@ -1133,7 +1133,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       role: "Rose Sale Project Manager",
       email: "ailyse.erlisha.lim@student.ateneo.edu",
       facebook: "https://fb.com/lyse.lim.3",
-      photo: "/internal/cta-wave1/rs-pm-ailyse.webp",
+      photo: "/internal/cta-wave1/rs-testimonial-ailyse.webp",
     },
     {
       name: "Chels Dagdag",
