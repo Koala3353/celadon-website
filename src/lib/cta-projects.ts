@@ -368,6 +368,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       role: "Chinese New Year Project Manager",
       email: "jenny.wang@student.ateneo.edu",
       facebook: "https://fb.com/jenny.wang.232730",
+      photo: "/internal/cta-wave1/cny-pm-jenny.webp",
     },
   ],
 };
