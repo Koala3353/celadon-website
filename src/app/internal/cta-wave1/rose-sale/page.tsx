@@ -225,7 +225,13 @@ export default function RoseSaleProjectPage() {
             <Heading>📌 Project Timeline</Heading>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">
-            <Timeline items={project.timeline} columns={2} />
+            {/* Scoped to just the timeline — a softer mauve instead of the
+                page's own magenta-pink accent for its untagged dots/line/
+                date text, without touching that accent anywhere else on
+                the page. */}
+            <div style={{ "--dept-accent": "#C79ABB" } as React.CSSProperties}>
+              <Timeline items={project.timeline} columns={2} />
+            </div>
           </Reveal>
         </Container>
       </section>
