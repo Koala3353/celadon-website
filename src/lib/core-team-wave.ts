@@ -85,9 +85,9 @@ export interface CoreTeamTimelineItem {
 }
 
 export const CTA_TIMELINE: CoreTeamTimelineItem[] = [
-  { date: "September 9–18, 2026", label: "Application Duration" },
-  { date: "September 12–22, 2026", label: "Interview Dates" },
-  { date: "September 25, 2026", label: "Release of Results" },
+  { date: "September 14–19, 2026", label: "CTA Wave 1 Duration" },
+  { date: "September 17–24, 2026", label: "Interview Dates" },
+  { date: "September 26, 2026", label: "Release of Results" },
 ];
 
 export const CTA_FAQS: { q: string; a: string | AboutRun[][] }[] = [

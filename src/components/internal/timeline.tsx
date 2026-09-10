@@ -62,9 +62,19 @@ export function Timeline({
 
   const half = Math.ceil(items.length / 2);
   return (
-    <div className="grid gap-x-8 sm:grid-cols-2">
-      <TimelineColumn items={items.slice(0, half)} />
-      <TimelineColumn items={items.slice(half)} />
-    </div>
+    <>
+      {/* Below `sm`, the two columns would otherwise stack as two separate
+          lists — each with its own connecting line ending mid-air — reading
+          as a broken timeline instead of one continuous one. Render the
+          full list as a single connected column there, and only switch to
+          the side-by-side split at `sm` and up. */}
+      <div className="sm:hidden">
+        <TimelineColumn items={items} />
+      </div>
+      <div className="hidden gap-x-8 sm:grid sm:grid-cols-2">
+        <TimelineColumn items={items.slice(0, half)} />
+        <TimelineColumn items={items.slice(half)} />
+      </div>
+    </>
   );
 }
