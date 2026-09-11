@@ -60,7 +60,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
     ],
     [
       {
-        text: "Through this celebration, we hope to bring Filipino-Chinese culture closer to the Ateneo community by creating a space where everyone can learn, participate, and celebrate together. From ",
+        text: "Through this celebration, we hope to bring Chinese-Filipino culture closer to the Ateneo community by creating a space where everyone can learn, participate, and celebrate together. From ",
       },
       { text: "interactive booths and cultural activities to performances, exhibits, and food", bold: true, highlight: true },
       {
@@ -85,7 +85,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
         { text: ", marking the start of a new year and welcoming it with hopes of " },
         { text: "prosperity, luck, and renewal", bold: true, highlight: true },
         {
-          text: ". In the Filipino-Chinese community, these traditions have become part of a rich cultural heritage that continues to shape our communities today.",
+          text: ". In the Chinese-Filipino community, these traditions have become part of a rich cultural heritage that continues to shape our communities today.",
         },
       ],
       [
@@ -108,7 +108,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   vision: [
     [
       {
-        text: "To bring Filipino-Chinese culture to life through a celebration that inspires appreciation, strengthens community, and creates meaningful memories for the Ateneo community.",
+        text: "To bring Chinese-Filipino culture to life through a celebration that inspires appreciation, strengthens connection, and creates meaningful memories for the Ateneo community.",
       },
     ],
   ],
@@ -130,7 +130,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       items: [
         [
           {
-            text: "The Programs (Prog) Committee is responsible for conceptualizing and implementing the activities and overall event flow of CNY. They work to ensure that each activity is engaging, culturally meaningful, and runs smoothly throughout the celebration.",
+            text: "The Programs (Prog) Committee is responsible for conceptualizing and implementing the activities and overall event flow of CNY. They work to ensure that each activity is engaging, culturally meaningful, and smoothly executed throughout the celebration.",
             italic: true,
           },
         ],
@@ -499,7 +499,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
         "Handle all photo and video documentation throughout the event, including a possible SDE",
         "Organize and facilitate core team DP shoots",
         "Prepare image and video assets for promotional and social media use",
-        "Writing accompanying post spiels for all social media posts",
+        "Write accompanying post spiels for all social media posts",
       ],
     },
     {
@@ -568,7 +568,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     body: [
       [
         {
-          text: "The SFF is a three-day event that bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. The activities that encompass consist of cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Chinese-Filipino culture.",
+          text: "The SFF is a three-day event that bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. The activities that encompass the SFF consist of cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Chinese-Filipino culture.",
         },
       ],
       [{ text: "The Spring Film Festival is divided into three events:" }],
@@ -649,7 +649,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "The Documentations Committee of the Spring Film Festival is material towards the preservation of memory through photo and video mediums. By joining this committee, one will be able to sharpen their knowledge in using photography and videography devices and applications, as well as implicit skills and techniques such as framing, lighting, visualization, and many more.",
+            text: "The Documentations Committee of the Spring Film Festival is instrumental in the preservation of memory through photo and video mediums. By joining this committee, one will be able to sharpen their knowledge in using photography and videography devices and applications, as well as implicit skills and techniques such as framing, lighting, visualization, and many more.",
             italic: true,
           },
         ],
@@ -725,10 +725,10 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
         ],
         [{ text: "Responsibilities", bold: true }],
         "Reaching out to external organizations.",
-        "Meeting and Coordinating with external organizations.",
+        "Meeting and coordinating with external organizations.",
         "Drafting Memorandum of Agreement.",
-        "Claiming monetary and non monetary sponsorships.",
-        "Ensuring compliance of both Ateneo Celadon and the External Party to confirmed agreements (i.e. With signatures from both ends).",
+        "Claiming monetary and non-monetary sponsorships.",
+        "Ensuring compliance of both Ateneo Celadon and the external party to confirmed agreements (i.e. with signatures from both ends).",
       ],
     },
     {
@@ -786,7 +786,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
         ],
         [
           {
-            text: "The Recruitment and Secretariat Committee work towards the data collection, interpretation, and evaluation of the project in order to determine whether the project's accomplishments still align with the prescribed and formulated goals. Afterwards, all data and interpretations shall be compiled to develop the project's sustainability report that could help the organization improve its future initiatives.",
+            text: "The Recruitment and Secretariat Committee works towards the data collection, interpretation, and evaluation of the project in order to determine whether the project's accomplishments still align with the prescribed and formulated goals. Afterwards, all data and interpretations shall be compiled to develop the project's sustainability report that could help the organization improve its future initiatives.",
             italic: true,
           },
         ],
@@ -1142,7 +1142,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       a: [
         [
           {
-            text: "Yes! If you're applying for Digital Creatives, Production Design, or Documentation & Publications, you'll need to accomplish the required Additional Requirements before your interview.",
+            text: "Yes! If you're applying for Digital Creatives, Production Design, or Documentations and Publications, you'll need to accomplish the required Additional Requirements before your interview.",
           },
         ],
       ],
