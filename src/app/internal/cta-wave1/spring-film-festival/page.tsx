@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Lora, EB_Garamond, Dancing_Script } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -18,6 +19,14 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// SFF's own doc only styles two things away from its default body font: its
+// headings (Lora, in the doc's own gold, #ecbf58) and the PM letter — set in
+// EB Garamond, with the salutation/signoff name in a cursive Dancing Script
+// accent (#970708) — scoped to just this page via CSS variables below.
+const lora = Lora({ subsets: ["latin"], weight: ["700"], variable: "--font-sff-heading" });
+const ebGaramond = EB_Garamond({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-sff-letter" });
+const dancingScript = Dancing_Script({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-sff-script" });
+
 function initials(name: string): string {
   return name
     .split(" ")
@@ -28,7 +37,7 @@ function initials(name: string): string {
 
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-xl font-extrabold text-dept-accent sm:text-2xl" data-reveal>
+    <h2 className="text-xl font-bold sm:text-2xl [font-family:var(--font-sff-heading)] [color:#ecbf58]" data-reveal>
       {children}
     </h2>
   );
@@ -40,6 +49,7 @@ export default function SpringFilmFestivalProjectPage() {
 
   return (
     <div
+      className={cn(lora.variable, ebGaramond.variable, dancingScript.variable)}
       style={
         {
           "--dept-accent": project.accent.base,
@@ -86,18 +96,25 @@ export default function SpringFilmFestivalProjectPage() {
       <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-            <p className="flex items-center gap-2 text-xl font-extrabold text-dept-accent" data-reveal>
+            <p
+              className="flex items-center gap-2 text-2xl font-bold sm:text-3xl [font-family:var(--font-sff-script)] [color:#970708]"
+              data-reveal
+            >
               <span aria-hidden>💌</span> Dear Aspiring Applicants,
             </p>
             <RichParagraphs
               paragraphs={project.letter}
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-4 [font-family:var(--font-sff-letter)]"
               paragraphClassName="prose-body text-dept-ink/80"
             />
             <p className="text-right" data-reveal>
-              <span className="prose-body font-bold text-dept-ink">{project.letterSignoff.highlighted}</span>
+              <span className="prose-body font-bold [font-family:var(--font-sff-letter)] [color:#970708]">
+                {project.letterSignoff.highlighted}
+              </span>
               <br />
-              <span className="prose-body text-dept-ink">{project.letterSignoff.name}</span>
+              <span className="prose-body text-dept-ink text-lg [font-family:var(--font-sff-script)]">
+                {project.letterSignoff.name}
+              </span>
             </p>
           </Reveal>
         </Container>

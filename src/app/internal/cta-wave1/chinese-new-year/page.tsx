@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Nunito, DM_Sans } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -19,6 +20,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// CNY's own doc sets its body copy in DM Sans throughout, with headings and
+// the PM salutation in a heavier Nunito Black, in the doc's own red (#d0353e).
+const nunito = Nunito({ subsets: ["latin"], weight: ["800", "900"], variable: "--font-cny-heading" });
+const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700", "900"], variable: "--font-cny-body" });
+
 function initials(name: string): string {
   return name
     .split(" ")
@@ -27,12 +33,9 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-// Matches the instructions PDF's own heading style — bold, colored, normal
-// case with a leading emoji icon — rather than the deputy hub's uppercase
-// display type, which the PDF doesn't use anywhere.
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-xl font-extrabold text-dept-accent sm:text-2xl" data-reveal>
+    <h2 className="text-xl font-black sm:text-2xl [font-family:var(--font-cny-heading)] [color:#d0353e]" data-reveal>
       {children}
     </h2>
   );
@@ -43,6 +46,7 @@ export default function ChineseNewYearProjectPage() {
 
   return (
     <div
+      className={cn(nunito.variable, dmSans.variable, "[font-family:var(--font-cny-body)]")}
       style={
         {
           "--dept-accent": project.accent.base,
@@ -92,7 +96,10 @@ export default function ChineseNewYearProjectPage() {
       <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-            <p className="flex items-center gap-2 text-xl font-extrabold text-dept-accent" data-reveal>
+            <p
+              className="flex items-center gap-2 text-xl font-black sm:text-2xl [font-family:var(--font-cny-heading)] [color:#d0353e]"
+              data-reveal
+            >
               <span aria-hidden>✨</span> Dear Applicant,
             </p>
             <RichParagraphs
@@ -101,7 +108,7 @@ export default function ChineseNewYearProjectPage() {
               paragraphClassName="prose-body text-dept-ink/80"
             />
             <p className="text-right" data-reveal>
-              <mark className="rounded-[2px] bg-red-200/70 px-0.5 font-semibold text-dept-ink">
+              <mark className="rounded-[2px] bg-red-200/70 px-0.5 font-black text-dept-ink">
                 {project.letterSignoff.highlighted}
               </mark>
               <br />

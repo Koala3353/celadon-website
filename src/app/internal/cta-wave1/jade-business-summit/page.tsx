@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Kumbh_Sans } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -18,6 +19,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// JADE's own doc sets everything — headings and body alike — in Kumbh Sans,
+// with headings/the PM salutation in its own teal-green (#579782).
+const kumbhSans = Kumbh_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+
 function initials(name: string): string {
   return name
     .split(" ")
@@ -28,7 +33,7 @@ function initials(name: string): string {
 
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-xl font-extrabold text-dept-accent sm:text-2xl" data-reveal>
+    <h2 className="text-xl font-bold sm:text-2xl [color:#579782]" data-reveal>
       {children}
     </h2>
   );
@@ -39,6 +44,7 @@ export default function JadeBusinessSummitProjectPage() {
 
   return (
     <div
+      className={kumbhSans.className}
       style={
         {
           "--dept-accent": project.accent.base,
@@ -126,7 +132,7 @@ export default function JadeBusinessSummitProjectPage() {
       <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-            <p className="text-xl font-extrabold text-dept-accent" data-reveal>
+            <p className="text-xl font-bold [color:#579782]" data-reveal>
               Dear JADE Applicant,
             </p>
             <RichParagraphs
