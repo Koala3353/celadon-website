@@ -460,7 +460,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
       ],
     },
     {
-      label: "Recruitment and Secretariat 📝 · 3 Core",
+      label: "Recruitment and Strategy 📝 · 3 Core",
       items: [
         "Manage participant registration, confirmation, attendance tracking, and certificate preparation",
         "Establish and manage the ambassadorship system to target high school student councils and college organizations",
@@ -525,11 +525,14 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
       role: "Jade Business Summit Project Manager",
       email: "lorien.stefan.lee@student.ateneo.edu",
       facebook: "https://fb.com/lorien.lee.33",
+      photo: "/internal/cta-wave1/jade-pm-lorien.webp",
     },
     {
       name: "Princess Datu",
       role: "Jade Business Summit Project Manager",
       email: "princess.jhode.datu@student.ateneo.edu",
+      facebook: "https://fb.com/princess.datu19",
+      photo: "/internal/cta-wave1/jade-pm-princess.webp",
     },
   ],
 };
