@@ -38,7 +38,7 @@ const WHAT_TO_EXPECT = [
 ];
 
 const OUR_PROMISES = [
-  "You get to showcase your creativity and hard work to a large audience (aka. our dearest customers)",
+  "You get to showcase your creativity and hard work to a large audience (aka. our dearest customers).",
   "Rose Sale will be a social, hardworking, and healthy working environment that credits and trains you!",
 ];
 

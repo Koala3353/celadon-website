@@ -60,17 +60,17 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
     ],
     [
       {
-        text: "Through this celebration we hope to bring Filipino-Chinese culture closer to the Ateneo community by creating a space where everyone can learn, participate, and celebrate together. From ",
+        text: "Through this celebration, we hope to bring Filipino-Chinese culture closer to the Ateneo community by creating a space where everyone can learn, participate, and celebrate together. From ",
       },
       { text: "interactive booths and cultural activities to performances, exhibits, and food", bold: true, highlight: true },
       {
-        text: ", CNY is more than just a celebration, it is an opportunity to share the traditions, stories, and values that continue to shape our culture.",
+        text: ", CNY is more than just a celebration; it is an opportunity to share the traditions, stories, and values that continue to shape our culture.",
       },
     ],
     [
-      { text: "“CNY 2027: A Home in Every Hue: Celebrating Culture in Full Color”", bold: true, highlight: true },
+      { text: "Chinese New Year 2027’s theme, “A Home in Every Hue: Celebrating Culture in Full Color,”", bold: true, highlight: true },
       {
-        text: " is inspired by the warmth of childhood memories, familiar traditions, and festive food. We hope to create a celebration that feels welcoming, meaningful, and familiar. We’d love to have you be part of the team that brings this vision to life!",
+        text: " is inspired by the warmth of childhood memories, familiar traditions, and festive food. We hope to create a celebration that feels welcoming, meaningful, and familiar, and we’d love to have you be part of the team that brings this vision to life!",
       },
     ],
     [{ text: "Join us in welcoming the Year of the Fire Goat this February 2–5, 2027! ✨🧧🐐" }],
@@ -108,7 +108,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   vision: [
     [
       {
-        text: "To bring Chinese-Filipino culture to life through a celebration that inspires appreciation, strengthens community, and creates meaningful memories for the Ateneo community.",
+        text: "To bring Filipino-Chinese culture to life through a celebration that inspires appreciation, strengthens community, and creates meaningful memories for the Ateneo community.",
       },
     ],
   ],
@@ -126,7 +126,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
   ],
   committees: [
     {
-      label: "Programs 🎉 · 2 Heads, 5 Core",
+      label: "Programs 🎉 · 1 Head, 4 Core",
       items: [
         [
           {
@@ -141,7 +141,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Logistics 📦 · 2 Heads, 5 Core",
+      label: "Logistics 📦 · 1 Head, 4 Core",
       items: [
         [
           {
@@ -172,7 +172,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "External Relations 🤝 · 2 Heads, 4 Core",
+      label: "External Relations 🤝 · 1 Head, 4 Core",
       items: [
         [
           {
@@ -188,7 +188,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Fundraising 🤑 · 2 Heads, 5 Core",
+      label: "Fundraising 🤑 · 1 Head, 4 Core",
       items: [
         [
           {
@@ -204,7 +204,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Operations ⚙️ · 2 Heads, 4 Core",
+      label: "Operations ⚙️ · 1 Head, 2 Core",
       items: [
         [
           {
@@ -235,7 +235,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Digital Creatives 🎨 · 2 Heads, 3 Core",
+      label: "Digital Creatives 🎨 · 2 Heads, 2 Core",
       items: [
         [
           {
@@ -263,7 +263,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Production Design 🖼 · 2 Heads, 5 Core",
+      label: "Production Design 🖼 · 2 Heads, 3 Core",
       items: [
         [
           {
@@ -290,7 +290,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       ],
     },
     {
-      label: "Documentation and Publications 📸 · 2 Heads, 8 Core",
+      label: "Documentation and Publications 📸 · 2 Heads, 5 Core",
       items: [
         [
           {
@@ -331,10 +331,6 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       a: [[{ text: "Any interested Celadonean who is willing to contribute to the project may apply. Previous experience is not required." }]],
     },
     {
-      q: "Can I apply for more than one committee?",
-      a: [[{ text: "Yes! You may apply for up to two committees." }]],
-    },
-    {
       q: "What if I don't have a lot of knowledge about Chinese-Filipino culture?",
       a: [
         [
@@ -349,7 +345,7 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
       a: [
         [
           {
-            text: "CNY is a major project that involves preparation before and throughout the celebration. Members are expected to actively participate in committee meetings, assigned tasks, and event days, but the PMs will be there to guide you every step of the way — just stay engaged and be transparent with your availability ❤️",
+            text: "CNY is a major project that involves preparation before and throughout the celebration. Members are expected to actively participate in committee meetings, assigned tasks, and event days, but the PMs will be there to guide you every step of the way—just stay engaged and be transparent with your availability ❤️",
           },
         ],
       ],
@@ -393,7 +389,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
     ],
     [
       {
-        text: "This year marks the second iteration since the revival of the Jade Business Summit, and with it comes an opportunity to rebuild the project into something bigger, bolder, and more impactful on the next generation of leaders and entrepreneurs. JADE is envisioned as a space where people can step beyond what they already know, and discover new perspectives, connect with the industries, ideas, and people shaping the future of Filipino-Chinese business.",
+        text: "This year marks the second iteration since the revival of the Jade Business Summit, and with it comes an opportunity to rebuild the project into something bigger, bolder, and more impactful for the next generation of leaders and entrepreneurs. JADE is envisioned as a space where people can step beyond what they already know and discover new perspectives, connect with the industries, ideas, and people shaping the future of Chinese-Filipino businesses.",
       },
     ],
     [
@@ -413,7 +409,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
     body: [
       [
         {
-          text: "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall that brings seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students from Ateneo and partner schools through insightful lectures, panel discussions, a networking opportunity, and a pitch workshop that challenges participants to collaborate in developing and presenting SMART business ideas before a panel of ADMU professors.",
+          text: "The Jade Business Summit is Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall that brings seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students from Ateneo and partner schools through insightful lectures, panel discussions, a networking opportunity, and a pitch workshop that challenges participants to collaborate in developing and presenting specific, measurable, achievable, relevant, and time-bound business ideas before a panel of ADMU professors.",
         },
       ],
     ],
@@ -425,12 +421,12 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
   vision: [
     [
       {
-        text: "The JADE Business Summit 2026-2027 envisions a gathering that celebrates the enterprises, values, and stories that have shaped our community, while empowering the next generation to build upon what came before. The project is guided by the Chinese principle 承先启后 (Chéngxiānqǐhòu), to carry forward the legacy of the past while opening the way for the future. As such, this year's summit explores the relationship between heritage and entrepreneurship whilst recognizing that every new venture begins with something inherited, learned, or passed down.",
+        text: "The Jade Business Summit 2026-2027 envisions a gathering that celebrates the enterprises, values, and stories that have shaped our community, while empowering the next generation to build upon what came before. The project is guided by the Chinese principle 承先启后 (Chéngxiānqǐhòu), to carry forward the legacy of the past while opening the way for the future. As such, this year's summit explores the relationship between heritage and entrepreneurship whilst recognizing that every new venture begins with something inherited, learned, or passed down.",
       },
     ],
     [
       {
-        text: "Through conversations with established encounters with established and emerging founders alike, alongside opportunities to explore the realities of building a business, JADE aims to pass on the lessons behind enduring legacies while giving aspiring entrepreneurs the knowledge, networks, and perspective to take their first steps. This year's thrust, “Heirlooms & Headstarts,” represents this balance through the heirlooms we inherit and the headstarts that allow us to build on and innovate with the past.",
+        text: "Through conversations with established entrepreneurs and emerging founders alike, alongside opportunities to explore the realities of building a business, JADE aims to pass on the lessons behind enduring legacies while giving aspiring entrepreneurs the knowledge, networks, and perspective to take their first steps. This year's thrust, “Heirlooms & Headstarts,” represents this balance through the heirlooms we inherit and the headstarts that allow us to build on and innovate with the past.",
       },
     ],
     [
@@ -464,7 +460,7 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
       ],
     },
     {
-      label: "Recruitment and Strategy 📝 · 3 Core",
+      label: "Recruitment and Secretariat 📝 · 3 Core",
       items: [
         "Manage participant registration, confirmation, attendance tracking, and certificate preparation",
         "Establish and manage the ambassadorship system to target high school student councils and college organizations",
@@ -553,12 +549,12 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
   letter: [
     [
       {
-        text: "Thank you very much for your interest in joining us in the planning and celebration of the 21st Spring Film Festival. We, project managers, hope to bridge the gap between the past and present into an interwoven story of performance, workshops and film viewing for the audience to see and experience the elegance of the Chinese-Filipino culture, values, and art.",
+        text: "Thank you very much for your interest in joining us in the planning and celebration of the 21st Spring Film Festival. We, project managers, hope to bridge the gap between the past and present into an interwoven story of performances, workshops, and film viewing for the audience to see and experience the elegance of Chinese-Filipino culture, values, and art.",
       },
     ],
     [
       {
-        text: "Every activity, film, and performance showcases a story, an experience, a memory, a loved one. May the memories, love, time, and people in the Spring Film Festival be joyous and unforgettable. The 21st Spring Film Festival is an invitation to leave a legacy of connection in harmony to your hearts and to the Filipino-Chinese community.",
+        text: "Every activity, film, and performance showcases a story, an experience, a memory, a loved one. May the memories, love, time, and people in the Spring Film Festival be joyous and unforgettable. The 21st Spring Film Festival is an invitation to leave a legacy of connection in harmony to your hearts and to the Chinese-Filipino community.",
       },
     ],
     [{ text: "We can’t wait to see you there!" }],
@@ -569,23 +565,23 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     body: [
       [
         {
-          text: "The Spring Film Festival is a three-day event that bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. The activities that encompass the Spring Film Festival consist of cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Filipino-Chinese culture.",
+          text: "The SFF is a three-day event that bridges both tradition and modernity by celebrating traditional values, art, and culture while integrating modern touches and elements to engage the present generation. The activities that encompass consist of cultural workshops, movie screenings, diverse performances, and social media engagement in order to attract a wide audience to interact with the Chinese-Filipino culture.",
         },
       ],
       [{ text: "The Spring Film Festival is divided into three events:" }],
-      [{ text: "(1) Gala Night that features performances of dancing, singing, and music talents;" }],
+      [{ text: "(1) Gala Night that features performances of dancing, singing, and musical talents;" }],
       [{ text: "(2) Workshop Day that places cultural workshops in the spotlight;" }],
-      [{ text: "(3) and Culminating Night that concludes the Spring Film Festival through workshops and performances." }],
+      [{ text: "(3) and Culminating Night that concludes the SFF through workshops and performances." }],
       [
         { text: "The 21st Spring Film Festival marks the 21st iteration of the event by " },
         { text: "Ateneo Celadon", bold: true },
         { text: " in collaboration with the " },
         { text: "Ateneo Ricardo Leong Center for Chinese Studies (RLCCS)", bold: true },
-        { text: ", each occurrence bearing a legacy of bringing the Filipino-Chinese culture to broader audiences. The theme for the 21st Spring Film Festival mainly revolves around the " },
+        { text: ", each occurrence bearing a legacy of bringing Chinese-Filipino culture to broader audiences. The theme for SFF mainly revolves around the " },
         { text: "Year of the Fire Goat", bold: true },
-        { text: " which symbolizes " },
+        { text: ", which symbolizes " },
         { text: "harmonious connection in new beginnings", bold: true },
-        { text: ". Thus, the activities to be featured in the 21st Spring Film Festival aim to emphasize the theme of " },
+        { text: ". Thus, the activities to be featured in the SFF aim to emphasize the theme of " },
         { text: "forming and nurturing stronger relationships", bold: true },
         { text: " in the celebration of " },
         { text: "creative and innovative activities", bold: true },
@@ -600,7 +596,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
   vision: [
     [
       {
-        text: "The Spring Film Festival aims to leave a lasting impression on the community through colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with–to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
+        text: "The Spring Film Festival aims to leave a lasting impression on the community by celebrating Chinese New Year with colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with them--to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
       },
     ],
   ],
@@ -618,22 +614,6 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
   ],
   committees: [
     {
-      label: "Communications and Publications 📣 · 1 Head, 3 Core",
-      items: [
-        [
-          {
-            text: "The Communications and Publications committee is one of the key committees in the Spring Film Festival who is responsible for creatively communicating information and events to the broader audience. It is through this committee that one may be able to sharpen their communication skills in both written and verbal communication, including comprehensive framing of information.",
-            italic: true,
-          },
-        ],
-        [{ text: "Responsibilities", bold: true }],
-        "Creating and writing spiels to accompany publication materials",
-        "Utilizing artistic elements created by the Creatives Department to communicate announcements, events, and other relevant information",
-        "Managing the Facebook Page of the Spring Film Festival",
-        "Interacting with stakeholders who may communicate through official pages",
-      ],
-    },
-    {
       label: "Digital Creatives 🎨 · 2 Heads, 4 Core",
       items: [
         [
@@ -643,10 +623,22 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
           },
         ],
         [{ text: "Responsibilities", bold: true }],
-        "Developing a Creative Brandbook that depicts the creative concept of the Spring Film Festival",
-        "Designing event flyers and posters",
-        "Designing publication materials",
-        "Designing and editing program slides",
+        "Developing a Creative Brandbook that depicts the creative concept of the Spring Film Festival.",
+        "Designing event flyers and posters.",
+        "Designing publication materials.",
+        "Designing and editing program slides.",
+        [
+          {
+            text: "NOTE: Applying as a Core Team Head/Member of the Digital Creatives Committee will also require the completion of COMMPUB Additional Requirements on Digital Creatives found in ",
+            italic: true,
+          },
+          {
+            text: "this document",
+            italic: true,
+            href: "https://docs.google.com/document/d/1v1f9fZvHbzmIBWXJKkLLCm43MOB3YDo-g0TW1P6c7Rw/edit?tab=t.0",
+          },
+          { text: ". Please attach the completed additional requirement alongside your application.", italic: true },
+        ],
       ],
     },
     {
@@ -658,12 +650,36 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
             italic: true,
           },
         ],
-        [{ text: "Responsibilities", bold: true }],
-        "Photography for DP Shoots",
-        "Photography for publication materials",
-        "Videography of trailers and promotional videos",
-        "Photo and video documentation of project execution",
-        "Photo and video editing and grading prior to publication",
+        [
+          {
+            text: "Additionally, the Documentations and Publications Committee is also responsible for creatively communicating information and events to the broader audience. It is through this committee that one may be able to sharpen their communication skills in both written and verbal communication, including comprehensive framing of information.",
+            italic: true,
+          },
+        ],
+        [{ text: "Documentation-Related Responsibilities", bold: true }],
+        "Photography for DP Shoots.",
+        "Photography for publication materials.",
+        "Videography of trailers and promotional videos.",
+        "Photo and video documentation of project execution.",
+        "Photo and video editing and grading prior to publication.",
+        [{ text: "Publication-Related Responsibilities", bold: true }],
+        "Creating and writing spiels to accompany publication materials.",
+        "Utilizing artistic elements created by the Creatives Department to communicate announcements, events, and other relevant information.",
+        [
+          {
+            text: "NOTE: Applying as a Core Team Head/Member of the Documentations and Publications Committee will also require the completion of COMMPUB Additional Requirements found in ",
+            italic: true,
+          },
+          {
+            text: "this document",
+            italic: true,
+            href: "https://docs.google.com/document/d/1v1f9fZvHbzmIBWXJKkLLCm43MOB3YDo-g0TW1P6c7Rw/edit?tab=t.0",
+          },
+          {
+            text: ". Please choose one requirement from the following (i.e. Photos, Videos, and Writing) for your submission.",
+            italic: true,
+          },
+        ],
       ],
     },
     {
@@ -678,9 +694,21 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
         [{ text: "Responsibilities", bold: true }],
         "Coordinating with the Programs Department for the provision of onsite gimmicks, if there are any",
         "Coordinating with the Digital Creatives Department in developing and applying creative concepts in an onsite setting",
-        "Coordinating with the Logistics Department in the procurement of physically tangible materials, whether for creative or practical application (e.g. decorations for DP shoot, materials for workshop)",
+        "Coordinating with the Logistics Department in the procurement of physically tangible materials, whether for creative or practical application. (i.e. decorations for DP shoot, materials for workshop)",
         "Visualizing event layout, if applicable",
         "Visualizing onsite promotions",
+        [
+          {
+            text: "NOTE: Applying as a Core Team Head/Member of the Production Design Committee will also require the completion of COMMPUB Additional Requirements on Production Design found in ",
+            italic: true,
+          },
+          {
+            text: "this document",
+            italic: true,
+            href: "https://docs.google.com/document/d/1v1f9fZvHbzmIBWXJKkLLCm43MOB3YDo-g0TW1P6c7Rw/edit?tab=t.0",
+          },
+          { text: ". Please attach the completed additional requirement alongside your application.", italic: true },
+        ],
       ],
     },
     {
@@ -688,16 +716,16 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
-            text: "The External Relations Committee is a relevant committee in forming and strengthening bonds with parties external to Ateneo Celadon. Further, the bonds that the External Relations Committee forms through this project may also have the potential to become strong partners that Ateneo Celadon could thrive with indefinitely. Through this committee, members may be able to develop strengths in communication and negotiation, as well as build knowledge towards communication mediums (e.g. email, Mailmeteor, Viber), agreements (e.g. contracts), obligations (e.g. fulfilling responsibilities), and protecting one's interests (e.g. preventing breach of agreement).",
+            text: "The External Relations Committee is a relevant committee in forming and strengthening bonds with parties external to Ateneo Celadon. Further, the bonds that the External Relations Committee forms through this project may also have the potential to become strong partners that Ateneo Celadon could thrive with indefinitely. Through this committee, members may be able to develop strengths in communication and negotiation, as well as build knowledge towards communication mediums (e.g. Email, Mailmeteor, Viber), agreements (e.g. contracts), obligations (e.g. fulfilling responsibilities), and protecting one's interests (e.g. preventing breach of agreement).",
             italic: true,
           },
         ],
         [{ text: "Responsibilities", bold: true }],
-        "Reaching out to external organizations",
-        "Meeting and coordinating with external organizations",
-        "Drafting Memorandum of Agreement",
-        "Claiming monetary and non-monetary sponsorships",
-        "Ensuring compliance of both Ateneo Celadon and the external party to confirmed agreements (i.e. with signatures from both ends)",
+        "Reaching out to external organizations.",
+        "Meeting and Coordinating with external organizations.",
+        "Drafting Memorandum of Agreement.",
+        "Claiming monetary and non monetary sponsorships.",
+        "Ensuring compliance of both Ateneo Celadon and the External Party to confirmed agreements (i.e. With signatures from both ends).",
       ],
     },
     {
@@ -705,14 +733,20 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
+            text: "One (1) Logistics Head and one (1) Logistics Core Team Member is already deployed.",
+            italic: true,
+          },
+        ],
+        [
+          {
             text: "The Logistics Committee is responsible for the procurement of materials for use of the project. These materials may be of any nature ranging from rooms, transportation, consumables (e.g. food and water), gimmick materials, decorations, and other miscellaneous materials. The contributions made by this committee are highly important towards the accomplishment of roles and responsibilities in all departments, especially those highly dependent on physical materials.",
             italic: true,
           },
         ],
         [{ text: "Responsibilities", bold: true }],
-        "Room reservation through CFMO",
-        "Coordination with other committees for material procurement",
-        "Sourcing transportation to the event venue",
+        "Room reservation through CFMO.",
+        "Coordination with other committees for material procurement.",
+        "Sourcing transportation to the event venue.",
       ],
     },
     {
@@ -720,21 +754,33 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       items: [
         [
           {
+            text: "One (1) Programs Head and one (1) Programs Core Team Member is already deployed. Wave 1 applications will accept only 1 Programs Head and 5 Programs Core Team Members.",
+            italic: true,
+          },
+        ],
+        [
+          {
             text: "The Programs Committee entertains all concerns related to the progression of the program presented to all guests and stakeholders participating in the Spring Film Festival. It is also one of the most demanding committees in terms of output generation which requires proper planning and communication with the project team. On the other hand, contributing in this department equips core team members with vast experience and opportunities which include a mix of creative concept development, clear writing and communication, organized compilation of information, and many more.",
             italic: true,
           },
         ],
         [{ text: "Responsibilities", bold: true }],
-        "Planning onsite and online gimmicks",
-        "Planning event flow",
-        "Planning event contingencies",
-        "Event scriptwriting",
-        "Performer and Volunteer Coordination",
+        "Planning onsite and online gimmicks.",
+        "Planning event flow.",
+        "Planning event contingencies.",
+        "Event scriptwriting.",
+        "Performer and Volunteer Coordination.",
       ],
     },
     {
       label: "Recruitment and Secretariat 📝 · 2 Heads, 5 Core",
       items: [
+        [
+          {
+            text: "One (1) Recruitment and Secretariat Head is already deployed. Wave 1 applications will accept only 1 Recruitment and Secretariat Head for the Spring Film Festival.",
+            italic: true,
+          },
+        ],
         [
           {
             text: "The Recruitment and Secretariat Committee work towards the data collection, interpretation, and evaluation of the project in order to determine whether the project's accomplishments still align with the prescribed and formulated goals. Afterwards, all data and interpretations shall be compiled to develop the project's sustainability report that could help the organization improve its future initiatives.",
@@ -748,12 +794,12 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
           },
         ],
         [{ text: "In the project planning and execution phases of the project, the responsibilities include:", bold: true }],
-        "Creation of recruitment forms for volunteers",
-        "Creation of evaluation forms",
-        "Creation of volunteer and RecSec Manuals",
-        "Orientation of volunteers prior to event execution",
-        "Supervision of guest registration",
-        "Creating the sustainability report",
+        "Creation of recruitment forms for volunteers.",
+        "Creation of evaluation forms.",
+        "Creation of volunteer and RecSec Manuals.",
+        "Orientation of volunteers prior to event execution.",
+        "Supervision of guest registration.",
+        "Creating the sustainability report.",
       ],
     },
   ],
@@ -763,28 +809,13 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       a: [
         [
           {
-            text: "Yes, applicants for Digital Creatives, Production Design, and Documentation & Publications will be asked to submit an additional requirement, as outlined by COMMPUB and the Project Managers.",
+            text: "Yes, applicants for Digital Creatives, Production Design, and Documentation & Publications will be asked to submit an additional requirement, as outlined by COMMPUB and the Project Managers. The COMMPUB Additional Requirements and their guidelines could be found in this document.",
           },
         ],
-      ],
-    },
-    {
-      q: "Can I apply to more than one committee?",
-      a: [
         [
-          {
-            text: "Yes! You may apply to a maximum of two committees. However, please note that you will only be assigned to only one committee.",
-          },
-        ],
-      ],
-    },
-    {
-      q: "Can I apply to more than one project aside from the Spring Film Festival?",
-      a: [
-        [
-          {
-            text: "Yes, all applicants within the project of Ateneo Celadon are allowed to apply for more than one project regardless of the date of its project execution; provided that the applicant is able to properly manage their workload and account for the events arising from commitment in two or more projects.",
-          },
+          { text: "This document: " },
+          { text: "SFF inspo", href: "https://canva.link/zptjwqs5l5b4uqs" },
+          { text: ", contains a visualization for the Spring Film Festival which may help you alongside your creative goals for the project. All the best!" },
         ],
       ],
     },
@@ -793,7 +824,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       a: [
         [
           {
-            text: "The Spring Film Festival will be located in Shangri-La Plaza, with the location below being its exact address: EDSA corner Shaw Boulevard, Ortigas Center, Mandaluyong City, Metro Manila, Philippines.",
+            text: "The Spring Film Festival will be located in Shangri-La Plaza Mall in Mandaluyong City. Further venue details will be announced soon, unless announced otherwise.",
           },
         ],
         [
@@ -888,7 +919,7 @@ export const ROSE_SALE: CtaProjectDetail = {
     ],
     [
       {
-        text: "We look forward to having you as part of our little Rose Sale family, and we hope that this opportunity inspires you to spread a little bit more love in the world, of course, including yourself! We're excited to share this journey with all of our future core team members, and we hope to see you soon!",
+        text: "We look forward to having you as part of our little Rose Sale family, and we hope that this opportunity inspires you to spread a little bit more love in the world—which, of course, includes yourself! We're excited to share this journey with all of our future core team members, and we hope to see you soon!",
       },
     ],
   ],
@@ -903,7 +934,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       ],
       [
         {
-          text: "Through customizable bouquets and other love centered products, the project provides members and non members of Ateneo Celadon alike a chance to express appreciation for one another.",
+          text: "Through customizable bouquets and other love-centered products, the project provides members and non-members of Ateneo Celadon alike a chance to express appreciation for one another.",
         },
       ],
     ],
@@ -922,7 +953,7 @@ export const ROSE_SALE: CtaProjectDetail = {
       { text: "take time to appreciate love in all forms", highlight: true },
       { text: ". Because in all of them, " },
       {
-        text: "one thing remains constant: the quiet acts of care that nurtured who we are today, filling our hearts with nostalgia for the little things that weave our story of love",
+        text: "what remains constant is the quiet acts of care that shape who we are today, filling our hearts with nostalgia for the little things that weave our story of love",
         highlight: true,
       },
       {
@@ -947,7 +978,7 @@ export const ROSE_SALE: CtaProjectDetail = {
     },
   ],
   timeline: [
-    { date: "September 28, 2026", label: "1st General Assembly", emphasis: "notable" },
+    { date: "October 1, 2026", label: "1st General Assembly", emphasis: "notable" },
     { date: "October 12–16, 2026", label: "Committees Onboarding (Online)", emphasis: "notable" },
     { date: "TBA", label: "Wave 2 Applications (Florists, Deliveries)", emphasis: "notable" },
     { date: "TBA", label: "Flower-Wrapping Workshop", emphasis: "notable" },
@@ -1104,7 +1135,13 @@ export const ROSE_SALE: CtaProjectDetail = {
     },
     {
       q: "Do we need to submit any additional requirements?",
-      a: [[{ text: "No need! Just let your passion and personality shine through your interview." }]],
+      a: [
+        [
+          {
+            text: "Yes! If you're applying for Digital Creatives, Production Design, or Documentation & Publications, you'll need to accomplish the required Additional Requirements before your interview.",
+          },
+        ],
+      ],
     },
     {
       q: "How often will we meet as a core team? Will there be work during the break?",

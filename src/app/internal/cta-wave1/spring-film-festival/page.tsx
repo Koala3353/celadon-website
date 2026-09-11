@@ -36,7 +36,7 @@ function Heading({ children }: { children: React.ReactNode }) {
 
 export default function SpringFilmFestivalProjectPage() {
   const project = SPRING_FILM_FESTIVAL;
-  const [appFaqs, projectFaqs] = [project.faqs.slice(0, 3), project.faqs.slice(3)];
+  const [appFaqs, projectFaqs] = [project.faqs.slice(0, 1), project.faqs.slice(1)];
 
   return (
     <div
@@ -147,9 +147,17 @@ export default function SpringFilmFestivalProjectPage() {
         <Container>
           <Reveal className="mx-auto w-full max-w-2xl text-left">
             <Heading>📌 Project Timeline</Heading>
+            <p className="prose-body mt-3 font-bold text-dept-ink" data-reveal>
+              Project Planning, Execution, and Evaluation
+            </p>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">
             <Timeline items={project.timeline} columns={2} />
+          </Reveal>
+          <Reveal className="mx-auto mt-4 w-full max-w-3xl text-left">
+            <p className="prose-body text-sm italic text-muted-foreground" data-reveal>
+              * All dates are tentative and are subject to change.
+            </p>
           </Reveal>
         </Container>
       </section>
