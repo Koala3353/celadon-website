@@ -120,7 +120,7 @@ export const CTA_FAQS: { q: string; a: string | AboutRun[][] }[] = [
       [
         { text: "If you are interested in applying as a Department Deputy, more information could be found in this link: " },
         { text: "https://ateneoceladon.com/internal/dept-apps/", href: "https://ateneoceladon.com/internal/dept-apps/" },
-        { text: ". Applications are open until September 12, 2026 unless extended." },
+        { text: ". Applications are open until September 15, 2026 unless extended." },
       ],
     ],
   },
