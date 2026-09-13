@@ -29,6 +29,11 @@ function Tile({ photo }: { photo: ScrollerPhoto }) {
   );
 }
 
+// Ambient drift speed, in pixels per second — slow enough to read as
+// "alive" rather than a ticker, same spirit as the hero's own float-slow
+// corner motifs.
+const AUTO_SCROLL_PX_PER_SECOND = 16;
+
 /**
  * A horizontally scrollable wall of event photos, three fixed-height rows
  * tall — tiles vary in column/row span so it reads as a curated mosaic
@@ -37,11 +42,13 @@ function Tile({ photo }: { photo: ScrollerPhoto }) {
  * strip would.
  *
  * The list is rendered three times in a row, starting scrolled to the
- * middle copy — once the user drags far enough to settle inside the copy
- * on either side, the scroll position is silently shifted back by exactly
- * one copy's width. The jump only ever happens after scrolling has
- * stopped, so it's invisible: the wall just appears to loop forever in
- * both directions instead of hitting a hard end.
+ * middle copy — whenever the scroll position drifts into the copy on
+ * either side, it's silently shifted back by exactly one copy's width, so
+ * the wall loops forever in both directions instead of hitting a hard end.
+ * It also drifts on its own via a slow scrollLeft increment (paused
+ * whenever the user is actually touching or hovering it, and skipped
+ * entirely under prefers-reduced-motion), so it never sits static waiting
+ * to be noticed as scrollable.
  */
 export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; className?: string }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -53,22 +60,60 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
     const setWidth = el.scrollWidth / 3;
     el.scrollLeft = setWidth;
 
-    let settleTimer: ReturnType<typeof setTimeout>;
     const onScroll = () => {
-      clearTimeout(settleTimer);
-      settleTimer = setTimeout(() => {
-        if (el.scrollLeft < setWidth * 0.5) {
-          el.scrollLeft += setWidth;
-        } else if (el.scrollLeft > setWidth * 1.5) {
-          el.scrollLeft -= setWidth;
-        }
-      }, 120);
+      if (el.scrollLeft < setWidth * 0.5) {
+        el.scrollLeft += setWidth;
+      } else if (el.scrollLeft > setWidth * 1.5) {
+        el.scrollLeft -= setWidth;
+      }
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let frameId: number | null = null;
+    let hovered = false;
+    let pressed = false;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const dt = now - last;
+      last = now;
+      if (!hovered && !pressed) {
+        el.scrollLeft += (AUTO_SCROLL_PX_PER_SECOND * dt) / 1000;
+      }
+      frameId = requestAnimationFrame(tick);
     };
 
-    el.addEventListener("scroll", onScroll, { passive: true });
+    const onEnter = () => {
+      hovered = true;
+    };
+    const onLeave = () => {
+      hovered = false;
+    };
+    const onDown = () => {
+      pressed = true;
+    };
+    const onUp = () => {
+      pressed = false;
+    };
+
+    if (!reduced) {
+      frameId = requestAnimationFrame(tick);
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
+      el.addEventListener("pointerdown", onDown);
+      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onUp);
+    }
+
     return () => {
       el.removeEventListener("scroll", onScroll);
-      clearTimeout(settleTimer);
+      if (frameId !== null) cancelAnimationFrame(frameId);
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
+      el.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
     };
   }, [photos]);
 
