@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display } from "next/font/google";
+import { Playfair_Display, Lato, DM_Sans } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -19,10 +19,16 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// RS's own doc sets headings in Playfair Display (its own navy, #3F5F99) —
-// scoped to just this page via a CSS variable on the root wrapper below.
-// Body copy stays on the site's usual default font.
+// RS's own doc doesn't use one body font throughout — per a precise
+// span-by-span PDF export check, the letter and "What is Rose Sale?"
+// section are DM Sans (as is the timeline), while the Vision, Testimonies,
+// committees, FAQs, and everything from "Who are we looking for?" onward
+// is Lato. Headings stay Playfair Display everywhere. Applied per-section
+// below rather than as one page-wide font, to match the doc exactly
+// instead of picking one font for "everything else".
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-rs-heading" });
+const lato = Lato({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--font-rs-lato" });
+const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-rs-dmsans" });
 
 function Heading({ children, color }: { children: React.ReactNode; color?: string }) {
   return (
@@ -57,7 +63,7 @@ export default function RoseSaleProjectPage() {
 
   return (
     <div
-      className={playfairDisplay.variable}
+      className={cn(playfairDisplay.variable, lato.variable, dmSans.variable)}
       style={
         {
           "--dept-accent": project.accent.base,
@@ -88,7 +94,7 @@ export default function RoseSaleProjectPage() {
         </Reveal>
         <Container className="relative flex flex-col items-center gap-5 pb-10 pt-12 text-center sm:pb-14 sm:pt-16">
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
-            <p className="prose-body text-lg text-dept-ink/80" data-reveal>
+            <p className="prose-body text-lg text-dept-ink/80 [font-family:var(--font-rs-dmsans)]" data-reveal>
               {project.about}
             </p>
             {/* Scoped to just this button — the doc's own blue instead of
@@ -110,7 +116,7 @@ export default function RoseSaleProjectPage() {
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
               <Image src={asset("/internal/cta-wave1/rs-letter.webp")} alt="Members browsing bouquets at a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 [font-family:var(--font-rs-dmsans)]">
               <p className="text-xl font-extrabold [font-family:var(--font-rs-heading)] [color:#3F5F99]" data-reveal>
                 Dear Applicant,
               </p>
@@ -133,7 +139,7 @@ export default function RoseSaleProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
-            <div className="flex flex-col gap-4 text-left">
+            <div className="flex flex-col gap-4 text-left [font-family:var(--font-rs-dmsans)]">
               <Heading>{project.whatIsIt.heading}</Heading>
               <RichParagraphs
                 paragraphs={project.whatIsIt.body}
@@ -155,7 +161,7 @@ export default function RoseSaleProjectPage() {
             <div className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)] md:block" data-reveal>
               <Image src={asset("/internal/cta-wave1/rs-vision.webp")} alt="Core team members arranging flowers at a past Rose Sale" fill sizes="40vw" className="object-cover" />
             </div>
-            <div className="flex flex-col gap-3 text-left">
+            <div className="flex flex-col gap-3 text-left [font-family:var(--font-rs-lato)]">
               <Heading>🌷 Vision and Thrust</Heading>
               <RichParagraphs
                 paragraphs={project.vision}
@@ -172,9 +178,12 @@ export default function RoseSaleProjectPage() {
         <section className="bg-white py-8 sm:py-10">
           <Container>
             <Reveal className="mx-auto w-full max-w-3xl text-left">
-              <Heading>💬 Testimonies</Heading>
+              <Heading color="#783F1A">💬 Testimonies</Heading>
             </Reveal>
-            <Reveal stagger={70} className="mx-auto mt-10 flex w-full max-w-2xl flex-col gap-10">
+            <Reveal
+              stagger={70}
+              className="mx-auto mt-10 flex w-full max-w-2xl flex-col gap-10 [font-family:var(--font-rs-lato)]"
+            >
               {project.testimonials.map((t) => (
                 <TestimonialCard
                   key={t.name}
@@ -193,7 +202,7 @@ export default function RoseSaleProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto grid w-full max-w-4xl gap-8 md:grid-cols-[1fr_1fr] md:items-center">
-            <div className="text-left">
+            <div className="text-left [font-family:var(--font-rs-lato)]">
               <Heading>🕵️‍♀️ Who are we looking for?</Heading>
               <ul className="mt-4 flex flex-col gap-2">
                 {LOOKING_FOR.map((item) => (
@@ -215,14 +224,17 @@ export default function RoseSaleProjectPage() {
       <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-2xl text-left">
-            <Heading>📌 Project Timeline</Heading>
+            <Heading color="#783F1A">📌 Project Timeline</Heading>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">
             {/* Scoped to just the timeline — a softer mauve instead of the
                 page's own magenta-pink accent for its untagged dots/line/
                 date text, without touching that accent anywhere else on
                 the page. */}
-            <div style={{ "--dept-accent": "#C79ABB" } as React.CSSProperties}>
+            <div
+              style={{ "--dept-accent": "#C79ABB" } as React.CSSProperties}
+              className="[font-family:var(--font-rs-dmsans)]"
+            >
               <Timeline items={project.timeline} columns={2} />
             </div>
           </Reveal>
@@ -233,12 +245,12 @@ export default function RoseSaleProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
-            <Heading>👥 Core Team Committees</Heading>
+            <Heading color="#783F1A">👥 Core Team Committees</Heading>
             <p className="prose-body mt-3 text-muted-foreground" data-reveal>
               Open a committee to see its competencies and deliverables.
             </p>
           </Reveal>
-          <Reveal className="mx-auto mt-10 w-full max-w-3xl">
+          <Reveal className="mx-auto mt-10 w-full max-w-3xl [font-family:var(--font-rs-lato)]">
             <ListAccordion groups={project.committees} />
           </Reveal>
         </Container>
@@ -247,8 +259,8 @@ export default function RoseSaleProjectPage() {
       {/* What We're Bringing this Year! */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl text-left">
-            <Heading>🎁 What We&rsquo;re Bringing this Year!</Heading>
+          <Reveal className="mx-auto w-full max-w-3xl text-left [font-family:var(--font-rs-lato)]">
+            <Heading color="#783F1A">🎁 What We&rsquo;re Bringing this Year!</Heading>
             <div className="mt-6 overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
               <Image
                 src={asset("/internal/cta-wave1/rs-bringing.webp")}
@@ -293,7 +305,7 @@ export default function RoseSaleProjectPage() {
       {/* FAQs */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl">
+          <Reveal className="mx-auto w-full max-w-3xl [font-family:var(--font-rs-lato)]">
             <Heading color="#783F1A">❓ FAQs</Heading>
             <div className="mt-6 flex flex-col gap-6">
               {project.faqs.map((faq) => (
@@ -330,14 +342,16 @@ export default function RoseSaleProjectPage() {
                   className="object-cover"
                 />
               </div>
-              <p className="prose-body text-muted-foreground">In Rose Sale, we will always have drinks (Chagee)!</p>
+              <p className="prose-body text-muted-foreground [font-family:var(--font-rs-lato)]">
+                In Rose Sale, we will always have drinks (Chagee)!
+              </p>
             </div>
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               {project.contacts.map((contact) => (
                 <div key={contact.name} className="flex flex-col items-center gap-1 text-center" data-reveal>
                   <p className="font-bold text-dept-ink">{contact.name}</p>
-                  <p className="text-sm text-muted-foreground">{contact.role}</p>
-                  <p className="text-sm">
+                  <p className="text-sm text-muted-foreground [font-family:var(--font-rs-lato)]">{contact.role}</p>
+                  <p className="text-sm [font-family:var(--font-rs-lato)]">
                     {contact.facebook && (
                       <a
                         href={contact.facebook}
