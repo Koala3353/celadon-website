@@ -197,7 +197,7 @@ export default function RoseSaleProjectPage() {
               <Heading>🕵️‍♀️ Who are we looking for?</Heading>
               <ul className="mt-4 flex flex-col gap-2">
                 {LOOKING_FOR.map((item) => (
-                  <li key={item} className="prose-body flex gap-2 text-sm text-dept-ink/80" data-reveal>
+                  <li key={item} className="prose-body flex gap-2 text-base text-dept-ink/80" data-reveal>
                     <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-dept-accent" />
                     <span>{item}</span>
                   </li>
@@ -265,7 +265,7 @@ export default function RoseSaleProjectPage() {
                 </p>
                 <ul className="mt-3 flex flex-col gap-2">
                   {WHAT_TO_EXPECT.map((item) => (
-                    <li key={item} className="prose-body flex gap-2 text-sm text-muted-foreground" data-reveal>
+                    <li key={item} className="prose-body flex gap-2 text-base text-muted-foreground" data-reveal>
                       <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-dept-accent" />
                       <span>{item}</span>
                     </li>
@@ -278,7 +278,7 @@ export default function RoseSaleProjectPage() {
                 </p>
                 <ul className="mt-3 flex flex-col gap-2">
                   {OUR_PROMISES.map((item) => (
-                    <li key={item} className="prose-body flex gap-2 text-sm text-muted-foreground" data-reveal>
+                    <li key={item} className="prose-body flex gap-2 text-base text-muted-foreground" data-reveal>
                       <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-dept-accent" />
                       <span>{item}</span>
                     </li>
