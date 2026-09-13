@@ -35,6 +35,36 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
+// The doc's own "divided into three events" line is followed by a photo for
+// each one — reproduced here as a card per event instead of plain text
+// bullets, so each event's own picture is actually visible next to it.
+const EVENTS = [
+  {
+    label: "Gala Night",
+    description: "Features performances of dancing, singing, and musical talents.",
+    photo: {
+      src: "/internal/cta-wave1/sff-gala-night.webp",
+      alt: "A vocalist performing at a past Spring Film Festival Gala Night",
+    },
+  },
+  {
+    label: "Workshop Day",
+    description: "Places cultural workshops in the spotlight.",
+    photo: {
+      src: "/internal/cta-wave1/sff-workshop-day.webp",
+      alt: "Attendees painting lanterns at a past Spring Film Festival Workshop Day",
+    },
+  },
+  {
+    label: "Culminating Night",
+    description: "Concludes the SFF through workshops and performances.",
+    photo: {
+      src: "/internal/cta-wave1/sff-culminating-night.webp",
+      alt: "A guzheng performance before a large crowd at a past Spring Film Festival Culminating Night",
+    },
+  },
+];
+
 function Heading({ children, color }: { children: React.ReactNode; color?: string }) {
   return (
     <h2
@@ -154,7 +184,27 @@ export default function SpringFilmFestivalProjectPage() {
             />
           </Reveal>
 
-          <Reveal className="mx-auto mt-4 w-full max-w-5xl text-left">
+          <Reveal stagger={80} className="mx-auto mt-8 grid w-full max-w-5xl gap-6 sm:grid-cols-3">
+            {EVENTS.map((event) => (
+              <div key={event.label} data-reveal>
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]">
+                  <Image
+                    src={asset(event.photo.src)}
+                    alt={event.photo.alt}
+                    fill
+                    sizes="(min-width: 640px) 33vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <p className="prose-body mt-3 font-bold [font-family:var(--font-sff-heading)] [color:#ecbf58]">
+                  {event.label}
+                </p>
+                <p className="prose-body text-sm text-dept-ink/80">{event.description}</p>
+              </div>
+            ))}
+          </Reveal>
+
+          <Reveal className="mx-auto mt-8 w-full max-w-5xl text-left">
             <RichParagraphs
               paragraphs={project.whatIsIt.body.slice(-1)}
               className="flex flex-col gap-4"

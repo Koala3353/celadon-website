@@ -572,9 +572,6 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
         },
       ],
       [{ text: "The Spring Film Festival is divided into three events:" }],
-      [{ text: "(1) Gala Night that features performances of dancing, singing, and musical talents;" }],
-      [{ text: "(2) Workshop Day that places cultural workshops in the spotlight;" }],
-      [{ text: "(3) and Culminating Night that concludes the SFF through workshops and performances." }],
       [
         { text: "The 21st Spring Film Festival marks the 21st iteration of the event by " },
         { text: "Ateneo Celadon", bold: true },
