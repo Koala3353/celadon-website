@@ -7,6 +7,7 @@ import { SkyHero } from "@/components/internal/sky-hero";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
 import { ProjectCard } from "@/components/internal/project-card";
+import { PhotoMosaic, type MosaicPhoto } from "@/components/internal/photo-mosaic";
 import { cn } from "@/lib/cn";
 import { CTA_APPLICATION_FORM_URL, CORE_TEAM_PROJECTS, CTA_FAQS, CTA_TIMELINE } from "@/lib/core-team-wave";
 
@@ -41,23 +42,47 @@ function SectionHeading({
   );
 }
 
+const GALLERY_PHOTOS: MosaicPhoto[] = [
+  {
+    src: "/internal/cta-wave1/jade-event-1.webp",
+    alt: "Jade Business Summit core team celebrating together after a past summit",
+    span: "sm:col-span-2 sm:row-span-2",
+  },
+  {
+    src: "/internal/cta-wave1/hub-cny-2.webp",
+    alt: "Lion dancers performing at a past Chinese New Year celebration",
+  },
+  {
+    src: "/internal/cta-wave1/hub-sff-3.webp",
+    alt: "Dragon dance performers waving flags at a past Spring Film Festival",
+    span: "sm:col-span-1 sm:row-span-2",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-1.webp",
+    alt: "Core team members delivering donations for Rose Sale's advocacy program",
+  },
+  {
+    src: "/internal/cta-wave1/hub-cny-1.webp",
+    alt: "A lion and dragon dance procession at a past Chinese New Year celebration",
+    span: "sm:col-span-2",
+  },
+  {
+    src: "/internal/cta-wave1/hub-sff-1.webp",
+    alt: "The Spring Film Festival core team posing on stage at Shangri-La Plaza",
+  },
+  {
+    src: "/internal/cta-wave1/hub-sff-2.webp",
+    alt: "Lion dancers performing on stage at a past Spring Film Festival",
+  },
+];
+
 export default function CoreTeamApplicationsHubPage() {
   return (
-    <div
-      style={
-        {
-          // A distinct slice of the same CelaSkies palette from the
-          // dept-apps hub — swapping the "cool" pair (blue/peach) for the
-          // brandbook's teal/gray secondary swatches, so this hub reads as
-          // its own space rather than a blue-and-peach reskin, while
-          // sky-navy (ink) and sky-teal stay shared with dept-apps as the
-          // one constant running through both.
-          "--sky-blue": "var(--sky-pink)",
-          "--sky-peach": "var(--sky-gray)",
-        } as React.CSSProperties
-      }
-    >
-      <SkyHero eyebrow="Wave 1" title="Core Team Applications" plain />
+    <>
+      <SkyHero
+        title="Core Team Applications"
+        heroImage={{ src: "/internal/cta-wave1/cta-hub-hero.webp", alt: "Celadon Core Team Applications" }}
+      />
 
       {/* One continuous ambient wash for the whole page body, same technique
           as the deputy hub — sections below are spacing and content only. */}
@@ -93,6 +118,17 @@ export default function CoreTeamApplicationsHubPage() {
               {CORE_TEAM_PROJECTS.map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
+            </Reveal>
+          </Container>
+        </section>
+
+        <section>
+          <Container>
+            <Reveal className="mx-auto w-full max-w-5xl">
+              <SectionHeading size="lg">Moments from Wave 1</SectionHeading>
+            </Reveal>
+            <Reveal stagger={60}>
+              <PhotoMosaic photos={GALLERY_PHOTOS} className="mx-auto mt-10 w-full max-w-4xl" />
             </Reveal>
           </Container>
         </section>
@@ -210,6 +246,6 @@ export default function CoreTeamApplicationsHubPage() {
           </Container>
         </section>
       </div>
-    </div>
+    </>
   );
 }
