@@ -8,17 +8,20 @@ import { cn } from "@/lib/cn";
 export interface ScrollerPhoto {
   src: string;
   alt: string;
+  /** Grid span classes — varying these per photo is what makes the wall
+   * read as a curated mosaic instead of a uniform thumbnail strip. */
+  span?: string;
 }
 
 function Tile({ photo }: { photo: ScrollerPhoto }) {
   return (
-    <div data-reveal className="group lift pressable w-64 shrink-0 snap-start sm:w-72">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-sky-peach/20 shadow-[var(--shadow-sm)]">
+    <div data-reveal className={cn("group lift pressable relative", photo.span)}>
+      <div className="absolute inset-0 overflow-hidden rounded-2xl bg-sky-peach/20 shadow-[var(--shadow-sm)]">
         <SkeletonImage
           src={asset(photo.src)}
           alt={photo.alt}
           fill
-          sizes="(min-width: 640px) 288px, 256px"
+          sizes="(min-width: 640px) 280px, 224px"
           className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-105"
         />
       </div>
@@ -27,17 +30,17 @@ function Tile({ photo }: { photo: ScrollerPhoto }) {
 }
 
 /**
- * A horizontally scrollable strip of event photos for decorating a hub
- * page — unlike a fixed grid, it scales to any number of photos without
- * needing its layout re-planned each time one is added or removed. Native
- * scroll-snap gives free momentum/snapping with no JS, and each tile reuses
- * the same lift/pressable hover language as ProjectCard.
+ * A horizontally scrollable wall of event photos, three fixed-height rows
+ * tall — tiles vary in column/row span so it reads as a curated mosaic
+ * (like the hero's own asymmetric bento) rather than a uniform thumbnail
+ * strip, while still scaling to any number of photos the same way a plain
+ * strip would.
  *
  * The list is rendered three times in a row, starting scrolled to the
  * middle copy — once the user drags far enough to settle inside the copy
  * on either side, the scroll position is silently shifted back by exactly
  * one copy's width. The jump only ever happens after scrolling has
- * stopped, so it's invisible: the strip just appears to loop forever in
+ * stopped, so it's invisible: the wall just appears to loop forever in
  * both directions instead of hitting a hard end.
  */
 export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; className?: string }) {
@@ -74,7 +77,10 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
   return (
     <div
       ref={scrollerRef}
-      className={cn("no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:gap-5", className)}
+      className={cn(
+        "no-scrollbar grid grid-flow-col-dense auto-cols-[7rem] grid-rows-[repeat(3,7rem)] gap-3 overflow-x-auto pb-2 sm:auto-cols-[8.75rem] sm:grid-rows-[repeat(3,8.75rem)] sm:gap-4",
+        className
+      )}
     >
       {[...photos, ...photos, ...photos].map((photo, i) => (
         <Tile key={`${photo.src}-${i}`} photo={photo} />

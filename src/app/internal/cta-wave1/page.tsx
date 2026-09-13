@@ -48,10 +48,12 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/jade-event-1.webp",
     alt: "Jade Business Summit core team celebrating together after a past summit",
+    span: "col-span-2 row-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-cny-1.webp",
     alt: "A lion and dragon dance procession at a past Chinese New Year celebration",
+    span: "col-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-sff-1.webp",
@@ -60,6 +62,7 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/hub-rs-1.webp",
     alt: "Core team members delivering donations for Rose Sale's advocacy program",
+    span: "row-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-jade-2.webp",
@@ -72,6 +75,7 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/hub-sff-2.webp",
     alt: "Lion dancers performing on stage at a past Spring Film Festival",
+    span: "col-span-2 row-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-rs-2.webp",
@@ -80,6 +84,7 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/hub-jade-3.webp",
     alt: "Jade Business Summit core team members posing together at De La Salle University",
+    span: "row-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-sff-3.webp",
@@ -88,6 +93,7 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/hub-rs-3.webp",
     alt: "Core team members delivering donations for Rose Sale's advocacy program",
+    span: "col-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-jade-4.webp",
