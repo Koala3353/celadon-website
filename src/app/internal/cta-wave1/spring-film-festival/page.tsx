@@ -35,33 +35,42 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-// The doc's own "divided into three events" line is followed by a photo for
-// each one — reproduced here as a card per event instead of plain text
-// bullets, so each event's own picture is actually visible next to it.
+// The doc's own "divided into three events" line is followed by its own set
+// of photos for each one — reproduced here as a card per event (label and
+// description above a small carousel of that event's own photos) instead of
+// plain text bullets, so each event's own pictures are actually visible.
 const EVENTS = [
   {
     label: "Gala Night",
     description: "Features performances of dancing, singing, and musical talents.",
-    photo: {
-      src: "/internal/cta-wave1/sff-gala-night.webp",
-      alt: "A vocalist performing at a past Spring Film Festival Gala Night",
-    },
+    alt: "A performance at a past Spring Film Festival Gala Night",
+    photos: [
+      "/internal/cta-wave1/sff-gala-night-2.webp",
+      "/internal/cta-wave1/sff-gala-night-1.webp",
+      "/internal/cta-wave1/sff-gala-night-3.webp",
+    ],
   },
   {
     label: "Workshop Day",
     description: "Places cultural workshops in the spotlight.",
-    photo: {
-      src: "/internal/cta-wave1/sff-workshop-day.webp",
-      alt: "Attendees painting lanterns at a past Spring Film Festival Workshop Day",
-    },
+    alt: "A cultural workshop at a past Spring Film Festival Workshop Day",
+    photos: [
+      "/internal/cta-wave1/sff-workshop-day-1.webp",
+      "/internal/cta-wave1/sff-workshop-day-2.webp",
+      "/internal/cta-wave1/sff-workshop-day-3.webp",
+      "/internal/cta-wave1/sff-workshop-day-4.webp",
+      "/internal/cta-wave1/sff-workshop-day-5.webp",
+    ],
   },
   {
     label: "Culminating Night",
     description: "Concludes the SFF through workshops and performances.",
-    photo: {
-      src: "/internal/cta-wave1/sff-culminating-night.webp",
-      alt: "A guzheng performance before a large crowd at a past Spring Film Festival Culminating Night",
-    },
+    alt: "A performance at a past Spring Film Festival Culminating Night",
+    photos: [
+      "/internal/cta-wave1/sff-culminating-night-3.webp",
+      "/internal/cta-wave1/sff-culminating-night-2.webp",
+      "/internal/cta-wave1/sff-culminating-night-1.webp",
+    ],
   },
 ];
 
@@ -165,7 +174,7 @@ export default function SpringFilmFestivalProjectPage() {
         </Container>
       </section>
 
-      {/* What is the Spring Film Festival? + Vision */}
+      {/* What is the Spring Film Festival? */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
@@ -187,19 +196,15 @@ export default function SpringFilmFestivalProjectPage() {
           <Reveal stagger={80} className="mx-auto mt-8 grid w-full max-w-5xl gap-6 sm:grid-cols-3">
             {EVENTS.map((event) => (
               <div key={event.label} data-reveal>
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]">
-                  <Image
-                    src={asset(event.photo.src)}
-                    alt={event.photo.alt}
-                    fill
-                    sizes="(min-width: 640px) 33vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <p className="prose-body mt-3 font-bold [font-family:var(--font-sff-heading)] [color:#ecbf58]">
+                <p className="prose-body font-bold [font-family:var(--font-sff-heading)] [color:#ecbf58]">
                   {event.label}
                 </p>
-                <p className="prose-body text-sm text-dept-ink/80">{event.description}</p>
+                <p className="prose-body mb-3 text-sm text-dept-ink/80">{event.description}</p>
+                <PhotoCarousel
+                  photos={event.photos.map((src) => asset(src))}
+                  alt={event.alt}
+                  className="aspect-[4/3] w-full rounded-2xl shadow-[var(--shadow-md)]"
+                />
               </div>
             ))}
           </Reveal>
@@ -211,8 +216,13 @@ export default function SpringFilmFestivalProjectPage() {
               paragraphClassName="prose-body text-dept-ink/80"
             />
           </Reveal>
+        </Container>
+      </section>
 
-          <Reveal className="mx-auto mt-10 grid w-full max-w-5xl gap-8 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-10">
+      {/* Vision & Thrust */}
+      <section className="bg-white py-8 sm:py-10">
+        <Container>
+          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-10">
             <div className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)] md:block" data-reveal>
               <Image
                 src={asset("/internal/cta-wave1/hub-sff-4.webp")}
