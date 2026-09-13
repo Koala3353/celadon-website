@@ -993,7 +993,7 @@ export const ROSE_SALE: CtaProjectDetail = {
     { date: "January 25, 2027", label: "Release of Pre-Order Form", emphasis: "critical" },
     { date: "January 30, 2027", label: "Systems Orientation", emphasis: "notable" },
     { date: "February 2, 2027", label: "Sales Workshop", emphasis: "notable" },
-    { date: "February 9–15, 2027", label: "Valentine's Onsite Selling Week", emphasis: "critical" },
+    { date: "February 9–13, 2027", label: "Valentine's Onsite Selling Week", emphasis: "critical" },
     { date: "February 27, 2027", label: "Advocacy Program" },
     { date: "March 3, 2027", label: "Post Documentation Album" },
   ],
