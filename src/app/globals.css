@@ -243,12 +243,15 @@ html {
    a continuous, very light wash rather than the stacked flat-color and
    multi-stop gradient bands the hub page used to switch between per
    section. Every section on top of it stays visually connected instead of
-   reading as a patchwork of separate backgrounds. */
+   reading as a patchwork of separate backgrounds. Strong enough to read
+   as a continuation of the hero photo rather than a plain white page
+   underneath it, but still light enough that bg-sky-peach/25 fills (FAQ
+   answers, Card surfaces) stay visibly distinct on top of it. */
 .sky-tint-field {
   background:
-    radial-gradient(55% 45% at 10% 0%, color-mix(in srgb, var(--sky-blue) 10%, transparent) 0%, transparent 65%),
-    radial-gradient(50% 45% at 100% 15%, color-mix(in srgb, var(--sky-peach) 28%, transparent) 0%, transparent 60%),
-    radial-gradient(60% 50% at 50% 100%, color-mix(in srgb, var(--sky-teal) 14%, transparent) 0%, transparent 65%),
+    radial-gradient(55% 45% at 10% 0%, color-mix(in srgb, var(--sky-blue) 22%, transparent) 0%, transparent 65%),
+    radial-gradient(50% 45% at 100% 15%, color-mix(in srgb, var(--sky-peach) 42%, transparent) 0%, transparent 60%),
+    radial-gradient(60% 50% at 50% 100%, color-mix(in srgb, var(--sky-teal) 26%, transparent) 0%, transparent 65%),
     var(--white);
 }
 

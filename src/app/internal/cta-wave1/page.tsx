@@ -8,7 +8,7 @@ import { SkyHero } from "@/components/internal/sky-hero";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
 import { ProjectCard } from "@/components/internal/project-card";
-import { PhotoMosaic, type MosaicPhoto } from "@/components/internal/photo-mosaic";
+import { PhotoScroller, type ScrollerPhoto } from "@/components/internal/photo-scroller";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { CTA_APPLICATION_FORM_URL, CORE_TEAM_PROJECTS, CTA_FAQS, CTA_TIMELINE } from "@/lib/core-team-wave";
@@ -44,37 +44,62 @@ function SectionHeading({
   );
 }
 
-const GALLERY_PHOTOS: MosaicPhoto[] = [
+const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/jade-event-1.webp",
     alt: "Jade Business Summit core team celebrating together after a past summit",
-    span: "sm:col-span-2 sm:row-span-2",
-  },
-  {
-    src: "/internal/cta-wave1/hub-cny-2.webp",
-    alt: "Lion dancers performing at a past Chinese New Year celebration",
-  },
-  {
-    src: "/internal/cta-wave1/hub-sff-3.webp",
-    alt: "Dragon dance performers waving flags at a past Spring Film Festival",
-    span: "sm:col-span-1 sm:row-span-2",
-  },
-  {
-    src: "/internal/cta-wave1/hub-rs-1.webp",
-    alt: "Core team members delivering donations for Rose Sale's advocacy program",
   },
   {
     src: "/internal/cta-wave1/hub-cny-1.webp",
     alt: "A lion and dragon dance procession at a past Chinese New Year celebration",
-    span: "sm:col-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-sff-1.webp",
     alt: "The Spring Film Festival core team posing on stage at Shangri-La Plaza",
   },
   {
+    src: "/internal/cta-wave1/hub-rs-1.webp",
+    alt: "Core team members delivering donations for Rose Sale's advocacy program",
+  },
+  {
+    src: "/internal/cta-wave1/hub-jade-2.webp",
+    alt: "A Jade Business Summit speaker addressing the audience at Escaler Hall",
+  },
+  {
+    src: "/internal/cta-wave1/hub-cny-2.webp",
+    alt: "Lion dancers performing at a past Chinese New Year celebration",
+  },
+  {
     src: "/internal/cta-wave1/hub-sff-2.webp",
     alt: "Lion dancers performing on stage at a past Spring Film Festival",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-2.webp",
+    alt: "Core team members arranging bouquets at a past Rose Sale",
+  },
+  {
+    src: "/internal/cta-wave1/hub-jade-3.webp",
+    alt: "Jade Business Summit core team members posing together at De La Salle University",
+  },
+  {
+    src: "/internal/cta-wave1/hub-sff-3.webp",
+    alt: "Dragon dance performers waving flags at a past Spring Film Festival",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-3.webp",
+    alt: "Core team members delivering donations for Rose Sale's advocacy program",
+  },
+  {
+    src: "/internal/cta-wave1/hub-jade-4.webp",
+    alt: "Jade Business Summit core team members presenting a group activity",
+  },
+  {
+    src: "/internal/cta-wave1/hub-sff-4.webp",
+    alt: "Core team members practicing Chinese calligraphy at a past Spring Film Festival",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-4.webp",
+    alt: "Core team members preparing flower arrangements at a past Rose Sale",
   },
 ];
 
@@ -126,11 +151,8 @@ export default function CoreTeamApplicationsHubPage() {
 
         <section>
           <Container>
-            <Reveal className="mx-auto w-full max-w-5xl">
-              <SectionHeading size="lg">Moments from Wave 1</SectionHeading>
-            </Reveal>
             <Reveal stagger={60}>
-              <PhotoMosaic photos={GALLERY_PHOTOS} className="mx-auto mt-10 w-full max-w-4xl" />
+              <PhotoScroller photos={GALLERY_PHOTOS} />
             </Reveal>
           </Container>
         </section>
