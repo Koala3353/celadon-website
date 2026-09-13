@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/reveal";
@@ -8,6 +9,7 @@ import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
 import { ProjectCard } from "@/components/internal/project-card";
 import { PhotoMosaic, type MosaicPhoto } from "@/components/internal/photo-mosaic";
+import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { CTA_APPLICATION_FORM_URL, CORE_TEAM_PROJECTS, CTA_FAQS, CTA_TIMELINE } from "@/lib/core-team-wave";
 
@@ -222,26 +224,40 @@ export default function CoreTeamApplicationsHubPage() {
             fix as the deputy hub). */}
         <section className="bg-white pb-14 pt-8 sm:pb-20 sm:pt-10">
           <Container>
-            <Reveal className="mx-auto w-full max-w-3xl">
-              <SectionHeading>FAQs</SectionHeading>
-              <div className="mt-6 flex flex-col gap-4">
-                {CTA_FAQS.map((faq) => (
-                  <div key={faq.q}>
-                    <p className="font-bold text-sky-navy">{faq.q}</p>
-                    {typeof faq.a === "string" ? (
-                      <p className="prose-body mt-1.5 rounded-xl bg-sky-peach/25 p-4 text-sky-navy/80">
-                        {faq.a}
-                      </p>
-                    ) : (
-                      <RichParagraphs
-                        paragraphs={faq.a}
-                        className="mt-1.5 flex flex-col gap-2 rounded-xl bg-sky-peach/25 p-4"
-                        paragraphClassName="prose-body text-sky-navy/80"
-                      />
-                    )}
-                  </div>
-                ))}
+            <Reveal className="mx-auto grid w-full max-w-5xl gap-x-10 gap-y-8 md:grid-cols-[1fr_auto] md:items-start">
+              <div className="w-full max-w-3xl">
+                <SectionHeading>FAQs</SectionHeading>
+                <div className="mt-6 flex flex-col gap-4">
+                  {CTA_FAQS.map((faq) => (
+                    <div key={faq.q}>
+                      <p className="font-bold text-sky-navy">{faq.q}</p>
+                      {typeof faq.a === "string" ? (
+                        <p className="prose-body mt-1.5 rounded-xl bg-sky-peach/25 p-4 text-sky-navy/80">
+                          {faq.a}
+                        </p>
+                      ) : (
+                        <RichParagraphs
+                          paragraphs={faq.a}
+                          className="mt-1.5 flex flex-col gap-2 rounded-xl bg-sky-peach/25 p-4"
+                          paragraphClassName="prose-body text-sky-navy/80"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
+              {/* Purely decorative, so it's hidden from screen readers and
+                  dropped below the FAQ list on mobile rather than squeezing
+                  the reading column narrower. */}
+              <Image
+                src={asset("/internal/cta-wave1/faq-panda.webp")}
+                alt=""
+                aria-hidden
+                width={900}
+                height={1185}
+                data-reveal
+                className="float-slow mx-auto hidden w-40 shrink-0 self-center md:block lg:w-52"
+              />
             </Reveal>
           </Container>
         </section>
