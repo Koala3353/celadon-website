@@ -594,6 +594,8 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     images: [
       { src: "/internal/cta-wave1/sff-event-1.webp", alt: "A lion dance performance at a past Spring Film Festival in Shangri-La Plaza" },
       { src: "/internal/cta-wave1/sff-event-2.webp", alt: "The Spring Film Festival core team and organizers at a past event" },
+      { src: "/internal/cta-wave1/hub-sff-2.webp", alt: "Lion dancers performing on stage at a past Spring Film Festival" },
+      { src: "/internal/cta-wave1/hub-sff-3.webp", alt: "Dragon dance performers waving flags at a past Spring Film Festival" },
     ],
   },
   vision: [

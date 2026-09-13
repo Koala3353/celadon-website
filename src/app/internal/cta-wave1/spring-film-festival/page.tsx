@@ -35,9 +35,13 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-function Heading({ children }: { children: React.ReactNode }) {
+function Heading({ children, color }: { children: React.ReactNode; color?: string }) {
   return (
-    <h2 className="text-xl font-bold sm:text-2xl [font-family:var(--font-sff-heading)] [color:#ecbf58]" data-reveal>
+    <h2
+      className="text-xl font-bold sm:text-2xl [font-family:var(--font-sff-heading)] [color:#ecbf58]"
+      style={color ? { color } : undefined}
+      data-reveal
+    >
       {children}
     </h2>
   );
@@ -95,27 +99,38 @@ export default function SpringFilmFestivalProjectPage() {
       {/* Letter from the PMs */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-            <p
-              className="flex items-center gap-2 text-2xl font-bold sm:text-3xl [font-family:var(--font-sff-script)] [color:#970708]"
-              data-reveal
-            >
-              <span aria-hidden>💌</span> Dear Aspiring Applicants,
-            </p>
-            <RichParagraphs
-              paragraphs={project.letter}
-              className="flex flex-col gap-4 [font-family:var(--font-sff-letter)]"
-              paragraphClassName="prose-body text-dept-ink/80"
-            />
-            <p className="text-right" data-reveal>
-              <span className="prose-body font-bold [font-family:var(--font-sff-letter)] [color:#970708]">
-                {project.letterSignoff.highlighted}
-              </span>
-              <br />
-              <span className="prose-body text-dept-ink text-lg [font-family:var(--font-sff-script)]">
-                {project.letterSignoff.name}
-              </span>
-            </p>
+          <Reveal className="mx-auto grid w-full max-w-4xl gap-8 md:grid-cols-[1fr_1.3fr] md:items-start">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+              <Image
+                src={asset("/internal/cta-wave1/hub-sff-1.webp")}
+                alt="The Spring Film Festival core team posing on stage at Shangri-La Plaza"
+                fill
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col gap-4">
+              <p
+                className="flex items-center gap-2 text-2xl font-bold sm:text-3xl [font-family:var(--font-sff-script)] [color:#970708]"
+                data-reveal
+              >
+                <span aria-hidden>💌</span> Dear Aspiring Applicants,
+              </p>
+              <RichParagraphs
+                paragraphs={project.letter}
+                className="flex flex-col gap-4 [font-family:var(--font-sff-letter)]"
+                paragraphClassName="prose-body text-dept-ink/80"
+              />
+              <p className="text-right" data-reveal>
+                <span className="prose-body font-bold [font-family:var(--font-sff-letter)] [color:#970708]">
+                  {project.letterSignoff.highlighted}
+                </span>
+                <br />
+                <span className="prose-body text-dept-ink text-lg [font-family:var(--font-sff-script)]">
+                  {project.letterSignoff.name}
+                </span>
+              </p>
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -147,14 +162,24 @@ export default function SpringFilmFestivalProjectPage() {
             />
           </Reveal>
 
-          <Reveal className="mx-auto mt-10 flex w-full max-w-3xl flex-col gap-3 text-left">
-            <Heading>🏮 Vision & Thrust</Heading>
-            <RichParagraphs
-              paragraphs={project.vision}
-              className="flex flex-col gap-4"
-              paragraphClassName="prose-body text-dept-ink/80"
-              data-reveal
-            />
+          <Reveal className="mx-auto mt-10 grid w-full max-w-5xl gap-8 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-10">
+            <div className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)] md:block" data-reveal>
+              <Image
+                src={asset("/internal/cta-wave1/hub-sff-4.webp")}
+                alt="Core team members practicing Chinese calligraphy at a past Spring Film Festival"
+                fill
+                sizes="40vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col gap-3 text-left">
+              <Heading>🏮 Vision & Thrust</Heading>
+              <RichParagraphs
+                paragraphs={project.vision}
+                className="flex flex-col gap-4"
+                paragraphClassName="prose-body text-dept-ink/80"
+              />
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -208,7 +233,7 @@ export default function SpringFilmFestivalProjectPage() {
             <div className="mt-4 flex flex-col gap-6">
               {appFaqs.map((faq) => (
                 <div key={faq.q} data-reveal>
-                  <p className="font-bold text-dept-ink">{faq.q}</p>
+                  <p className="font-bold [color:#970708]">{faq.q}</p>
                   <RichParagraphs
                     paragraphs={faq.a}
                     className="mt-1.5 flex flex-col gap-2"
@@ -223,7 +248,7 @@ export default function SpringFilmFestivalProjectPage() {
             <div className="mt-4 flex flex-col gap-6">
               {projectFaqs.map((faq) => (
                 <div key={faq.q} data-reveal>
-                  <p className="font-bold text-dept-ink">{faq.q}</p>
+                  <p className="font-bold [color:#970708]">{faq.q}</p>
                   <RichParagraphs
                     paragraphs={faq.a}
                     className="mt-1.5 flex flex-col gap-2"
@@ -240,7 +265,7 @@ export default function SpringFilmFestivalProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
-            <Heading>✉️ Contact Us</Heading>
+            <Heading color="#970708">✉️ Contact Us</Heading>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               {project.contacts.map((contact) => (
                 <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
