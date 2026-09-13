@@ -146,7 +146,7 @@ export default function RoseSaleProjectPage() {
                 className="flex flex-col gap-4"
                 paragraphClassName="prose-body text-dept-ink/80"
               />
-              <p className="prose-body flex items-center gap-1.5 text-sm font-bold [color:#783F1A]" data-reveal>
+              <p className="prose-body -mt-2 flex items-center gap-1.5 text-sm font-bold [color:#783F1A]" data-reveal>
                 <span aria-hidden>📌</span> February 9–15, 2027
               </p>
             </div>
