@@ -34,8 +34,7 @@ export interface CoreTeamProject {
   href?: string;
 }
 
-// TODO: replace with the real Wave 1 Google Form link once applications open.
-export const CTA_APPLICATION_FORM_URL = "#";
+export const CTA_APPLICATION_FORM_URL = "https://forms.gle/cdZvpjbTLXADNrbc6";
 
 export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
   {
