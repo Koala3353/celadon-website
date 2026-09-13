@@ -91,7 +91,10 @@ export default function RoseSaleProjectPage() {
             <p className="prose-body text-lg text-dept-ink/80" data-reveal>
               {project.about}
             </p>
-            <div data-reveal>
+            {/* Scoped to just this button — the doc's own blue instead of
+                the page's magenta-pink accent, without touching that
+                accent anywhere else on the page. */}
+            <div data-reveal style={{ "--dept-accent": "#3F5F99" } as React.CSSProperties}>
               <ButtonLink href={CTA_APPLICATION_FORM_URL} external size="lg" variant="accent">
                 Apply Now
               </ButtonLink>
