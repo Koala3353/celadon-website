@@ -598,7 +598,7 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
   vision: [
     [
       {
-        text: "The Spring Film Festival aims to leave a lasting impression on the community by celebrating Chinese New Year with colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with them--to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
+        text: "The Spring Film Festival aims to leave a lasting impression on the community by celebrating Chinese New Year with colorful performances, Chinese film viewing, and cultural workshops. Through this engagement, we aim for audiences to bring a piece of Chinese art, culture, and values with them—to their homes, to the new year, and to their community. We hope they carry a piece of Chinese history in their hearts and present lives.",
       },
     ],
   ],

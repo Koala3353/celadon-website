@@ -199,7 +199,11 @@ export default function SpringFilmFestivalProjectPage() {
                 <p className="prose-body font-bold [font-family:var(--font-sff-heading)] [color:#ecbf58]">
                   {event.label}
                 </p>
-                <p className="prose-body mb-3 text-sm text-dept-ink/80">{event.description}</p>
+                {/* min-h reserves space for the longest description (2
+                    lines) so all three photos start at the same height
+                    regardless of how many lines any one card's text wraps
+                    to. */}
+                <p className="prose-body mb-3 min-h-[2.8rem] text-sm text-dept-ink/80">{event.description}</p>
                 <PhotoCarousel
                   photos={event.photos.map((src) => asset(src))}
                   alt={event.alt}
