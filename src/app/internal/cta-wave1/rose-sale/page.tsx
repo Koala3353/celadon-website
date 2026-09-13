@@ -139,6 +139,9 @@ export default function RoseSaleProjectPage() {
                 className="flex flex-col gap-4"
                 paragraphClassName="prose-body text-dept-ink/80"
               />
+              <p className="prose-body flex items-center gap-1.5 font-bold [color:#783F1A]" data-reveal>
+                <span aria-hidden>📌</span> February 9–15, 2027
+              </p>
             </div>
             <PhotoCarousel
               photos={(project.whatIsIt.images ?? []).map((img) => ({ src: asset(img.src) }))}
