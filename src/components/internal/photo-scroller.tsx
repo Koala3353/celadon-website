@@ -79,6 +79,10 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
       ref={scrollerRef}
       className={cn(
         "no-scrollbar grid grid-flow-col-dense auto-cols-[7rem] grid-rows-[repeat(3,7rem)] gap-3 overflow-x-auto pb-2 sm:auto-cols-[8.75rem] sm:grid-rows-[repeat(3,8.75rem)] sm:gap-4",
+        // A permanent edge fade, not just a first-load hint — it signals
+        // there's always more to scroll to on both sides, which is true
+        // here since the wall loops endlessly in either direction.
+        "[mask-image:linear-gradient(to_right,transparent,black_2rem,black_calc(100%_-_2rem),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_2rem,black_calc(100%_-_2rem),transparent)]",
         className
       )}
     >

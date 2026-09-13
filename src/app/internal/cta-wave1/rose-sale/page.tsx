@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Lato, DM_Sans } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -19,18 +19,16 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// RS's own doc sets its own typography rather than following the site's
-// usual Montserrat — Playfair Display for headings (in the doc's own navy,
-// #3F5F99), Lato for the PM letter, DM Sans for everything else — scoped to
-// just this page via CSS variables on the root wrapper below.
+// RS's own doc sets headings in Playfair Display (its own navy, #3F5F99) —
+// scoped to just this page via a CSS variable on the root wrapper below.
+// Body copy stays on the site's usual default font.
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-rs-heading" });
-const lato = Lato({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--font-rs-letter" });
-const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-rs-body" });
 
-function Heading({ children }: { children: React.ReactNode }) {
+function Heading({ children, color }: { children: React.ReactNode; color?: string }) {
   return (
     <h2
       className="text-xl font-bold sm:text-2xl [font-family:var(--font-rs-heading)] [color:#3F5F99]"
+      style={color ? { color } : undefined}
       data-reveal
     >
       {children}
@@ -59,7 +57,7 @@ export default function RoseSaleProjectPage() {
 
   return (
     <div
-      className={cn(playfairDisplay.variable, lato.variable, dmSans.variable, "[font-family:var(--font-rs-body)]")}
+      className={playfairDisplay.variable}
       style={
         {
           "--dept-accent": project.accent.base,
@@ -109,8 +107,8 @@ export default function RoseSaleProjectPage() {
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
               <Image src={asset("/internal/cta-wave1/rs-letter.webp")} alt="Members browsing bouquets at a past Rose Sale" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
             </div>
-            <div className="flex flex-col gap-4 [font-family:var(--font-rs-letter)]">
-              <p className="text-xl font-extrabold text-dept-accent" data-reveal>
+            <div className="flex flex-col gap-4">
+              <p className="text-xl font-extrabold [font-family:var(--font-rs-heading)] [color:#3F5F99]" data-reveal>
                 Dear Applicant,
               </p>
               <RichParagraphs
@@ -139,7 +137,7 @@ export default function RoseSaleProjectPage() {
                 className="flex flex-col gap-4"
                 paragraphClassName="prose-body text-dept-ink/80"
               />
-              <p className="prose-body flex items-center gap-1.5 font-bold [color:#783F1A]" data-reveal>
+              <p className="prose-body flex items-center gap-1.5 text-sm font-bold [color:#783F1A]" data-reveal>
                 <span aria-hidden>📌</span> February 9–15, 2027
               </p>
             </div>
@@ -293,7 +291,7 @@ export default function RoseSaleProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl">
-            <Heading>❓ FAQs</Heading>
+            <Heading color="#783F1A">❓ FAQs</Heading>
             <div className="mt-6 flex flex-col gap-6">
               {project.faqs.map((faq) => (
                 <div key={faq.q} data-reveal>

@@ -62,7 +62,6 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/hub-rs-1.webp",
     alt: "Core team members delivering donations for Rose Sale's advocacy program",
-    span: "row-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-jade-2.webp",
@@ -84,7 +83,6 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
   {
     src: "/internal/cta-wave1/hub-jade-3.webp",
     alt: "Jade Business Summit core team members posing together at De La Salle University",
-    span: "row-span-2",
   },
   {
     src: "/internal/cta-wave1/hub-sff-3.webp",
