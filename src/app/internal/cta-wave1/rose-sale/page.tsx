@@ -141,14 +141,14 @@ export default function RoseSaleProjectPage() {
           <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-10">
             <div className="flex flex-col gap-4 text-left [font-family:var(--font-rs-dmsans)]">
               <Heading>{project.whatIsIt.heading}</Heading>
+              <p className="prose-body -mt-2 flex items-center gap-1.5 text-sm font-bold [color:#783F1A]" data-reveal>
+                <span aria-hidden>📌</span> February 9–13, 2027
+              </p>
               <RichParagraphs
                 paragraphs={project.whatIsIt.body}
                 className="flex flex-col gap-4"
                 paragraphClassName="prose-body text-dept-ink/80"
               />
-              <p className="prose-body -mt-2 flex items-center gap-1.5 text-sm font-bold [color:#783F1A]" data-reveal>
-                <span aria-hidden>📌</span> February 9–15, 2027
-              </p>
             </div>
             <PhotoCarousel
               photos={(project.whatIsIt.images ?? []).map((img) => ({ src: asset(img.src) }))}
