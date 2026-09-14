@@ -95,11 +95,36 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
     const onLeave = () => {
       hovered = false;
     };
-    const onDown = () => {
+
+    // Real touch input already scrolls a plain `overflow-x-auto` element
+    // natively — this only steps in for mouse/trackpad-style pointers,
+    // which browsers never let you click-drag to scroll on their own, so
+    // without this the wall was only reachable by hunting for its
+    // (deliberately hidden, see .no-scrollbar) scrollbar.
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartScrollLeft = 0;
+
+    const onDown = (e: PointerEvent) => {
       pressed = true;
+      if (e.pointerType !== "mouse") return;
+      dragging = true;
+      dragStartX = e.clientX;
+      dragStartScrollLeft = el.scrollLeft;
+      el.setPointerCapture(e.pointerId);
+      el.classList.add("cursor-grabbing");
     };
-    const onUp = () => {
+    const onMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      el.scrollLeft = dragStartScrollLeft - (e.clientX - dragStartX);
+    };
+    const onUp = (e: PointerEvent) => {
       pressed = false;
+      dragging = false;
+      el.classList.remove("cursor-grabbing");
+      if (e.pointerId !== undefined && el.hasPointerCapture?.(e.pointerId)) {
+        el.releasePointerCapture(e.pointerId);
+      }
     };
 
     if (!reduced) {
@@ -108,6 +133,7 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
       el.addEventListener("mouseenter", onEnter);
       el.addEventListener("mouseleave", onLeave);
       el.addEventListener("pointerdown", onDown);
+      el.addEventListener("pointermove", onMove);
       window.addEventListener("pointerup", onUp);
       window.addEventListener("pointercancel", onUp);
     }
@@ -118,6 +144,7 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
       el.removeEventListener("mouseenter", onEnter);
       el.removeEventListener("mouseleave", onLeave);
       el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);
     };
@@ -129,7 +156,7 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
     <div
       ref={scrollerRef}
       className={cn(
-        "no-scrollbar grid grid-flow-col-dense auto-cols-[7rem] grid-rows-[repeat(3,7rem)] gap-3 overflow-x-auto pb-2 sm:auto-cols-[8.75rem] sm:grid-rows-[repeat(3,8.75rem)] sm:gap-4",
+        "no-scrollbar grid cursor-grab grid-flow-col-dense auto-cols-[7rem] grid-rows-[repeat(3,7rem)] gap-3 overflow-x-auto pb-2 [touch-action:pan-x] sm:auto-cols-[8.75rem] sm:grid-rows-[repeat(3,8.75rem)] sm:gap-4",
         // A permanent edge fade, not just a first-load hint — it signals
         // there's always more to scroll to on both sides, which is true
         // here since the wall loops endlessly in either direction.
