@@ -6,10 +6,22 @@ import { Container } from "@/components/ui/container";
 import { FooterFrame } from "@/components/footer-frame";
 import { FooterColumnSwitch } from "@/components/footer-column-switch";
 
-const NAV = [
+const PUBLIC_NAV = [
   { href: "/about", label: "About Us" },
   { href: "/departments", label: "Departments" },
   { href: "/projects", label: "Projects" },
+];
+
+// The internal portal's own footer swaps in these instead — a staff member
+// on a gated /internal page has no use for links back out to the public
+// marketing pages, and this instead echoes the portal's own top nav
+// (internal-nav.tsx) so the footer reinforces it rather than pointing
+// somewhere else entirely.
+const INTERNAL_NAV = [
+  { href: "/internal", label: "Dashboard" },
+  { href: "/internal/dept-apps", label: "Deputy Applications" },
+  { href: "/internal/cta-wave1", label: "Core Team Applications" },
+  { href: "/internal/ebcb-directory", label: "EBCB Directory" },
 ];
 
 export function SiteFooter() {
@@ -53,18 +65,36 @@ export function SiteFooter() {
           }
         />
 
-        <nav aria-label="Footer" className="flex flex-col gap-3">
-          <h2 className="eyebrow text-white">Explore</h2>
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="w-fit text-sm text-on-navy underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <FooterColumnSwitch
+          publicContent={
+            <nav aria-label="Footer" className="flex flex-col gap-3">
+              <h2 className="eyebrow text-white">Explore</h2>
+              {PUBLIC_NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="w-fit text-sm text-on-navy underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          }
+          internalContent={
+            <nav aria-label="Footer" className="flex flex-col gap-3">
+              <h2 className="eyebrow text-white">Explore</h2>
+              {INTERNAL_NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="w-fit text-sm text-on-navy underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          }
+        />
 
         <div className="flex flex-col gap-3">
           <h2 className="eyebrow text-white">Connect with us</h2>

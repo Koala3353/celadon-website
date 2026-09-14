@@ -197,6 +197,20 @@ html {
     0 0 10px #fff;
 }
 
+/* The links/icons under .footer-dark-text still carry their own
+   `hover:text-white` utility for the usual navy footer — matched
+   specificity to `.footer-dark-text *` above means source order alone
+   decided which one won, so the hover state was landing invisibly under
+   the black override more often than not. This selector is deliberately
+   one step more specific (an extra pseudo-class) so hovering a footer
+   link reliably flips it white regardless of stylesheet order. */
+.footer-dark-text a:hover,
+.footer-dark-text a:hover *,
+.footer-dark-text a:focus-visible,
+.footer-dark-text a:focus-visible * {
+  color: #ffffff;
+}
+
 /* The internal footer's desktop background is a wide banner (5.3:1) — on a
    viewport that's square-ish or taller (a resized browser window, a tablet
    in portrait, etc.) `cover` would blow it up and crop nearly all of it away
