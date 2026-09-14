@@ -117,7 +117,6 @@ export const CHINESE_NEW_YEAR: CtaProjectDetail = {
     alt: "Testimonials — CNY '26 PM Franzelle Yulangco and CNY '26 PM Therese Yap",
   },
   timeline: [
-    { date: "September 25, 2026", label: "Release of Wave 1 Results" },
     { date: "September 30, 2026", label: "Heads Onboarding" },
     { date: "October 8, 2026", label: "First General Assembly" },
     { date: "October 9–November 25, 2026", label: "Working Timeline for 1st Semester" },
@@ -436,7 +435,6 @@ export const JADE_BUSINESS_SUMMIT: CtaProjectDetail = {
     ],
   ],
   timeline: [
-    { date: "September 25, 2026", label: "Release of Wave 1 Application Results" },
     { date: "October 2, 2026", label: "Core Team 1st General Assembly" },
     { date: "October 2 – November 6, 2026", label: "Wave 1 Working Timeline" },
     { date: "October 27, 2026", label: "Core-wide Dry Run" },
@@ -603,9 +601,6 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
     ],
   ],
   timeline: [
-    { date: "September 9, 2026", label: "Opening of Wave 1 Core Team Applications" },
-    { date: "September 14–22, 2026", label: "Interview Period for Spring Film Festival Core Team Applications" },
-    { date: "September 25, 2026", label: "Release of Results" },
     { date: "September 28, 2026", label: "Core Team Heads Onboarding" },
     { date: "October 2, 2026", label: "Core Team General Assembly" },
     { date: "October 5, 2026 – February 4, 2027", label: "Project Planning, Organizing, Leading, and Controlling" },
