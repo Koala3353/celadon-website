@@ -5,6 +5,7 @@ import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import type { Department } from "@/lib/deputy-departments";
 import { RichParagraphs } from "@/components/internal/rich-text";
+import { BackLink } from "@/components/internal/back-link";
 
 /**
  * Per-department hero — deliberately not the CelaSkies sky theme (that's
@@ -108,6 +109,9 @@ export function DeptHero({ dept }: { dept: Department }) {
       )}
 
       <Container className="relative pb-10 pt-12 sm:pb-14 sm:pt-16">
+        <div className="mb-6">
+          <BackLink href="/internal/dept-apps" label="All Departments" />
+        </div>
         <Reveal
           className={cn(
             "mx-auto flex flex-col items-center gap-5 text-center",

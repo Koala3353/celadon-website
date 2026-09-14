@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
 import { RichParagraphs } from "@/components/internal/rich-text";
+import { BackLink } from "@/components/internal/back-link";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { PhotoCarousel } from "@/components/photo-carousel";
@@ -93,6 +94,9 @@ export default function RoseSaleProjectPage() {
           />
         </Reveal>
         <Container className="relative flex flex-col items-center gap-5 pb-10 pt-12 text-center sm:pb-14 sm:pt-16">
+          <div className="self-start">
+            <BackLink href="/internal/cta-wave1" label="All Projects" />
+          </div>
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
             <p className="prose-body text-lg text-dept-ink/80 [font-family:var(--font-rs-dmsans)]" data-reveal>
               {project.about}

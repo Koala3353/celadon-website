@@ -8,7 +8,8 @@ import { usePathname } from "next/navigation";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/container";
-import { DEPARTMENTS } from "@/lib/deputy-departments";
+import { DEPARTMENTS, type DeptAccent } from "@/lib/deputy-departments";
+import { CORE_TEAM_PROJECTS } from "@/lib/core-team-wave";
 
 /**
  * The nav bar shown across the whole /internal portal — deliberately
@@ -57,11 +58,7 @@ export function InternalNav() {
                 mattered). */}
             <DeptsDropdown key={pathname} active={deptAppsActive} />
 
-            <NavPill
-              href="/internal/cta-wave1"
-              label="Core Team Applications"
-              active={pathname.startsWith("/internal/cta-wave1")}
-            />
+            <CtaDropdown key={`${pathname}-cta`} active={ctaActive} />
 
             <NavPill
               href="/internal/ebcb-directory"
@@ -130,8 +127,44 @@ export function InternalNav() {
  * without the panel closing under it. A click on the chevron still toggles
  * it too, for touch/keyboard use where there's no hover to begin with.
  */
-function DeptsDropdown({ active }: { active: boolean }) {
-  const [deptsOpen, setDeptsOpen] = useState(false);
+interface DropdownItem {
+  slug: string;
+  name: string;
+  emoji?: string;
+  href: string;
+  accent: DeptAccent;
+}
+
+/**
+ * A nav pill + chevron that opens a small panel of links below it — used
+ * for both "Deputy Applications" (one entry per department) and "Core Team
+ * Applications" (one entry per project), which share this exact
+ * open/close/outside-click behavior and only differ in which list and
+ * which root link they point at.
+ *
+ * Opens on hover over the trigger (the pill + its chevron) or the panel
+ * itself, closes a beat after the pointer leaves both — not the whole
+ * `relative` wrapper, whose box also covers the dead space where the
+ * (currently invisible) panel sits before it's ever opened, which used to
+ * open the menu just from hovering past that empty gap. The short close
+ * delay is what lets the pointer cross the small trigger-to-panel gap
+ * without the panel closing under it. A click on the chevron still toggles
+ * it too, for touch/keyboard use where there's no hover to begin with.
+ */
+function PortalDropdown({
+  href,
+  label,
+  active,
+  items,
+  chevronLabel,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+  items: DropdownItem[];
+  chevronLabel: string;
+}) {
+  const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -143,23 +176,23 @@ function DeptsDropdown({ active }: { active: boolean }) {
   };
   const openNow = () => {
     cancelClose();
-    setDeptsOpen(true);
+    setOpen(true);
   };
   const closeSoon = () => {
     cancelClose();
-    closeTimer.current = setTimeout(() => setDeptsOpen(false), 150);
+    closeTimer.current = setTimeout(() => setOpen(false), 150);
   };
 
   useEffect(() => cancelClose, []);
 
   useEffect(() => {
-    if (!deptsOpen) return;
+    if (!open) return;
 
     const onPointerDown = (e: PointerEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setDeptsOpen(false);
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
     };
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setDeptsOpen(false);
+      if (e.key === "Escape") setOpen(false);
     };
 
     document.addEventListener("pointerdown", onPointerDown);
@@ -168,17 +201,17 @@ function DeptsDropdown({ active }: { active: boolean }) {
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [deptsOpen]);
+  }, [open]);
 
   return (
     <div ref={rootRef} className="relative">
       <div className="flex items-center" onMouseEnter={openNow} onMouseLeave={closeSoon}>
-        <NavPill href="/internal/dept-apps" label="Deputy Applications" active={active} />
+        <NavPill href={href} label={label} active={active} />
         <button
           type="button"
-          onClick={() => setDeptsOpen((v) => !v)}
-          aria-label="Show departments"
-          aria-expanded={deptsOpen}
+          onClick={() => setOpen((v) => !v)}
+          aria-label={chevronLabel}
+          aria-expanded={open}
           className="pressable -ml-2 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-navy-tint hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
         >
           <svg
@@ -188,7 +221,7 @@ function DeptsDropdown({ active }: { active: boolean }) {
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={cn("h-3.5 w-3.5 transition-transform duration-200", deptsOpen && "rotate-180")}
+            className={cn("h-3.5 w-3.5 transition-transform duration-200", open && "rotate-180")}
             aria-hidden
           >
             <path d="m6 9 6 6 6-6" />
@@ -202,23 +235,59 @@ function DeptsDropdown({ active }: { active: boolean }) {
           onMouseLeave={closeSoon}
           className={cn(
             "grid grid-cols-1 gap-0.5 rounded-2xl bg-white p-2 shadow-[var(--shadow-md)] ring-1 ring-inset ring-border transition-opacity duration-150",
-            deptsOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+            open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
           )}
         >
-          {DEPARTMENTS.map((dept) => (
+          {items.map((item) => (
             <Link
-              key={dept.slug}
-              href={`/internal/dept-apps/${dept.slug}`}
-              style={{ "--dept-tint": dept.accent.tint, "--dept-ink": dept.accent.ink } as React.CSSProperties}
+              key={item.slug}
+              href={item.href}
+              style={{ "--dept-tint": item.accent.tint, "--dept-ink": item.accent.ink } as React.CSSProperties}
               className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-muted-foreground transition-colors hover:bg-dept-tint hover:text-dept-ink"
             >
-              <span aria-hidden>{dept.emoji}</span>
-              {dept.name}
+              {item.emoji && <span aria-hidden>{item.emoji}</span>}
+              {item.name}
             </Link>
           ))}
         </div>
       </div>
     </div>
+  );
+}
+
+function DeptsDropdown({ active }: { active: boolean }) {
+  return (
+    <PortalDropdown
+      href="/internal/dept-apps"
+      label="Deputy Applications"
+      active={active}
+      chevronLabel="Show departments"
+      items={DEPARTMENTS.map((dept) => ({
+        slug: dept.slug,
+        name: dept.name,
+        emoji: dept.emoji,
+        href: `/internal/dept-apps/${dept.slug}`,
+        accent: dept.accent,
+      }))}
+    />
+  );
+}
+
+function CtaDropdown({ active }: { active: boolean }) {
+  return (
+    <PortalDropdown
+      href="/internal/cta-wave1"
+      label="Core Team Applications"
+      active={active}
+      chevronLabel="Show projects"
+      items={CORE_TEAM_PROJECTS.map((project) => ({
+        slug: project.slug,
+        name: project.name,
+        emoji: project.emoji,
+        href: project.href ?? "/internal/cta-wave1",
+        accent: project.accent,
+      }))}
+    />
   );
 }
 
@@ -360,6 +429,20 @@ function InternalMobileMenu({
           <Link href="/internal/cta-wave1" onClick={handleClose} className={blockClass(ctaActive)}>
             Core Team Applications
           </Link>
+          <div className="ml-3 flex flex-col gap-0.5 border-l border-border pl-3">
+            {CORE_TEAM_PROJECTS.map((project) => (
+              <Link
+                key={project.slug}
+                href={project.href ?? "/internal/cta-wave1"}
+                onClick={handleClose}
+                style={{ "--dept-tint": project.accent.tint, "--dept-ink": project.accent.ink } as React.CSSProperties}
+                className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-muted-foreground transition-colors hover:bg-dept-tint hover:text-dept-ink"
+              >
+                {project.emoji && <span aria-hidden>{project.emoji}</span>}
+                {project.name}
+              </Link>
+            ))}
+          </div>
           <Link
             href="/internal/ebcb-directory"
             onClick={handleClose}
