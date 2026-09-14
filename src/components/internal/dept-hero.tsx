@@ -21,6 +21,8 @@ import { BackLink } from "@/components/internal/back-link";
 export function DeptHero({ dept }: { dept: Department }) {
   return (
     <section className="relative overflow-hidden bg-dept-tint text-dept-ink">
+      <BackLink href="/internal/dept-apps" label="All Departments" />
+
       {/* Ambient depth in the department's own accent — same radial-glow
           technique as the public site's navy hero, so every department page
           reads as one family even though the hue changes per department. */}
@@ -109,9 +111,6 @@ export function DeptHero({ dept }: { dept: Department }) {
       )}
 
       <Container className="relative pb-10 pt-12 sm:pb-14 sm:pt-16">
-        <div className="mb-6">
-          <BackLink href="/internal/dept-apps" label="All Departments" />
-        </div>
         <Reveal
           className={cn(
             "mx-auto flex flex-col items-center gap-5 text-center",

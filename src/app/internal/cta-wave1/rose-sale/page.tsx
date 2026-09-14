@@ -75,6 +75,8 @@ export default function RoseSaleProjectPage() {
       }
     >
       <section className="relative overflow-hidden bg-dept-tint text-dept-ink">
+        <BackLink href="/internal/cta-wave1" label="All Projects" />
+
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
@@ -95,9 +97,6 @@ export default function RoseSaleProjectPage() {
           />
         </Reveal>
         <Container className="relative flex flex-col items-center gap-5 pb-10 pt-12 text-center sm:pb-14 sm:pt-16">
-          <div className="self-start">
-            <BackLink href="/internal/cta-wave1" label="All Projects" />
-          </div>
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
             <p className="prose-body text-lg text-dept-ink/80 [font-family:var(--font-rs-dmsans)]" data-reveal>
               {project.about}
