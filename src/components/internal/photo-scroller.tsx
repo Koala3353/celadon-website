@@ -70,18 +70,23 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
     el.addEventListener("scroll", onScroll, { passive: true });
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let frameId: number | null = null;
+    let intervalId: ReturnType<typeof setInterval> | null = null;
     let hovered = false;
     let pressed = false;
     let last = performance.now();
 
-    const tick = (now: number) => {
+    // A timer, not requestAnimationFrame — rAF can go quiet on a page with
+    // no other activity (some browsers throttle it until something else
+    // forces a paint, e.g. mouse movement), which made this drift stall
+    // whenever the cursor held still. setInterval keeps ticking regardless.
+    const TICK_MS = 50;
+    const tick = () => {
+      const now = performance.now();
       const dt = now - last;
       last = now;
       if (!hovered && !pressed) {
         el.scrollLeft += (AUTO_SCROLL_PX_PER_SECOND * dt) / 1000;
       }
-      frameId = requestAnimationFrame(tick);
     };
 
     const onEnter = () => {
@@ -98,7 +103,8 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
     };
 
     if (!reduced) {
-      frameId = requestAnimationFrame(tick);
+      last = performance.now();
+      intervalId = setInterval(tick, TICK_MS);
       el.addEventListener("mouseenter", onEnter);
       el.addEventListener("mouseleave", onLeave);
       el.addEventListener("pointerdown", onDown);
@@ -108,7 +114,7 @@ export function PhotoScroller({ photos, className }: { photos: ScrollerPhoto[]; 
 
     return () => {
       el.removeEventListener("scroll", onScroll);
-      if (frameId !== null) cancelAnimationFrame(frameId);
+      if (intervalId !== null) clearInterval(intervalId);
       el.removeEventListener("mouseenter", onEnter);
       el.removeEventListener("mouseleave", onLeave);
       el.removeEventListener("pointerdown", onDown);
