@@ -238,6 +238,10 @@ export default function CoreTeamApplicationsHubPage() {
                   <span>Wait for your application results!</span>
                 </li>
               </ol>
+              <p className="prose-body mt-4 italic text-sky-navy/70">
+                Note: Should you apply to Chinese New Year, Spring Film Festival, and Rose Sale, you may
+                only get accepted to at most 2 core positions or 1 head position among these projects.
+              </p>
             </Reveal>
           </Container>
         </section>

@@ -102,7 +102,14 @@ export const CTA_TIMELINE: CoreTeamTimelineItem[] = [
 export const CTA_FAQS: { q: string; a: string | AboutRun[][] }[] = [
   {
     q: "Can I apply to more than one project?",
-    a: "Yes — there's no limit on how many of the projects above you can apply to.",
+    a: [
+      [{ text: "Yes — there's no limit on how many of the projects above you can apply to." }],
+      [
+        {
+          text: "That said, should you apply to Chinese New Year, Spring Film Festival, and Rose Sale, you may only get accepted to at most 2 core positions or 1 head position among these projects. This limit is meant to help prevent work burnout.",
+        },
+      ],
+    ],
   },
   {
     q: "Can I apply to more than one committee?",
