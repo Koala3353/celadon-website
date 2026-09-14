@@ -48,7 +48,7 @@ export function InternalNav() {
             <span className="sr-only">A-yi&rsquo;s Corner</span>
           </Link>
 
-          <nav aria-label="Internal portal" className="hidden items-center gap-1 sm:flex">
+          <nav aria-label="Internal portal" className="hidden items-center gap-1 lg:flex">
             <NavPill href="/internal" label="Dashboard" active={pathname === "/internal"} />
 
             {/* Keyed by pathname so it's a fresh instance (deptsOpen reset
@@ -70,7 +70,7 @@ export function InternalNav() {
 
         <Link
           href="/"
-          className="pressable hidden items-center rounded-full bg-navy-tint px-4 py-2 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:bg-navy/[0.15] sm:flex"
+          className="pressable hidden items-center whitespace-nowrap rounded-full bg-navy-tint px-4 py-2 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:bg-navy/[0.15] lg:flex"
         >
           Public Site
         </Link>
@@ -81,7 +81,7 @@ export function InternalNav() {
           aria-label="Open menu"
           aria-haspopup="dialog"
           aria-expanded={menuOpen}
-          className="pressable flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-navy-tint focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy sm:hidden"
+          className="pressable flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-navy-tint focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy lg:hidden"
         >
           <svg
             viewBox="0 0 24 24"
@@ -297,7 +297,7 @@ function NavPill({ href, label, active }: { href: string; label: string; active:
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "relative rounded-full px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors",
+        "relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy",
         active ? "text-navy" : "text-muted-foreground hover:text-navy"
       )}
@@ -373,7 +373,7 @@ function InternalMobileMenu({
       role="dialog"
       aria-modal="true"
       aria-label="Internal portal menu"
-      className="fixed inset-0 sm:hidden"
+      className="fixed inset-0 lg:hidden"
       style={{ zIndex: "var(--z-overlay)" }}
     >
       <div
