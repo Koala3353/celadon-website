@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { CommitteeExplorer } from "@/components/committee-explorer";
 import { SkyHero } from "@/components/internal/sky-hero";
 import { Reveal } from "@/components/motion/reveal";
@@ -60,18 +59,30 @@ export default function InternalPortalHomePage() {
                 </Card>
               </Link>
 
-              <div data-reveal>
-                <Card className="h-full ring-sky-navy/10" innerClassName="flex h-full flex-col gap-3 p-8 opacity-70">
-                  <Badge tone="closed">Coming soon</Badge>
+              <Link href="/internal/cta-wave1" data-reveal className="group pressable">
+                <Card
+                  className="lift h-full ring-sky-navy/10 transition group-hover:ring-sky-navy/30"
+                  innerClassName="flex h-full flex-col gap-3 p-8"
+                >
+                  <span className="sky-display eyebrow w-fit rounded-full bg-sky-blue px-3 py-1 text-[0.6875rem] text-white">
+                    Open now
+                  </span>
                   <h2 className="sky-display text-2xl font-semibold text-sky-navy">Core Team Applications</h2>
                   <p className="prose-body text-sm text-muted-foreground">
-                    Applications for project Core Team roles aren&rsquo;t open yet.
+                    Apply to join a project&rsquo;s Core Team. Browse every project&rsquo;s committees,
+                    timeline, and requirements.
                   </p>
-                  <p className="mt-auto pt-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Stay tuned for the 3rd week of September
+                  <p className="mt-auto flex items-center gap-1 pt-3 text-xs font-bold uppercase tracking-wider text-sky-navy">
+                    Explore projects
+                    <span
+                      aria-hidden
+                      className="inline-block transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
                   </p>
                 </Card>
-              </div>
+              </Link>
             </Reveal>
           </Container>
         </section>

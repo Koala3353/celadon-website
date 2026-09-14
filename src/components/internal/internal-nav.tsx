@@ -22,6 +22,7 @@ export function InternalNav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const deptAppsActive = pathname.startsWith("/internal/dept-apps");
+  const ctaActive = pathname.startsWith("/internal/cta-wave1");
 
   return (
     <header
@@ -55,6 +56,12 @@ export function InternalNav() {
                 link's own navigation (see DeptsDropdown for why that
                 mattered). */}
             <DeptsDropdown key={pathname} active={deptAppsActive} />
+
+            <NavPill
+              href="/internal/cta-wave1"
+              label="Core Team Applications"
+              active={pathname.startsWith("/internal/cta-wave1")}
+            />
 
             <NavPill
               href="/internal/ebcb-directory"
@@ -94,7 +101,12 @@ export function InternalNav() {
       </Container>
 
       {menuOpen && (
-        <InternalMobileMenu deptAppsActive={deptAppsActive} pathname={pathname} onClose={() => setMenuOpen(false)} />
+        <InternalMobileMenu
+          deptAppsActive={deptAppsActive}
+          ctaActive={ctaActive}
+          pathname={pathname}
+          onClose={() => setMenuOpen(false)}
+        />
       )}
     </header>
   );
@@ -238,10 +250,12 @@ const MENU_TRANSITION_MS = 300;
 function InternalMobileMenu({
   pathname,
   deptAppsActive,
+  ctaActive,
   onClose,
 }: {
   pathname: string;
   deptAppsActive: boolean;
+  ctaActive: boolean;
   onClose: () => void;
 }) {
   // Starts closed and flips to open one frame after mount, so the panel's
@@ -343,6 +357,9 @@ function InternalMobileMenu({
               </Link>
             ))}
           </div>
+          <Link href="/internal/cta-wave1" onClick={handleClose} className={blockClass(ctaActive)}>
+            Core Team Applications
+          </Link>
           <Link
             href="/internal/ebcb-directory"
             onClick={handleClose}
