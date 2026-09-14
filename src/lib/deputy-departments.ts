@@ -1185,7 +1185,7 @@ export const DEPARTMENTS: Department[] = [
         {
           label: "Analytical & Eager to Learn",
           items: [
-            "Team players who have experience working with Google Sheets and Workspace and are eager to develop their soft skills alongside their technical capabilities.",
+            "Team players who are familiar with Google Sheets and Workspace and are eager to develop their soft skills alongside their technical capabilities.",
           ],
         },
       ],
