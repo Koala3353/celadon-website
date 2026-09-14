@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
+import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { PhotoCarousel } from "@/components/photo-carousel";
@@ -379,6 +380,8 @@ export default function RoseSaleProjectPage() {
           </Reveal>
         </Container>
       </section>
+
+      <FloatingApplyButton href={CTA_APPLICATION_FORM_URL} label={`Apply to ${project.name} now`} />
     </div>
   );
 }
