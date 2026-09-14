@@ -38,7 +38,31 @@ export interface CoreTeamProject {
 
 export const CTA_APPLICATION_FORM_URL = "https://forms.gle/cdZvpjbTLXADNrbc6";
 
+// Ordered by each project's own execution date (earliest first), not by
+// slug or alphabetically — Jade runs in November, the other three all run
+// in February but in this sequence.
 export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
+  {
+    slug: "jade-business-summit",
+    name: "Jade Business Summit",
+    emoji: "🐉",
+    dates: "November 7, 2026",
+    accent: JADE_BUSINESS_SUMMIT.accent,
+    blurb:
+      "Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall bringing seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students.",
+    photo: { src: "/internal/cta-wave1/jade-hero.webp", alt: "Jade Business Summit 2026–2027 — Heirlooms & Headstarts" },
+    href: "/internal/cta-wave1/jade-business-summit",
+  },
+  {
+    slug: "chinese-new-year",
+    name: "Chinese New Year",
+    emoji: "🧧",
+    dates: "February 2–5, 2027",
+    accent: CHINESE_NEW_YEAR.accent,
+    blurb: "Xīn nián kuài lè! 🧧✨ A vibrant celebration where Chinese-Filipino traditions, festive customs, and cherished childhood memories come to life.",
+    photo: { src: "/internal/cta-wave1/cny-hero.webp", alt: "Chinese New Year '27 — A Home in Every Hue: Celebrating Culture in Full Color" },
+    href: "/internal/cta-wave1/chinese-new-year",
+  },
   {
     slug: "spring-film-festival",
     name: "Spring Film Festival",
@@ -61,27 +85,6 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     photo: { src: "/internal/cta-wave1/rs-hero.webp", alt: "Rose Sale '27 — Wave 1 Applications" },
     photoPosition: "90% center",
     href: "/internal/cta-wave1/rose-sale",
-  },
-  {
-    slug: "chinese-new-year",
-    name: "Chinese New Year",
-    emoji: "🧧",
-    dates: "February 2–5, 2027",
-    accent: CHINESE_NEW_YEAR.accent,
-    blurb: "Xīn nián kuài lè! 🧧✨ A vibrant celebration where Chinese-Filipino traditions, festive customs, and cherished childhood memories come to life.",
-    photo: { src: "/internal/cta-wave1/cny-hero.webp", alt: "Chinese New Year '27 — A Home in Every Hue: Celebrating Culture in Full Color" },
-    href: "/internal/cta-wave1/chinese-new-year",
-  },
-  {
-    slug: "jade-business-summit",
-    name: "Jade Business Summit",
-    emoji: "🐉",
-    dates: "November 7, 2026",
-    accent: JADE_BUSINESS_SUMMIT.accent,
-    blurb:
-      "Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall bringing seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students.",
-    photo: { src: "/internal/cta-wave1/jade-hero.webp", alt: "Jade Business Summit 2026–2027 — Heirlooms & Headstarts" },
-    href: "/internal/cta-wave1/jade-business-summit",
   },
 ];
 
