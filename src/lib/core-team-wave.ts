@@ -16,6 +16,8 @@ export interface CoreTeamProject {
   name: string;
   /** Shown beside the name on the project card — not every project has one. */
   emoji?: string;
+  /** The project's own execution date(s) — shown right under its name. */
+  dates: string;
   blurb: string;
   /** Same accent a project's own detail page is themed with (see
    * cta-projects.ts) — reused here so its card matches, the same way a
@@ -41,6 +43,7 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     slug: "spring-film-festival",
     name: "Spring Film Festival",
     emoji: "🌸",
+    dates: "February 5–7, 2027",
     accent: SPRING_FILM_FESTIVAL.accent,
     blurb:
       "The Spring Film Festival (SFF) is a three-day event in Shangri-La that showcases cultural workshops, movie screenings, and diverse performances to promote Chinese culture, art, and history to the Filipino-Chinese community.",
@@ -51,6 +54,7 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     slug: "rose-sale",
     name: "Rose Sale",
     emoji: "🌹",
+    dates: "February 9–13, 2027",
     accent: ROSE_SALE.accent,
     blurb:
       "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community. Through customizable bouquets and other love-centered products, it gives everyone a chance to express appreciation for one another.",
@@ -62,6 +66,7 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
     slug: "chinese-new-year",
     name: "Chinese New Year",
     emoji: "🧧",
+    dates: "February 2–5, 2027",
     accent: CHINESE_NEW_YEAR.accent,
     blurb: "Xīn nián kuài lè! 🧧✨ A vibrant celebration where Chinese-Filipino traditions, festive customs, and cherished childhood memories come to life.",
     photo: { src: "/internal/cta-wave1/cny-hero.webp", alt: "Chinese New Year '27 — A Home in Every Hue: Celebrating Culture in Full Color" },
@@ -70,6 +75,8 @@ export const CORE_TEAM_PROJECTS: CoreTeamProject[] = [
   {
     slug: "jade-business-summit",
     name: "Jade Business Summit",
+    emoji: "🐉",
+    dates: "November 7, 2026",
     accent: JADE_BUSINESS_SUMMIT.accent,
     blurb:
       "Ateneo Celadon's flagship business event: a one-day summit at Escaler Hall bringing seasoned Chinese-Filipino business leaders and rising young founders together with business-minded students.",

@@ -34,6 +34,7 @@ function ProjectCardBody({ project }: { project: CoreTeamProject }) {
       <span className="sky-display text-lg font-semibold text-dept-ink">
         {project.name} {project.emoji && <span aria-hidden>{project.emoji}</span>}
       </span>
+      <span className="text-xs font-semibold uppercase tracking-wide text-dept-accent">{project.dates}</span>
       <p className="prose-body mt-2 text-sm text-dept-ink/80">{project.blurb}</p>
       {project.href && (
         <span className="mt-auto flex items-center gap-1 pt-4 text-sm font-bold text-dept-accent">
