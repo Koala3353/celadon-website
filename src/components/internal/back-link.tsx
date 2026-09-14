@@ -10,7 +10,6 @@ export function BackLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      data-reveal
       className="group inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-dept-ink/60 transition-colors hover:text-dept-ink"
     >
       <span
