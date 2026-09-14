@@ -127,10 +127,10 @@ export default function CoreTeamApplicationsHubPage() {
                 data-reveal
               >
                 <span className="sky-display eyebrow rounded-full bg-sky-peach/50 px-4 py-1.5 text-sky-navy/80">
-                  2026&ndash;2027 applications
+                  2026&ndash;2027 Core Team Applications
                 </span>
                 <p className="sky-display text-xl font-semibold text-sky-navy sm:text-2xl">
-                  Core Team Applications Wave 1 &mdash; join a project&rsquo;s core team!
+                  Celadon&rsquo;s Wave 1 Core Team Applications are now open!
                 </p>
                 <ButtonLink href={CTA_APPLICATION_FORM_URL} external size="lg">
                   Apply Now
