@@ -30,11 +30,25 @@ function isAllowedDomain(email: string, env: Env): boolean {
   return domains.some((domain) => lower.endsWith(`@${domain}`));
 }
 
+// @ateneo-celadon.org is the org's own domain — every address on it is a
+// Celadon account by construction (unlike @student.ateneo.edu, which is
+// shared with every other Ateneo student), so it skips the member-roster
+// check entirely rather than needing each address added to the Sheet.
+const ROSTER_EXEMPT_DOMAIN = "ateneo-celadon.org";
+
+// Individual addresses that should get in without being on the roster —
+// e.g. a shared/official inbox rather than a real member's own account.
+const ROSTER_EXEMPT_EMAILS = new Set(["celadon.college.org@student.ateneo.edu"]);
+
 // A signed-in Ateneo/Celadon email only gets in if it's also on the member
 // roster — the domain check alone would admit any Ateneo student, not just
-// Celadon's ~700-800 actual members.
+// Celadon's ~700-800 actual members. ROSTER_EXEMPT_DOMAIN/_EMAILS are the
+// deliberate exceptions to that.
 async function isMember(email: string, env: Env): Promise<boolean> {
-  return (await env.MEMBERS.get(email.toLowerCase())) !== null;
+  const lower = email.toLowerCase();
+  if (lower.endsWith(`@${ROSTER_EXEMPT_DOMAIN}`)) return true;
+  if (ROSTER_EXEMPT_EMAILS.has(lower)) return true;
+  return (await env.MEMBERS.get(lower)) !== null;
 }
 
 async function isAuthorized(email: string, env: Env): Promise<boolean> {
