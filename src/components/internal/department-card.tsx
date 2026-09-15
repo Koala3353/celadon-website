@@ -6,19 +6,18 @@ import type { Department } from "@/lib/deputy-departments";
 /**
  * A single flat surface tinted to the department's own accent (set once as
  * CSS variables — see DepartmentPage for the same pattern on the full page),
- * with the cover photo doing the identifying work instead of a decorative
+ * with the cover art doing the identifying work instead of a decorative
  * icon badge. The department name sits directly on the tint, colored by the
  * accent's ink, so each card reads as a distinct color-block rather than a
  * repeat of the same white card shape six times over.
  *
- * Uses `cardCover` rather than the page's own `heroImage` banner —
- * `heroImage` is designed for a full-width page hero, and several
- * departments' banners crop badly (or cut off their own name) at this
- * card's much narrower 16:10 box, which is why `cardCover` exists as its
- * own dedicated, pre-cropped asset per department.
+ * Uses the department's own `heroImage` — its illustrated banner, the same
+ * one that runs across its detail page — rather than `cardCover`'s plain
+ * event-photo collage, so the cards read as a matching illustrated set
+ * instead of a grid of photos.
  */
 export function DepartmentCard({ dept }: { dept: Department }) {
-  const cover = dept.cardCover;
+  const cover = dept.heroImage ?? dept.cardCover;
 
   return (
     <Link
