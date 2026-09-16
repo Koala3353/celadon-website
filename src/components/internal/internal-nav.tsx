@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/container";
-import { DEPARTMENTS, type DeptAccent } from "@/lib/deputy-departments";
+import type { DeptAccent } from "@/lib/deputy-departments";
 import { CORE_TEAM_PROJECTS } from "@/lib/core-team-wave";
 
 /**
@@ -22,7 +22,6 @@ export function InternalNav() {
   const pathname = usePathname() ?? "/internal";
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const deptAppsActive = pathname.startsWith("/internal/dept-apps");
   const ctaActive = pathname.startsWith("/internal/cta-wave1");
 
   return (
@@ -51,14 +50,12 @@ export function InternalNav() {
           <nav aria-label="Internal portal" className="hidden items-center gap-1 lg:flex">
             <NavPill href="/internal" label="Dashboard" active={pathname === "/internal"} />
 
-            {/* Keyed by pathname so it's a fresh instance (deptsOpen reset
-                to false) after every navigation — no effect-based setState
-                needed, and no risk of a click-time re-render racing the
-                link's own navigation (see DeptsDropdown for why that
-                mattered). */}
-            <DeptsDropdown key={pathname} active={deptAppsActive} />
-
-            <CtaDropdown key={`${pathname}-cta`} active={ctaActive} />
+            {/* Keyed by pathname so it's a fresh instance (its open state
+                reset to false) after every navigation — no effect-based
+                setState needed, and no risk of a click-time re-render
+                racing the link's own navigation (see PortalDropdown for why
+                that mattered). */}
+            <CtaDropdown key={pathname} active={ctaActive} />
 
             <NavPill
               href="/internal/ebcb-directory"
@@ -98,35 +95,12 @@ export function InternalNav() {
       </Container>
 
       {menuOpen && (
-        <InternalMobileMenu
-          deptAppsActive={deptAppsActive}
-          ctaActive={ctaActive}
-          pathname={pathname}
-          onClose={() => setMenuOpen(false)}
-        />
+        <InternalMobileMenu ctaActive={ctaActive} pathname={pathname} onClose={() => setMenuOpen(false)} />
       )}
     </header>
   );
 }
 
-/**
- * The "Deputy Applications" pill + its departments dropdown. Split out from
- * InternalNav so it can be remounted fresh (via `key={pathname}` on the
- * parent) whenever the route changes — that resets `deptsOpen` back to
- * false for free, without an effect calling setState (which both trips the
- * react-hooks/set-state-in-effect lint rule and, worse, risks toggling
- * `pointer-events` on a link mid-click and eating the click's own default
- * navigation before the browser processes it).
- *
- * Opens on hover over the trigger (the pill + its chevron) or the panel
- * itself, closes a beat after the pointer leaves both — not the whole
- * `relative` wrapper, whose box also covers the dead space where the
- * (currently invisible) panel sits before it's ever opened, which used to
- * open the menu just from hovering past that empty gap. The short close
- * delay is what lets the pointer cross the small trigger-to-panel gap
- * without the panel closing under it. A click on the chevron still toggles
- * it too, for touch/keyboard use where there's no hover to begin with.
- */
 interface DropdownItem {
   slug: string;
   name: string;
@@ -136,11 +110,8 @@ interface DropdownItem {
 }
 
 /**
- * A nav pill + chevron that opens a small panel of links below it — used
- * for both "Deputy Applications" (one entry per department) and "Core Team
- * Applications" (one entry per project), which share this exact
- * open/close/outside-click behavior and only differ in which list and
- * which root link they point at.
+ * A nav pill + chevron that opens a small panel of links below it — the
+ * "Core Team Applications" pill and its one-entry-per-project panel.
  *
  * Opens on hover over the trigger (the pill + its chevron) or the panel
  * itself, closes a beat after the pointer leaves both — not the whole
@@ -255,24 +226,6 @@ function PortalDropdown({
   );
 }
 
-function DeptsDropdown({ active }: { active: boolean }) {
-  return (
-    <PortalDropdown
-      href="/internal/dept-apps"
-      label="Deputy Applications"
-      active={active}
-      chevronLabel="Show departments"
-      items={DEPARTMENTS.map((dept) => ({
-        slug: dept.slug,
-        name: dept.name,
-        emoji: dept.emoji,
-        href: `/internal/dept-apps/${dept.slug}`,
-        accent: dept.accent,
-      }))}
-    />
-  );
-}
-
 function CtaDropdown({ active }: { active: boolean }) {
   return (
     <PortalDropdown
@@ -318,12 +271,10 @@ const MENU_TRANSITION_MS = 300;
 
 function InternalMobileMenu({
   pathname,
-  deptAppsActive,
   ctaActive,
   onClose,
 }: {
   pathname: string;
-  deptAppsActive: boolean;
   ctaActive: boolean;
   onClose: () => void;
 }) {
@@ -409,23 +360,6 @@ function InternalMobileMenu({
           <Link href="/internal" onClick={handleClose} className={blockClass(pathname === "/internal")}>
             Dashboard
           </Link>
-          <Link href="/internal/dept-apps" onClick={handleClose} className={blockClass(deptAppsActive)}>
-            Deputy Applications
-          </Link>
-          <div className="ml-3 flex flex-col gap-0.5 border-l border-border pl-3">
-            {DEPARTMENTS.map((dept) => (
-              <Link
-                key={dept.slug}
-                href={`/internal/dept-apps/${dept.slug}`}
-                onClick={handleClose}
-                style={{ "--dept-tint": dept.accent.tint, "--dept-ink": dept.accent.ink } as React.CSSProperties}
-                className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-muted-foreground transition-colors hover:bg-dept-tint hover:text-dept-ink"
-              >
-                <span aria-hidden>{dept.emoji}</span>
-                {dept.name}
-              </Link>
-            ))}
-          </div>
           <Link href="/internal/cta-wave1" onClick={handleClose} className={blockClass(ctaActive)}>
             Core Team Applications
           </Link>

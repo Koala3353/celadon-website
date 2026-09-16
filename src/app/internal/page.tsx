@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { CommitteeExplorer } from "@/components/committee-explorer";
 import { SkyHero } from "@/components/internal/sky-hero";
 import { Reveal } from "@/components/motion/reveal";
@@ -34,30 +35,19 @@ export default function InternalPortalHomePage() {
         <section className="pb-8 pt-16 sm:pb-10 sm:pt-20">
           <Container>
             <Reveal stagger={70} className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-              <Link href="/internal/dept-apps" data-reveal className="group pressable">
-                <Card
-                  className="lift h-full ring-sky-navy/10 transition group-hover:ring-sky-navy/30"
-                  innerClassName="flex h-full flex-col gap-3 p-8"
-                >
-                  <span className="sky-display eyebrow w-fit rounded-full bg-sky-blue px-3 py-1 text-[0.6875rem] text-white">
-                    Open now
-                  </span>
+              {/* Closed, so deliberately not a link — the hub and the
+                  department pages behind it are no longer linked from
+                  anywhere in the portal. */}
+              <div data-reveal>
+                <Card className="h-full ring-sky-navy/10" innerClassName="flex h-full flex-col gap-3 p-8 opacity-70">
+                  <Badge tone="closed">Closed</Badge>
                   <h2 className="sky-display text-2xl font-semibold text-sky-navy">Deputy Applications</h2>
                   <p className="prose-body text-sm text-muted-foreground">
-                    Apply to join a department&rsquo;s year-long deputy pool. Browse every department&rsquo;s
-                    roles, timeline, and requirements.
-                  </p>
-                  <p className="mt-auto flex items-center gap-1 pt-3 text-xs font-bold uppercase tracking-wider text-sky-navy">
-                    Explore departments
-                    <span
-                      aria-hidden
-                      className="inline-block transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
+                    Applications for this year&rsquo;s department deputy pools are now closed. Thank you to
+                    everyone who applied!
                   </p>
                 </Card>
-              </Link>
+              </div>
 
               <Link href="/internal/cta-wave1" data-reveal className="group pressable">
                 <Card

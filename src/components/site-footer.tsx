@@ -19,7 +19,6 @@ const PUBLIC_NAV = [
 // somewhere else entirely.
 const INTERNAL_NAV = [
   { href: "/internal", label: "Dashboard" },
-  { href: "/internal/dept-apps", label: "Deputy Applications" },
   { href: "/internal/cta-wave1", label: "Core Team Applications" },
   { href: "/internal/ebcb-directory", label: "EBCB Directory" },
 ];
