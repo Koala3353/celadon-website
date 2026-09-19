@@ -94,7 +94,7 @@ export interface CoreTeamTimelineItem {
 }
 
 export const CTA_TIMELINE: CoreTeamTimelineItem[] = [
-  { date: "September 14–19, 2026", label: "CTA Wave 1 Duration" },
+  { date: "September 14–22, 2026", label: "CTA Wave 1 Duration" },
   { date: "September 17–24, 2026", label: "Interview Dates" },
   { date: "September 26, 2026", label: "Release of Results" },
 ];
