@@ -330,7 +330,7 @@ export default function SpringFilmFestivalProjectPage() {
       </section>
 
       {/* Flat white — last section, footer sits directly below. */}
-      <section className="bg-dept-tint py-8 sm:py-10">
+      <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading color="#970708">✉️ Contact Us</Heading>
