@@ -726,14 +726,8 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Logistics 📦 · 2 Heads, 5 Core",
+      label: "Logistics 📦 · 1 Head, 4 Core",
       items: [
-        [
-          {
-            text: "One (1) Logistics Head and one (1) Logistics Core Team Member is already deployed.",
-            italic: true,
-          },
-        ],
         [
           {
             text: "The Logistics Committee is responsible for the procurement of materials for use of the project. These materials may be of any nature ranging from rooms, transportation, consumables (e.g. food and water), gimmick materials, decorations, and other miscellaneous materials. The contributions made by this committee are highly important towards the accomplishment of roles and responsibilities in all departments, especially those highly dependent on physical materials.",
@@ -747,14 +741,8 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Programs 🎤 · 2 Heads, 6 Core",
+      label: "Programs 🎤 · 1 Head, 5 Core",
       items: [
-        [
-          {
-            text: "One (1) Programs Head and one (1) Programs Core Team Member is already deployed. Wave 1 applications will accept only 1 Programs Head and 5 Programs Core Team Members.",
-            italic: true,
-          },
-        ],
         [
           {
             text: "The Programs Committee entertains all concerns related to the progression of the program presented to all guests and stakeholders participating in the Spring Film Festival. It is also one of the most demanding committees in terms of output generation which requires proper planning and communication with the project team. On the other hand, contributing in this department equips core team members with vast experience and opportunities which include a mix of creative concept development, clear writing and communication, organized compilation of information, and many more.",
@@ -770,14 +758,8 @@ export const SPRING_FILM_FESTIVAL: CtaProjectDetail = {
       ],
     },
     {
-      label: "Recruitment and Secretariat 📝 · 2 Heads, 5 Core",
+      label: "Recruitment and Secretariat 📝 · 1 Head, 5 Core",
       items: [
-        [
-          {
-            text: "One (1) Recruitment and Secretariat Head is already deployed. Wave 1 applications will accept only 1 Recruitment and Secretariat Head for the Spring Film Festival.",
-            italic: true,
-          },
-        ],
         [
           {
             text: "The Recruitment and Secretariat Committee works towards the data collection, interpretation, and evaluation of the project in order to determine whether the project's accomplishments still align with the prescribed and formulated goals. Afterwards, all data and interpretations shall be compiled to develop the project's sustainability report that could help the organization improve its future initiatives.",
