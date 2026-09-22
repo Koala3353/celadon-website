@@ -4,17 +4,15 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { SkeletonImage } from "@/components/ui/skeleton-image";
-import { ButtonLink } from "@/components/ui/button-link";
+import { ClosedBanner } from "@/components/internal/closed-banner";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
-import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { PhotoCarousel } from "@/components/photo-carousel";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { CTA_APPLICATION_FORM_URL } from "@/lib/core-team-wave";
 import { CHINESE_NEW_YEAR } from "@/lib/cta-projects";
 
 export const metadata: Metadata = {
@@ -61,6 +59,7 @@ export default function ChineseNewYearProjectPage() {
           the project name and thrust, so there's no separate H1 repeating
           it underneath. */}
       <section className="relative overflow-hidden bg-dept-tint text-dept-ink">
+        <ClosedBanner>Wave 1 Core Team Applications are now closed.</ClosedBanner>
         <BackLink href="/internal/cta-wave1" label="All Projects" />
 
         <div
@@ -87,11 +86,6 @@ export default function ChineseNewYearProjectPage() {
             <p className="prose-body text-lg text-dept-ink/80" data-reveal>
               {project.about}
             </p>
-            <div data-reveal>
-              <ButtonLink href={CTA_APPLICATION_FORM_URL} external size="lg" variant="accent">
-                Apply Now
-              </ButtonLink>
-            </div>
           </Reveal>
         </Container>
       </section>
@@ -293,7 +287,6 @@ export default function ChineseNewYearProjectPage() {
         </Container>
       </section>
 
-      <FloatingApplyButton href={CTA_APPLICATION_FORM_URL} label={`Apply to ${project.name} now`} />
     </div>
   );
 }

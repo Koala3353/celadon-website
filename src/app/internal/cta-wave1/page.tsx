@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
+import { ClosedBanner } from "@/components/internal/closed-banner";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
 import { SkyHero } from "@/components/internal/sky-hero";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
@@ -110,6 +110,8 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
 export default function CoreTeamApplicationsHubPage() {
   return (
     <>
+      <ClosedBanner>Wave 1 Core Team Applications are now closed.</ClosedBanner>
+
       <SkyHero
         title="Core Team Applications"
         heroImage={{ src: "/internal/cta-wave1/cta-hub-hero.webp", alt: "Celadon Core Team Applications" }}
@@ -130,11 +132,11 @@ export default function CoreTeamApplicationsHubPage() {
                   2026&ndash;2027 Core Team Applications
                 </span>
                 <p className="sky-display text-xl font-semibold text-sky-navy sm:text-2xl">
-                  Celadon&rsquo;s Wave 1 Core Team Applications are now open!
+                  Celadon&rsquo;s Wave 1 Core Team Applications are now closed.
                 </p>
-                <ButtonLink href={CTA_APPLICATION_FORM_URL} external size="lg">
-                  Apply Now
-                </ButtonLink>
+                <p className="prose-body text-sm text-sky-navy/70">
+                  Thank you to everyone who applied &mdash; watch out for Wave 2!
+                </p>
               </Card>
             </Reveal>
           </Container>

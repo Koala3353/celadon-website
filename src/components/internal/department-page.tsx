@@ -722,25 +722,6 @@ export function DepartmentPage({ dept }: { dept: Department }) {
         </Container>
       </section>
 
-      {dept.floatingApplyUrl && (
-        <a
-          href={dept.floatingApplyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            zIndex: "var(--z-nav)",
-            // Clears the iOS home-indicator / gesture bar on notched
-            // phones instead of sitting flush against the very bottom edge.
-            bottom: "max(1rem, env(safe-area-inset-bottom))",
-          }}
-          className="pressable fixed inset-x-4 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center justify-center gap-2 rounded-full bg-dept-accent px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-[var(--shadow-lg)] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dept-accent sm:inset-x-auto sm:right-6 sm:px-6 sm:py-3 sm:text-sm"
-        >
-          <span className="truncate">Apply to {dept.name} now</span>
-          <span aria-hidden className="shrink-0 text-sm sm:text-base">
-            &#8599;
-          </span>
-        </a>
-      )}
     </div>
   );
 }

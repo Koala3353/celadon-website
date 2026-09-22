@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -49,30 +48,19 @@ export default function InternalPortalHomePage() {
                 </Card>
               </div>
 
-              <Link href="/internal/cta-wave1" data-reveal className="group pressable">
-                <Card
-                  className="lift h-full ring-sky-navy/10 transition group-hover:ring-sky-navy/30"
-                  innerClassName="flex h-full flex-col gap-3 p-8"
-                >
-                  <span className="sky-display eyebrow w-fit rounded-full bg-sky-blue px-3 py-1 text-[0.6875rem] text-white">
-                    Open now
-                  </span>
+              {/* Closed too, so the same treatment as Deputy Applications
+                  above: a plain card rather than a link, with the hub and
+                  the four project pages behind it unlinked portal-wide. */}
+              <div data-reveal>
+                <Card className="h-full ring-sky-navy/10" innerClassName="flex h-full flex-col gap-3 p-8 opacity-70">
+                  <Badge tone="closed">Closed</Badge>
                   <h2 className="sky-display text-2xl font-semibold text-sky-navy">Core Team Applications</h2>
                   <p className="prose-body text-sm text-muted-foreground">
-                    Apply to join a project&rsquo;s Core Team. Browse every project&rsquo;s committees,
-                    timeline, and requirements.
-                  </p>
-                  <p className="mt-auto flex items-center gap-1 pt-3 text-xs font-bold uppercase tracking-wider text-sky-navy">
-                    Explore projects
-                    <span
-                      aria-hidden
-                      className="inline-block transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
+                    Wave 1 Core Team Applications are now closed. Thank you to everyone who applied &mdash;
+                    watch out for Wave 2!
                   </p>
                 </Card>
-              </Link>
+              </div>
             </Reveal>
           </Container>
         </section>

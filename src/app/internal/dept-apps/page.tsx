@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
+import { ClosedBanner } from "@/components/internal/closed-banner";
 import { Card } from "@/components/ui/card";
 import { SkeletonImage } from "@/components/ui/skeleton-image";
 import { Reveal } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
 import { SkyHero } from "@/components/internal/sky-hero";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
 import { DepartmentCard } from "@/components/internal/department-card";
@@ -55,6 +55,8 @@ export default function DeptAppsHubPage() {
 
   return (
     <>
+      <ClosedBanner>Deputy Applications are now closed.</ClosedBanner>
+
       <SkyHero
         title="CelaSkies"
         heroImage={{ src: "/internal/celaskies-hero.webp", alt: "CelaSkies — Deputy Applications, 2026-2027" }}
@@ -86,12 +88,11 @@ export default function DeptAppsHubPage() {
                     2026&ndash;2027 applications
                   </span>
                   <p className="sky-display text-xl font-semibold text-sky-navy sm:text-2xl">
-                    Get ready for take-off! Celadon Deputy Applications 2627 are officially open!
-                    &#9992;&#65039; &#128153;
+                    Celadon Deputy Applications 2627 are now closed. &#9992;&#65039; &#128153;
                   </p>
-                  <ButtonLink href={APPLICATION_FORM_URL} external size="lg">
-                    Apply Now
-                  </ButtonLink>
+                  <p className="prose-body text-sm text-sky-navy/70">
+                    Thank you to everyone who applied!
+                  </p>
                 </div>
               </Card>
             </Reveal>

@@ -6,6 +6,7 @@ import { cn } from "@/lib/cn";
 import type { Department } from "@/lib/deputy-departments";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
+import { ClosedBanner } from "@/components/internal/closed-banner";
 
 /**
  * Per-department hero — deliberately not the CelaSkies sky theme (that's
@@ -21,6 +22,7 @@ import { BackLink } from "@/components/internal/back-link";
 export function DeptHero({ dept }: { dept: Department }) {
   return (
     <section className="relative overflow-hidden bg-dept-tint text-dept-ink">
+      <ClosedBanner>Deputy Applications are now closed.</ClosedBanner>
       <BackLink href="/internal/dept-apps" label="All Departments" />
 
       {/* Ambient depth in the department's own accent — same radial-glow
