@@ -47,10 +47,24 @@ const GOOGLE_ICON = `<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http
   <path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.97l2.99 2.33C4.66 5.17 6.65 3.58 9 3.58z"/>
 </svg>`;
 
-export function signInPage(startUrl: string, notice: string | null): string {
+export type GateSite = "portal" | "toolkit";
+
+const SITE_COPY: Record<GateSite, { name: string; lede: string }> = {
+  portal: {
+    name: "Celadon Internal Portal",
+    lede: "Sign in with your organization Google account to continue.",
+  },
+  toolkit: {
+    name: "CLDN PM Toolkit",
+    lede: "The Project Manager Toolkit is for Celadon members. Sign in with your Ateneo or Celadon Google account to continue.",
+  },
+};
+
+export function signInPage(startUrl: string, notice: string | null, site: GateSite = "portal"): string {
+  const copy = SITE_COPY[site];
   const errorBlock =
     notice === "denied"
-      ? `<div class="error">This email is not authorized for the Celadon internal portal.</div>`
+      ? `<div class="error">This email isn't on the Celadon member list for the ${copy.name}. Sign in with the account you registered with Celadon, or ask the HR EBCB to add you.</div>`
       : notice === "error"
         ? `<div class="error">Something went wrong signing you in. Please try again.</div>`
         : "";
@@ -61,14 +75,14 @@ export function signInPage(startUrl: string, notice: string | null): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Celadon Internal Portal</title>
+<title>${copy.name}</title>
 <style>${SHARED_STYLE}</style>
 </head>
 <body>
   <div class="card">
-    <p class="eyebrow">Celadon Internal Portal</p>
+    <p class="eyebrow">${copy.name}</p>
     <h1>Sign in to continue</h1>
-    <p class="lede">Sign in with your organization Google account to continue.</p>
+    <p class="lede">${copy.lede}</p>
     ${errorBlock}
     <a class="btn" href="${startUrl}">${GOOGLE_ICON}Continue with Google</a>
   </div>

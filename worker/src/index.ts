@@ -1,6 +1,6 @@
 import { base64UrlEncodeString, base64UrlDecodeString, verifyGoogleIdToken } from "./crypto";
-import { parseCookies, setCookie, clearCookie, createSessionToken, verifySessionToken } from "./session";
-import { signInPage } from "./pages";
+import { parseCookies, cookieValues, setCookie, clearCookie, createSessionToken, verifySessionToken } from "./session";
+import { signInPage, type GateSite } from "./pages";
 
 export interface Env {
   GOOGLE_CLIENT_ID: string;
@@ -21,6 +21,15 @@ const SESSION_COOKIE = "celadon_session";
 const NONCE_COOKIE = "celadon_oauth_nonce";
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30; // 30d — matches the "same browser, no repeat sign-in" behavior.
 const NONCE_TTL_SECONDS = 600; // Just long enough to complete the Google redirect round trip.
+
+// The PM Toolkit (pm.ateneoceladon.com, a separate GitHub Pages site) sits
+// behind this same gate. Its sign-in runs through the main domain's
+// /internal/__auth/* endpoints, so Google only ever sees the one redirect URI
+// already registered, and the session cookie is scoped to the parent domain
+// so one sign-in covers both sites.
+const MAIN_ORIGIN = "https://ateneoceladon.com";
+const TOOLKIT_HOST = "pm.ateneoceladon.com";
+const COOKIE_DOMAIN = "ateneoceladon.com";
 
 function isAllowedDomain(email: string, env: Env): boolean {
   const domains = env.ALLOWED_EMAIL_DOMAINS.split(",")
@@ -55,11 +64,34 @@ async function isAuthorized(email: string, env: Env): Promise<boolean> {
   return isAllowedDomain(email, env) && (await isMember(email, env));
 }
 
-// Only ever redirect back into our own gated path — a returnTo taken
-// straight from a query param would otherwise be an open redirect.
+// Only ever redirect back into a gated place we own — the /internal path on
+// this domain, or a page on the PM Toolkit — since a returnTo taken straight
+// from a query param would otherwise be an open redirect.
 function safeReturnTo(value: string | null): string {
   if (value && value.startsWith(GATE_PATH_PREFIX) && !value.startsWith("//")) return value;
+  if (value) {
+    try {
+      const u = new URL(value);
+      if (u.protocol === "https:" && u.hostname === TOOLKIT_HOST && !u.username && !u.password) {
+        return u.toString();
+      }
+    } catch {
+      // Not an absolute URL; fall through to the default.
+    }
+  }
   return `${GATE_PATH_PREFIX}/`;
+}
+
+function isToolkitUrl(value: string): boolean {
+  return value.startsWith(`https://${TOOLKIT_HOST}/`);
+}
+
+async function sessionEmail(request: Request, env: Env): Promise<string | null> {
+  for (const token of cookieValues(request.headers.get("Cookie") ?? "", SESSION_COOKIE)) {
+    const session = await verifySessionToken(token, env.COOKIE_SECRET);
+    if (session && (await isAuthorized(session.email, env))) return session.email;
+  }
+  return null;
 }
 
 async function handleAuthStart(url: URL, env: Env): Promise<Response> {
@@ -81,36 +113,41 @@ async function handleAuthStart(url: URL, env: Env): Promise<Response> {
 }
 
 async function handleCallback(request: Request, url: URL, env: Env): Promise<Response> {
+  // Set once the state is decoded, so a failure sends a PM Toolkit visitor
+  // back to the toolkit's sign-in screen rather than the portal's.
+  let bounceTarget = `${GATE_PATH_PREFIX}/`;
   const bounceBack = (notice: "denied" | "error") =>
     new Response(null, {
       status: 302,
       headers: (() => {
-        const h = new Headers({ Location: `${GATE_PATH_PREFIX}/?notice=${notice}` });
+        const target = isToolkitUrl(bounceTarget) ? `https://${TOOLKIT_HOST}/` : `${GATE_PATH_PREFIX}/`;
+        const h = new Headers({ Location: `${target}?notice=${notice}` });
         h.append("Set-Cookie", clearCookie(NONCE_COOKIE));
         return h;
       })(),
     });
 
+  const state = url.searchParams.get("state");
+  const dotIndex = state ? state.indexOf(".") : -1;
+
+  let returnTo = `${GATE_PATH_PREFIX}/`;
+  if (state && dotIndex !== -1) {
+    try {
+      returnTo = safeReturnTo(base64UrlDecodeString(state.slice(dotIndex + 1)));
+    } catch {
+      // Keep the default.
+    }
+  }
+  bounceTarget = returnTo;
+
   if (url.searchParams.get("error")) return bounceBack("error");
 
   const code = url.searchParams.get("code");
-  const state = url.searchParams.get("state");
-  if (!code || !state) return bounceBack("error");
-
-  const dotIndex = state.indexOf(".");
-  if (dotIndex === -1) return bounceBack("error");
+  if (!code || !state || dotIndex === -1) return bounceBack("error");
   const nonce = state.slice(0, dotIndex);
-  const returnToB64 = state.slice(dotIndex + 1);
 
   const cookies = parseCookies(request.headers.get("Cookie") ?? "");
   if (!nonce || cookies[NONCE_COOKIE] !== nonce) return bounceBack("error");
-
-  let returnTo: string;
-  try {
-    returnTo = safeReturnTo(base64UrlDecodeString(returnToB64));
-  } catch {
-    returnTo = `${GATE_PATH_PREFIX}/`;
-  }
 
   const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
@@ -136,13 +173,16 @@ async function handleCallback(request: Request, url: URL, env: Env): Promise<Res
   const token = await createSessionToken(claims.email, env.COOKIE_SECRET, SESSION_TTL_SECONDS);
   const headers = new Headers({ Location: returnTo });
   headers.append("Set-Cookie", clearCookie(NONCE_COOKIE));
-  headers.append("Set-Cookie", setCookie(SESSION_COOKIE, token, SESSION_TTL_SECONDS));
+  // Parent-domain cookie so the same sign-in is valid on pm.ateneoceladon.com.
+  headers.append("Set-Cookie", setCookie(SESSION_COOKIE, token, SESSION_TTL_SECONDS, COOKIE_DOMAIN));
   return new Response(null, { status: 302, headers });
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+
+    if (url.hostname === TOOLKIT_HOST) return handleToolkit(request, url, env);
 
     if (url.pathname === CALLBACK_PATH) return handleCallback(request, url, env);
     if (url.pathname === AUTH_START_PATH) return handleAuthStart(url, env);
@@ -153,21 +193,44 @@ export default {
       return fetch(request);
     }
 
-    const cookies = parseCookies(request.headers.get("Cookie") ?? "");
-    const session = await verifySessionToken(cookies[SESSION_COOKIE], env.COOKIE_SECRET);
-
     // Re-check the allowlist on every request, not just at sign-in time — if
     // someone's email is removed from ALLOWED_EMAIL_DOMAINS or the member
     // roster after they already have a session cookie, they lose access
     // immediately rather than keeping it until the cookie happens to expire.
-    if (session && (await isAuthorized(session.email, env))) {
+    if (await sessionEmail(request, env)) {
       return fetch(request);
     }
 
     const startUrl = `${AUTH_START_PATH}?returnTo=${encodeURIComponent(url.pathname)}`;
-    const notice = url.searchParams.get("notice");
-    return new Response(signInPage(startUrl, notice === "denied" || notice === "error" ? notice : null), {
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-    });
+    return gatePage(url, startUrl, "portal");
   },
 };
+
+function gatePage(url: URL, startUrl: string, site: GateSite): Response {
+  const notice = url.searchParams.get("notice");
+  return new Response(signInPage(startUrl, notice === "denied" || notice === "error" ? notice : null, site), {
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Robots-Tag": "noindex, nofollow",
+    },
+  });
+}
+
+// Every path on pm.ateneoceladon.com is members-only, assets and the search
+// index included, so nothing from the toolkit is served before sign-in.
+async function handleToolkit(request: Request, url: URL, env: Env): Promise<Response> {
+  if (await sessionEmail(request, env)) {
+    const upstream = await fetch(request);
+    const response = new Response(upstream.body, upstream);
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    // Gated pages must not be stored by shared caches between visitors.
+    response.headers.set("Cache-Control", "private, max-age=0, must-revalidate");
+    return response;
+  }
+
+  const back = new URL(url.toString());
+  back.searchParams.delete("notice");
+  const startUrl = `${MAIN_ORIGIN}${AUTH_START_PATH}?returnTo=${encodeURIComponent(back.toString())}`;
+  return gatePage(url, startUrl, "toolkit");
+}

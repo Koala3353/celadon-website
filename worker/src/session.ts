@@ -12,12 +12,34 @@ export function parseCookies(header: string): Record<string, string> {
   return out;
 }
 
-export function setCookie(name: string, value: string, maxAgeSeconds: number): string {
-  return `${name}=${encodeURIComponent(value)}; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=${maxAgeSeconds}`;
+/**
+ * Every value sent for `name`. A browser can hold two cookies with the same
+ * name, one host-only and one scoped to the parent domain, and sends both, so
+ * the session check tries each rather than trusting whichever came first.
+ */
+export function cookieValues(header: string, name: string): string[] {
+  const out: string[] = [];
+  for (const part of header.split(";")) {
+    const idx = part.indexOf("=");
+    if (idx === -1) continue;
+    if (part.slice(0, idx).trim() !== name) continue;
+    try {
+      out.push(decodeURIComponent(part.slice(idx + 1).trim()));
+    } catch {
+      // A malformed value is skipped, not fatal.
+    }
+  }
+  return out;
 }
 
-export function clearCookie(name: string): string {
-  return `${name}=; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=0`;
+export function setCookie(name: string, value: string, maxAgeSeconds: number, domain?: string): string {
+  const scope = domain ? `; Domain=${domain}` : "";
+  return `${name}=${encodeURIComponent(value)}; Path=/${scope}; Secure; HttpOnly; SameSite=Lax; Max-Age=${maxAgeSeconds}`;
+}
+
+export function clearCookie(name: string, domain?: string): string {
+  const scope = domain ? `; Domain=${domain}` : "";
+  return `${name}=; Path=/${scope}; Secure; HttpOnly; SameSite=Lax; Max-Age=0`;
 }
 
 interface SessionPayload {

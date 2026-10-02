@@ -3,7 +3,10 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-08-01",
   "routes": [
-    { "pattern": "ateneoceladon.com/internal*", "zone_name": "ateneoceladon.com" }
+    { "pattern": "ateneoceladon.com/internal*", "zone_name": "ateneoceladon.com" },
+    // The whole PM Toolkit is members-only. pm.ateneoceladon.com must be a
+    // *proxied* (orange-cloud) CNAME to koala3353.github.io for this to run.
+    { "pattern": "pm.ateneoceladon.com/*", "zone_name": "ateneoceladon.com" }
   ],
   "vars": {
     // Not secret — client IDs are public by design (they end up in browser
