@@ -14,7 +14,8 @@ export const COMMPUB_REQUIREMENTS_GUIDE_URL =
 
 /**
  * Rose Sale recruits a second, smaller set of committees in Wave 2. Only
- * `committees` changes, plus one FAQ dropped — everything else is Wave 1's
+ * `committees` changes, plus one FAQ and the timeline's already-past
+ * onboarding/application rows dropped — everything else is Wave 1's
  * entry verbatim, so a later edit to the shared fields (letter, contacts…)
  * reaches both waves without being made twice.
  */
@@ -23,6 +24,17 @@ export const ROSE_SALE_WAVE2: CtaProjectDetail = {
   // The additional-requirements FAQ covers Digital Creatives, Production
   // Design and DocPub, none of which Rose Sale recruits in Wave 2.
   faqs: ROSE_SALE.faqs.filter((faq) => !faq.q.startsWith("Do we need to submit any additional requirements")),
+  // These four are behind Wave 2 applicants already (or, for the Wave 2
+  // row itself, describe the very round they're applying in).
+  timeline: ROSE_SALE.timeline?.filter(
+    (item) =>
+      ![
+        "Heads Onboarding",
+        "1st General Assembly",
+        "Committees Onboarding (Online)",
+        "Wave 2 Applications (Florists, Deliveries, Sales)",
+      ].includes(item.label)
+  ),
   committees: [
     {
       label: "Sales 🪻 · 2 Heads, 3 Core",
