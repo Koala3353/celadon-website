@@ -77,19 +77,6 @@ export const CTA_WAVE2_FAQS: { q: string; a: string | AboutRun[][] }[] = [
   },
   {
     q: "Can I apply as a Department Deputy as well as a Core Team Member at the same time?",
-    a: [
-      [
-        { text: "Yes, it is possible for a member of Ateneo Celadon to be a department deputy as well as a core team member at the same time. However, keep in mind that deputies take on a year-long role in supporting Ateneo Celadon in its different departments which mainly consists of " },
-        { text: "project deployment as a core team member of other projects", bold: true },
-        { text: " and " },
-        { text: "other additional tasks within your chosen department", bold: true },
-        { text: "." },
-      ],
-      [
-        {
-          text: "Do note that Deputy Applications for this school year have already closed, so this only applies if you are already part of a department's deputy pool.",
-        },
-      ],
-    ],
+    a: "Yes, it is possible for a member of Ateneo Celadon to be a department deputy as well as a core team member at the same time.",
   },
 ];
