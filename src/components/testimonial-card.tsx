@@ -48,6 +48,7 @@ export function TestimonialCard({
   className,
   headerClassName,
   pillFrom = "sm",
+  size = "md",
 }: {
   name: string;
   role: string;
@@ -68,10 +69,14 @@ export function TestimonialCard({
    * When a group of cards is rendered together, pass the same value to
    * every card in the group — mixing the two looks inconsistent. */
   pillFrom?: keyof typeof PILL_BREAKPOINT_CLASSES;
+  /** Text size for the name, role, and quote. "lg" bumps each up one step
+   * for a page that wants its testimonies to read larger. */
+  size?: "md" | "lg";
 }) {
   const isDark = tone === "dark";
   const roleLines = role.split(", ");
   const bp = PILL_BREAKPOINT_CLASSES[pillFrom];
+  const isLarge = size === "lg";
 
   return (
     <div className={cn("flex flex-col gap-4", bp.wrapper)} data-reveal>
@@ -114,9 +119,9 @@ export function TestimonialCard({
           </div>
         )}
         <div className={cn(bp.bubble, !isDark && bp.bubbleRing)}>
-          <p className={cn("text-sm font-bold", isDark ? "text-sky-navy" : "text-dept-ink")}>{name}</p>
+          <p className={cn(isLarge ? "text-base" : "text-sm", "font-bold", isDark ? "text-sky-navy" : "text-dept-ink")}>{name}</p>
           {roleLines.map((line) => (
-            <p key={line} className="text-xs leading-tight text-muted-foreground">
+            <p key={line} className={cn(isLarge ? "text-sm" : "text-xs", "leading-tight text-muted-foreground")}>
               {line}
             </p>
           ))}
@@ -135,7 +140,7 @@ export function TestimonialCard({
           className
         )}
       >
-        <p className={cn("prose-body text-sm italic", isDark ? "text-white/90" : "text-muted-foreground")}>
+        <p className={cn("prose-body italic", isLarge ? "text-base" : "text-sm", isDark ? "text-white/90" : "text-muted-foreground")}>
           &ldquo;{testimonialText}&rdquo;
         </p>
       </div>

@@ -195,6 +195,7 @@ export default function RoseSaleWave2ProjectPage() {
                   role={t.role}
                   imageSrc={t.photo ? asset(t.photo) : null}
                   testimonialText={t.quote}
+                  size="lg"
                 />
               ))}
             </Reveal>
