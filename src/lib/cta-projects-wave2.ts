@@ -119,7 +119,7 @@ export const CELADON_MERCH: CelaMerchContent = {
     ],
     [
       {
-        text: "But to achieve this, we need YOUR help. This project not only proudly showcases the creative identity of Celadoneans, but also nurtures growth and familiarity within and beyond the team, bringing together a holistic community.",
+        text: "But to achieve this, we need YOUR help. This project not only proudly showcases the creative identity of Celadoneans but also nurtures growth and familiarity within and beyond the team, bringing together a holistic community.",
       },
     ],
     [

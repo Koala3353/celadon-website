@@ -29,8 +29,8 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
   {
     slug: "celadon-merch",
     name: "Celadon Merch",
-    // Placeholder until CelaMerch's timeline is sent.
-    dates: "Dates to be announced",
+    // Merch Selling, from the project timeline.
+    dates: "February 2–5, 2027",
     accent: CELADON_MERCH.accent,
     blurb:
       "Celadon Merchandise is a fundraising project that promotes Chinese culture within the Ateneo Community, simultaneously portraying Celadon’s organizational identity.",
