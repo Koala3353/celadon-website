@@ -91,7 +91,7 @@ export interface CelaMerchContent {
   letterSignoff: string;
   vision: string;
   thrust: string;
-  /** Empty until the timeline arrives — the page shows a placeholder. */
+  /** The page shows a placeholder if this is ever left empty. */
   timeline: DeptTimelineItem[];
   committees: DeptGroup[];
   requirements: DeptGroup[];
@@ -133,7 +133,15 @@ export const CELADON_MERCH: CelaMerchContent = {
     "To promote Chinese Culture, nurture inclusivity, and create a lasting impact on the market through our merchandise collection.",
   thrust:
     "To elevate the project’s brand image and visibility in the Atenean Community, fostering a space for self-expression and growth",
-  timeline: [],
+  timeline: [
+    { date: "October 26 – December 14, 2026", label: "Merch Ideation" },
+    // The PMs' doc gives this one a "-" for its date.
+    { date: "TBA", label: "General Assembly" },
+    // The doc reads "January 15, 2026", which would end before it starts —
+    // read as 2027.
+    { date: "December 14, 2026 – January 15, 2027", label: "Merch Preparation" },
+    { date: "February 2–5, 2027", label: "Merch Selling!!" },
+  ],
   committees: [
     {
       label: "Logistics · 2 Heads, 4 Core",
@@ -231,8 +239,18 @@ export const CELADON_MERCH: CelaMerchContent = {
   ],
   // Emails to follow — Facebook only for now.
   contacts: [
-    { name: "Quisha Lim", role: "Project Manager", facebook: "https://www.facebook.com/quisha.lim.2025" },
-    { name: "Iris Pabiloña", role: "Project Manager", facebook: "https://www.facebook.com/iris.pabilona.3" },
+    {
+      name: "Quisha Lim",
+      role: "Project Manager",
+      email: "quisha.nicole.lim@student.ateneo.edu",
+      facebook: "https://www.facebook.com/quisha.lim.2025",
+    },
+    {
+      name: "Iris Pabiloña",
+      role: "Project Manager",
+      email: "iris.casey.pabilona@student.ateneo.edu",
+      facebook: "https://www.facebook.com/iris.pabilona.3",
+    },
   ],
 };
 

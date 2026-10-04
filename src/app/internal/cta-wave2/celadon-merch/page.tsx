@@ -169,11 +169,11 @@ export default function CeladonMerchProjectPage() {
         </Container>
       </section>
 
-      {/* Project Timeline */}
+      {/* General Timeline */}
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-2xl text-left">
-            <Heading>Project Timeline</Heading>
+            <Heading>General Timeline</Heading>
           </Reveal>
           <Reveal className="mx-auto mt-8 w-full max-w-2xl">
             {project.timeline.length > 0 ? (
