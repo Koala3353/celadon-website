@@ -280,7 +280,7 @@ export default function CeladonMerchProjectPage() {
         </Container>
       </section>
 
-      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label={`Apply to ${project.name} now`} />
+      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label="Apply to Celadon Merch now" />
     </div>
   );
 }

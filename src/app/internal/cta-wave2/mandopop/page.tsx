@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
+import { ButtonLink } from "@/components/ui/button-link";
 import { Reveal } from "@/components/motion/reveal";
 import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { RichParagraphs } from "@/components/internal/rich-text";
@@ -34,7 +35,7 @@ const merriweather = Merriweather({
  * ink, the headings, the pale alternate band and the solid blocks (cards,
  * table header, avatars); red (30) is the secondary accent — labels,
  * bullets, links, FAQ questions, the accordion and floating button; yellow
- * (10) is kept to the heading underlines, the Apply Now button and a few
+ * (10) is kept to the heading underlines and a few
  * small highlights on navy, where it has the contrast to read.
  */
 const NAVY = MANDOPOP.palette.dominant;
@@ -95,7 +96,7 @@ export default function MandopopProjectPage() {
       }
     >
       {/* Header */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: NAVY }}>
+      <section className="relative overflow-hidden" style={{ backgroundColor: NAVY_TINT }}>
         <BackLink href="/internal/cta-wave2" label="All Projects" />
         <Reveal>
           <Image
@@ -108,6 +109,15 @@ export default function MandopopProjectPage() {
             className="max-h-[60vh] w-full object-cover"
           />
         </Reveal>
+        <Container className="relative flex flex-col items-center pb-10 pt-10 text-center sm:pb-14 sm:pt-12">
+          <Reveal className="flex flex-col items-center">
+            <div data-reveal>
+              <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg" variant="accent">
+                Apply Now
+              </ButtonLink>
+            </div>
+          </Reveal>
+        </Container>
       </section>
 
       {/* What is Mandopop? */}
@@ -135,17 +145,6 @@ export default function MandopopProjectPage() {
                   <dd>{project.venue}</dd>
                 </div>
               </dl>
-              <div className="pt-3" data-reveal>
-                <a
-                  href={CTA_WAVE2_APPLICATION_FORM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pressable inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-black uppercase tracking-wider shadow-[var(--shadow-md)] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
-                  style={{ backgroundColor: YELLOW, color: NAVY, outlineColor: NAVY }}
-                >
-                  Apply Now <span aria-hidden>&#8599;</span>
-                </a>
-              </div>
             </div>
             <PhotoPlaceholder className="aspect-[4/3] w-full" />
           </Reveal>
@@ -360,7 +359,7 @@ export default function MandopopProjectPage() {
         </Container>
       </Band>
 
-      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label={`Apply to ${project.name} now`} />
+      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label="Apply to Mandopop now" />
     </div>
   );
 }

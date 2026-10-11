@@ -97,11 +97,8 @@ export default function RoseSaleWave2ProjectPage() {
             className="max-h-[60vh] w-full object-cover"
           />
         </Reveal>
-        <Container className="relative flex flex-col items-center gap-5 pb-10 pt-12 text-center sm:pb-14 sm:pt-16">
+        <Container className="relative flex flex-col items-center gap-5 pb-10 pt-10 text-center sm:pb-14 sm:pt-12">
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
-            <p className="prose-body text-lg text-dept-ink/80 [font-family:var(--font-rs-dmsans)]" data-reveal>
-              {project.about}
-            </p>
             {/* Scoped to just this button — the doc's own blue instead of
                 the page's magenta-pink accent, without touching that
                 accent anywhere else on the page. */}
@@ -371,7 +368,7 @@ export default function RoseSaleWave2ProjectPage() {
         </Container>
       </section>
 
-      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label={`Apply to ${project.name} now`} />
+      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label="Apply to Rose Sale now" />
     </div>
   );
 }

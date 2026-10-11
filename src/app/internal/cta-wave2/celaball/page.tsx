@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { EB_Garamond } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
+import { ButtonLink } from "@/components/ui/button-link";
 import { Reveal } from "@/components/motion/reveal";
 import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { BackLink } from "@/components/internal/back-link";
@@ -125,6 +126,15 @@ export default function CelaballProjectPage() {
             className="max-h-[60vh] w-full object-cover"
           />
         </Reveal>
+        <Container className="relative flex flex-col items-center pb-10 pt-10 text-center sm:pb-14 sm:pt-12">
+          <Reveal className="flex flex-col items-center">
+            <div data-reveal>
+              <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg" variant="accent">
+                Apply Now
+              </ButtonLink>
+            </div>
+          </Reveal>
+        </Container>
       </section>
 
       {/* What is Celaball? */}
@@ -164,17 +174,6 @@ export default function CelaballProjectPage() {
                 )}
               </p>
               <p data-reveal>{aboutRest.map((run) => run.text).join("")}</p>
-              <div className="pt-2" data-reveal>
-                <a
-                  href={CTA_WAVE2_APPLICATION_FORM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pressable inline-flex items-center gap-2 rounded-full px-7 py-3 text-base font-bold uppercase tracking-wider shadow-[var(--shadow-md)] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
-                  style={{ backgroundColor: P.amber, color: "#3B2207", outlineColor: TEXT.amber }}
-                >
-                  Apply Now <span aria-hidden>&#8599;</span>
-                </a>
-              </div>
             </div>
             <div className="relative aspect-[1654/962] w-full overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
               <Image
@@ -309,34 +308,34 @@ export default function CelaballProjectPage() {
       {/* Project Timeline */}
       <section className="py-12 sm:py-16" style={{ backgroundColor: P.cream }}>
         <Container>
-          <div className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
-            <Reveal className="order-2 md:order-1">
-              <Timeline
-                items={project.timeline.map((row) => ({
-                  date: row.date,
-                  label: row.label,
-                  emphasis: row.proper ? "critical" : undefined,
-                }))}
-              />
-            </Reveal>
-            <Reveal className="order-1 flex flex-col items-center text-center md:order-2 md:items-end md:text-right">
+          <Reveal className="mx-auto flex w-full max-w-3xl items-center justify-end gap-4 text-right">
+            <Image
+              src={asset("/internal/cta-wave2/cb-moon.webp")}
+              alt=""
+              aria-hidden
+              width={700}
+              height={700}
+              data-reveal
+              className="w-20 mix-blend-multiply sm:w-28"
+            />
+            <div>
               <h2 className="text-4xl font-bold leading-tight sm:text-5xl" style={{ color: TEXT.teal }} data-reveal>
                 Project
                 <br />
                 Timeline
               </h2>
               <Stars color={TEXT.orange} className="mt-2 text-sm" />
-              <Image
-                src={asset("/internal/cta-wave2/cb-moon.webp")}
-                alt=""
-                aria-hidden
-                width={700}
-                height={700}
-                data-reveal
-                className="mt-4 hidden w-48 mix-blend-multiply md:block"
-              />
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
+          <Reveal className="mx-auto mt-8 w-full max-w-3xl">
+            <Timeline
+              items={project.timeline.map((row) => ({
+                date: row.date,
+                label: row.label,
+                emphasis: row.proper ? "critical" : undefined,
+              }))}
+            />
+          </Reveal>
         </Container>
       </section>
 
@@ -381,7 +380,7 @@ export default function CelaballProjectPage() {
         </Container>
       </section>
 
-      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label={`Apply to ${project.name} now`} />
+      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label="Apply to Celaball now" />
     </div>
   );
 }
