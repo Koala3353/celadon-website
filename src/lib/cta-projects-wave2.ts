@@ -262,12 +262,14 @@ export const CELADON_MERCH: CelaMerchContent = {
   contacts: [
     {
       name: "Quisha Lim",
+      photo: "/internal/cta-wave2/pm-quisha.webp",
       role: "Project Manager",
       email: "quisha.nicole.lim@student.ateneo.edu",
       facebook: "https://www.facebook.com/quisha.lim.2025",
     },
     {
       name: "Iris Pabiloña",
+      photo: "/internal/cta-wave2/pm-iris.webp",
       role: "Project Manager",
       email: "iris.casey.pabilona@student.ateneo.edu",
       facebook: "https://www.facebook.com/iris.pabilona.3",
@@ -536,6 +538,7 @@ export const MANDOPOP: MandopopContent = {
   contacts: [
     {
       name: "Aiden Duyongco",
+      photo: "/internal/cta-wave2/pm-aiden.webp",
       role: "Project Manager",
       email: "aiden.jaedrick.riley.duyongco@student.ateneo.edu",
       facebook: "https://www.facebook.com/share/1Js7CzdDEr/",
@@ -766,12 +769,14 @@ export const CELABALL: CelaballContent = {
   contacts: [
     {
       name: "Beatrice Maxine D. Sy",
+      photo: "/internal/cta-wave2/pm-reese.webp",
       role: "Project Manager",
       email: "beatrice.maxine.sy@student.ateneo.edu",
       facebook: "https://web.facebook.com/beatricemaxine.sy.7",
     },
     {
       name: "Francesca M. Tiu",
+      photo: "/internal/cta-wave2/pm-chesea.webp",
       role: "Project Manager",
       email: "francesca.ean.alexis.tiu@student.ateneo.edu",
       facebook: "https://www.facebook.com/tiuchesea/",
