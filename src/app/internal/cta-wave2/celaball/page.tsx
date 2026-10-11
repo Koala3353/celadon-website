@@ -308,26 +308,25 @@ export default function CelaballProjectPage() {
       {/* Project Timeline */}
       <section className="py-12 sm:py-16" style={{ backgroundColor: P.cream }}>
         <Container>
-          <Reveal className="mx-auto flex w-full max-w-3xl items-center justify-end gap-4 text-right">
-            <Image
-              src={asset("/internal/cta-wave2/cb-moon.webp")}
-              alt=""
-              aria-hidden
-              width={700}
-              height={700}
-              data-reveal
-              className="w-20 mix-blend-multiply sm:w-28"
-            />
-            <div>
+          {/* Heading sits flush on top of the timeline, right-aligned; the
+              moon hangs beside it without adding to its height. */}
+          <Reveal className="mx-auto flex w-full max-w-3xl justify-end text-right">
+            <div className="relative">
+              <Image
+                src={asset("/internal/cta-wave2/cb-moon.webp")}
+                alt=""
+                aria-hidden
+                width={700}
+                height={700}
+                className="pointer-events-none absolute right-full top-1/2 mr-2 hidden w-24 -translate-y-1/2 mix-blend-multiply sm:block"
+              />
               <h2 className="text-4xl font-bold leading-tight sm:text-5xl" style={{ color: TEXT.teal }} data-reveal>
-                Project
-                <br />
-                Timeline
+                Project Timeline
               </h2>
-              <Stars color={TEXT.orange} className="mt-2 text-sm" />
+              <Stars color={TEXT.orange} className="text-sm" />
             </div>
           </Reveal>
-          <Reveal className="mx-auto mt-8 w-full max-w-3xl">
+          <Reveal className="mx-auto mt-2 w-full max-w-3xl">
             <Timeline
               items={project.timeline.map((row) => ({
                 date: row.date,
