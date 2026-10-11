@@ -20,7 +20,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     dates: "February 9–15, 2027",
     accent: ROSE_SALE.accent,
     blurb:
-      "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community. Through customizable bouquets and other love-centered products, it gives everyone a chance to express appreciation for one another.",
+      "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program. Through customizable bouquets and other love-centered products, it gives members and non-members alike a chance to express appreciation for one another.",
     photo: { src: "/internal/cta-wave1/rs-hero.webp", alt: "Rose Sale '27" },
     photoPosition: "90% center",
     href: "/internal/cta-wave2/rose-sale",
@@ -33,7 +33,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     accent: CELADON_MERCH.accent,
     photo: { src: "/internal/cta-wave2/cm-hero.webp", alt: "Celadon Merchandise" },
     blurb:
-      "Celadon Merchandise is a fundraising project that promotes Chinese culture within the Ateneo Community, simultaneously portraying Celadon’s organizational identity.",
+      "Celadon Merchandise promotes Chinese culture within the Ateneo community while portraying Celadon’s organizational identity. Through creative, culture-inspired products, it empowers people to express themselves and their style freely.",
     href: "/internal/cta-wave2/celadon-merch",
   },
   {
@@ -43,7 +43,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     dates: "March 7, 2027 (tentative)",
     accent: MANDOPOP.cardAccent,
     blurb:
-      "Mandopop Music Festival is a one-day concert held outside Ateneo, open to everyone at no cost. Organized by Celadon’s Cultural Affairs Department, the festival celebrates Chinese and Filipino-Chinese music through live performances of familiar favorites and contemporary interpretations of classic songs.",
+      "The Mandopop Music Festival is a one-day concert held outside Ateneo, free and open to the public. Under the theme “Beyond the Final Note,” it celebrates Chinese and Filipino-Chinese music through live performances of familiar favorites and fresh takes on classic songs.",
     photo: { src: "/internal/cta-wave2/mdp-hero.webp", alt: "Mandopop 2027 — Wave 2 Applications" },
     href: "/internal/cta-wave2/mandopop",
   },
@@ -54,7 +54,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     dates: "June 12, 2027",
     accent: CELABALL.cardAccent,
     blurb:
-      "Celaball is the closing project of Ateneo Celadon, serving as a formal party that brings together the Celadon community for an evening of remembrance, connection, and celebration through curated programs, interactive game segments, performances, and a shared dining experience.",
+      "Celaball is Ateneo Celadon’s premier culminating event: an elegant night of dining and cultural appreciation celebrating Chinese-Filipino culture, community, and milestones. It brings active members, executive boards, and alumni together as one pamilya.",
     photo: { src: "/internal/cta-wave2/cb-hero.webp", alt: "Celadon Ball — Jia Yuan: Home Across Horizons" },
     href: "/internal/cta-wave2/celaball",
   },
