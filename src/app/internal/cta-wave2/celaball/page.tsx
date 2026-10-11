@@ -12,7 +12,7 @@ import { ListAccordion } from "@/components/internal/list-accordion";
 import { Timeline } from "@/components/internal/timeline";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { CTA_WAVE2_APPLICATION_FORM_URL } from "@/lib/core-team-wave2";
+import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
 import { CELABALL } from "@/lib/cta-projects-wave2";
 import type { DeptGroup } from "@/lib/deputy-departments";
 
@@ -127,7 +127,10 @@ export default function CelaballProjectPage() {
           />
         </Reveal>
         <Container className="relative flex flex-col items-center pb-10 pt-10 text-center sm:pb-14 sm:pt-12">
-          <Reveal className="flex flex-col items-center">
+          <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
+            <p className="prose-body max-w-2xl text-lg text-dept-ink/80" data-reveal>
+              {wave2Blurb("celaball")}
+            </p>
             <div data-reveal>
               <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg" variant="accent">
                 Apply Now
@@ -308,9 +311,9 @@ export default function CelaballProjectPage() {
       {/* Project Timeline */}
       <section className="py-12 sm:py-16" style={{ backgroundColor: P.cream }}>
         <Container>
-          {/* Heading sits flush on top of the timeline, right-aligned; the
+          {/* Heading sits flush on top of the timeline, left-aligned; the
               moon hangs beside it without adding to its height. */}
-          <Reveal className="mx-auto flex w-full max-w-3xl justify-end text-right">
+          <Reveal className="mx-auto flex w-full max-w-3xl justify-start text-left">
             <div className="relative">
               <Image
                 src={asset("/internal/cta-wave2/cb-moon.webp")}
@@ -318,7 +321,7 @@ export default function CelaballProjectPage() {
                 aria-hidden
                 width={700}
                 height={700}
-                className="pointer-events-none absolute right-full top-1/2 mr-2 hidden w-24 -translate-y-1/2 mix-blend-multiply sm:block"
+                className="pointer-events-none absolute left-full top-1/2 ml-3 hidden w-24 -translate-y-1/2 mix-blend-multiply sm:block"
               />
               <h2 className="text-4xl font-bold leading-tight sm:text-5xl" style={{ color: TEXT.teal }} data-reveal>
                 Project Timeline
@@ -348,7 +351,11 @@ export default function CelaballProjectPage() {
             </p>
           </Reveal>
           <Reveal className="mx-auto mt-8 w-full max-w-3xl">
-            <ListAccordion groups={committeeGroups} />
+            {/* Garamond reads small, so the duties inside each committee go up
+                a step from the accordion's default 14px. */}
+            <div className="[&_details>div_li]:text-[17px] [&_details>div_p]:text-[17px]">
+              <ListAccordion groups={committeeGroups} />
+            </div>
           </Reveal>
         </Container>
       </section>

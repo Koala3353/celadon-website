@@ -60,6 +60,12 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
   },
 ];
 
+/** The hub card's short description, reused at the top of the project's
+ * own page so both say the same thing. */
+export function wave2Blurb(slug: string): string {
+  return CORE_TEAM_WAVE2_PROJECTS.find((project) => project.slug === slug)?.blurb ?? "";
+}
+
 export const CTA_WAVE2_TIMELINE: CoreTeamTimelineItem[] = [
   { date: "October 12–19, 2026", label: "CTA Wave 2 Duration" },
   { date: "October 19–21, 2026", label: "CTA Wave 2 Extension" },

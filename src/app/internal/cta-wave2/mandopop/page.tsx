@@ -11,10 +11,9 @@ import { ProjectFaqs } from "@/components/internal/project-faqs";
 import { PmContacts } from "@/components/internal/pm-contacts";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { Timeline } from "@/components/internal/timeline";
-import { PhotoPlaceholder } from "@/components/internal/photo-placeholder";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { CTA_WAVE2_APPLICATION_FORM_URL } from "@/lib/core-team-wave2";
+import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
 import { COMMPUB_REQUIREMENTS_GUIDE_URL, MANDOPOP } from "@/lib/cta-projects-wave2";
 
 export const metadata: Metadata = {
@@ -110,7 +109,10 @@ export default function MandopopProjectPage() {
           />
         </Reveal>
         <Container className="relative flex flex-col items-center pb-10 pt-10 text-center sm:pb-14 sm:pt-12">
-          <Reveal className="flex flex-col items-center">
+          <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
+            <p className="prose-body max-w-2xl text-lg text-dept-ink/80" data-reveal>
+              {wave2Blurb("mandopop")}
+            </p>
             <div data-reveal>
               <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg" variant="accent">
                 Apply Now
@@ -123,7 +125,7 @@ export default function MandopopProjectPage() {
       {/* What is Mandopop? */}
       <Band tone="white">
         <Container>
-          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
+          <Reveal className="mx-auto w-full max-w-3xl">
             <div className="flex flex-col gap-4 text-left">
               <Heading>What is Mandopop? 🎶</Heading>
               <RichParagraphs
@@ -146,7 +148,6 @@ export default function MandopopProjectPage() {
                 </div>
               </dl>
             </div>
-            <PhotoPlaceholder className="aspect-[4/3] w-full" />
           </Reveal>
         </Container>
       </Band>

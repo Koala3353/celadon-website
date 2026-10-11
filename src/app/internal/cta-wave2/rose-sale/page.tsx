@@ -14,7 +14,7 @@ import { PhotoCarousel } from "@/components/photo-carousel";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { CTA_WAVE2_APPLICATION_FORM_URL } from "@/lib/core-team-wave2";
+import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
 import { ROSE_SALE_WAVE2 } from "@/lib/cta-projects-wave2";
 
 export const metadata: Metadata = {
@@ -99,6 +99,9 @@ export default function RoseSaleWave2ProjectPage() {
         </Reveal>
         <Container className="relative flex flex-col items-center gap-5 pb-10 pt-10 text-center sm:pb-14 sm:pt-12">
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
+            <p className="prose-body max-w-2xl text-lg text-dept-ink/80" data-reveal>
+              {wave2Blurb("rose-sale")}
+            </p>
             {/* Scoped to just this button — the doc's own blue instead of
                 the page's magenta-pink accent, without touching that
                 accent anywhere else on the page. */}

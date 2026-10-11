@@ -11,9 +11,8 @@ import { ProjectFaqs } from "@/components/internal/project-faqs";
 import { PmContacts } from "@/components/internal/pm-contacts";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
-import { PhotoPlaceholder } from "@/components/internal/photo-placeholder";
 import { asset } from "@/lib/asset";
-import { CTA_WAVE2_APPLICATION_FORM_URL } from "@/lib/core-team-wave2";
+import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
 import { CELADON_MERCH } from "@/lib/cta-projects-wave2";
 
 export const metadata: Metadata = {
@@ -117,6 +116,9 @@ export default function CeladonMerchProjectPage() {
 
         <Container className="relative flex flex-col items-center gap-5 pb-10 pt-10 text-center sm:pb-14 sm:pt-12">
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-5">
+            <p className="prose-body max-w-2xl text-lg text-dept-ink/80" data-reveal>
+              {wave2Blurb("celadon-merch")}
+            </p>
             <div data-reveal>
               <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg" variant="accent">
                 Apply Now
@@ -129,7 +131,7 @@ export default function CeladonMerchProjectPage() {
       {/* What is CelaMerch? */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
+          <Reveal className="mx-auto w-full max-w-3xl">
             <div className="flex flex-col gap-4 text-left">
               <Heading>
                 What is <Red>Cela</Red>
@@ -142,7 +144,6 @@ export default function CeladonMerchProjectPage() {
                 Welcome to <Red>Celadon</Red> <Orange>Merchandise</Orange>!
               </p>
             </div>
-            <PhotoPlaceholder className="aspect-[4/3] w-full" />
           </Reveal>
         </Container>
       </section>
