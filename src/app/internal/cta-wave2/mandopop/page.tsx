@@ -6,7 +6,10 @@ import { Reveal } from "@/components/motion/reveal";
 import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
+import { ProjectFaqs } from "@/components/internal/project-faqs";
+import { PmContacts } from "@/components/internal/pm-contacts";
 import { ListAccordion } from "@/components/internal/list-accordion";
+import { Timeline } from "@/components/internal/timeline";
 import { PhotoPlaceholder } from "@/components/internal/photo-placeholder";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
@@ -72,13 +75,6 @@ function Heading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function initials(name: string): string {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
-}
 
 export default function MandopopProjectPage() {
   const project = MANDOPOP;
@@ -251,33 +247,14 @@ export default function MandopopProjectPage() {
               {project.timelineNote}
             </p>
           </Reveal>
-          {/* The doc lays this out as a two-column table, so it's kept as
-              one — the period in red, what to expect beside it. */}
           <Reveal className="mx-auto mt-8 w-full max-w-3xl">
-            <dl className="overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-sm)] ring-1 ring-inset ring-[#2A4072]/10">
-              <div
-                className="hidden grid-cols-[13rem_1fr] gap-4 px-5 py-3 text-xs font-black uppercase tracking-wider sm:grid"
-                style={{ backgroundColor: NAVY, color: CREAM }}
-              >
-                <span>Period</span>
-                <span>What to Expect</span>
-              </div>
-              {project.timeline.map((row, i) => (
-                <div
-                  key={row.period}
-                  data-reveal
-                  className={cn(
-                    "grid gap-1 px-5 py-4 sm:grid-cols-[13rem_1fr] sm:gap-4",
-                    i > 0 && "border-t border-[#2A4072]/10"
-                  )}
-                >
-                  <dt className="text-sm font-black" style={{ color: RED }}>
-                    {row.period}
-                  </dt>
-                  <dd className="prose-body text-sm opacity-90">{row.expect}</dd>
-                </div>
-              ))}
-            </dl>
+            <Timeline
+              items={project.timeline.map((row) => ({
+                date: row.period,
+                label: row.expect,
+                emphasis: row.expect === "Mandopop Music Festival" ? "critical" : undefined,
+              }))}
+            />
           </Reveal>
         </Container>
       </Band>
@@ -358,20 +335,7 @@ export default function MandopopProjectPage() {
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading>FAQs 💬</Heading>
-            <div className="mt-6 flex flex-col gap-6">
-              {project.faqs.map((faq) => (
-                <div key={faq.q} data-reveal>
-                  <p className="font-bold" style={{ color: RED }}>
-                    {faq.q}
-                  </p>
-                  <RichParagraphs
-                    paragraphs={faq.a}
-                    className="mt-1.5 flex flex-col gap-2"
-                    paragraphClassName="prose-body opacity-90"
-                  />
-                </div>
-              ))}
-            </div>
+            <ProjectFaqs faqs={project.faqs} />
           </Reveal>
         </Container>
       </Band>
@@ -386,42 +350,8 @@ export default function MandopopProjectPage() {
             <p className="prose-body mt-3" data-reveal>
               {project.contactsIntro}
             </p>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2">
-              {project.contacts.map((contact) => (
-                <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
-                  <div
-                    className="flex h-28 w-28 items-center justify-center rounded-full"
-                    style={{ backgroundColor: NAVY, color: YELLOW }}
-                  >
-                    <span className="text-2xl font-black">{initials(contact.name)}</span>
-                  </div>
-                  <p className="font-bold">{contact.name}</p>
-                  <p className="text-sm opacity-75">{contact.role}</p>
-                  <p className="text-sm">
-                    {contact.facebook && (
-                      <a
-                        href={contact.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-bold underline-offset-2 hover:underline"
-                        style={{ color: RED }}
-                      >
-                        Facebook
-                      </a>
-                    )}
-                    {contact.facebook && contact.email && " | "}
-                    {contact.email && (
-                      <a
-                        href={`mailto:${contact.email}`}
-                        className="font-bold underline-offset-2 hover:underline"
-                        style={{ color: RED }}
-                      >
-                        Email
-                      </a>
-                    )}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-8">
+              <PmContacts contacts={project.contacts} />
             </div>
             <p className="prose-body mt-10 text-center font-bold" data-reveal>
               {project.closingLine} 📼

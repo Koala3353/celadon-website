@@ -31,6 +31,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     // Merch Selling, from the project timeline.
     dates: "February 2–5, 2027",
     accent: CELADON_MERCH.accent,
+    photo: { src: "/internal/cta-wave2/cm-hero.webp", alt: "Celadon Merchandise" },
     blurb:
       "Celadon Merchandise is a fundraising project that promotes Chinese culture within the Ateneo Community, simultaneously portraying Celadon’s organizational identity.",
     href: "/internal/cta-wave2/celadon-merch",

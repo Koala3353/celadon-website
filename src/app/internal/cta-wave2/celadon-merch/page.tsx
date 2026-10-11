@@ -7,6 +7,9 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
+import { ProjectFaqs } from "@/components/internal/project-faqs";
+import { PmContacts } from "@/components/internal/pm-contacts";
+import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { PhotoPlaceholder } from "@/components/internal/photo-placeholder";
 import { asset } from "@/lib/asset";
@@ -18,13 +21,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-function initials(name: string): string {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
-}
 
 // Matches the PMs' content tab: Kumbh Sans body, Libre Baskerville
 // headings in near-black brown, with one word of each heading picked out in
@@ -97,8 +93,8 @@ export default function CeladonMerchProjectPage() {
             <Image
               src={asset(project.heroImage.src)}
               alt={project.heroImage.alt}
-              width={1920}
-              height={1080}
+              width={1600}
+              height={902}
               priority
               data-reveal
               className="max-h-[60vh] w-full object-cover"
@@ -199,25 +195,8 @@ export default function CeladonMerchProjectPage() {
           <Reveal className="mx-auto w-full max-w-2xl text-left">
             <Heading>Project Timeline</Heading>
           </Reveal>
-          {/* The doc lays this out as a two-column table — dates in orange,
-              what's happening in red — so it's kept as one. */}
           <Reveal className="mx-auto mt-8 w-full max-w-2xl">
-            <dl className="overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-sm)]">
-              {project.timeline.map((row, i) => (
-                <div
-                  key={row.label}
-                  data-reveal
-                  className={`grid gap-1 px-5 py-3.5 text-center sm:grid-cols-2 sm:gap-4 ${i > 0 ? "border-t border-[#220300]/15" : ""}`}
-                >
-                  <dt className="text-sm" style={{ color: ORANGE_TEXT }}>
-                    {row.date}
-                  </dt>
-                  <dd className="text-sm font-bold" style={{ color: RED }}>
-                    {row.label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <Timeline items={project.timeline} />
           </Reveal>
         </Container>
       </section>
@@ -232,7 +211,10 @@ export default function CeladonMerchProjectPage() {
             </p>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl">
-            <ListAccordion groups={project.committees} />
+            {/* Committee names in the doc's heading face, Libre Baskerville. */}
+            <div className="[&_summary>span]:[font-family:var(--font-cm-heading)]">
+              <ListAccordion groups={project.committees} />
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -257,7 +239,16 @@ export default function CeladonMerchProjectPage() {
               ))}
             </div>
             <p className="prose-body mt-6 text-center" style={{ color: ORANGE_TEXT }} data-reveal>
-              ~ {project.requirementsNote} ~
+              ~ {project.requirementsNote}{" "}
+              <a
+                href={project.moodboard.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold underline underline-offset-2 hover:opacity-80"
+              >
+                {project.moodboard.label}
+              </a>{" "}
+              ~
             </p>
           </Reveal>
         </Container>
@@ -270,20 +261,7 @@ export default function CeladonMerchProjectPage() {
             <Heading>
               Project <Red>FAQs</Red>!
             </Heading>
-            <div className="mt-6 flex flex-col gap-6">
-              {project.faqs.map((faq) => (
-                <div key={faq.q} data-reveal>
-                  <p className="font-bold" style={{ color: RED }}>
-                    {faq.q}
-                  </p>
-                  <RichParagraphs
-                    paragraphs={faq.a}
-                    className="mt-1.5 flex flex-col gap-2"
-                    paragraphClassName="prose-body text-muted-foreground"
-                  />
-                </div>
-              ))}
-            </div>
+            <ProjectFaqs faqs={project.faqs} />
           </Reveal>
         </Container>
       </section>
@@ -295,34 +273,8 @@ export default function CeladonMerchProjectPage() {
             <Heading>
               Contact <Red>Us</Red>!!
             </Heading>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2">
-              {project.contacts.map((contact) => (
-                <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>
-                  <div className="flex h-28 w-28 items-center justify-center rounded-full bg-dept-accent/15">
-                    <span className="display text-2xl text-dept-ink/60">{initials(contact.name)}</span>
-                  </div>
-                  <p className="font-bold text-dept-ink">{contact.name}</p>
-                  <p className="text-sm text-muted-foreground">{contact.role}</p>
-                  <p className="text-sm">
-                    {contact.facebook && (
-                      <a
-                        href={contact.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-link underline-offset-2 hover:underline"
-                      >
-                        Facebook
-                      </a>
-                    )}
-                    {contact.facebook && contact.email && " | "}
-                    {contact.email && (
-                      <a href={`mailto:${contact.email}`} className="text-link underline-offset-2 hover:underline">
-                        Email
-                      </a>
-                    )}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-6">
+              <PmContacts contacts={project.contacts} />
             </div>
           </Reveal>
         </Container>

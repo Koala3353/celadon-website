@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
+import { ProjectFaqs } from "@/components/internal/project-faqs";
 import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
@@ -312,18 +313,7 @@ export default function RoseSaleWave2ProjectPage() {
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl [font-family:var(--font-rs-lato)]">
             <Heading color="#783F1A">❓ FAQs</Heading>
-            <div className="mt-6 flex flex-col gap-6">
-              {project.faqs.map((faq) => (
-                <div key={faq.q} data-reveal>
-                  <p className="font-bold text-dept-ink">{faq.q}</p>
-                  <RichParagraphs
-                    paragraphs={faq.a}
-                    className="mt-1.5 flex flex-col gap-2"
-                    paragraphClassName="prose-body text-muted-foreground"
-                  />
-                </div>
-              ))}
-            </div>
+            <ProjectFaqs faqs={project.faqs} />
           </Reveal>
         </Container>
       </section>

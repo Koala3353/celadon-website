@@ -5,10 +5,15 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { BackLink } from "@/components/internal/back-link";
+import { ProjectFaqs } from "@/components/internal/project-faqs";
+import { PmContacts } from "@/components/internal/pm-contacts";
+import { ListAccordion } from "@/components/internal/list-accordion";
+import { Timeline } from "@/components/internal/timeline";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { CTA_WAVE2_APPLICATION_FORM_URL } from "@/lib/core-team-wave2";
 import { CELABALL } from "@/lib/cta-projects-wave2";
+import type { DeptGroup } from "@/lib/deputy-departments";
 
 export const metadata: Metadata = {
   title: "Celaball — Core Team Applications Wave 2",
@@ -36,11 +41,6 @@ const TEXT = {
   coral: "#C4503C",
   teal: "#3F7F8B",
 };
-const TILE = [
-  { bg: "#FDE5DF", rule: P.coral, ink: TEXT.coral },
-  { bg: "#E4F1F3", rule: P.teal, ink: TEXT.teal },
-  { bg: "#FDEBCF", rule: P.amber, ink: TEXT.amber },
-];
 
 function Heading({
   children,
@@ -82,6 +82,21 @@ function Bullets({ items, color = INK }: { items: string[]; color?: string }) {
 export default function CelaballProjectPage() {
   const project = CELABALL;
   const [aboutLead, aboutRest] = project.about;
+  // Same accordion as every other project page; a committee's requirement
+  // follows its duties under its own bold sub-heading.
+  const committeeGroups: DeptGroup[] = project.committees.map((committee) => ({
+    label: `${committee.name} · ${committee.count}`,
+    items: [
+      ...committee.items,
+      ...(committee.requirement
+        ? [
+            [{ text: "Requirement", bold: true }],
+            committee.requirement.portfolio,
+            `Alternative: ${committee.requirement.alternative}`,
+          ]
+        : []),
+    ],
+  }));
 
   return (
     <div
@@ -295,26 +310,14 @@ export default function CelaballProjectPage() {
       <section className="py-12 sm:py-16" style={{ backgroundColor: P.cream }}>
         <Container>
           <div className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
-            <Reveal className="order-2 flex flex-col md:order-1">
-              {project.timeline.map((row) =>
-                row.proper ? (
-                  <p
-                    key={row.label}
-                    className="border-y py-4 text-xl font-bold leading-snug sm:text-2xl"
-                    style={{ color: TEXT.coral, borderColor: P.coral }}
-                    data-reveal
-                  >
-                    {row.date} : {row.label}
-                  </p>
-                ) : (
-                  <p key={row.label} className="border-b py-3 leading-snug" style={{ borderColor: `${P.amber}80` }} data-reveal>
-                    <strong className="font-bold" style={{ color: TEXT.orange }}>
-                      {row.date}:
-                    </strong>{" "}
-                    {row.label}
-                  </p>
-                )
-              )}
+            <Reveal className="order-2 md:order-1">
+              <Timeline
+                items={project.timeline.map((row) => ({
+                  date: row.date,
+                  label: row.label,
+                  emphasis: row.proper ? "critical" : undefined,
+                }))}
+              />
             </Reveal>
             <Reveal className="order-1 flex flex-col items-center text-center md:order-2 md:items-end md:text-right">
               <h2 className="text-4xl font-bold leading-tight sm:text-5xl" style={{ color: TEXT.teal }} data-reveal>
@@ -340,41 +343,14 @@ export default function CelaballProjectPage() {
       {/* Who are we looking for? */}
       <section className="bg-white py-12 sm:py-16">
         <Container>
-          <Reveal className="mx-auto w-full max-w-5xl text-left">
+          <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading color={TEXT.orange}>Who are we looking for?</Heading>
             <p className="mt-3" data-reveal>
               {project.lookingFor}
             </p>
           </Reveal>
-          <Reveal stagger={60} className="mx-auto mt-8 grid w-full max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {project.committees.map((committee, i) => {
-              const tone = TILE[i % TILE.length];
-              return (
-                <div
-                  key={committee.name}
-                  className="flex flex-col gap-3 rounded-2xl border-t-4 p-5 text-left"
-                  style={{ backgroundColor: tone.bg, borderColor: tone.rule }}
-                  data-reveal
-                >
-                  <div>
-                    <h3 className="text-xl font-bold leading-tight" style={{ color: tone.ink }}>
-                      {committee.name}
-                    </h3>
-                    <p className="mt-1 text-sm font-bold">{committee.count}</p>
-                  </div>
-                  <Bullets items={committee.items} />
-                  {committee.requirement && (
-                    <div className="mt-1 text-[15px]">
-                      <p className="italic">Requirement:</p>
-                      <ul className="mt-1 flex flex-col gap-1 pl-4">
-                        <li className="list-[circle]">{committee.requirement.portfolio}</li>
-                        <li className="list-[circle]">Alternative: {committee.requirement.alternative}</li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          <Reveal className="mx-auto mt-8 w-full max-w-3xl">
+            <ListAccordion groups={committeeGroups} />
           </Reveal>
         </Container>
       </section>
@@ -384,16 +360,7 @@ export default function CelaballProjectPage() {
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading color={TEXT.amber}>FAQs</Heading>
-            <div className="mt-6 flex flex-col gap-6">
-              {project.faqs.map((faq, i) => (
-                <div key={faq.q} data-reveal>
-                  <p className="rounded-lg px-4 py-2.5 font-bold" style={{ backgroundColor: P.coral, color: "#3B1A12" }}>
-                    {i + 1}. {faq.q}
-                  </p>
-                  <p className="mt-3 px-1">{faq.a}</p>
-                </div>
-              ))}
-            </div>
+            <ProjectFaqs faqs={project.faqs} />
           </Reveal>
         </Container>
       </section>
@@ -407,40 +374,8 @@ export default function CelaballProjectPage() {
             <p className="mt-4" data-reveal>
               {project.contactsIntro}
             </p>
-            <div className="mt-8 grid w-full gap-8 sm:grid-cols-2">
-              {project.contacts.map((contact) => (
-                <div key={contact.name} className="flex flex-col items-center gap-1" data-reveal>
-                  <p>
-                    <strong className="font-bold">{contact.name}</strong> | {contact.role}
-                  </p>
-                  {contact.email && (
-                    <p className="text-[15px]">
-                      <strong className="font-bold">Email:</strong>{" "}
-                      <a
-                        href={`mailto:${contact.email}`}
-                        className="break-all underline-offset-2 hover:underline"
-                        style={{ color: TEXT.teal }}
-                      >
-                        {contact.email}
-                      </a>
-                    </p>
-                  )}
-                  {contact.facebook && (
-                    <p className="text-[15px]">
-                      <strong className="font-bold">Facebook:</strong>{" "}
-                      <a
-                        href={contact.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="break-all font-bold underline underline-offset-2 hover:opacity-80"
-                        style={{ color: TEXT.teal }}
-                      >
-                        {contact.facebook.replace(/^https?:\/\/(www\.|web\.)?/, "").replace(/\/$/, "")}
-                      </a>
-                    </p>
-                  )}
-                </div>
-              ))}
+            <div className="mt-8 w-full">
+              <PmContacts contacts={project.contacts} />
             </div>
           </Reveal>
         </Container>

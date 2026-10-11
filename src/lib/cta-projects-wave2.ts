@@ -97,7 +97,6 @@ export interface CelaMerchContent {
   name: string;
   fullName: string;
   accent: { base: string; tint: string; ink: string };
-  /** Unset until the header artwork arrives — the page shows a text hero. */
   heroImage?: { src: string; alt: string };
   whatIsIt: string;
   welcome: string;
@@ -110,6 +109,7 @@ export interface CelaMerchContent {
   committees: DeptGroup[];
   requirements: DeptGroup[];
   requirementsNote: string;
+  moodboard: { label: string; url: string };
   faqs: { q: string; a: AboutRun[][] }[];
   contacts: DeptContact[];
 }
@@ -122,6 +122,7 @@ export const CELADON_MERCH: CelaMerchContent = {
   // own content tab is styled in: brick red for headings, warm orange for
   // committee labels and notes, near-black brown for ink.
   accent: { base: "#BD433E", tint: "#FBF1EA", ink: "#220300" },
+  heroImage: { src: "/internal/cta-wave2/cm-hero.webp", alt: "Celadon Merchandise" },
   whatIsIt:
     "Celadon Merchandise is a fundraising project that promotes Chinese culture within the Ateneo Community, simultaneously portraying Celadon’s organizational identity. Through integrating creativity and culture into its products, this project empowers individuals to express themselves, their preferences, and fashion styles freely.",
   welcome: "Welcome to Celadon Merchandise!",
@@ -231,7 +232,12 @@ export const CELADON_MERCH: CelaMerchContent = {
       ],
     },
   ],
-  requirementsNote: "Alternative requirements must adhere to the vision and theme of Celadon Merchandise Wave 2.",
+  requirementsNote:
+    "Alternative requirements must adhere to the vision and theme of Celadon Merchandise Wave 2 as found in this drive:",
+  moodboard: {
+    label: "CM Wave 2 Moodboard",
+    url: "https://drive.google.com/file/d/1su3nf-UMY4ZwtqX6ERhQG3Sp5Oy5-ds_/view?usp=sharing",
+  },
   faqs: [
     {
       q: "How heavy is the workload of this project?",
