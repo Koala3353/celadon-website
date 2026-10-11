@@ -151,8 +151,6 @@ export const CELADON_MERCH: CelaMerchContent = {
   thrust:
     "To elevate the project’s brand image and visibility in the Atenean Community, fostering a space for self-expression and growth",
   timeline: [
-    { date: "October 7–12, 2026", label: "Application Period" },
-    { date: "October 21, 2026", label: "Release of Results" },
     { date: "October 26 – December 14, 2026", label: "Merch Ideation" },
     { date: "January 8, 2027", label: "General Assembly" },
     // The doc reads "January 15, 2026", which would end before it starts —
@@ -384,8 +382,6 @@ export const MANDOPOP: MandopopContent = {
   timelineNote:
     "The preparation schedule below is proposed and may change as the venue, performers, and event date are finalized.",
   timeline: [
-    { period: "October 7–13, 2026", expect: "CTA Wave 2 applications" },
-    { period: "October 21, 2026", expect: "Release of application results" },
     { period: "Late October 2026", expect: "Core team onboarding, first general assembly, and committee planning" },
     {
       period: "November–December 2026",
@@ -615,7 +611,7 @@ export const CELABALL: CelaballContent = {
     ],
     [
       {
-        text: "It acts as a milestone event marking the culmination of the organization’s many activities, projects, and initiatives throughout the school year—uniting members, the EBCB, and past Celadonians to honor their shared achievements and reflect on the past year.",
+        text: "It acts as a milestone event marking the culmination of the organization’s many activities, projects, and initiatives throughout the school year—uniting members, the EBCB, and past Celadoneans to honor their shared achievements and reflect on the past year.",
       },
     ],
   ],
@@ -666,8 +662,6 @@ export const CELABALL: CelaballContent = {
     },
   ],
   timeline: [
-    { date: "October 12–19, 2026", label: "Core Team Applications (Wave 2)" },
-    { date: "October 24, 2026", label: "Release of Application Results" },
     { date: "Late October 2026", label: "Core Team Onboarding & 1st General Assembly" },
     {
       date: "November 2026 – January 2027",
@@ -679,7 +673,7 @@ export const CELABALL: CelaballContent = {
     { date: "Late June 2027", label: "Post-Event Evaluations, Documentation Directory Release & Debriefing" },
   ],
   lookingFor:
-    "We are looking for Celadonians who are proactive, communicative, and passionate about creating a memorable experience for the community.",
+    "We are looking for Celadoneans who are proactive, communicative, and passionate about creating a memorable experience for the community.",
   committees: [
     {
       name: "Programs (PROG)",
