@@ -8,7 +8,6 @@ import { SkyHero } from "@/components/internal/sky-hero";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
 import { ProjectCard } from "@/components/internal/project-card";
-import { PhotoPlaceholder } from "@/components/internal/photo-placeholder";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import {
@@ -92,16 +91,6 @@ export default function CoreTeamApplicationsWave2HubPage() {
               {CORE_TEAM_WAVE2_PROJECTS.map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
-            </Reveal>
-          </Container>
-        </section>
-
-        <section>
-          <Container>
-            <Reveal stagger={60}>
-              {/* Holds the photo wall's place until Wave 2's project
-                  photos are in; swap back to <PhotoScroller> then. */}
-              <PhotoPlaceholder className="mx-auto aspect-[16/7] w-full max-w-5xl" />
             </Reveal>
           </Container>
         </section>
