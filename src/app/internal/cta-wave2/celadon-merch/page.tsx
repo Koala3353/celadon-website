@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Kumbh_Sans, Libre_Baskerville } from "next/font/google";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -6,7 +7,6 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
-import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { PhotoPlaceholder } from "@/components/internal/photo-placeholder";
 import { asset } from "@/lib/asset";
@@ -26,15 +26,31 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-// CelaMerch hasn't sent fonts or colors yet, so this page uses the site's
-// own type and takes every color from --dept-* — swapping the placeholder
-// accent in cta-projects-wave2.ts restyles the whole page at once.
+// Matches the PMs' content tab: Kumbh Sans body, Libre Baskerville
+// headings in near-black brown, with one word of each heading picked out in
+// brick red or warm orange.
+const kumbhSans = Kumbh_Sans({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-cm-body" });
+const libreBaskerville = Libre_Baskerville({ subsets: ["latin"], weight: ["700"], variable: "--font-cm-heading" });
+
+const RED = "#BD433E";
+// The doc's own orange (#DC9960) is too light to read as small text on
+// white, so text uses this darker shade of it; fills keep the original.
+const ORANGE_TEXT = "#B5652A";
+
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-xl font-bold text-dept-ink sm:text-2xl" data-reveal>
+    <h2 className="text-xl font-bold text-dept-ink [font-family:var(--font-cm-heading)] sm:text-2xl" data-reveal>
       {children}
     </h2>
   );
+}
+
+function Red({ children }: { children: React.ReactNode }) {
+  return <span style={{ color: RED }}>{children}</span>;
+}
+
+function Orange({ children }: { children: React.ReactNode }) {
+  return <span style={{ color: ORANGE_TEXT }}>{children}</span>;
 }
 
 function Bullets({ items }: { items: string[] }) {
@@ -55,6 +71,7 @@ export default function CeladonMerchProjectPage() {
 
   return (
     <div
+      className={`${kumbhSans.variable} ${libreBaskerville.variable} [font-family:var(--font-cm-body)]`}
       style={
         {
           "--dept-accent": project.accent.base,
@@ -95,8 +112,8 @@ export default function CeladonMerchProjectPage() {
               <p className="sky-display eyebrow text-dept-accent" data-reveal>
                 Core Team Applications &middot; Wave 2
               </p>
-              <h1 className="text-4xl font-bold text-dept-ink sm:text-6xl" data-reveal>
-                {project.fullName}
+              <h1 className="text-4xl font-bold text-dept-ink [font-family:var(--font-cm-heading)] sm:text-6xl" data-reveal>
+                <Red>Celadon</Red> <Orange>Merchandise</Orange>
               </h1>
             </Reveal>
           </Container>
@@ -118,12 +135,15 @@ export default function CeladonMerchProjectPage() {
         <Container>
           <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
             <div className="flex flex-col gap-4 text-left">
-              <Heading>What is CelaMerch?</Heading>
+              <Heading>
+                What is <Red>Cela</Red>
+                <Orange>Merch</Orange>?
+              </Heading>
               <p className="prose-body text-dept-ink/80" data-reveal>
                 {project.whatIsIt}
               </p>
-              <p className="text-lg font-bold text-dept-accent" data-reveal>
-                {project.welcome}
+              <p className="text-lg font-bold text-dept-ink [font-family:var(--font-cm-heading)]" data-reveal>
+                Welcome to <Red>Celadon</Red> <Orange>Merchandise</Orange>!
               </p>
             </div>
             <PhotoPlaceholder className="aspect-[4/3] w-full" />
@@ -135,7 +155,9 @@ export default function CeladonMerchProjectPage() {
       <section className="bg-dept-tint py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4 text-left">
-            <Heading>A Message from the PMs&hellip;</Heading>
+            <Heading>
+              A <Red>Message</Red> from the PMs&hellip;
+            </Heading>
             <RichParagraphs
               paragraphs={project.letter}
               className="flex flex-col gap-4"
@@ -153,15 +175,17 @@ export default function CeladonMerchProjectPage() {
         <Container>
           <Reveal className="mx-auto grid w-full max-w-4xl gap-6 sm:grid-cols-2">
             {[
-              { heading: "Our Vision", body: project.vision },
-              { heading: "Our Thrust", body: project.thrust },
+              { heading: "Our", word: "Vision", color: RED, body: project.vision },
+              { heading: "Our", word: "Thrust", color: ORANGE_TEXT, body: project.thrust },
             ].map((block) => (
               <div
                 key={block.heading}
                 className="flex flex-col gap-3 rounded-2xl bg-dept-tint p-6 text-left ring-1 ring-inset ring-dept-accent/15"
                 data-reveal
               >
-                <h2 className="text-xl font-bold text-dept-ink">{block.heading}</h2>
+                <h2 className="text-xl font-bold text-dept-ink [font-family:var(--font-cm-heading)]">
+                  {block.heading} <span style={{ color: block.color }}>{block.word}</span>
+                </h2>
                 <p className="prose-body text-dept-ink/80">{block.body}</p>
               </div>
             ))}
@@ -175,12 +199,25 @@ export default function CeladonMerchProjectPage() {
           <Reveal className="mx-auto w-full max-w-2xl text-left">
             <Heading>Project Timeline</Heading>
           </Reveal>
+          {/* The doc lays this out as a two-column table — dates in orange,
+              what's happening in red — so it's kept as one. */}
           <Reveal className="mx-auto mt-8 w-full max-w-2xl">
-            {project.timeline.length > 0 ? (
-              <Timeline items={project.timeline} />
-            ) : (
-              <PhotoPlaceholder className="py-10" label="Timeline coming soon" />
-            )}
+            <dl className="overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-sm)]">
+              {project.timeline.map((row, i) => (
+                <div
+                  key={row.label}
+                  data-reveal
+                  className={`grid gap-1 px-5 py-3.5 text-center sm:grid-cols-2 sm:gap-4 ${i > 0 ? "border-t border-[#220300]/15" : ""}`}
+                >
+                  <dt className="text-sm" style={{ color: ORANGE_TEXT }}>
+                    {row.date}
+                  </dt>
+                  <dd className="text-sm font-bold" style={{ color: RED }}>
+                    {row.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </Container>
       </section>
@@ -212,12 +249,14 @@ export default function CeladonMerchProjectPage() {
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {project.requirements.map((req) => (
                 <div key={req.label} className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-[var(--shadow-sm)]" data-reveal>
-                  <p className="font-bold text-dept-ink">{req.label}</p>
+                  <p className="font-bold" style={{ color: RED }}>
+                    {req.label}
+                  </p>
                   <Bullets items={req.items as string[]} />
                 </div>
               ))}
             </div>
-            <p className="prose-body mt-6 text-center italic text-dept-ink/70" data-reveal>
+            <p className="prose-body mt-6 text-center" style={{ color: ORANGE_TEXT }} data-reveal>
               ~ {project.requirementsNote} ~
             </p>
           </Reveal>
@@ -228,11 +267,15 @@ export default function CeladonMerchProjectPage() {
       <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
-            <Heading>Project FAQs!</Heading>
+            <Heading>
+              Project <Red>FAQs</Red>!
+            </Heading>
             <div className="mt-6 flex flex-col gap-6">
               {project.faqs.map((faq) => (
                 <div key={faq.q} data-reveal>
-                  <p className="font-bold text-dept-ink">{faq.q}</p>
+                  <p className="font-bold" style={{ color: RED }}>
+                    {faq.q}
+                  </p>
                   <RichParagraphs
                     paragraphs={faq.a}
                     className="mt-1.5 flex flex-col gap-2"
@@ -249,7 +292,9 @@ export default function CeladonMerchProjectPage() {
       <section className="bg-white pb-14 pt-4 sm:pb-20">
         <Container>
           <Reveal className="mx-auto w-full max-w-2xl text-left">
-            <Heading>Contact Us!!</Heading>
+            <Heading>
+              Contact <Red>Us</Red>!!
+            </Heading>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               {project.contacts.map((contact) => (
                 <div key={contact.name} className="flex flex-col items-center gap-2 text-center" data-reveal>

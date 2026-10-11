@@ -3,12 +3,11 @@
  * same shape as Wave 1's (core-team-wave.ts), so the hub and its project
  * cards reuse Wave 1's components unchanged.
  *
- * Wave 2's fourth project, CelaBall, is deliberately absent until its
- * content arrives — add it to CORE_TEAM_WAVE2_PROJECTS then.
+ * Four projects: Rose Sale, Celadon Merch, Mandopop and CelaBall.
  */
 import type { CoreTeamProject, CoreTeamTimelineItem } from "@/lib/core-team-wave";
 import type { AboutRun } from "@/lib/deputy-departments";
-import { CELADON_MERCH, MANDOPOP } from "@/lib/cta-projects-wave2";
+import { CELABALL, CELADON_MERCH, MANDOPOP } from "@/lib/cta-projects-wave2";
 import { ROSE_SALE } from "@/lib/cta-projects";
 
 export const CTA_WAVE2_APPLICATION_FORM_URL = "https://forms.gle/VTQZpGMPMekgwhck8";
@@ -18,7 +17,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     slug: "rose-sale",
     name: "Rose Sale",
     emoji: "🌹",
-    dates: "February 9–13, 2027",
+    dates: "February 9–15, 2027",
     accent: ROSE_SALE.accent,
     blurb:
       "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community. Through customizable bouquets and other love-centered products, it gives everyone a chance to express appreciation for one another.",
@@ -47,13 +46,24 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     photo: { src: "/internal/cta-wave2/mdp-hero.webp", alt: "Mandopop 2027 — Wave 2 Applications" },
     href: "/internal/cta-wave2/mandopop",
   },
+  {
+    slug: "celaball",
+    name: "Celadon Ball",
+    emoji: "🪩",
+    dates: "June 12, 2027",
+    accent: CELABALL.cardAccent,
+    blurb:
+      "Celaball is the closing project of Ateneo Celadon, serving as a formal party that brings together the Celadon community for an evening of remembrance, connection, and celebration through curated programs, interactive game segments, performances, and a shared dining experience.",
+    photo: { src: "/internal/cta-wave2/cb-hero.webp", alt: "Celadon Ball — Jia Yuan: Home Across Horizons" },
+    href: "/internal/cta-wave2/celaball",
+  },
 ];
 
 export const CTA_WAVE2_TIMELINE: CoreTeamTimelineItem[] = [
-  { date: "October 7–13, 2026", label: "CTA Wave 2 Duration" },
-  { date: "October 13–16, 2026", label: "CTA Wave 2 Extension" },
-  { date: "October 9–19, 2026", label: "Interview Dates" },
-  { date: "October 21, 2026", label: "Release of Results" },
+  { date: "October 12–19, 2026", label: "CTA Wave 2 Duration" },
+  { date: "October 19–21, 2026", label: "CTA Wave 2 Extension" },
+  { date: "October 15–22, 2026", label: "Interview Dates" },
+  { date: "October 24, 2026", label: "Release of Results" },
 ];
 
 // Wave 1's FAQ, minus its cross-project cap: Wave 2 has no limit on how

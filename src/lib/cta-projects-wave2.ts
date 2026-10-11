@@ -19,22 +19,36 @@ export const COMMPUB_REQUIREMENTS_GUIDE_URL =
  * entry verbatim, so a later edit to the shared fields (letter, contacts…)
  * reaches both waves without being made twice.
  */
-export const ROSE_SALE_WAVE2: CtaProjectDetail = {
+export const ROSE_SALE_WAVE2: CtaProjectDetail & {
+  committeePhotos: { src: string; alt: string }[];
+} = {
   ...ROSE_SALE,
   // The additional-requirements FAQ covers Digital Creatives, Production
   // Design and DocPub, none of which Rose Sale recruits in Wave 2.
   faqs: ROSE_SALE.faqs.filter((faq) => !faq.q.startsWith("Do we need to submit any additional requirements")),
-  // These four are behind Wave 2 applicants already (or, for the Wave 2
-  // row itself, describe the very round they're applying in).
-  timeline: ROSE_SALE.timeline?.filter(
-    (item) =>
-      ![
-        "Heads Onboarding",
-        "1st General Assembly",
-        "Committees Onboarding (Online)",
-        "Wave 2 Applications (Florists, Deliveries, Sales)",
-      ].includes(item.label)
-  ),
+  // From the Wave 2 doc's own timeline, minus the rows that are already
+  // behind Wave 2 applicants: Release of Wave 1 Results, Heads Onboarding,
+  // 1st General Assembly, Committees Onboarding, and the Wave 2
+  // Applications row itself. Emphasis follows the doc's colored rows.
+  timeline: [
+    { date: "November 5, 2026", label: "2nd General Assembly", emphasis: "notable" },
+    { date: "TBA", label: "Flower-Wrapping Workshop", emphasis: "notable" },
+    { date: "November 16–20, 2026", label: "Finalize Product List, Prices, Sponsorships, and Publication Materials" },
+    { date: "December 12, 2026", label: "Order Non-Flower Products" },
+    { date: "January 25 – February 8, 2027", label: "Implement Marketing Strategies" },
+    { date: "January 25, 2027", label: "Release of Pre-Order Form", emphasis: "critical" },
+    { date: "January 30, 2027", label: "Systems Orientation", emphasis: "notable" },
+    { date: "February 2, 2027", label: "Sales Workshop", emphasis: "notable" },
+    { date: "February 9–15, 2027", label: "Valentine's Onsite Selling Week", emphasis: "critical" },
+    { date: "February 27, 2027", label: "Advocacy Program" },
+    { date: "March 3, 2027", label: "Post Documentation Album" },
+  ],
+  // Paired with `committees` by index — the doc puts one photo beside each.
+  committeePhotos: [
+    { src: "/internal/cta-wave2/rs-committee-sales.webp", alt: "A Rose Sale seller helping a customer pick flowers" },
+    { src: "/internal/cta-wave2/rs-committee-deliveries.webp", alt: "Rose Sale core members preparing orders at a table" },
+    { src: "/internal/cta-wave2/rs-committee-florists.webp", alt: "A wrapped Rose Sale bouquet of pink carnations" },
+  ],
   committees: [
     {
       label: "Sales 🪻 · 2 Heads, 3 Core",
@@ -104,9 +118,10 @@ export const CELADON_MERCH: CelaMerchContent = {
   slug: "celadon-merch",
   name: "Celadon Merch",
   fullName: "Celadon Merchandise",
-  // PLACEHOLDER — CelaMerch hasn't chosen its colors yet. A neutral Celadon
-  // blue so the page renders; replace with the project's own once sent.
-  accent: { base: "#3D5A96", tint: "#EEF2F9", ink: "#1F2D52" },
+  // CelaMerch left the color table blank, so these come from the colors its
+  // own content tab is styled in: brick red for headings, warm orange for
+  // committee labels and notes, near-black brown for ink.
+  accent: { base: "#BD433E", tint: "#FBF1EA", ink: "#220300" },
   whatIsIt:
     "Celadon Merchandise is a fundraising project that promotes Chinese culture within the Ateneo Community, simultaneously portraying Celadon’s organizational identity. Through integrating creativity and culture into its products, this project empowers individuals to express themselves, their preferences, and fashion styles freely.",
   welcome: "Welcome to Celadon Merchandise!",
@@ -118,8 +133,10 @@ export const CELADON_MERCH: CelaMerchContent = {
       },
     ],
     [
+      { text: "But to achieve this, we need " },
+      { text: "YOUR", italic: true, accent: true },
       {
-        text: "But to achieve this, we need YOUR help. This project not only proudly showcases the creative identity of Celadoneans but also nurtures growth and familiarity within and beyond the team, bringing together a holistic community.",
+        text: " help. This project not only proudly showcases the creative identity of Celadoneans but also nurtures growth and familiarity within and beyond the team, bringing together a holistic community.",
       },
     ],
     [
@@ -134,9 +151,10 @@ export const CELADON_MERCH: CelaMerchContent = {
   thrust:
     "To elevate the project’s brand image and visibility in the Atenean Community, fostering a space for self-expression and growth",
   timeline: [
+    { date: "October 7–12, 2026", label: "Application Period" },
+    { date: "October 21, 2026", label: "Release of Results" },
     { date: "October 26 – December 14, 2026", label: "Merch Ideation" },
-    // The PMs' doc gives this one a "-" for its date.
-    { date: "TBA", label: "General Assembly" },
+    { date: "January 8, 2027", label: "General Assembly" },
     // The doc reads "January 15, 2026", which would end before it starts —
     // read as 2027.
     { date: "December 14, 2026 – January 15, 2027", label: "Merch Preparation" },
@@ -222,7 +240,7 @@ export const CELADON_MERCH: CelaMerchContent = {
       a: [
         [
           {
-            text: "All members of the project will be required to work during the summer break, as starting early will provide us with an allowance for unexpected events in the timeline.",
+            text: "All members of the project will be required to work during the semester break, as starting early will provide us with an allowance for unexpected events in the timeline.",
           },
         ],
         [{ text: "As a core member, the workload per committee will vary." }],
@@ -237,7 +255,6 @@ export const CELADON_MERCH: CelaMerchContent = {
       a: [[{ text: "We will mostly be working online in the planning phase and on-site in the selling week." }]],
     },
   ],
-  // Emails to follow — Facebook only for now.
   contacts: [
     {
       name: "Quisha Lim",
@@ -529,4 +546,235 @@ export const MANDOPOP: MandopopContent = {
     },
   ],
   closingLine: "Help us create something worth remembering—beyond the final note.",
+};
+
+// ----------------------------------------------------------------- Celaball
+
+export interface CelaballContent {
+  slug: string;
+  name: string;
+  /** Pulled from the doc's own styling — its color table row was left blank. */
+  palette: {
+    amber: string;
+    orange: string;
+    coral: string;
+    teal: string;
+    cream: string;
+  };
+  cardAccent: { base: string; tint: string; ink: string };
+  heroImage: { src: string; alt: string };
+  date: string;
+  about: AboutRun[][];
+  letter: string[];
+  letterSignoff: { closing: string; names: string; role: string };
+  theme: {
+    name: string;
+    chinese: string;
+    subtitle: string;
+    parts: { glyph: string; romanized: string; meaning: string; body: string; tone: "teal" | "coral" }[];
+    together: AboutRun[][];
+  };
+  objectives: { title: string; body: string }[];
+  timeline: { date: string; label: string; proper?: boolean }[];
+  lookingFor: string;
+  committees: {
+    name: string;
+    count: string;
+    items: string[];
+    requirement?: { portfolio: string; alternative: string };
+  }[];
+  faqs: { q: string; a: string }[];
+  contactsIntro: string;
+  contacts: DeptContact[];
+}
+
+export const CELABALL: CelaballContent = {
+  slug: "celaball",
+  name: "Celaball",
+  palette: {
+    amber: "#F4A740",
+    orange: "#D98530",
+    coral: "#F08A78",
+    teal: "#99C3CC",
+    cream: "#FDF2D6",
+  },
+  cardAccent: { base: "#D98530", tint: "#FDF2D6", ink: "#6B3A10" },
+  heroImage: {
+    src: "/internal/cta-wave2/cb-hero.webp",
+    alt: "Celadon Ball — Jia Yuan: Home Across Horizons",
+  },
+  date: "June 12, 2027",
+  about: [
+    [
+      { text: "Celaball", bold: true },
+      { text: " is the closing project of " },
+      { text: "Ateneo Celadon", bold: true },
+      {
+        text: ", serving as a formal party that brings together the Celadon community for an evening of remembrance, connection, and celebration through curated programs, interactive game segments, performances, and a shared dining experience.",
+      },
+    ],
+    [
+      {
+        text: "It acts as a milestone event marking the culmination of the organization’s many activities, projects, and initiatives throughout the school year—uniting members, the EBCB, and past Celadonians to honor their shared achievements and reflect on the past year.",
+      },
+    ],
+  ],
+  letter: [
+    "Welcome to Celadon Ball 2026–2027! As the school year draws to a close, Celaball stands as the moment where a whole academic year of hard work, shared laughter, and meaningful connections come together under one roof.",
+    "Bringing a grand night like this to life takes a passionate, dedicated, and communicative core team. This year, we aim to elevate every aspect of Celaball and create a culture that allows each member to grow in their goals and feel more connected with the Celadon community at large.",
+    "Whether you want to structure our event flow, establish our visual branding, build external partnerships, or capture the magic on camera, there is a place for you on our team. We can’t wait to see your applications and build this unforgettable night together!",
+  ],
+  letterSignoff: { closing: "Warmly,", names: "Reese & Chesea", role: "Celaball 2026–2027 Project Managers" },
+  theme: {
+    name: "Jia Yuan",
+    chinese: "家緣",
+    subtitle: "Home Across Horizons",
+    parts: [
+      {
+        glyph: "家",
+        romanized: "Jia",
+        meaning: "Home",
+        body: "Jia draws from the ancient wisdom of sì hǎi wéi jiā (四海為家): home is not a static place, but a sense of belonging that travels with us wherever we go.",
+        tone: "teal",
+      },
+      {
+        glyph: "緣",
+        romanized: "Yuan",
+        meaning: "Fate",
+        body: "Yuan is the invisible thread of fate that brings relative strangers into one another’s orbits.",
+        tone: "coral",
+      },
+    ],
+    together: [
+      [
+        { text: "Together, " },
+        { text: "Jia Yuan", bold: true },
+        {
+          text: " tells the story of Celadon: how people from different walks of life cross paths, build trust, and turn a shared space into a family. As the year closes, it gathers us under this sunset sky to honor where we started, reflect on how far we have come, and celebrate the bonds we built along the way.",
+        },
+      ],
+    ],
+  },
+  objectives: [
+    {
+      title: "Community Building & Belonging",
+      body: "Create an emotionally resonant milestone experience bringing together all years and positions.",
+    },
+    {
+      title: "Core Development & Welfare",
+      body: "Ensure every core member develops personal and professional leadership competencies in a supportive, organized space.",
+    },
+  ],
+  timeline: [
+    { date: "October 12–19, 2026", label: "Core Team Applications (Wave 2)" },
+    { date: "October 24, 2026", label: "Release of Application Results" },
+    { date: "Late October 2026", label: "Core Team Onboarding & 1st General Assembly" },
+    {
+      date: "November 2026 – January 2027",
+      label: "Early Venue Sourcing, Supplier Procurement & Sponsorship Package Drafting",
+    },
+    { date: "February – April 2027", label: "RecSec Interest Checks, Early Marketing Blasts & Ticket Sales Rollout" },
+    { date: "May 2027", label: "Final Program Cues, Dry Runs, and Audio-Visual Checks" },
+    { date: "June 12, 2027", label: "CELADON BALL 2026–2027 PROPER", proper: true },
+    { date: "Late June 2027", label: "Post-Event Evaluations, Documentation Directory Release & Debriefing" },
+  ],
+  lookingFor:
+    "We are looking for Celadonians who are proactive, communicative, and passionate about creating a memorable experience for the community.",
+  committees: [
+    {
+      name: "Programs (PROG)",
+      count: "2 Heads, 4 Core Members",
+      items: [
+        "Conceptualize the program flow",
+        "Create presentation slides and scripts for hosts for event proper",
+        "Create games and icebreakers",
+        "Procure performers",
+      ],
+    },
+    {
+      name: "Logistics (LOG)",
+      count: "2 Heads, 3 Core Members",
+      items: [
+        "Procure the physical venue & complete related requirements",
+        "Manage ingress and egress on event proper",
+        "Reserve rooms for DP shoot and core team GAs",
+      ],
+    },
+    {
+      name: "Recruitment & Secretariat (RecSec)",
+      count: "1 Head, 2 Core Members",
+      items: [
+        "Manage the Celadon-wide interest check and process the data",
+        "Create the guest registration process",
+        "Create the table grouping process",
+        "Manage event day registration",
+        "Manage the event evaluation form and process the data",
+      ],
+    },
+    {
+      name: "Digital Creatives (DC)",
+      count: "2 Heads, 3 Core Members",
+      items: [
+        "Establish the visual identity of Celaball",
+        "Design promotional pubmats",
+        "Create the DP frames",
+        "Create the presentation slides template",
+      ],
+      requirement: { portfolio: "Portfolio", alternative: "Make a sample sign-up poster for Celaball" },
+    },
+    {
+      name: "Documentation & Publications (DocPub)",
+      count: "1 Head, 3 Core Members",
+      items: [
+        "Handle event photo and video coverage",
+        "Write social media captions",
+        "Producing the Year-in-Review recap video.",
+        "Manage the DP shoot set and picture taking",
+      ],
+      requirement: { portfolio: "Portfolio", alternative: "Make a sample DP shoot set up for Celaball" },
+    },
+    {
+      name: "External Relations (ExRel)",
+      count: "2 Heads, 3 Core Members",
+      items: ["Reach out to corporate sponsors", "Negotiates x-deals for party favors", "Manage partner communication."],
+    },
+    {
+      name: "Fundraising (FR)",
+      count: "2 Heads, 4 Core Members",
+      items: ["Brainstorm fundraising ideas to expand the project budget", "Operate fundraising booths and initiatives"],
+    },
+  ],
+  faqs: [
+    {
+      q: "Do I need extensive experience to join?",
+      a: "Not at all! We are looking for members who are eager to learn, collaborate, and contribute. Your PMs and Core Heads will guide and support you throughout the entire process.",
+    },
+    {
+      q: "How heavy will the workload be?",
+      a: "Workload will be structured and spread out across the school year to avoid exam season burnout. Tasks will pick up closer to the event in April/May, but clear role descriptions and weekly check-ins will ensure tasks remain manageable.",
+    },
+    {
+      q: "Can I apply for COMMPUB committees (Digital Creatives / DocPub) if I don’t have a portfolio?",
+      a: "Yes! If you don’t have a portfolio, you can fulfill the alternative challenge options specified in the COMMPUB guidelines (e.g., sample poster, sample caption, or photo plan).",
+    },
+    {
+      q: "How often will we meet as a core team?",
+      a: "We will hold regular online/hybrid syncs (mostly weekly or as needed per committee) to keep everyone updated without taking up too much of your personal schedule.",
+    },
+  ],
+  contactsIntro: "Have any questions or concerns about the roles or the project? Reach out to us anytime!",
+  contacts: [
+    {
+      name: "Beatrice Maxine D. Sy",
+      role: "Project Manager",
+      email: "beatrice.maxine.sy@student.ateneo.edu",
+      facebook: "https://web.facebook.com/beatricemaxine.sy.7",
+    },
+    {
+      name: "Francesca M. Tiu",
+      role: "Project Manager",
+      email: "francesca.ean.alexis.tiu@student.ateneo.edu",
+      facebook: "https://www.facebook.com/tiuchesea/",
+    },
+  ],
 };
