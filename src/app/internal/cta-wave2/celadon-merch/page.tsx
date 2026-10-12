@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Kumbh_Sans, Libre_Baskerville } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -15,6 +15,20 @@ import { asset } from "@/lib/asset";
 import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
 import { CELADON_MERCH } from "@/lib/cta-projects-wave2";
 
+// Served from src/fonts rather than fetched from Google Fonts at build
+// time — see src/fonts/README.md.
+const kumbhSans = localFont({
+  src: [{ path: "../../../../fonts/kumbh-sans/kumbh-sans-normal.woff2", weight: "400 700", style: "normal" }],
+  variable: "--font-cm-body",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});
+const libreBaskerville = localFont({
+  src: [{ path: "../../../../fonts/libre-baskerville/libre-baskerville-normal.woff2", weight: "700", style: "normal" }],
+  variable: "--font-cm-heading",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
+
 export const metadata: Metadata = {
   title: "Celadon Merch — Core Team Applications Wave 2",
   robots: { index: false, follow: false },
@@ -24,8 +38,6 @@ export const metadata: Metadata = {
 // Matches the PMs' content tab: Kumbh Sans body, Libre Baskerville
 // headings in near-black brown, with one word of each heading picked out in
 // brick red or warm orange.
-const kumbhSans = Kumbh_Sans({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-cm-body" });
-const libreBaskerville = Libre_Baskerville({ subsets: ["latin"], weight: ["700"], variable: "--font-cm-heading" });
 
 const RED = "#BD433E";
 // The doc's own orange (#DC9960) is too light to read as small text on

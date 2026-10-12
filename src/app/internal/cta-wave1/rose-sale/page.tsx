@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Lato, DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -14,6 +14,30 @@ import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { ROSE_SALE } from "@/lib/cta-projects";
 
+// Served from src/fonts rather than fetched from Google Fonts at build
+// time — see src/fonts/README.md.
+const playfairDisplay = localFont({
+  src: [{ path: "../../../../fonts/playfair-display/playfair-display-normal.woff2", weight: "600 700", style: "normal" }],
+  variable: "--font-rs-heading",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
+const lato = localFont({
+  src: [
+    { path: "../../../../fonts/lato/lato-normal-400.woff2", weight: "400", style: "normal" },
+    { path: "../../../../fonts/lato/lato-normal-700.woff2", weight: "700", style: "normal" },
+    { path: "../../../../fonts/lato/lato-italic-400.woff2", weight: "400", style: "italic" },
+    { path: "../../../../fonts/lato/lato-italic-700.woff2", weight: "700", style: "italic" },
+  ],
+  variable: "--font-rs-lato",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});
+const dmSans = localFont({
+  src: [{ path: "../../../../fonts/dm-sans/dm-sans-normal.woff2", weight: "400 900", style: "normal" }],
+  variable: "--font-rs-dmsans",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});
+
 export const metadata: Metadata = {
   title: "Rose Sale — Core Team Applications",
   robots: { index: false, follow: false },
@@ -26,9 +50,6 @@ export const metadata: Metadata = {
 // is Lato. Headings stay Playfair Display everywhere. Applied per-section
 // below rather than as one page-wide font, to match the doc exactly
 // instead of picking one font for "everything else".
-const playfairDisplay = Playfair_Display({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-rs-heading" });
-const lato = Lato({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--font-rs-lato" });
-const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-rs-dmsans" });
 
 function Heading({ children, color }: { children: React.ReactNode; color?: string }) {
   return (

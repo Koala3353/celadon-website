@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora, EB_Garamond, Dancing_Script } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -14,6 +14,30 @@ import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { SPRING_FILM_FESTIVAL } from "@/lib/cta-projects";
 
+// Served from src/fonts rather than fetched from Google Fonts at build
+// time — see src/fonts/README.md.
+const lora = localFont({
+  src: [{ path: "../../../../fonts/lora/lora-normal.woff2", weight: "700", style: "normal" }],
+  variable: "--font-sff-heading",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
+const ebGaramond = localFont({
+  src: [
+    { path: "../../../../fonts/eb-garamond/eb-garamond-normal.woff2", weight: "400 700", style: "normal" },
+    { path: "../../../../fonts/eb-garamond/eb-garamond-italic.woff2", weight: "400 700", style: "italic" },
+  ],
+  variable: "--font-sff-letter",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
+const dancingScript = localFont({
+  src: [{ path: "../../../../fonts/dancing-script/dancing-script-normal.woff2", weight: "400 700", style: "normal" }],
+  variable: "--font-sff-script",
+  fallback: ["cursive"],
+  adjustFontFallback: false,
+});
+
 export const metadata: Metadata = {
   title: "Spring Film Festival — Core Team Applications",
   robots: { index: false, follow: false },
@@ -23,9 +47,6 @@ export const metadata: Metadata = {
 // headings (Lora, in the doc's own gold, #ecbf58) and the PM letter — set in
 // EB Garamond, with the salutation/signoff name in a cursive Dancing Script
 // accent (#970708) — scoped to just this page via CSS variables below.
-const lora = Lora({ subsets: ["latin"], weight: ["700"], variable: "--font-sff-heading" });
-const ebGaramond = EB_Garamond({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-sff-letter" });
-const dancingScript = Dancing_Script({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-sff-script" });
 
 function initials(name: string): string {
   return name

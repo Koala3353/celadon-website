@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito, DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -15,6 +15,19 @@ import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { CHINESE_NEW_YEAR } from "@/lib/cta-projects";
 
+// Served from src/fonts rather than fetched from Google Fonts at build
+// time — see src/fonts/README.md.
+const nunito = localFont({
+  src: [{ path: "../../../../fonts/nunito/nunito-normal.woff2", weight: "800 900", style: "normal" }],
+  variable: "--font-cny-heading",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});
+const dmSans = localFont({
+  src: [{ path: "../../../../fonts/dm-sans/dm-sans-normal.woff2", weight: "400 900", style: "normal" }],
+  variable: "--font-cny-body",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});
+
 export const metadata: Metadata = {
   title: "Chinese New Year — Core Team Applications",
   robots: { index: false, follow: false },
@@ -22,8 +35,6 @@ export const metadata: Metadata = {
 
 // CNY's own doc sets its body copy in DM Sans throughout, with headings and
 // the PM salutation in a heavier Nunito Black, in the doc's own red (#d0353e).
-const nunito = Nunito({ subsets: ["latin"], weight: ["800", "900"], variable: "--font-cny-heading" });
-const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700", "900"], variable: "--font-cny-body" });
 
 function initials(name: string): string {
   return name

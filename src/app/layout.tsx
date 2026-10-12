@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { asset } from "@/lib/asset";
 import { SiteHeader } from "@/components/site-header";
@@ -13,10 +13,13 @@ import { SITE_URL } from "@/lib/site-url";
  * stands in for both weights: the same geometric construction and wide caps,
  * and it covers 400 through 900 from a single variable family.
  */
-const montserrat = Montserrat({
+// Served from src/fonts rather than fetched from Google Fonts at build time
+// (see src/fonts/README.md).
+const montserrat = localFont({
+  src: [{ path: "../fonts/montserrat/montserrat-normal.woff2", weight: "100 900", style: "normal" }],
   variable: "--font-body",
-  subsets: ["latin"],
   display: "swap",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
 // Sheet-driven, so the org name and one-liner are editable without a deploy

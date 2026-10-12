@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Merriweather } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -16,17 +16,23 @@ import { cn } from "@/lib/cn";
 import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
 import { COMMPUB_REQUIREMENTS_GUIDE_URL, MANDOPOP } from "@/lib/cta-projects-wave2";
 
+// Served from src/fonts rather than fetched from Google Fonts at build
+// time — see src/fonts/README.md.
+const merriweather = localFont({
+  src: [
+    { path: "../../../../fonts/merriweather/merriweather-normal.woff2", weight: "400 900", style: "normal" },
+    { path: "../../../../fonts/merriweather/merriweather-italic.woff2", weight: "400 900", style: "italic" },
+  ],
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
+
 export const metadata: Metadata = {
   title: "Mandopop Music Festival — Core Team Applications Wave 2",
   robots: { index: false, follow: false },
 };
 
 // The instructions doc is set in Merriweather throughout, headings and body.
-const merriweather = Merriweather({
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  style: ["normal", "italic"],
-});
 
 /*
  * White-led like every other project page, with the project's own 60/30/10

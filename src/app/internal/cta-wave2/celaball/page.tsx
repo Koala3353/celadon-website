@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -16,17 +16,23 @@ import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave
 import { CELABALL } from "@/lib/cta-projects-wave2";
 import type { DeptGroup } from "@/lib/deputy-departments";
 
+// Served from src/fonts rather than fetched from Google Fonts at build
+// time — see src/fonts/README.md.
+const ebGaramond = localFont({
+  src: [
+    { path: "../../../../fonts/eb-garamond/eb-garamond-normal.woff2", weight: "400 700", style: "normal" },
+    { path: "../../../../fonts/eb-garamond/eb-garamond-italic.woff2", weight: "400 700", style: "italic" },
+  ],
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
+
 export const metadata: Metadata = {
   title: "Celaball — Core Team Applications Wave 2",
   robots: { index: false, follow: false },
 };
 
 // The doc is set in Garamond throughout; EB Garamond is its web stand-in.
-const ebGaramond = EB_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  style: ["normal", "italic"],
-});
 
 /*
  * Sunset palette from the doc: amber, orange, coral and a soft teal on

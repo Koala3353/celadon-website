@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Kumbh_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -14,6 +14,13 @@ import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { JADE_BUSINESS_SUMMIT } from "@/lib/cta-projects";
 
+// Served from src/fonts rather than fetched from Google Fonts at build
+// time — see src/fonts/README.md.
+const kumbhSans = localFont({
+  src: [{ path: "../../../../fonts/kumbh-sans/kumbh-sans-normal.woff2", weight: "400 700", style: "normal" }],
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});
+
 export const metadata: Metadata = {
   title: "Jade Business Summit — Core Team Applications",
   robots: { index: false, follow: false },
@@ -21,7 +28,6 @@ export const metadata: Metadata = {
 
 // JADE's own doc sets everything — headings and body alike — in Kumbh Sans,
 // with headings/the PM salutation in its own teal-green (#579782).
-const kumbhSans = Kumbh_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 function initials(name: string): string {
   return name
