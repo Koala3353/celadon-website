@@ -728,6 +728,14 @@ export const CELABALL: CelaballContent = {
       requirement: { portfolio: "Portfolio", alternative: "Make a sample sign-up poster for Celaball" },
     },
     {
+      name: "Production Design (PROD)",
+      count: "1 Head, 2 Core Members",
+      items: [
+        "Brainstorm visual concepts and design themes to match the project's vision",
+        "Source materials, construct stage setups, and manage event props and decor",
+      ],
+    },
+    {
       name: "Documentation & Publications (DocPub)",
       count: "1 Head, 3 Core Members",
       items: [
