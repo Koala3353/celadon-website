@@ -104,6 +104,10 @@ export interface DeptTimelineItem {
    * table row) as more significant than the rest — rendered with a bigger
    * dot, "critical" bigger still. Most timelines leave this unset. */
   emphasis?: "notable" | "critical";
+  /** Overrides the row's dot and text color — for a doc that picks out one
+   * row in its own color (e.g. Celaball's peach event-day row). The label
+   * also goes bold so the row reads as the highlight it is in the doc. */
+  color?: string;
 }
 
 export interface DeptProject {

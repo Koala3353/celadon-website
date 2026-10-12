@@ -335,6 +335,8 @@ export default function CelaballProjectPage() {
                 date: row.date,
                 label: row.label,
                 emphasis: row.proper ? "critical" : undefined,
+                // The doc sets the event-day row in its peach.
+                color: row.proper ? P.coral : undefined,
               }))}
             />
           </Reveal>

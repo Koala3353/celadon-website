@@ -27,6 +27,11 @@ function TimelineColumn({ items }: { items: DeptTimelineItem[] }) {
                 "shrink-0 rounded-full",
                 item.emphasis ? DOT_STYLES[item.emphasis] : "mt-1.5 h-3 w-3 bg-dept-accent ring-4 ring-dept-accent/15"
               )}
+              style={
+                item.color
+                  ? { backgroundColor: item.color, boxShadow: `0 0 0 5px color-mix(in srgb, ${item.color} 25%, transparent)` }
+                  : undefined
+              }
             />
             {i < items.length - 1 && <span className="w-px flex-1 bg-dept-accent/20" />}
           </div>
@@ -36,10 +41,16 @@ function TimelineColumn({ items }: { items: DeptTimelineItem[] }) {
                 "text-xs font-bold uppercase tracking-wider",
                 item.emphasis ? DATE_TEXT_STYLES[item.emphasis] : "text-dept-accent"
               )}
+              style={item.color ? { color: item.color } : undefined}
             >
               {item.date}
             </p>
-            <p className="prose-body text-muted-foreground">{item.label}</p>
+            <p
+              className={cn("prose-body", item.color ? "font-bold" : "text-muted-foreground")}
+              style={item.color ? { color: item.color } : undefined}
+            >
+              {item.label}
+            </p>
           </div>
         </li>
       ))}
