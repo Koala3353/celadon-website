@@ -427,11 +427,19 @@ export const MANDOPOP: MandopopContent = {
     },
     {
       label: "Recruitment and Secretariat (RecSec) · 2 Core",
-      items: ["Manage core team onboarding", "Keeps track of attendance and meeting minutes"],
+      items: [
+        "Manage core team onboarding",
+        "Keep track of attendance and meeting minutes",
+        "Handle registrations and RSVPs on the day of the event",
+      ],
     },
     {
       label: "Production Design (PROD) · 1 Head, 3 Core",
-      items: ["Develop a stage design for the event", "Create the background to be displayed for the performance"],
+      items: [
+        "Develop the stage design for the event",
+        "Create the background to be displayed for the performances",
+        "Coordinate with other departments and the performers to maintain a cohesive visual identity on the day of the event",
+      ],
     },
     {
       label: "Digital Creatives (DC) · 1 Head, 4 Core",
