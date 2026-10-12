@@ -8,6 +8,7 @@ import { SkyHero } from "@/components/internal/sky-hero";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
 import { ProjectCard } from "@/components/internal/project-card";
+import { PhotoScroller, type ScrollerPhoto } from "@/components/internal/photo-scroller";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import {
@@ -16,6 +17,59 @@ import {
   CTA_WAVE2_FAQS,
   CTA_WAVE2_TIMELINE,
 } from "@/lib/core-team-wave2";
+
+// Same scrolling photo wall as the Wave 1 hub, built from the photos each
+// Wave 2 project has sent so far, with projects interleaved so no two tiles
+// from the same one sit side by side where avoidable. Spans follow Wave 1's
+// rhythm: a few large tiles anchor the mosaic between single ones.
+const GALLERY_PHOTOS: ScrollerPhoto[] = [
+  {
+    src: "/internal/cta-wave2/cb-what-is.webp",
+    alt: "Guests seated at round tables under a draped ceiling at a past Celadon Ball",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-1.webp",
+    alt: "Core team members delivering donations for Rose Sale's advocacy program",
+    span: "col-span-2",
+  },
+  {
+    src: "/internal/cta-wave2/cm-photo-1.webp",
+    alt: "CelaMerch pre-order pub mat with shirts, a cap, lanyards, pins and keychains",
+    span: "row-span-2",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-2.webp",
+    alt: "Core team members arranging bouquets at a past Rose Sale",
+  },
+  {
+    src: "/internal/cta-wave1/rs-what-is.webp",
+    alt: "A past Rose Sale flower-archway booth with Celadon Rose Sale signage",
+  },
+  {
+    src: "/internal/cta-wave2/cb-letter.webp",
+    alt: "Celadon members dancing in formal wear at a past Celadon Ball",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-3.webp",
+    alt: "Core team members delivering donations for Rose Sale's advocacy program",
+    span: "col-span-2",
+  },
+  {
+    src: "/internal/cta-wave1/rs-vision.webp",
+    alt: "Core team members arranging flowers at a past Rose Sale",
+  },
+  {
+    src: "/internal/cta-wave1/hub-rs-4.webp",
+    alt: "Core team members preparing flower arrangements at a past Rose Sale",
+  },
+  {
+    src: "/internal/cta-wave1/rs-bringing.webp",
+    alt: "The Rose Sale core team at their booth, selling bouquets and flower arrangements",
+    span: "col-span-2",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Core Team Applications Wave 2",
@@ -91,6 +145,14 @@ export default function CoreTeamApplicationsWave2HubPage() {
               {CORE_TEAM_WAVE2_PROJECTS.map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
+            </Reveal>
+          </Container>
+        </section>
+
+        <section>
+          <Container>
+            <Reveal stagger={60}>
+              <PhotoScroller photos={GALLERY_PHOTOS} />
             </Reveal>
           </Container>
         </section>
