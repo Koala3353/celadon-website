@@ -55,7 +55,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     dates: "June 12, 2027",
     accent: CELABALL.cardAccent,
     blurb:
-      "Celaball is Ateneo Celadon’s premier culminating event: an elegant night of dining and cultural appreciation celebrating Chinese-Filipino culture, community, and milestones. It brings active members, executive boards, and alumni together as one pamilya.",
+      "Celaball is Ateneo Celadon’s premier culminating event: an elegant night of dining and cultural appreciation celebrating Chinese-Filipino culture, community, and milestones. It brings Celadoneans, executive and central board members, and alumni together as one family.",
     photo: { src: "/internal/cta-wave2/cb-hero.webp", alt: "Celadon Ball — Jia Yuan: Home Across Horizons" },
     href: "/internal/cta-wave2/celaball",
   },
