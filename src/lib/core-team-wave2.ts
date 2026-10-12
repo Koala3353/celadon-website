@@ -28,6 +28,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
   {
     slug: "celadon-merch",
     name: "Celadon Merch",
+    emoji: "👕",
     // Merch Selling, from the project timeline.
     dates: "February 2–5, 2027",
     accent: CELADON_MERCH.accent,
