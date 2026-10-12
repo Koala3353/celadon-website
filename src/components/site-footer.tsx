@@ -19,8 +19,7 @@ const PUBLIC_NAV = [
 // somewhere else entirely.
 const INTERNAL_NAV = [
   { href: "/internal", label: "Dashboard" },
-  // Core Team Applications sat here until Wave 1 closed, alongside Deputy
-  // Applications before it. Both hubs are unlinked portal-wide now.
+  { href: "/internal/cta-wave2", label: "Core Team Applications" },
   { href: "/internal/ebcb-directory", label: "EBCB Directory" },
 ];
 
