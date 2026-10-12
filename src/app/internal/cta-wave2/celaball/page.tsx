@@ -125,8 +125,8 @@ export default function CelaballProjectPage() {
           <Image
             src={asset(project.heroImage.src)}
             alt={project.heroImage.alt}
-            width={1600}
-            height={900}
+            width={1365}
+            height={768}
             priority
             data-reveal
             className="max-h-[60vh] w-full object-cover"

@@ -607,7 +607,7 @@ export const CELABALL: CelaballContent = {
   },
   cardAccent: { base: "#D98530", tint: "#FDF2D6", ink: "#6B3A10" },
   heroImage: {
-    src: "/internal/cta-wave2/cb-hero.webp",
+    src: "/internal/cta-wave2/cb-hero-v2.webp",
     alt: "Celadon Ball — Jia Yuan: Home Across Horizons",
   },
   date: "June 12, 2027",
