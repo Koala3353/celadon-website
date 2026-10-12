@@ -212,6 +212,17 @@ export default function CelaballProjectPage() {
                   className="object-cover"
                 />
               </div>
+              {/* The doc's hanging-stars flourish. Only in the two-column
+                  layout, where the photo column has empty space below it;
+                  on phones it would just add height. */}
+              <Image
+                src={asset("/internal/cta-wave2/cb-stars.webp")}
+                alt=""
+                aria-hidden
+                width={392}
+                height={255}
+                className="hidden w-full max-w-[17rem] md:block"
+              />
             </div>
             <div className="flex flex-col gap-4 text-left md:pt-14">
               {project.letter.map((p) => (
