@@ -69,6 +69,21 @@ function Band({
   );
 }
 
+function Photo({ src, alt, width, height }: { src: string; alt: string; width: number; height: number }) {
+  return (
+    <div className="overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+      <Image
+        src={asset(src)}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes="(min-width: 768px) 40vw, 100vw"
+        className="h-auto w-full"
+      />
+    </div>
+  );
+}
+
 function Heading({ children }: { children: React.ReactNode }) {
   return (
     <h2
@@ -131,7 +146,7 @@ export default function MandopopProjectPage() {
       {/* What is Mandopop? */}
       <Band tone="white">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl">
+          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
             <div className="flex flex-col gap-4 text-left">
               <Heading>What is Mandopop? 🎶</Heading>
               <RichParagraphs
@@ -154,6 +169,12 @@ export default function MandopopProjectPage() {
                 </div>
               </dl>
             </div>
+            <Photo
+              src="/internal/cta-wave2/mdp-crowd.webp"
+              alt="A crowd watching a band under blue stage lights at a past Mandopop Music Festival"
+              width={1400}
+              height={748}
+            />
           </Reveal>
         </Container>
       </Band>
@@ -161,20 +182,30 @@ export default function MandopopProjectPage() {
       {/* Dear Applicant */}
       <Band tone="tint">
         <Container>
-          <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4 text-left">
+          <Reveal className="mx-auto flex w-full max-w-5xl flex-col gap-6 text-left">
             <Heading>Dear Applicant,</Heading>
-            {project.letter.map((p) => (
-              <p key={p} className="prose-body opacity-95" data-reveal>
-                {p}
-              </p>
-            ))}
-            <p className="prose-body mt-2" data-reveal>
-              <strong className="font-bold" style={{ color: RED }}>{project.letterSignoff.closing}</strong>
-              <br />
-              <strong className="font-bold">{project.letterSignoff.names}</strong>
-              <br />
-              <em className="italic opacity-85">{project.letterSignoff.role}</em>
-            </p>
+            <div className="grid gap-8 md:grid-cols-[1fr_1.3fr] md:items-start md:gap-10">
+              <Photo
+                src="/internal/cta-wave2/mdp-guzheng.webp"
+                alt="A performer playing the guzheng on stage at a past Mandopop Music Festival"
+                width={1400}
+                height={808}
+              />
+              <div className="flex flex-col gap-4">
+                {project.letter.map((p) => (
+                  <p key={p} className="prose-body opacity-95" data-reveal>
+                    {p}
+                  </p>
+                ))}
+                <p className="prose-body mt-2" data-reveal>
+                  <strong className="font-bold" style={{ color: RED }}>{project.letterSignoff.closing}</strong>
+                  <br />
+                  <strong className="font-bold">{project.letterSignoff.names}</strong>
+                  <br />
+                  <em className="italic opacity-85">{project.letterSignoff.role}</em>
+                </p>
+              </div>
+            </div>
           </Reveal>
         </Container>
       </Band>
@@ -182,12 +213,20 @@ export default function MandopopProjectPage() {
       {/* Our Vision */}
       <Band tone="white">
         <Container>
-          <Reveal className="mx-auto flex w-full max-w-2xl flex-col gap-4 text-left">
-            <Heading>Our Vision: {project.visionHeading} 💿</Heading>
-            <RichParagraphs
-              paragraphs={project.vision}
-              className="flex flex-col gap-4"
-              paragraphClassName="prose-body opacity-90"
+          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-10">
+            <div className="flex flex-col gap-4 text-left">
+              <Heading>Our Vision: {project.visionHeading} 💿</Heading>
+              <RichParagraphs
+                paragraphs={project.vision}
+                className="flex flex-col gap-4"
+                paragraphClassName="prose-body opacity-90"
+              />
+            </div>
+            <Photo
+              src="/internal/cta-wave2/mdp-team.webp"
+              alt="The Mandopop core team posing together on stage after a past festival"
+              width={1400}
+              height={675}
             />
           </Reveal>
         </Container>
@@ -270,7 +309,15 @@ export default function MandopopProjectPage() {
         <Container>
           <Reveal className="mx-auto w-full max-w-3xl text-left">
             <Heading>Find Your Place Behind the Music 🎤</Heading>
-            <p className="prose-body mt-3 opacity-90" data-reveal>
+            <div className="mt-6">
+              <Photo
+                src="/internal/cta-wave2/mdp-stage.webp"
+                alt="A band performing on the Mandopop stage under coloured lights, with the audience in front"
+                width={1400}
+                height={813}
+              />
+            </div>
+            <p className="prose-body mt-6 opacity-90" data-reveal>
               Open a committee to see what it handles.
             </p>
             <p className="prose-body mt-4 text-sm" data-reveal>

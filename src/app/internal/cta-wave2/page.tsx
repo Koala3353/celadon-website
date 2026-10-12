@@ -29,9 +29,13 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
     span: "col-span-2 row-span-2",
   },
   {
+    src: "/internal/cta-wave2/mdp-crowd.webp",
+    alt: "A crowd watching a band under blue stage lights at a past Mandopop Music Festival",
+    span: "col-span-2",
+  },
+  {
     src: "/internal/cta-wave1/hub-rs-1.webp",
     alt: "Core team members delivering donations for Rose Sale's advocacy program",
-    span: "col-span-2",
   },
   {
     src: "/internal/cta-wave2/cm-photo-1.webp",
@@ -39,17 +43,30 @@ const GALLERY_PHOTOS: ScrollerPhoto[] = [
     span: "row-span-2",
   },
   {
+    src: "/internal/cta-wave2/mdp-guzheng.webp",
+    alt: "A performer playing the guzheng on stage at a past Mandopop Music Festival",
+  },
+  {
     src: "/internal/cta-wave1/hub-rs-2.webp",
     alt: "Core team members arranging bouquets at a past Rose Sale",
+  },
+  {
+    src: "/internal/cta-wave2/cb-letter.webp",
+    alt: "Celadon members dancing in formal wear at a past Celadon Ball",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "/internal/cta-wave2/mdp-stage.webp",
+    alt: "A band performing on the Mandopop stage under coloured lights",
+    span: "col-span-2",
   },
   {
     src: "/internal/cta-wave1/rs-what-is.webp",
     alt: "A past Rose Sale flower-archway booth with Celadon Rose Sale signage",
   },
   {
-    src: "/internal/cta-wave2/cb-letter.webp",
-    alt: "Celadon members dancing in formal wear at a past Celadon Ball",
-    span: "col-span-2 row-span-2",
+    src: "/internal/cta-wave2/mdp-team.webp",
+    alt: "The Mandopop core team posing together on stage after a past festival",
   },
   {
     src: "/internal/cta-wave1/hub-rs-3.webp",
