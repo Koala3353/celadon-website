@@ -147,7 +147,7 @@ export default function RoseSaleWave2ProjectPage() {
             <div className="flex flex-col gap-4 text-left [font-family:var(--font-rs-dmsans)]">
               <Heading>{project.whatIsIt.heading}</Heading>
               <p className="prose-body -mt-2 flex items-center gap-1.5 text-sm font-bold [color:#783F1A]" data-reveal>
-                <span aria-hidden>📌</span> February 9–15, 2027
+                <span aria-hidden>📌</span> February 9–13, 2027
               </p>
               <RichParagraphs
                 paragraphs={project.whatIsIt.body}

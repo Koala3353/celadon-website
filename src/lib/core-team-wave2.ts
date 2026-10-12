@@ -17,7 +17,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     slug: "rose-sale",
     name: "Rose Sale",
     emoji: "🌹",
-    dates: "February 9–15, 2027",
+    dates: "February 9–13, 2027",
     accent: ROSE_SALE.accent,
     blurb:
       "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program. Through customizable bouquets and other love-centered products, it gives members and non-members alike a chance to express appreciation for one another.",
