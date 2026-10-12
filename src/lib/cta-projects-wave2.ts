@@ -23,6 +23,7 @@ export const ROSE_SALE_WAVE2: CtaProjectDetail & {
   committeePhotos: { src: string; alt: string }[];
 } = {
   ...ROSE_SALE,
+  heroImage: { src: "/internal/cta-wave2/rs-hero.webp", alt: "Rose Sale '27 — Wave 2 Applications" },
   // The additional-requirements FAQ covers Digital Creatives, Production
   // Design and DocPub, none of which Rose Sale recruits in Wave 2.
   faqs: ROSE_SALE.faqs.filter((faq) => !faq.q.startsWith("Do we need to submit any additional requirements")),

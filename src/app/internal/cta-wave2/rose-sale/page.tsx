@@ -91,7 +91,7 @@ export default function RoseSaleWave2ProjectPage() {
             src={asset(project.heroImage.src)}
             alt={project.heroImage.alt}
             width={1920}
-            height={865}
+            height={857}
             priority
             data-reveal
             className="max-h-[60vh] w-full object-cover"

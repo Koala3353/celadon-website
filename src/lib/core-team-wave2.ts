@@ -21,7 +21,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     accent: ROSE_SALE.accent,
     blurb:
       "Rose Sale, Celadon’s annual Valentine’s fundraising project, celebrates love in all its forms within the Ateneo community while supporting its advocacy program. Through customizable bouquets and other love-centered products, it gives members and non-members alike a chance to express appreciation for one another.",
-    photo: { src: "/internal/cta-wave1/rs-hero.webp", alt: "Rose Sale '27" },
+    photo: { src: "/internal/cta-wave2/rs-hero.webp", alt: "Rose Sale '27 — Wave 2 Applications" },
     photoPosition: "90% center",
     href: "/internal/cta-wave2/rose-sale",
   },
