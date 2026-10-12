@@ -68,7 +68,6 @@ export function wave2Blurb(slug: string): string {
 
 export const CTA_WAVE2_TIMELINE: CoreTeamTimelineItem[] = [
   { date: "October 12–19, 2026", label: "CTA Wave 2 Duration" },
-  { date: "October 19–21, 2026", label: "CTA Wave 2 Extension" },
   { date: "October 15–22, 2026", label: "Interview Dates" },
   { date: "October 24, 2026", label: "Release of Results" },
 ];
