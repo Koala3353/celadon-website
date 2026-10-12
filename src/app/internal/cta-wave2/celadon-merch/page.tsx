@@ -147,7 +147,7 @@ export default function CeladonMerchProjectPage() {
       {/* What is CelaMerch? */}
       <section className="bg-white py-8 sm:py-10">
         <Container>
-          <Reveal className="mx-auto w-full max-w-3xl">
+          <Reveal className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[1.3fr_1fr] md:items-center md:gap-12">
             <div className="flex flex-col gap-4 text-left">
               <Heading>
                 What is <Red>Cela</Red>
@@ -159,6 +159,18 @@ export default function CeladonMerchProjectPage() {
               <p className="text-lg font-bold text-dept-ink [font-family:var(--font-cm-heading)]" data-reveal>
                 Welcome to <Red>Celadon</Red> <Orange>Merchandise</Orange>!
               </p>
+            </div>
+            {/* A designed pub mat with its own lettering, so it's shown whole
+                rather than cropped to fit a frame. */}
+            <div className="mx-auto w-full max-w-sm overflow-hidden rounded-2xl shadow-[var(--shadow-md)]" data-reveal>
+              <Image
+                src={asset("/internal/cta-wave2/cm-photo-1.webp")}
+                alt="CelaMerch pre-orders: shirts, a cap, lanyards, pins and keychains around a flip phone reading Check out Celadon, shop now"
+                width={1080}
+                height={1350}
+                sizes="(min-width: 768px) 24rem, 100vw"
+                className="h-auto w-full"
+              />
             </div>
           </Reveal>
         </Container>
