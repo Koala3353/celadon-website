@@ -203,7 +203,7 @@ export default function CeladonMerchProjectPage() {
       </section>
 
       {/* Project Timeline */}
-      <section className="bg-dept-tint py-8 sm:py-10">
+      <section className="bg-white py-8 sm:py-10">
         <Container>
           <Reveal className="mx-auto w-full max-w-2xl text-left">
             <Heading>Project Timeline</Heading>
