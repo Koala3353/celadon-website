@@ -545,6 +545,7 @@ export const MANDOPOP: MandopopContent = {
     },
     {
       name: "Jerry Señas",
+      photo: "/internal/cta-wave2/pm-jerry.webp",
       role: "Project Manager",
       email: "jerry.senas@student.ateneo.edu",
       facebook: "https://www.facebook.com/jerry.jet.158",
