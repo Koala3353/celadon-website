@@ -33,6 +33,8 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     dates: "February 2–5, 2027",
     accent: CELADON_MERCH.accent,
     photo: { src: "/internal/cta-wave2/cm-hero.webp", alt: "Celadon Merchandise" },
+    // The title sits upper-left in the art; keep the card's crop toward it.
+    photoPosition: "20% 30%",
     blurb:
       "Celadon Merchandise promotes Chinese culture within the Ateneo community while portraying Celadon’s organizational identity. Through creative, culture-inspired products, it empowers people to express themselves and their style freely.",
     href: "/internal/cta-wave2/celadon-merch",

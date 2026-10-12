@@ -109,6 +109,10 @@ export default function CeladonMerchProjectPage() {
               priority
               data-reveal
               className="max-h-[60vh] w-full object-cover"
+              // On very wide screens the 60vh cap trims the banner top and
+              // bottom; anchoring the crop high keeps the whole "Celadon
+              // Merchandise" title (upper-left of the art) in frame.
+              style={{ objectPosition: "center 25%" }}
             />
           </Reveal>
         ) : (
