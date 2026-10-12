@@ -278,7 +278,7 @@ export default function RoseSaleWave2ProjectPage() {
             </p>
           </Reveal>
           <Reveal className="mx-auto mt-10 w-full max-w-3xl [font-family:var(--font-rs-lato)]">
-            <ListAccordion groups={project.committees} photos={project.committeePhotos} />
+            <ListAccordion groups={project.committees} />
           </Reveal>
         </Container>
       </section>

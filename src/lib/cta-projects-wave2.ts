@@ -19,9 +19,7 @@ export const COMMPUB_REQUIREMENTS_GUIDE_URL =
  * entry verbatim, so a later edit to the shared fields (letter, contacts…)
  * reaches both waves without being made twice.
  */
-export const ROSE_SALE_WAVE2: CtaProjectDetail & {
-  committeePhotos: { src: string; alt: string }[];
-} = {
+export const ROSE_SALE_WAVE2: CtaProjectDetail = {
   ...ROSE_SALE,
   heroImage: { src: "/internal/cta-wave2/rs-hero.webp", alt: "Rose Sale '27 — Wave 2 Applications" },
   // The additional-requirements FAQ covers Digital Creatives, Production
@@ -43,12 +41,6 @@ export const ROSE_SALE_WAVE2: CtaProjectDetail & {
     { date: "February 9–13, 2027", label: "Valentine's Onsite Selling Week", emphasis: "critical" },
     { date: "February 27, 2027", label: "Advocacy Program" },
     { date: "March 3, 2027", label: "Post Documentation Album" },
-  ],
-  // Paired with `committees` by index — the doc puts one photo beside each.
-  committeePhotos: [
-    { src: "/internal/cta-wave2/rs-committee-sales.webp", alt: "A Rose Sale seller helping a customer pick flowers" },
-    { src: "/internal/cta-wave2/rs-committee-deliveries.webp", alt: "Rose Sale core members preparing orders at a table" },
-    { src: "/internal/cta-wave2/rs-committee-florists.webp", alt: "A wrapped Rose Sale bouquet of pink carnations" },
   ],
   committees: [
     {
