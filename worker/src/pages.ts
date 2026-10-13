@@ -50,7 +50,7 @@ const GOOGLE_ICON = `<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http
 export function signInPage(startUrl: string, notice: string | null): string {
   const errorBlock =
     notice === "denied"
-      ? `<div class="error">This email is not authorized for the Celadon internal portal.</div>`
+      ? `<div class="error">This email isn&rsquo;t on the Celadon member list yet. If you&rsquo;re a member, ask the OSR EBCB to add you.</div>`
       : notice === "error"
         ? `<div class="error">Something went wrong signing you in. Please try again.</div>`
         : "";
