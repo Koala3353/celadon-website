@@ -50,7 +50,7 @@ const GOOGLE_ICON = `<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http
 export function signInPage(startUrl: string, notice: string | null): string {
   const errorBlock =
     notice === "denied"
-      ? `<div class="error">This email isn&rsquo;t on the Celadon member list yet. If you&rsquo;re a member, ask the OSR EBCB to add you.</div>`
+      ? `<div class="error">This email isn&rsquo;t on the Celadon member list yet. If you&rsquo;re a member, contact <a href="https://www.facebook.com/kyle.dominic.co.2025" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">fb.com/kyle.dominic.co.2025</a> on Facebook to be added.</div>`
       : notice === "error"
         ? `<div class="error">Something went wrong signing you in. Please try again.</div>`
         : "";
