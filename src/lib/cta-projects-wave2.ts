@@ -312,7 +312,7 @@ export const MANDOPOP: MandopopContent = {
   cardAccent: { base: "#9B3230", tint: "#F5ECDA", ink: "#2A4072" },
   // Extracted from the instructions PDF (1095x615) — swap in the original
   // artwork file when it's available for a sharper header.
-  heroImage: { src: "/internal/cta-wave2/mdp-hero.webp", alt: "Mandopop 2027 — Wave 2 Applications" },
+  heroImage: { src: "/internal/cta-wave2/mdp-hero-v2.webp", alt: "Mandopop 2026 — Wave 2 Applications" },
   about: [
     [
       { text: "Mandopop Music Festival is a one-day concert held outside Ateneo, " },

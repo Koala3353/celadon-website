@@ -122,8 +122,8 @@ export default function MandopopProjectPage() {
           <Image
             src={asset(project.heroImage.src)}
             alt={project.heroImage.alt}
-            width={1095}
-            height={615}
+            width={1600}
+            height={900}
             priority
             data-reveal
             className="max-h-[60vh] w-full object-cover"
