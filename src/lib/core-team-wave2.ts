@@ -47,7 +47,7 @@ export const CORE_TEAM_WAVE2_PROJECTS: CoreTeamProject[] = [
     accent: MANDOPOP.cardAccent,
     blurb:
       "The Mandopop Music Festival is a one-day concert held outside Ateneo, free and open to the public. Under the theme “Beyond the Final Note,” it celebrates Chinese and Filipino-Chinese music through live performances of familiar favorites and fresh takes on classic songs.",
-    photo: { src: "/internal/cta-wave2/mdp-hero-v2.webp", alt: "Mandopop 2026 — Wave 2 Applications" },
+    photo: { src: "/internal/cta-wave2/mdp-hero-v3.webp", alt: "Mandopop 2027 — Wave 2 Applications" },
     href: "/internal/cta-wave2/mandopop",
   },
   {
