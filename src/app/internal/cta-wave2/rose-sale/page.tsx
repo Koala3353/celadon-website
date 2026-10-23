@@ -3,18 +3,17 @@ import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { BackLink } from "@/components/internal/back-link";
+import { ClosedBanner } from "@/components/internal/closed-banner";
 import { ProjectFaqs } from "@/components/internal/project-faqs";
-import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { Timeline } from "@/components/internal/timeline";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { PhotoCarousel } from "@/components/photo-carousel";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
+import { wave2Blurb } from "@/lib/core-team-wave2";
 import { ROSE_SALE_WAVE2 } from "@/lib/cta-projects-wave2";
 
 // Served from src/fonts rather than fetched from Google Fonts at build
@@ -97,6 +96,7 @@ export default function RoseSaleWave2ProjectPage() {
       }
     >
       <section className="relative overflow-hidden bg-dept-tint text-dept-ink">
+        <ClosedBanner>Wave 2 Core Team Applications are now closed.</ClosedBanner>
         <BackLink href="/internal/cta-wave2" label="All Projects" />
 
         <div
@@ -123,14 +123,6 @@ export default function RoseSaleWave2ProjectPage() {
             <p className="prose-body max-w-2xl text-lg text-dept-ink/80" data-reveal>
               {wave2Blurb("rose-sale")}
             </p>
-            {/* Scoped to just this button — the doc's own blue instead of
-                the page's magenta-pink accent, without touching that
-                accent anywhere else on the page. */}
-            <div data-reveal style={{ "--dept-accent": "#3F5F99" } as React.CSSProperties}>
-              <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg" variant="accent">
-                Apply Now
-              </ButtonLink>
-            </div>
           </Reveal>
         </Container>
       </section>
@@ -391,8 +383,6 @@ export default function RoseSaleWave2ProjectPage() {
           </Reveal>
         </Container>
       </section>
-
-      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label="Apply to Rose Sale now" />
     </div>
   );
 }

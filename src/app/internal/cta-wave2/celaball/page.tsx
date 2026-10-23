@@ -2,17 +2,16 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
-import { ButtonLink } from "@/components/ui/button-link";
 import { Reveal } from "@/components/motion/reveal";
-import { FloatingApplyButton } from "@/components/internal/floating-apply-button";
 import { BackLink } from "@/components/internal/back-link";
+import { ClosedBanner } from "@/components/internal/closed-banner";
 import { ProjectFaqs } from "@/components/internal/project-faqs";
 import { PmContacts } from "@/components/internal/pm-contacts";
 import { ListAccordion } from "@/components/internal/list-accordion";
 import { Timeline } from "@/components/internal/timeline";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { CTA_WAVE2_APPLICATION_FORM_URL, wave2Blurb } from "@/lib/core-team-wave2";
+import { wave2Blurb } from "@/lib/core-team-wave2";
 import { CELABALL } from "@/lib/cta-projects-wave2";
 import type { DeptGroup } from "@/lib/deputy-departments";
 
@@ -120,6 +119,7 @@ export default function CelaballProjectPage() {
     >
       {/* Header */}
       <section className="relative overflow-hidden" style={{ backgroundColor: P.cream }}>
+        <ClosedBanner>Wave 2 Core Team Applications are now closed.</ClosedBanner>
         <BackLink href="/internal/cta-wave2" label="All Projects" />
         <Reveal>
           <Image
@@ -137,11 +137,6 @@ export default function CelaballProjectPage() {
             <p className="prose-body max-w-2xl text-lg text-dept-ink/80" data-reveal>
               {wave2Blurb("celaball")}
             </p>
-            <div data-reveal>
-              <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg" variant="accent">
-                Apply Now
-              </ButtonLink>
-            </div>
           </Reveal>
         </Container>
       </section>
@@ -404,8 +399,6 @@ export default function CelaballProjectPage() {
           </Reveal>
         </Container>
       </section>
-
-      <FloatingApplyButton href={CTA_WAVE2_APPLICATION_FORM_URL} label="Apply to Celaball now" />
     </div>
   );
 }

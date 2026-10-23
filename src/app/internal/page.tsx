@@ -49,19 +49,17 @@ export default function InternalPortalHomePage() {
                 </Card>
               </div>
 
-              {/* Wave 2 is open, so this card links to its hub. */}
+              {/* Wave 2 has closed, but its hub stays linked for browsing. */}
               <Link href="/internal/cta-wave2" data-reveal className="group pressable">
                 <Card
                   className="lift h-full ring-sky-navy/10 transition group-hover:ring-sky-navy/30"
                   innerClassName="flex h-full flex-col gap-3 p-8"
                 >
-                  <span className="sky-display eyebrow w-fit rounded-full bg-sky-blue px-3 py-1 text-[0.6875rem] text-white">
-                    Open now &middot; Wave 2
-                  </span>
+                  <Badge tone="closed">Closed &middot; Wave 2</Badge>
                   <h2 className="sky-display text-2xl font-semibold text-sky-navy">Core Team Applications</h2>
                   <p className="prose-body text-sm text-muted-foreground">
-                    Apply to join a project&rsquo;s Core Team. Browse every project&rsquo;s committees,
-                    timeline, and requirements.
+                    Wave 2 applications are now closed. Thank you to everyone who applied! You can still
+                    browse every project&rsquo;s committees and timeline.
                   </p>
                   <p className="mt-auto flex items-center gap-1 pt-3 text-xs font-bold uppercase tracking-wider text-sky-navy">
                     Explore projects

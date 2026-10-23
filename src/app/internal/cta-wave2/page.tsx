@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
+import { ClosedBanner } from "@/components/internal/closed-banner";
 import { SkyHero } from "@/components/internal/sky-hero";
 import { RichParagraphs } from "@/components/internal/rich-text";
 import { TimelineFlow } from "@/components/internal/timeline-flow";
@@ -123,6 +123,8 @@ function SectionHeading({
 export default function CoreTeamApplicationsWave2HubPage() {
   return (
     <>
+      <ClosedBanner>Wave 2 Core Team Applications are now closed.</ClosedBanner>
+
       <SkyHero
         title="Core Team Applications"
         heroImage={{ src: "/internal/cta-wave1/cta-hub-hero.webp", alt: "Celadon Core Team Applications" }}
@@ -143,11 +145,8 @@ export default function CoreTeamApplicationsWave2HubPage() {
                   2026&ndash;2027 Core Team Applications
                 </span>
                 <p className="sky-display text-xl font-semibold text-sky-navy sm:text-2xl">
-                  Celadon&rsquo;s Wave 2 Core Team Applications are now open!
+                  Celadon&rsquo;s Wave 2 Core Team Applications are now closed. Thank you to everyone who applied!
                 </p>
-                <ButtonLink href={CTA_WAVE2_APPLICATION_FORM_URL} external size="lg">
-                  Apply Now
-                </ButtonLink>
               </Card>
             </Reveal>
           </Container>
