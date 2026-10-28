@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { CommitteeExplorer } from "@/components/committee-explorer";
 import { SkyHero } from "@/components/internal/sky-hero";
 import { Reveal } from "@/components/motion/reveal";
@@ -31,50 +28,9 @@ export default function InternalPortalHomePage() {
       {/* One continuous ambient wash for the whole page body, same technique
           as the dept-apps hub — sections below are spacing and content only. */}
       <div className="sky-tint-field">
-        {/* ---- Deputy / Core Team application cards --------------------- */}
-        <section className="pb-8 pt-16 sm:pb-10 sm:pt-20">
-          <Container>
-            <Reveal stagger={70} className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-              {/* Closed, so deliberately not a link — the hub and the
-                  department pages behind it are no longer linked from
-                  anywhere in the portal. */}
-              <div data-reveal>
-                <Card className="h-full ring-sky-navy/10" innerClassName="flex h-full flex-col gap-3 p-8 opacity-70">
-                  <Badge tone="closed">Closed</Badge>
-                  <h2 className="sky-display text-2xl font-semibold text-sky-navy">Deputy Applications</h2>
-                  <p className="prose-body text-sm text-muted-foreground">
-                    Applications for this year&rsquo;s department deputy pools are now closed. Thank you to
-                    everyone who applied!
-                  </p>
-                </Card>
-              </div>
-
-              {/* Wave 2 has closed, but its hub stays linked for browsing. */}
-              <Link href="/internal/cta-wave2" data-reveal className="group pressable">
-                <Card
-                  className="lift h-full ring-sky-navy/10 transition group-hover:ring-sky-navy/30"
-                  innerClassName="flex h-full flex-col gap-3 p-8"
-                >
-                  <Badge tone="closed">Closed &middot; Wave 2</Badge>
-                  <h2 className="sky-display text-2xl font-semibold text-sky-navy">Core Team Applications</h2>
-                  <p className="prose-body text-sm text-muted-foreground">
-                    Wave 2 applications are now closed. Thank you to everyone who applied! You can still
-                    browse every project&rsquo;s committees and timeline.
-                  </p>
-                  <p className="mt-auto flex items-center gap-1 pt-3 text-xs font-bold uppercase tracking-wider text-sky-navy">
-                    Explore projects
-                    <span
-                      aria-hidden
-                      className="inline-block transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </p>
-                </Card>
-              </Link>
-            </Reveal>
-          </Container>
-        </section>
+        {/* The Deputy and Core Team application cards sat here until both
+            closed. Their pages still resolve from direct links, with a
+            ClosedBanner. */}
 
         {/* ---- Core Team committees ----------------------------------- */}
         {/* Flat white, not the ambient wash — this is the last section on
@@ -83,7 +39,7 @@ export default function InternalPortalHomePage() {
             through here instead would cut off abruptly right where the
             footer needs to fade in cleanly (same fix as the dept-apps hub
             and EBCB directory pages). */}
-        <section className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-10">
+        <section className="bg-white pb-16 pt-16 sm:pb-20 sm:pt-20">
           <Container>
             <Reveal className="mx-auto max-w-2xl text-center">
               <p className="sky-display eyebrow text-sky-navy/70" data-reveal>
