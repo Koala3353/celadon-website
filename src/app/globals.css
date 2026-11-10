@@ -67,6 +67,15 @@
   --sky-pink: #f5d8dd;
   --sky-gray: #d3cfda;
 
+  /* Workshops page only — sampled from its LEGO-style header art. Blue and
+     orange fail AA as text on white, so they're fills only; text stays
+     sky-navy. */
+  --lego-blue: #0596d5;
+  --lego-sky: #67b2e8;
+  --lego-yellow: #fee300;
+  --lego-orange: #f4993f;
+  --lego-cream: #fff9df;
+
   /* Per-department accent — the *values* are set inline per page (see
      Department.accent in deputy-departments.ts), not here. Declaring the
      variable at :root just gives it a real (if unused) default so nothing
@@ -103,6 +112,12 @@
   --color-sky-mint: var(--sky-mint);
   --color-sky-pink: var(--sky-pink);
   --color-sky-gray: var(--sky-gray);
+
+  --color-lego-blue: var(--lego-blue);
+  --color-lego-sky: var(--lego-sky);
+  --color-lego-yellow: var(--lego-yellow);
+  --color-lego-orange: var(--lego-orange);
+  --color-lego-cream: var(--lego-cream);
 
   --font-sans: var(--font-body);
   --font-display: var(--font-body);
@@ -267,6 +282,16 @@ html {
     radial-gradient(50% 45% at 100% 15%, color-mix(in srgb, var(--sky-peach) 42%, transparent) 0%, transparent 60%),
     radial-gradient(60% 50% at 50% 100%, color-mix(in srgb, var(--sky-teal) 26%, transparent) 0%, transparent 65%),
     var(--white);
+}
+
+/* A LEGO baseplate: a grid of soft studs on pale blue, fading to flat white
+   at the bottom so the last section meets the footer's white margin gap
+   without a seam. */
+.lego-baseplate {
+  background:
+    linear-gradient(to bottom, transparent 75%, var(--white) 100%),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0 7px, color-mix(in srgb, var(--lego-blue) 10%, transparent) 8px 10px, transparent 11px) 0 0 / 44px 44px,
+    color-mix(in srgb, var(--lego-sky) 22%, var(--white));
 }
 
 .sky-display {
