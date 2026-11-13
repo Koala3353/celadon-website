@@ -122,7 +122,13 @@ const WORKSHOPS: Workshop[] = [
       {
         label: "Build It Like It's Going to Break",
         type: "pdf",
-        href: "/internal/workshops/operations-build-it-like-its-going-to-break.pdf",
+        href: "https://drive.google.com/file/d/1hXsHEnrEr79402nWUd4iJh696_nC4vq9/view?usp=sharing",
+      },
+      {
+        // A /copy link: Google asks the member to make their own copy.
+        label: "Workshop challenge (makes your own copy)",
+        type: "sheet",
+        href: "https://docs.google.com/spreadsheets/d/1mb7eJ-7299Y3cxkLVZiVi4NxG-SGuPZN3YndVxySVI4/copy",
       },
     ],
   },
@@ -136,7 +142,13 @@ const WORKSHOPS: Workshop[] = [
     description:
       "How a project gets brought to life. Learn to cook up the perfect Project Proposal Form and kickstart large-scale projects in Celadon, or any initiative you want to push for in an Ateneo organization.",
     poster: { src: "/internal/workshops/ppf-workshop.webp", width: 900, height: 1125 },
-    materials: [],
+    materials: [
+      {
+        label: "Workshop slides: The Art Behind Every Dish",
+        type: "pdf",
+        href: "https://drive.google.com/file/d/1FvfmL0O9HkAcECGOpAD80iF9TsSmerWX/view?usp=sharing",
+      },
+    ],
   },
 ];
 
@@ -146,6 +158,14 @@ export function getWorkshops(): Workshop[] {
 
 export function getWorkshopDepartment(workshop: Workshop): Department | undefined {
   return DEPARTMENTS.find((d) => d.slug === workshop.dept);
+}
+
+/** True once the workshop's day is over, in Philippine time. Evaluated at
+ * build time — the site rebuilds every 3 hours, so it flips within a few
+ * hours of the day ending. */
+export function isWorkshopPast(workshop: Workshop): boolean {
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Manila" }); // "YYYY-MM-DD"
+  return workshop.date < today;
 }
 
 /** "2026-09-14" -> "September 14, 2026". Parsed by hand so the date never

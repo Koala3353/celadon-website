@@ -284,14 +284,21 @@ html {
     var(--white);
 }
 
-/* A LEGO baseplate: a grid of soft studs on pale blue, fading to flat white
-   at the bottom so the last section meets the footer's white margin gap
-   without a seam. */
+/* A blue LEGO baseplate. Each stud is three stacked circles on the same
+   40px grid: a dark one nudged down-right (shadow), a light one nudged
+   up-left (rim highlight), and the stud face on top in plate blue. Fades to
+   flat white at the bottom so the last section meets the footer's white
+   margin gap without a seam. */
 .lego-baseplate {
+  /* Plate blue washed toward white so it stays a backdrop, not a feature.
+     Raise the percentage for a stronger blue. */
+  --plate: color-mix(in srgb, var(--lego-blue) 30%, var(--white));
   background:
-    linear-gradient(to bottom, transparent 75%, var(--white) 100%),
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0 7px, color-mix(in srgb, var(--lego-blue) 10%, transparent) 8px 10px, transparent 11px) 0 0 / 44px 44px,
-    color-mix(in srgb, var(--lego-sky) 22%, var(--white));
+    linear-gradient(to bottom, transparent 82%, var(--white) 100%),
+    radial-gradient(circle at 50% 50%, var(--plate) 0 9.5px, transparent 10px) 0 0 / 40px 40px,
+    radial-gradient(circle at calc(50% - 1.5px) calc(50% - 1.5px), rgba(255, 255, 255, 0.6) 0 11px, transparent 11.5px) 0 0 / 40px 40px,
+    radial-gradient(circle at calc(50% + 1.5px) calc(50% + 2px), rgba(0, 40, 90, 0.16) 0 11.5px, transparent 12.5px) 0 0 / 40px 40px,
+    var(--plate);
 }
 
 .sky-display {
