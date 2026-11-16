@@ -67,7 +67,13 @@ const WORKSHOPS: Workshop[] = [
       "For fresh deputies and logistics core team members of any Celadon project: everything you need to get ahead in the venue-reservation game, so venue stress never gets the best of you.",
     topics: ["CFMO reservation", "CSMO coordination", "FSQA approval", "Product procurement"],
     poster: { src: "/internal/workshops/logistics-workshop.webp", width: 900, height: 1273 },
-    materials: [],
+    materials: [
+      {
+        label: "Workshop slides",
+        type: "pdf",
+        href: "https://drive.google.com/file/d/1fWtCxrwE1XN0m3Umj3osWGQawsg39TbK/view?usp=sharing",
+      },
+    ],
   },
   {
     slug: "sheets-workshop",
@@ -105,7 +111,18 @@ const WORKSHOPS: Workshop[] = [
       "An evening of creative ideation with COMMPUB, with guest speakers and a challenge to make unique writing outputs.",
     topics: ["Talks from guest speakers", "Spiel writing", "CelaZine tips and tricks"],
     poster: { src: "/internal/workshops/writing-workshop.webp", width: 900, height: 1125 },
-    materials: [],
+    materials: [
+      {
+        label: "Spiel writing slides",
+        type: "slides",
+        href: "https://www.canva.com/design/DAHZwzSA28I/-8NGV85fVFlsaY6kEZ4gFg/view",
+      },
+      {
+        label: "Group challenge: The Snake's Mark",
+        type: "pdf",
+        href: "https://drive.google.com/file/d/1Dw2hU0ufxkINc9rW-lYsz0Y7VzTfKrRw/view?usp=sharing",
+      },
+    ],
   },
   {
     slug: "operations-workshop",
