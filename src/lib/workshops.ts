@@ -54,7 +54,13 @@ const WORKSHOPS: Workshop[] = [
       "Pitching projects to potential partners",
     ],
     poster: { src: "/internal/workshops/marketing-pitches-workshop.webp", width: 900, height: 1125 },
-    materials: [],
+    materials: [
+      {
+        label: "Workshop slides",
+        type: "slides",
+        href: "https://www.canva.com/design/DAHYFRLE2HI/YF1BYgxqfa64aJbAE1WAiQ/view",
+      },
+    ],
   },
   {
     slug: "logistics-workshop",

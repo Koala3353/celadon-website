@@ -54,6 +54,11 @@ export function InternalNav() {
               label="EBCB Directory"
               active={pathname.startsWith("/internal/ebcb-directory")}
             />
+            <NavPill
+              href="/internal/workshops"
+              label="Workshops"
+              active={pathname.startsWith("/internal/workshops")}
+            />
           </nav>
         </div>
 
@@ -213,6 +218,13 @@ function InternalMobileMenu({
             className={blockClass(pathname.startsWith("/internal/ebcb-directory"))}
           >
             EBCB Directory
+          </Link>
+          <Link
+            href="/internal/workshops"
+            onClick={handleClose}
+            className={blockClass(pathname.startsWith("/internal/workshops"))}
+          >
+            Workshops
           </Link>
         </nav>
 
